@@ -10,14 +10,37 @@ FR.mkdir(exist_ok=True)
 W, H, FPS, DUR = 720, 1280, 15, 10
 src = (ROOT / "octoopus-character.svg").read_text()
 
-# Render smiling and speaking mouth variants from the supplied SVG.
-for name, speaking in [("happy", False), ("speaking", True)]:
-    s = src
-    if speaking:
-        s = s.replace('<g id="surprise" style="opacity:0">', '<g id="surprise" style="opacity:1">')
-        s = s.replace('<path id="happy"', '<path id="happy" style="opacity:0"')
-    cairosvg.svg2png(bytestring=s.encode(), write_to=str(ROOT / f"{name}.png"), output_width=425, output_height=472)
-mascots = {k: Image.open(ROOT / f"{k}.png").convert("RGBA") for k in ["happy", "speaking"]}
+# Build high-resolution sprite variants. Rendering larger than the final canvas and
+# downsampling AFTER rotation greatly reduces jagged SVG edges.
+SCALE = 3
+GAZES = {
+    "center": (0, 0),
+    "left": (-6, 1),
+    "right": (6, 1),
+    "up": (0, -4),
+    "down": (0, 4),
+}
+def svg_variant(mouth, gaze):
+    svg = src
+    dx, dy = GAZES[gaze]
+    for ident in ["R-pupil", "R-B-Light", "R-L-Light", "L-pupil", "L-B-Light", "L-L-Light"]:
+        svg = svg.replace(f'<g id="{ident}">', f'<g id="{ident}" transform="translate({dx} {dy})">')
+    if mouth == "open":
+        svg = svg.replace('<g id="surprise" style="opacity:0">', '<g id="surprise" style="opacity:1">')
+        svg = svg.replace('<path id="happy"', '<path id="happy" style="opacity:0"')
+    elif mouth == "sad":
+        svg = svg.replace('<path id="sad" style="opacity:0"', '<path id="sad" style="opacity:1"')
+        svg = svg.replace('<path id="happy"', '<path id="happy" style="opacity:0"')
+    return svg
+
+mascots = {}
+for gaze in GAZES:
+    for mouth in ["closed", "open"]:
+        key = (gaze, mouth)
+        png = ROOT / f"sprite_{gaze}_{mouth}.png"
+        cairosvg.svg2png(bytestring=svg_variant(mouth, gaze).encode(),
+                         write_to=str(png), output_width=425*SCALE, output_height=472*SCALE)
+        mascots[key] = Image.open(png).convert("RGBA")
 
 font_path = "/usr/share/fonts/truetype/noto/NotoSansArabicUI-Regular.ttf"
 font_bold = "/usr/share/fonts/truetype/noto/NotoSansArabicUI-Bold.ttf"
@@ -68,10 +91,31 @@ for i in range(FPS * DUR):
     im = Image.alpha_composite(im, glow)
     op = max(0, min(1, (t-.25)/.6))
     scale = .90 + .10*rise
-    speaking = t > 2.7 and int((t-2.7)/.112) < len(chars) and int(t*7)%3 != 0
-    mascot = mascots["speaking" if speaking else "happy"]
-    obj = mascot.resize((int(425*scale), int(472*scale)), Image.Resampling.LANCZOS)
-    obj = obj.rotate(math.sin(t*1.7)*.65 if t > 1.7 else 0, resample=Image.Resampling.BICUBIC, expand=True)
+    talking = t > 2.7 and int((t-2.7)/.112) < len(chars)
+    # Gaze changes at meaningful beats: entrance, greeting, then looking toward the text.
+    if t < 1.45:
+        gaze = "center"
+    elif 2.1 < t < 2.8:
+        gaze = "left"
+    elif 5.8 < t < 6.55:
+        gaze = "right"
+    elif 7.4 < t < 8.0:
+        gaze = "down"
+    else:
+        gaze = ["center", "up", "center", "right"][int(t*0.72) % 4]
+    # Approximate syllabic mouth envelope; varies in speed and has short rests.
+    phase = (t-2.7)*math.pi*2*(3.0 + 0.35*math.sin(t*0.9))
+    mouth_open = (max(0.0, math.sin(phase)+0.12) ** 1.25) if talking else 0.0
+    if talking and (int((t-2.7)*5.2) % 7 == 0):
+        mouth_open *= 0.25
+    closed = mascots[(gaze, "closed")]
+    opened = mascots[(gaze, "open")]
+    obj = Image.blend(closed, opened, min(0.88, mouth_open*0.82))
+    # Resize and rotate at 3x resolution, then downsample only once.
+    obj = obj.resize((int(425*scale*SCALE), int(472*scale*SCALE)), Image.Resampling.LANCZOS)
+    obj = obj.rotate(math.sin(t*1.55)*1.05 if t > 1.5 else 0, resample=Image.Resampling.BICUBIC, expand=True)
+    final_size = (max(1, round(obj.width/SCALE)), max(1, round(obj.height/SCALE)))
+    obj = obj.resize(final_size, Image.Resampling.LANCZOS)
     y = int(420 + (1-rise)*500 + bob)
     if op < 1:
         obj.putalpha(obj.getchannel("A").point(lambda a: int(a*op)))
