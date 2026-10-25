@@ -1,0 +1,1204 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Octoopus · Reel 01 — صفحهٔ سفید</title>
+<link rel="stylesheet" href="./fonts.css">
+<style>
+  /* ============================================================
+     پالت برند — از سایت octoopus.ir استخراج شده
+     ============================================================ */
+  :root{
+    --navy:#0A192F;
+    --navy-2:#142B4D;
+    --cyan:#41FAF1;
+    --muted:#B4BCD0;
+    --stage-w:1080;
+    --stage-h:1920;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:#05080f;
+    font-family:"Vazirmatn", system-ui, sans-serif;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:geometricPrecision;
+  }
+
+  /* ---------- صحنه ۱۰۸۰×۱۹۲۰ ---------- */
+  #stage{
+    position:absolute;top:50%;left:50%;
+    margin:-960px 0 0 -540px;
+    width:1080px;height:1920px;
+    transform-origin:50% 50%;
+    overflow:hidden;
+    perspective:1800px;
+    background:radial-gradient(120% 80% at 50% 78%, #10233f 0%, var(--navy) 46%, #050c17 100%);
+    isolation:isolate;
+    will-change:transform;
+  }
+
+  /* ---------- پس‌زمینه ---------- */
+  .dots{
+    position:absolute;inset:-140px;
+    background-image:radial-gradient(rgba(65,250,241,.20) 2.4px, transparent 2.4px);
+    background-size:64px 64px;
+    opacity:.5;
+    mask-image:radial-gradient(75% 60% at 50% 55%, #000 0%, transparent 100%);
+    -webkit-mask-image:radial-gradient(75% 60% at 50% 55%, #000 0%, transparent 100%);
+  }
+  .glow{
+    position:absolute;left:50%;bottom:-280px;
+    width:1500px;height:1100px;margin-left:-750px;
+    background:radial-gradient(closest-side, rgba(65,250,241,.22), rgba(65,250,241,.06) 55%, transparent 72%);
+    filter:blur(6px);
+    pointer-events:none;
+  }
+  .bubbles{position:absolute;inset:0;overflow:hidden}
+  .bubbles i{
+    position:absolute;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(65,250,241,.85), rgba(65,250,241,.10) 70%);
+    box-shadow:0 0 18px rgba(65,250,241,.35);
+    will-change:transform,opacity;
+  }
+  .vignette{
+    position:absolute;inset:0;
+    background:radial-gradient(78% 62% at 50% 52%, transparent 40%, rgba(2,6,14,.55) 100%);
+    pointer-events:none;
+  }
+
+  /* ---------- نوار برند ---------- */
+  .brand{
+    position:absolute;top:96px;left:0;right:0;
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    font-size:34px;font-weight:500;color:var(--muted);
+    letter-spacing:.06em;opacity:.62;direction:ltr;
+  }
+  .brand .dot{width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 22px var(--cyan)}
+
+  /* ---------- نوار مسیر (stepper) ---------- */
+  .steps-nav{
+    position:absolute;top:152px;left:84px;right:84px;z-index:38;
+    display:flex;align-items:center;gap:20px;direction:rtl;
+  }
+  .steps-nav .sn{
+    display:flex;align-items:center;gap:12px;
+    font-size:28px;font-weight:700;color:#6f7d95;white-space:nowrap;
+  }
+  .steps-nav .sn i{
+    width:20px;height:20px;border-radius:50%;
+    border:3px solid currentColor;display:block;flex:none;
+  }
+  .steps-nav .sn.on{color:var(--cyan)}
+  .steps-nav .sn.on i{background:var(--cyan);box-shadow:0 0 20px rgba(65,250,241,.65)}
+  .steps-nav .sn.done{color:rgba(65,250,241,.5)}
+  .steps-nav .sn.done i{background:rgba(65,250,241,.5)}
+  .steps-nav .bar{flex:1;height:3px;background:rgba(255,255,255,.12);border-radius:3px;max-width:260px}
+
+  /* ---------- مانیتور ---------- */
+  .monitor{
+    position:absolute;top:470px;left:50%;width:900px;margin-left:-450px;
+    z-index:28;opacity:0;will-change:transform,opacity;
+    transform-style:preserve-3d;
+  }
+  .mon-frame{
+    border-radius:28px;padding:26px;
+    background:linear-gradient(180deg,#1d2a44 0%,#0d1626 100%);
+    border:1px solid rgba(65,250,241,.20);
+    box-shadow:0 60px 120px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .mon-screen{
+    position:relative;width:848px;height:500px;
+    border-radius:14px;overflow:hidden;background:#05080f;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.6);
+  }
+  .scr{position:absolute;inset:0;opacity:0}
+  .scr.on{opacity:1}
+  .mon-bar{
+    position:absolute;top:0;left:0;right:0;height:56px;
+    display:flex;align-items:center;gap:10px;padding:0 18px;
+    background:#eceff4;border-bottom:1px solid #d5dae2;direction:ltr;
+  }
+  .mon-bar i{width:14px;height:14px;border-radius:50%;display:block;flex:none}
+  .mon-bar .u{
+    flex:1;height:34px;border-radius:8px;background:#fff;
+    display:flex;align-items:center;padding:0 16px;
+    font:600 20px/1 Consolas,monospace;color:#4b5872;direction:ltr;
+  }
+  .mon-blank{
+    position:absolute;top:56px;left:0;right:0;bottom:0;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .mon-blank span{font:700 30px/1 Consolas,monospace;color:#d6dae0;direction:ltr}
+  .mon-log-head{
+    position:absolute;top:0;left:0;right:0;height:46px;
+    display:flex;align-items:center;padding:0 30px;direction:ltr;
+    background:#131a28;border-bottom:1px solid rgba(255,255,255,.07);
+    font:600 20px/1 Consolas,monospace;color:#5d6a80;
+  }
+  .mon-log{
+    position:absolute;top:46px;left:0;right:0;bottom:0;background:#0a0e15;direction:ltr;
+    padding:0 30px;display:flex;flex-direction:column;justify-content:center;gap:8px;
+    font:500 24px/1.55 Consolas,monospace;
+  }
+  .mon-log .l{color:#7f8da5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mon-log .l.hi{color:#ff8b84;opacity:.34;padding-left:14px;margin-left:-14px;border-left:4px solid transparent}
+  .mon-log .l.hi.on{opacity:1;background:rgba(255,80,80,.13);border-left-color:#ff5f57}
+  .mon-site{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,#0A192F,#142B4D);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  }
+  .mon-site b{font-size:44px;font-weight:900;color:#fff}
+  .mon-site u{
+    text-decoration:none;background:var(--cyan);color:#06202c;
+    font-size:26px;font-weight:800;padding:12px 28px;border-radius:999px;
+  }
+  .mon-glare{
+    position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,transparent 42%);
+  }
+
+  /* ---------- کارت‌های سه علت ---------- */
+  .causes{
+    position:absolute;top:620px;left:84px;right:84px;z-index:36;
+    display:flex;flex-direction:column;gap:24px;
+  }
+  .cause{
+    display:flex;align-items:center;gap:26px;
+    padding:24px 28px;border-radius:24px;
+    background:linear-gradient(90deg,rgba(20,43,77,.90),rgba(10,25,47,.78));
+    border:1px solid rgba(65,250,241,.18);
+    opacity:0;will-change:transform,opacity;
+  }
+  .cause .n{
+    width:72px;height:72px;border-radius:50%;flex:none;
+    display:grid;place-items:center;
+    font:900 38px/1 Vazirmatn,sans-serif;color:#06202c;
+    background:var(--cyan);box-shadow:0 0 34px rgba(65,250,241,.35);
+  }
+  .cause .tx{flex:1;min-width:0}
+  .cause .t{font-size:44px;font-weight:900;color:#fff;line-height:1.25}
+  .cause .f{
+    font-size:28px;font-weight:700;color:var(--cyan);
+    direction:rtl;text-align:right;margin-top:10px;line-height:1.4;
+  }
+
+  /* ---------- سوال‌ها ---------- */
+  .qs{
+    position:absolute;top:700px;left:84px;right:84px;z-index:36;
+    display:flex;flex-direction:column;gap:28px;
+  }
+  .q{
+    display:flex;align-items:center;gap:24px;
+    padding:26px 30px;border-radius:24px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.10);
+    opacity:0;will-change:transform,opacity;
+  }
+  .q .tick{
+    width:60px;height:60px;border-radius:50%;flex:none;
+    border:4px solid rgba(65,250,241,.30);
+    display:grid;place-items:center;
+  }
+  .q .tick svg{width:30px;height:30px;opacity:0}
+  .q.on .tick{border-color:var(--cyan);background:rgba(65,250,241,.14)}
+  .q.on .tick svg{opacity:1}
+  .q .qt{font-size:42px;font-weight:800;color:#fff}
+  .q .qa{font-size:27px;color:var(--muted);margin-top:8px}
+
+  /* ---------- کرسر ---------- */
+  .cursor{
+    position:absolute;left:0;top:0;z-index:70;
+    opacity:0;will-change:transform;pointer-events:none;
+  }
+  .cursor svg{width:46px;height:46px;display:block;filter:drop-shadow(0 8px 14px rgba(0,0,0,.55))}
+  .cursor .ring{
+    position:absolute;left:-28px;top:-28px;width:56px;height:56px;
+    border-radius:50%;border:3px solid var(--cyan);opacity:0;
+  }
+
+  /* ---------- کاراکتر ---------- */
+  .char{
+    position:absolute;top:800px;left:50%;width:780px;
+    margin-left:-390px;
+    transform-origin:50% 100%;
+    filter:drop-shadow(0 40px 70px rgba(0,0,0,.45)) drop-shadow(0 0 60px rgba(65,250,241,.10));
+    will-change:transform;
+  }
+  .char svg{display:block;width:100%;height:auto;overflow:visible}
+  .octo-body{fill:var(--cyan)}
+  .octo-ring{fill:#000}
+  .octo-pupil{fill:#03080f}
+  .octo-shine{fill:#fff}
+
+  /* ---------- متن ---------- */
+  .copy{
+    position:absolute;top:238px;left:84px;right:84px;z-index:40;
+    display:grid;
+  }
+  .beat{
+    grid-area:1 / 1;
+    display:flex;flex-direction:column;align-items:flex-start;
+    gap:26px;
+  }
+  .title{
+    font-size:92px;font-weight:900;line-height:1.3;color:#fff;
+    text-shadow:0 10px 40px rgba(0,0,0,.45);
+    direction:rtl;
+  }
+  .sub{
+    font-size:42px;font-weight:500;line-height:1.6;color:var(--muted);
+    direction:rtl;
+  }
+  .w{display:inline-block;will-change:transform,opacity}
+  .hl{color:var(--cyan);position:relative;z-index:0}
+  .hl::after{
+    content:"";position:absolute;left:-0.02em;right:-0.02em;bottom:0.02em;height:0.045em;
+    border-radius:0.03em;
+    background:rgba(65,250,241,.85);
+    transform:scaleX(var(--u, 0));
+    transform-origin:100% 50%;
+    z-index:-1;
+  }
+  /* کلمه‌ای که خودش «صفحهٔ سفید» می‌شود */
+  .hl.wblock{
+    background:#fff;color:#0A192F;
+    border-radius:18px;
+    padding:0 .18em;
+    margin:0 .03em;
+    text-shadow:none;
+    box-shadow:0 0 0 3px rgba(255,255,255,.55), 0 20px 46px rgba(0,0,0,.5), 0 0 70px rgba(65,250,241,.22);
+  }
+  .hl.wblock::after{display:none}
+  .chip{
+    margin-top:6px;
+    display:inline-flex;align-items:center;gap:18px;
+    background:var(--cyan);color:#06202c;
+    font-size:40px;font-weight:800;
+    padding:22px 42px;border-radius:999px;
+    box-shadow:0 18px 50px rgba(65,250,241,.28);
+    opacity:0;will-change:transform,opacity;
+  }
+  .chip .ltr{direction:ltr;font-weight:700;letter-spacing:.02em;opacity:.85;font-size:34px}
+  .chip svg{width:30px;height:30px}
+
+  /* ---------- جلوه‌ها ---------- */
+  .sweep{
+    position:absolute;top:0;left:0;right:0;height:9px;
+    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+    box-shadow:0 0 40px 10px rgba(65,250,241,.35);
+    opacity:0;pointer-events:none;z-index:60;
+  }
+
+  /* ---------- راهنمای سیف‌زون اینستاگرام ---------- */
+  .guides{position:absolute;inset:0;display:none;pointer-events:none}
+  .guides.on{display:block}
+  .guides .zone{position:absolute;left:0;right:0;border:2px dashed rgba(255,90,90,.45)}
+  .guides .zone.top{top:0;height:130px;background:rgba(255,60,60,.06)}
+  .guides .zone.bottom{bottom:0;height:430px;background:rgba(255,60,60,.06)}
+  .guides .zone .tag{position:absolute;right:16px;bottom:10px;font-size:24px;color:rgba(255,140,140,.8)}
+
+  /* ---------- نوار کنترل (فقط پیش‌نمایش) ---------- */
+  #ui{
+    position:fixed;left:0;right:0;bottom:0;z-index:50;
+    display:flex;align-items:center;gap:14px;
+    padding:12px 20px;background:rgba(8,14,24,.92);
+    border-top:1px solid rgba(65,250,241,.18);
+    font-size:13px;color:#cfd8e6;direction:ltr;
+    font-family:ui-monospace,Consolas,monospace;
+  }
+  #ui button{
+    background:rgba(65,250,241,.12);color:#41FAF1;border:1px solid rgba(65,250,241,.35);
+    border-radius:8px;padding:7px 14px;font:inherit;cursor:pointer;
+  }
+  #ui button:hover{background:rgba(65,250,241,.22)}
+  #ui input[type=range]{flex:1;accent-color:#41FAF1;height:4px}
+  #ui label{display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+  #ui .time{min-width:120px;text-align:center;color:#7f8ea6}
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div class="dots" id="dots"></div>
+  <div class="glow" id="glow"></div>
+  <div class="bubbles" id="bubbles"></div>
+
+  <div class="brand"><span class="dot"></span><span>octoopus.ir</span></div>
+
+  <!-- نوار مسیر -->
+  <div class="steps-nav" id="stepsNav">
+    <div class="sn" data-i="0"><i></i><span>مشکل</span></div>
+    <div class="bar"></div>
+    <div class="sn" data-i="1"><i></i><span>علت</span></div>
+    <div class="bar"></div>
+    <div class="sn" data-i="2"><i></i><span>تشخیص</span></div>
+  </div>
+
+  <!-- مانیتور -->
+  <div class="monitor" id="monitor">
+    <div class="mon-frame">
+      <div class="mon-screen" id="monScreen">
+        <div class="scr" id="scrWhite">
+          <div class="mon-bar">
+            <i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i>
+            <div class="u">octoopus.ir</div>
+          </div>
+          <div class="mon-blank" id="monBlank"><span>octoopus.ir</span></div>
+        </div>
+
+        <div class="scr" id="scrLog">
+          <div class="mon-log-head">wp-content/debug.log</div>
+          <div class="mon-log">
+            <div class="l">[21-Oct-2026 14:22:01] PHP Fatal error: Uncaught Error:</div>
+            <div class="l hi" id="logHi">Allowed memory size of 134217728 bytes exhausted</div>
+            <div class="l">in /wp-content/plugins/nova-slider/ on line 42</div>
+          </div>
+        </div>
+
+        <div class="scr" id="scrSite">
+          <div class="mon-site"><b>اکتوپوس</b><u>مشاورهٔ رایگان</u></div>
+        </div>
+
+        <div class="mon-glare"></div>
+      </div>
+    </div>
+    <div class="mon-neck" style="width:120px;height:44px;margin:0 auto;background:linear-gradient(180deg,#1d2a44,#0b1220)"></div>
+    <div class="mon-base" style="width:330px;height:24px;margin:0 auto;border-radius:0 0 16px 16px;background:linear-gradient(180deg,#16223a,#0a1120)"></div>
+  </div>
+
+  <!-- سه علت -->
+  <div class="causes" id="causes">
+    <div class="cause" data-i="0">
+      <div class="n">۱</div>
+      <div class="tx">
+        <div class="t">افزونهٔ ناسازگار</div>
+        <div class="f">پنل باز می‌شه، ولی سایت سفیده</div>
+      </div>
+    </div>
+    <div class="cause" data-i="1">
+      <div class="n">۲</div>
+      <div class="tx">
+        <div class="t">خطای PHP</div>
+        <div class="f">یه خطای PHP در قالب یا کد</div>
+      </div>
+    </div>
+    <div class="cause" data-i="2">
+      <div class="n">۳</div>
+      <div class="tx">
+        <div class="t">کمبود حافظه</div>
+        <div class="f">حافظهٔ PHP تموم شده</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- دو سوال -->
+  <div class="qs" id="qs">
+    <div class="q" data-i="0">
+      <div class="tick">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#41FAF1" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div class="tx">
+        <div class="qt">پنل باز می‌شه؟</div>
+        <div class="qa">آره → سمت فرانت خراب شده، نه هاست</div>
+      </div>
+    </div>
+    <div class="q" data-i="1">
+      <div class="tick">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#41FAF1" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div class="tx">
+        <div class="qt">آخرین چیزی که عوض کردی چی بود؟</div>
+        <div class="qa">آپدیت؟ پلاگین؟ محتوا؟</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- کرسر -->
+  <div class="cursor" id="cursor">
+    <svg viewBox="0 0 24 24" fill="#fff" stroke="#0A192F" stroke-width="1.4" stroke-linejoin="round">
+      <path d="M5 2.5 19.5 12.2 12.3 13.4 9.6 20.2z"/>
+    </svg>
+    <div class="ring" id="clickRing"></div>
+  </div>
+
+  <!-- کاراکتر اکتو -->
+  <div class="char" id="charWrap">
+    <svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+      <g id="charInner">
+        <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+
+        <!-- چشم راست -->
+        <g id="eyeR">
+          <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilR">
+            <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- چشم چپ -->
+        <g id="eyeL">
+          <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilL">
+            <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- بازوها -->
+        <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+        <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+        <path id="legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+        <path id="legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+
+        <!-- دهان: سه حالت -->
+        <g id="mouth">
+          <g id="mSurprise" opacity="0">
+            <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+          </g>
+          <path id="mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+          <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="copy" id="copy"></div>
+
+  <div class="sweep" id="sweep"></div>
+
+  <div class="guides" id="guides">
+    <div class="zone top"><span class="tag">IG header</span></div>
+    <div class="zone bottom"><span class="tag">IG UI</span></div>
+  </div>
+</div>
+
+<div id="ui">
+  <button id="playBtn">Pause</button>
+  <input id="scrub" type="range" min="0" max="40" step="0.01" value="0">
+  <span class="time" id="timeLbl">0.00s</span>
+  <label><input id="guideChk" type="checkbox"> safe-zones</label>
+  <button id="restartBtn">Restart</button>
+</div>
+
+<script>
+/* =====================================================================
+   OCTOOPUS · REEL ENGINE v2
+   کل انیمیشن یک تابع خالص از زمان است: draw(t) — هیچ stateی نگه
+   نمی‌داریم. به همین دلیل می‌توانیم فریم‌به‌فریم (۳۰fps) رندر کنیم و
+   خروجی کاملاً یکسان بگیریم.
+
+   v2: ریگ دوربین، مانیتور سه‌بعدی، کرسر، کارت‌های علت، نوار مسیر.
+   تایم‌لاین همه‌چیز نسبت به «بیت‌ها» تعریف می‌شود (b + o) تا با
+   جابه‌جا شدن صدا، کل صحنه خودکار جابه‌جا شود.
+   ===================================================================== */
+
+const RENDER = new URLSearchParams(location.search).has("render");
+const params = new URLSearchParams(location.search);
+
+/* ---------------------------------------------------------------------
+   ۱) تنظیمات ریلز
+   --------------------------------------------------------------------- */
+const CFG = {
+  duration: 40.6,
+  fps: 30,
+
+  rise: { start: 0.05, dur: 0.95, from: 980 },
+
+  // پلک زدن: خودکرد بر اساس طول هر بیت (با تایمینگ صدا جابه‌جا می‌شود)
+  blinks: [],
+
+  // ---------- صحنه‌های متنی ----------
+  beats: [
+    { t0: 0.0, t1: 4.0,
+      title: "سایتت {{سفید}} شده؟",
+      sub: "قبل هر کاری این [[مسیر]] رو برو.",
+      mouth: "surprise", gaze: [0.0, -0.10], sweep: false },
+
+    { t0: 4.0, t1: 9.0,
+      title: "خطاش رو [[نمی‌بینی]]",
+      sub: "صفحهٔ سفید یعنی خطا هست، ولی پنهانه",
+      mouth: "sad", gaze: [0.55, -0.55], sweep: true },
+
+    { t0: 9.0, t1: 20.0,
+      title: "سه [[علت]] داره",
+      sub: "هر کدوم اثر انگشت خودش رو داره",
+      textHide: { mark: "c0", o: 3.2 },
+      mouth: "surprise", gaze: [0.35, -0.45], sweep: true },
+
+    { t0: 20.0, t1: 29.2,
+      title: "از کجا [[شروع]] کنم؟",
+      sub: "دو تا سوال",
+      textHide: { mark: "q0", o: 3.4 },
+      mouth: "sad", gaze: [0.40, -0.40], sweep: true },
+
+    { t0: 29.2, t1: 34.6,
+      title: "جواب توی [[لاگ]]ه",
+      sub: "فقط یه خط",
+      mouth: "surprise", gaze: [0.50, -0.50], sweep: true },
+
+    { t0: 34.6, t1: 40.6,
+      title: "بذار [[ببینم]]",
+      sub: "تحلیل رایگان، همین امروز",
+      mouth: "happy", gaze: [0.0, 0.0], sweep: true,
+      chip: "مشاوره رایگان" }
+  ],
+
+  // ---------- ریگ دوربین (s=زوم، x/y=پن در پیکسل صحنه) ----------
+  // هر کی‌فریم یا به ابتدای یک بیت چسبیده (o) یا به انتهای آن (ref:"end")
+  camera: [
+    { b: 0, o: 0.0,  s: 1.00, x: 0, y: 0 },
+    { b: 0, o: 3.0,  s: 1.06, x: 0, y: 0 },
+    { b: 1, o: 0.2,  s: 1.02, x: 0, y: 0 },
+    { b: 1, o: 2.2,  s: 1.09, x: 0, y: 0 },
+    { b: 2, o: 0.3,  s: 1.00, x: 0, y: 0 },
+    { b: 2, ref: "end", o: -0.6, s: 1.04, x: 0, y: 0 },
+    { b: 3, o: 0.3,  s: 1.00, x: 0, y: 0 },
+    { b: 4, o: 0.2,  s: 1.00, x: 0, y: 0 },
+    { b: 4, o: 1.0,  s: 1.15, x: 0, y: 70 },
+    { b: 4, ref: "end", o: -0.1, s: 1.15, x: 0, y: 70 },
+    { b: 5, o: 0.15, s: 1.00, x: 0, y: 0 }
+  ],
+
+  // ---------- کاراکتر (scale/موقعیت) ----------
+  char: [
+    { b: 0, o: 0.0,      scale: 1.00, x: 0,    y: 0 },
+    { b: 0, ref: "end", o: 0,      scale: 1.00, x: 0,    y: 0 },
+    { b: 1, o: 0.45,     scale: 0.52, x: -300, y: 40 },
+    { b: 1, ref: "end", o: 0,      scale: 0.52, x: -300, y: 40 },
+    { b: 2, o: 0.25,     scale: 0.50, x: -320, y: 60 },
+    { b: 2, ref: "end", o: 0,      scale: 0.50, x: -320, y: 60 },
+    { b: 3, o: 0.25,     scale: 0.52, x: -320, y: 50 },
+    { b: 3, ref: "end", o: 0,      scale: 0.52, x: -320, y: 50 },
+    { b: 4, o: 0.30,     scale: 0.42, x: 330,  y: 150 },
+    { b: 4, ref: "end", o: 0,      scale: 0.42, x: 330,  y: 150 },
+    { b: 5, o: 0.50,     scale: 1.00, x: 0,    y: 0 }
+  ],
+
+  // ---------- مانیتور ----------
+  monitor: [
+    { b: 0, o: 0.0,  opacity: 0, x: 520,  y: 40,  scale: 0.90, rotY: -34, state: "white" },
+    { b: 1, o: -0.55, opacity: 0, x: 520,  y: 40,  scale: 0.90, rotY: -34, state: "white" },
+    { b: 1, o: 0.55, opacity: 1, x: 0,    y: 0,   scale: 1.00, rotY: -14, state: "white" },
+    { b: 1, ref: "end", o: -0.25, opacity: 1, x: 0,  y: 0,   scale: 1.00, rotY: -14, state: "white" },
+    { b: 1, ref: "end", o: 0, opacity: 0, x: -140, y: 0,   scale: 0.94, rotY: -14, state: "white" },
+    { b: 4, o: -0.50, opacity: 0, x: 0,    y: 0,   scale: 1.00, rotY: 0,   state: "log" },
+    { b: 4, o: 0.20,  opacity: 1, x: 0,    y: 0,   scale: 1.00, rotY: 0,   state: "log" },
+    { b: 4, ref: "end", o: 0, opacity: 1, x: 0,  y: 0,   scale: 1.00, rotY: 0,   state: "log" },
+    { b: 5, o: 0.35,  opacity: 0, x: 0,    y: -70, scale: 0.92, rotY: 0,   state: "log" }
+  ],
+
+  // ---------- کرسر (کلیک درست قبل از پایان جملهٔ «جواب توی لاگه») ----------
+  cursor: [
+    { b: 4, o: -0.8, x: 1000, y: 1720 },
+    { b: 4, o: 0.3,  x: 700,  y: 1200 },
+    { b: 4, ref: "end", o: -1.0, x: 330, y: 860 },
+    { b: 4, ref: "end", o: -0.45, x: 130, y: 744, click: true },
+    { b: 4, ref: "end", o: 0, x: 130, y: 744 }
+  ],
+
+  // ---------- کارت‌های علت (زمان‌شان از روی صدا: برچسب mark) ----------
+  causes: [
+    { b: 2, o: 3.2, i: 0, mark: "c0" },
+    { b: 2, o: 5.8, i: 1, mark: "c1" },
+    { b: 2, o: 8.4, i: 2, mark: "c2" }
+  ],
+
+  // ---------- سوال‌ها ----------
+  questions: [
+    { b: 3, o: 3.4, i: 0, mark: "q0" },
+    { b: 3, o: 6.2, i: 1, mark: "q1" }
+  ],
+
+  // ---------- نوار مسیر ----------
+  stepper: [
+    { b: 0, o: 0.0, step: 0 },
+    { b: 2, o: 0.0, step: 1 },
+    { b: 4, o: 0.0, step: 2 }
+  ]
+};
+
+/* ---------------------------------------------------------------------
+   ۲) ابزارهای ریاضی
+   --------------------------------------------------------------------- */
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const prog = (t, start, dur) => clamp((t - start) / dur);
+const eOutCubic = t => 1 - Math.pow(1 - t, 3);
+const eInCubic = t => t * t * t;
+const eOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+const eInOutCubic = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const eOutBack = (t, s = 1.35) => 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2);
+
+function rng(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/* ---------------------------------------------------------------------
+   ۳) گرفتن المان‌ها
+   --------------------------------------------------------------------- */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const el = {
+  stage: $("#stage"),
+  dots: $("#dots"), glow: $("#glow"), charWrap: $("#charWrap"), char: $("#charInner"),
+  eyeL: $("#eyeL"), eyeR: $("#eyeR"), pupilL: $("#pupilL"), pupilR: $("#pupilR"),
+  mHappy: $("#mHappy"), mSad: $("#mSad"), mSurprise: $("#mSurprise"),
+  legs: { LL: $("#legLL"), LM: $("#legLM"), RM: $("#legRM"), RL: $("#legRL") },
+  chip: null, copy: $("#copy"), sweep: $("#sweep"), bubbles: $("#bubbles"),
+  monitor: $("#monitor"), monBlank: $("#monBlank"),
+  screens: { white: $("#scrWhite"), log: $("#scrLog"), site: $("#scrSite") },
+  logHi: $("#logHi"), cursor: $("#cursor"), ring: $("#clickRing"),
+  causes: $$("#causes .cause"), questions: $$("#qs .q"), stepsNav: $$("#stepsNav .sn")
+};
+
+/* ---------------------------------------------------------------------
+   ۴) ساخت متن‌ها (واژه‌به‌واژه)
+   [[...]] = هایلایت فیروزه‌ای     {{...}} = بلوک سفید (خودِ صفحهٔ سفید)
+   --------------------------------------------------------------------- */
+function segments(text) {
+  const out = [];
+  String(text).split(/(\[\[.+?\]\]|\{\{.+?\}\})/g).filter(Boolean).forEach(part => {
+    const block = part.startsWith("{{");
+    const hl = block || part.startsWith("[[");
+    const clean = block ? part.slice(2, -2) : (hl ? part.slice(2, -2) : part);
+    clean.split(/\s+/).filter(Boolean).forEach(w => out.push({ w, hl, block }));
+  });
+  return out;
+}
+
+function buildLine(parent, text, cls) {
+  const d = document.createElement("div");
+  d.className = cls;
+  parent.appendChild(d);
+  for (const s of segments(text)) {
+    const w = document.createElement("span");
+    w.className = "w" + (s.hl ? " hl" : "") + (s.block ? " wblock" : "");
+    w.textContent = s.w;
+    d.appendChild(w);
+    d.appendChild(document.createTextNode(" "));
+  }
+  return d;
+}
+
+CFG.beats.forEach(b => {
+  const box = document.createElement("div");
+  box.className = "beat";
+  el.copy.appendChild(box);
+  b._box = box;
+  b._title = buildLine(box, b.title, "title");
+  b._sub = buildLine(box, b.sub, "sub");
+  b._words = [...b._title.querySelectorAll(".w"), ...b._sub.querySelectorAll(".w")];
+  b._hlBars = [...box.querySelectorAll(".hl")];
+  b._titleLen = b._title.querySelectorAll(".w").length;
+});
+
+// چیپ CTA
+const chipBeat = CFG.beats.findIndex(b => b.chip);if (chipBeat > -1) {
+  const c = document.createElement("div");
+  c.className = "chip";
+  c.innerHTML =
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+       stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+     <span>${CFG.beats[chipBeat].chip}</span>
+     <span class="ltr">octoopus.ir</span>`;
+  CFG.beats[chipBeat]._box.appendChild(c);
+  el.chip = c;
+}
+
+/* ---------------------------------------------------------------------
+   ۵) حباب‌ها
+   --------------------------------------------------------------------- */
+const BUBBLES = [];
+(function makeBubbles() {
+  const r = rng(20260119);
+  for (let i = 0; i < 16; i++) {
+    const node = document.createElement("i");
+    const size = lerp(8, 34, r());
+    node.style.width = size + "px";
+    node.style.height = size + "px";
+    el.bubbles.appendChild(node);
+    BUBBLES.push({
+      node,
+      x: lerp(40, 1040, r()),
+      y0: lerp(0, 2100, r()),
+      speed: lerp(45, 150, r()),
+      wob: lerp(12, 48, r()),
+      phase: r() * Math.PI * 2,
+      alpha: lerp(0.10, 0.42, r())
+    });
+  }
+})();
+
+/* ---------------------------------------------------------------------
+   ۶) تایم‌لاین کی‌فریمی
+   هر کی‌فریم یا t مطلق دارد یا b/o (بیت + آفست). با تغییر تایمینگ
+   صدا، همه‌چیز خودکار جابه‌جا می‌شود.
+   --------------------------------------------------------------------- */
+function resolveTrack(list) {
+  if (!list) return [];
+  return list.map(k => {
+    const o = { ...k };
+    if (o.t == null) {
+      const beat = CFG.beats[o.b] || { t0: 0, t1: 0 };
+      o.t = (o.ref === "end" ? beat.t1 : beat.t0) + (o.o || 0);
+    }
+    return o;
+  });
+}
+let TRACKS = {};
+let MARKS = {};   // زمان‌های استخراج‌شده از صدا (b0..b5, c0..c2, q0..q1)
+
+function resolveTrack(list) {
+  if (!list) return [];
+  return list.map(k => {
+    const o = { ...k };
+    if (o.t == null) {
+      const beat = CFG.beats[o.b] || { t0: 0, t1: 0 };
+      o.t = (o.ref === "end" ? beat.t1 : beat.t0) + (o.o || 0);
+    }
+    return o;
+  }).sort((a, b) => a.t - b.t);   // مرتب‌سازی: تایمینگ صدا ممکن است ترتیب را به‌هم بزند
+}
+function resolveAll() {
+  TRACKS = {
+    camera: resolveTrack(CFG.camera),
+    char: resolveTrack(CFG.char),
+    monitor: resolveTrack(CFG.monitor),
+    cursor: resolveTrack(CFG.cursor),
+    stepper: resolveTrack(CFG.stepper)
+  };
+  const beatOf = (c) => CFG.beats[c.b] || { t0: 0, t1: 0 };
+  CFG.causes = CFG.causes.map(c => ({
+    ...c,
+    t: (c.mark && MARKS[c.mark]) ? MARKS[c.mark].t0 : beatOf(c).t0 + (c.o || 0),
+    tEnd: beatOf(c).t1
+  }));
+  CFG.questions = CFG.questions.map(c => ({
+    ...c,
+    t: (c.mark && MARKS[c.mark]) ? MARKS[c.mark].t0 : beatOf(c).t0 + (c.o || 0),
+    tEnd: beatOf(c).t1
+  }));
+  // تیتر صحنه وقتی کارت/سوال ظاهر می‌شود کنار می‌رود
+  CFG.beats.forEach(b => {
+    if (!b.textHide) { b._hideAt = null; return; }
+    const m = b.textHide.mark && MARKS[b.textHide.mark];
+    b._hideAt = m ? m.t0 - 0.25 : b.t0 + (b.textHide.o || 0);
+  });
+
+  // تایم‌لاین طراحی‌شده (برای حالت «بخوان روی ویدیو»)
+  window.OCTO_TIMELINE = {
+    beats: CFG.beats.map(b => ({ t0: +b.t0.toFixed(3), t1: +b.t1.toFixed(3) })),
+    cards: CFG.causes.map(c => ({ i: c.i, t: +c.t.toFixed(3) })),
+    questions: CFG.questions.map(q => ({ i: q.i, t: +q.t.toFixed(3) })),
+    marks: MARKS
+  };
+}
+
+// رویدادهای صوتی: لحظه‌هایی که یک افکت باید بزند
+// (رندرر این لیست را می‌خواند و برایش صدا می‌سازد)
+let EVENTS = [];
+function computeEvents() {
+  const B = CFG.beats;
+  const t0 = i => (B[i] ? B[i].t0 : 0);
+  const ev = [];
+  ev.push({ name: "rise",   t: CFG.rise.start + 0.05 });     // اکتو از اعماق
+  ev.push({ name: "pop",    t: t0(0) + 0.30 });              // بلوک «سفید»
+  for (let i = 1; i < B.length; i++) ev.push({ name: "sweep", t: t0(i) - 0.04 });
+  ev.push({ name: "whoosh", t: t0(1) - 0.55 });               // ورود مانیتور
+  ev.push({ name: "zap",    t: t0(1) + 0.55 });               // روشن شدن صفحهٔ سفید
+  CFG.causes.forEach(c => ev.push({ name: "pop",  t: c.t + 0.02 }));      // کارت‌ها
+  CFG.questions.forEach(q => ev.push({ name: "tick", t: q.t + 0.05 }));    // سوال‌ها
+  ev.push({ name: "zap",    t: t0(4) + 0.20 });               // باز شدن لاگ
+  const clickKF = TRACKS.cursor.find(k => k.click);
+  if (clickKF) ev.push({ name: "click", t: clickKF.t });      // کلیک کرسر
+  ev.push({ name: "ding",   t: t0(5) + 0.55 });               // چیپ CTA
+  EVENTS = ev.filter(e => e.t >= 0).sort((a, b) => a.t - b.t);
+  window.OCTO_EVENTS = EVENTS;
+}
+resolveAll();
+computeEvents();
+
+function ease(name, t) {
+  switch (name) {
+    case "linear": return t;
+    case "out": return eOutCubic(t);
+    case "expo": return eOutExpo(t);
+    case "back": return eOutBack(t, 1.2);
+    case "inOut": return eInOutCubic(t);
+    default: return eInOutCubic(t);
+  }
+}
+
+function track(list, t) {
+  if (!list || !list.length) return null;
+  if (t <= list[0].t) return { ...list[0] };
+  const last = list[list.length - 1];
+  if (t >= last.t) return { ...last };
+  for (let i = 0; i < list.length - 1; i++) {
+    const a = list[i], b = list[i + 1];
+    if (t >= a.t && t <= b.t) {
+      const p = b.t === a.t ? 1 : (t - a.t) / (b.t - a.t);
+      const e = ease(b.ease || "inOut", p);
+      const out = {};
+      for (const k of Object.keys(b)) {
+        if (k === "t" || k === "ease") continue;
+        out[k] = (typeof b[k] === "number" && typeof a[k] === "number")
+          ? lerp(a[k], b[k], e)
+          : (p >= 1 ? b[k] : a[k]);
+      }
+      out.t = t;
+      return out;
+    }
+  }
+  return { ...last };
+}
+
+/* ---------------------------------------------------------------------
+   ۷) رندر هر فریم
+   --------------------------------------------------------------------- */
+const CX = 212.6, CY = 471.93;
+const EYE = { L: [114.81, 157.74], R: [302.82, 157.74] };
+let FIT = 1;
+
+function mouthWeights(t) {
+  const w = { happy: 0, sad: 0, surprise: 0 };
+  let idx = 0;
+  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) idx = i;
+  const cur = CFG.beats[idx];
+  const p = clamp((t - cur.t0) / 0.1);
+  w[cur.mouth] = p;
+  if (idx > 0) w[CFG.beats[idx - 1].mouth] += 1 - p;
+  return w;
+}
+
+function gazeAt(t) {
+  let idx = 0;
+  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) idx = i;
+  const cur = CFG.beats[idx];
+  if (idx === 0) return cur.gaze;
+  const p = eInOutCubic(clamp((t - cur.t0) / 0.45));
+  const prev = CFG.beats[idx - 1].gaze;
+  return [lerp(prev[0], cur.gaze[0], p), lerp(prev[1], cur.gaze[1], p)];
+}
+
+// پلک زدن بر اساس طول هر بیت ساخته می‌شود تا با صدا جابه‌جا شود
+function blinkTimes() {
+  const out = [...(CFG.blinks || [])];
+  for (const b of CFG.beats) {
+    const len = Math.max(0.6, b.t1 - b.t0);
+    out.push(b.t0 + Math.min(0.50, len * 0.18));
+    out.push(b.t0 + Math.min(0.85, len * 0.32));
+    out.push(b.t0 + len * 0.74);
+  }
+  return out;
+}
+
+function blinkAt(t) {
+  let sy = 1;
+  for (const bt of blinkTimes()) {
+    const p = (t - bt) / 0.16;
+    if (p > 0 && p < 1) sy = Math.min(sy, 1 - 0.94 * Math.sin(Math.PI * p));
+  }
+  return sy;
+}
+
+// نویز قطعی برای فلیکر صفحهٔ سفید
+function flick(t, seed) {
+  const n = Math.sin(t * 37.1 + seed) * 0.5 + Math.sin(t * 61.7 + seed * 2.3) * 0.5;
+  return n;
+}
+
+function draw(t) {
+  t = Math.max(0, t);
+
+  /* --- پس‌زمینه --- */
+  el.dots.style.transform = `translate(${Math.sin(t * 0.25) * 14}px, ${-t * 10}px)`;
+  el.glow.style.transform = `scale(${1 + Math.sin(t * 1.15) * 0.02})`;
+  el.glow.style.opacity = 0.85 + Math.sin(t * 1.15) * 0.15;
+
+  for (const b of BUBBLES) {
+    const y = 2100 - (((b.y0 + t * b.speed) % 2300));
+    const x = b.x + Math.sin(t * 1.1 + b.phase) * b.wob;
+    b.node.style.transform = `translate(${x}px, ${y}px)`;
+    b.node.style.opacity = b.alpha * (0.55 + 0.45 * Math.sin(t * 1.6 + b.phase));
+  }
+
+  /* --- دوربین --- */
+  const cam = track(TRACKS.camera, t) || { s: 1, x: 0, y: 0 };
+  const cs = cam.s || 1;
+  const maxX = (cs - 1) * 540, maxY = (cs - 1) * 960;
+  const cx = clamp(cam.x || 0, -maxX, maxX);
+  const cy = clamp(cam.y || 0, -maxY, maxY);
+  el.stage.style.transform =
+    `scale(${FIT}) translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px) scale(${cs.toFixed(4)})`;
+
+  /* --- کاراکتر: بالا آمدن + تنفس + فشردگی --- */
+  const riseP = prog(t, CFG.rise.start, CFG.rise.dur);
+  const riseY = lerp(CFG.rise.from, 0, eOutBack(riseP, 1.05));
+  const breath = Math.sin(t * 1.85) * 5;
+  const landAt = CFG.rise.start + CFG.rise.dur * 0.82;
+  const squash = 0.075 * Math.sin(Math.PI * prog(t, landAt, 0.4));
+  const sy = (1 - squash) * (1 + Math.sin(t * 1.85) * 0.006);
+  const sx = 1 + squash * 0.55;
+
+  el.char.setAttribute("transform",
+    `translate(0 ${riseY + breath}) translate(${CX} ${CY}) scale(${sx} ${sy}) translate(${-CX} ${-CY})`);
+
+  /* --- جای کاراکتر در صحنه --- */
+  const chr = track(TRACKS.char, t) || { scale: 1, x: 0, y: 0 };
+  el.charWrap.style.transform =
+    `translate(${(chr.x || 0).toFixed(1)}px, ${(chr.y || 0).toFixed(1)}px) scale(${(chr.scale || 1).toFixed(3)})`;
+
+  /* --- بازوها --- */
+  const swayAmp = 1.4 + (1 - riseP) * 5;
+  const legs = [["LL", 0, -1], ["LM", 0.6, -1], ["RM", 1.2, 1], ["RL", 1.8, 1]];
+  for (const [key, phase, dir] of legs) {
+    const a = Math.sin(t * 2.1 + phase) * swayAmp * dir;
+    el.legs[key].setAttribute("transform",
+      `rotate(${a.toFixed(2)} ${key === "LL" ? 31.89 : key === "LM" ? 152.34 : key === "RM" ? 272.93 : 393.3} 308.65)`);
+  }
+
+  /* --- چشم‌ها --- */
+  const g = gazeAt(t);
+  const gx = g[0] * 9, gy = g[1] * 7;
+  el.pupilL.setAttribute("transform", `translate(${gx.toFixed(2)} ${gy.toFixed(2)})`);
+  el.pupilR.setAttribute("transform", `translate(${gx.toFixed(2)} ${gy.toFixed(2)})`);
+  const bsy = blinkAt(t);
+  for (const [k, c] of [["eyeL", EYE.L], ["eyeR", EYE.R]]) {
+    el[k].setAttribute("transform",
+      `translate(${c[0]} ${c[1]}) scale(1 ${bsy.toFixed(3)}) translate(${-c[0]} ${-c[1]})`);
+  }
+
+  /* --- دهان --- */
+  const mw = mouthWeights(t);
+  el.mHappy.style.opacity = mw.happy;
+  el.mSad.style.opacity = mw.sad;
+  el.mSurprise.style.opacity = mw.surprise;
+
+  /* --- متن صحنه‌ها --- */
+  CFG.beats.forEach(b => {
+    const inDur = 0.5, outDur = 0.3;
+    const pIn = eOutExpo(prog(t, b.t0, inDur));
+    const pOut = prog(t, b.t1 - outDur, outDur);
+    const hide = b._hideAt != null ? prog(t, b._hideAt, 0.35) : 0;
+    const alpha = pIn * (1 - eInCubic(pOut)) * (1 - eInCubic(hide));
+    const shift = lerp(48, 0, pIn) + lerp(0, -34, eInCubic(pOut));
+
+    if (alpha <= 0.001) {
+      b._title.style.opacity = 0; b._sub.style.opacity = 0;
+      b._words.forEach(w => { w.style.opacity = 0; });
+      return;
+    }
+
+    b._title.style.opacity = alpha;
+    b._sub.style.opacity = alpha;
+    b._title.style.transform = `translateY(${shift}px)`;
+
+    b._words.forEach((w, i) => {
+      const isSub = i >= b._titleLen;
+      const p = eOutExpo(clamp((t - b.t0 - 0.04 - i * 0.055) / 0.42));
+      // کلمه‌های بلوک‌سفید با فلیکر CRT چشمک می‌زنند
+      const flk = w.classList.contains("wblock")
+        ? (1 - 0.05 * Math.abs(flick(t, 9.3)))
+        : 1;
+      w.style.opacity = p * flk;
+      w.style.transform = `translateY(${lerp(46, 0, p)}px) scale(${lerp(0.94, 1, p)})`;
+      w.style.filter = p < 0.98 ? `blur(${lerp(6, 0, p).toFixed(2)}px)` : "none";
+      if (isSub) w.style.opacity = p * 0.92;
+    });
+
+    b._hlBars.forEach((h, i) => {
+      const p = eOutCubic(clamp((t - b.t0 - 0.42 - i * 0.07) / 0.45));
+      h.style.setProperty("--u", p.toFixed(3));
+    });
+
+    if (b.chip && el.chip) {
+      const p = clamp((t - b.t0 - 0.55) / 0.42);
+      const e = eOutBack(p, 1.9);
+      el.chip.style.opacity = clamp(p * 1.6);
+      el.chip.style.transform = `translateY(${lerp(24, 0, p)}px) scale(${lerp(0.82, 1, e)})`;
+    }
+  });
+
+  /* --- مانیتور --- */
+  const mo = track(TRACKS.monitor, t) || { opacity: 0 };
+  el.monitor.style.opacity = mo.opacity ?? 0;
+  el.monitor.style.transform =
+    `translate(${(mo.x || 0).toFixed(1)}px, ${(mo.y || 0).toFixed(1)}px) scale(${(mo.scale || 1).toFixed(3)}) rotateY(${(mo.rotY || 0).toFixed(1)}deg)`;
+  for (const key of Object.keys(el.screens)) {
+    el.screens[key].classList.toggle("on", key === mo.state);
+  }
+  /* --- فلیکر CRT روی صفحهٔ سفید --- */
+  const f = flick(t, 3.7);
+  el.monBlank.style.opacity = (1 - 0.06 * Math.abs(f)).toFixed(3);
+
+  /* --- خط لاگ --- */
+  const clickKF = TRACKS.cursor.find(k => k.click);
+  const clickT = clickKF ? clickKF.t : 1e9;
+  el.logHi.classList.toggle("on", t >= clickT);
+
+  /* --- کرسر --- */
+  const cu = track(TRACKS.cursor, t);
+  if (cu) {
+    const vis = t >= cu.t - 0.01 && t <= (TRACKS.cursor[TRACKS.cursor.length - 1].t + 0.4);
+    el.cursor.style.opacity = vis ? 1 : 0;
+    el.cursor.style.transform = `translate(${(cu.x || 0).toFixed(1)}px, ${(cu.y || 0).toFixed(1)}px)`;
+    const cp = prog(t, clickT, 0.45);
+    el.ring.style.opacity = (cp > 0 && cp < 1) ? (1 - cp) * 0.9 : 0;
+    el.ring.style.transform = `scale(${(0.3 + cp * 2.2).toFixed(3)})`;
+  }
+
+  /* --- کارت‌های علت --- */
+  el.causes.forEach(node => {
+    const c = CFG.causes.find(x => x.i === +node.dataset.i);
+    if (!c) return;
+    const p = eOutBack(prog(t, c.t, 0.5), 1.5);
+    const out = prog(t, c.tEnd - 0.35, 0.35);
+    const alpha = clamp(p * 1.4) * (1 - eInCubic(out));
+    node.style.opacity = alpha;
+    node.style.transform = `translateY(${lerp(46, 0, p).toFixed(1)}px) scale(${lerp(0.92, 1, clamp(p)).toFixed(3)})`;
+  });
+
+  /* --- سوال‌ها --- */
+  el.questions.forEach(node => {
+    const q = CFG.questions.find(x => x.i === +node.dataset.i);
+    if (!q) return;
+    const p = eOutBack(prog(t, q.t, 0.5), 1.4);
+    const out = prog(t, q.tEnd - 0.35, 0.35);
+    const alpha = clamp(p * 1.4) * (1 - eInCubic(out));
+    node.style.opacity = alpha;
+    node.classList.toggle("on", t >= q.t && alpha > 0.05);
+    node.style.transform = `translateX(${lerp(50, 0, p).toFixed(1)}px)`;
+  });
+
+  /* --- نوار مسیر --- */
+  const st = track(TRACKS.stepper, t);
+  const step = st ? st.step : 0;
+  el.stepsNav.forEach((node, i) => {
+    node.classList.toggle("on", i === step);
+    node.classList.toggle("done", i < step);
+  });
+
+  /* --- کارت خطای قدیمی (غیرفعال در این نسخه) --- */
+  /* --- خط اسکن --- */
+  let sweepOp = 0, sweepY = -60;
+  for (const b of CFG.beats) {
+    if (!b.sweep) continue;
+    const p = prog(t, b.t0 - 0.05, 0.45);
+    if (p > 0 && p < 1) {
+      sweepY = lerp(-40, 1960, eInOutCubic(p));
+      sweepOp = Math.sin(Math.PI * p) * 0.75;
+    }
+  }
+  el.sweep.style.transform = `translateY(${sweepY}px)`;
+  el.sweep.style.opacity = sweepOp;
+}
+
+/* ---------------------------------------------------------------------
+   ۸) پخش / پیش‌نمایش + هوک زمان‌بندی صدا
+   --------------------------------------------------------------------- */
+window.renderAt = draw;
+window.OCTO_META = { duration: CFG.duration, fps: CFG.fps, width: 1080, height: 1920 };
+window.__ready = false;
+
+// رندرر می‌تواند تایمینگ صدا را از بیرون تزریق کند
+window.applyTiming = (obj) => {
+  if (!obj) return;
+  if (obj.duration) { CFG.duration = obj.duration; window.OCTO_META.duration = obj.duration; }
+
+  if (obj.marks) {
+    MARKS = obj.marks;
+    // بیت‌ها از روی برچسب‌های b0..b5 ساخته می‌شوند:
+    // هر بیت از شروع جمله‌اش تا شروع جملهٔ بعدی ادامه دارد.
+    const keys = Object.keys(MARKS)
+      .filter(k => /^b\d+$/.test(k))
+      .sort((a, b) => (+a.slice(1)) - (+b.slice(1)));
+    keys.forEach((k, i) => {
+      const beat = CFG.beats[i];
+      if (!beat) return;
+      const start = Math.max(0, MARKS[k].t0 - 0.12);
+      const next = keys[i + 1] ? MARKS[keys[i + 1]].t0 - 0.12 : (obj.duration || MARKS[k].t1 + 0.6);
+      beat.t0 = start;
+      beat.t1 = Math.max(start + 0.6, next);
+    });
+  }
+
+  if (Array.isArray(obj.beats)) {
+    obj.beats.forEach((bt, i) => {
+      if (!CFG.beats[i]) return;
+      if (bt.t0 != null) CFG.beats[i].t0 = bt.t0;
+      if (bt.t1 != null) CFG.beats[i].t1 = bt.t1;
+    });
+  }
+  resolveAll();
+  computeEvents();
+};
+
+if (RENDER) {
+  document.getElementById("ui").style.display = "none";
+  const tf = params.get("t");
+  draw(tf ? parseFloat(tf) : 0);
+  if (params.has("guides")) document.getElementById("guides").classList.add("on");
+  document.fonts.ready.then(() => { window.__ready = true; });
+} else {
+  const stage = el.stage;
+  stage.style.top = "calc(50% - 28px)";
+  const fit = () => {
+    FIT = Math.min(window.innerWidth / 1080, (window.innerHeight - 56) / 1920);
+    draw(offset);
+  };
+
+  const playBtn = document.getElementById("playBtn");
+  const scrub = document.getElementById("scrub");
+  const timeLbl = document.getElementById("timeLbl");
+  scrub.max = CFG.duration;
+
+  let playing = true, t0 = performance.now(), offset = 0;
+
+  const tick = (now) => {
+    if (playing) {
+      offset = ((now - t0) / 1000) % CFG.duration;
+      scrub.value = offset;
+    }
+    draw(offset);
+    timeLbl.textContent = offset.toFixed(2) + "s";
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  fit();
+  window.addEventListener("resize", fit);
+
+  playBtn.onclick = () => {
+    playing = !playing;
+    playBtn.textContent = playing ? "Pause" : "Play";
+    if (playing) t0 = performance.now() - offset * 1000;
+  };
+  scrub.oninput = () => {
+    offset = parseFloat(scrub.value);
+    if (playing) t0 = performance.now() - offset * 1000;
+  };
+  document.getElementById("restartBtn").onclick = () => {
+    offset = 0; t0 = performance.now();
+  };
+  document.getElementById("guideChk").onchange = (e) => {
+    document.getElementById("guides").classList.toggle("on", e.target.checked);
+  };
+  document.fonts.ready.then(() => { window.__ready = true; });
+}
+</script>
+</body>
+</html>
