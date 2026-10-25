@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Octo Motion — سلام من اکتو هستم</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#06152b;color:#f4fbff;font-family:Vazirmatn,"Noto Sans Arabic",sans-serif}
+body{display:grid;place-items:center;min-height:100vh}
+#scene{position:relative;width:min(100vw,720px);height:min(177.78vw,1280px);max-height:100vh;aspect-ratio:9/16;overflow:hidden;background:radial-gradient(ellipse at 50% 55%,#12334b 0%,#0a2039 42%,#06152b 100%)}
+.grid{position:absolute;inset:0;opacity:.15;background-image:linear-gradient(#41faf21f 1px,transparent 1px),linear-gradient(90deg,#41faf21f 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(transparent,black 25%,black 75%,transparent)}
+.glow{position:absolute;width:85%;aspect-ratio:1;left:7.5%;top:25%;border-radius:50%;background:radial-gradient(circle,#41faf224,transparent 68%);filter:blur(10px)}
+.brand{position:absolute;top:6%;width:100%;text-align:center;font:700 18px sans-serif;letter-spacing:5px;color:#e0f6ff8f}
+.depth{position:absolute;top:10%;left:7%;direction:ltr;font:12px monospace;letter-spacing:2px;color:#41faf2a6;border-left:2px solid #41faf2;padding-left:12px}
+#octo{position:absolute;width:56%;height:auto;left:22%;top:34%;opacity:0;filter:drop-shadow(0 24px 38px #0005);transform:translateY(70%);transform-origin:50% 80%}
+#octo img{width:100%;height:auto}
+#message{position:absolute;left:9.4%;top:14%;width:81.2%;min-height:160px;padding:28px 30px;border:1px solid #41faf278;border-radius:26px;background:linear-gradient(135deg,#122f45f0,#091d33f0);box-shadow:0 16px 55px #0004;opacity:0;transform:translateY(20px)}
+.kicker{font-size:15px;color:#41faf2;margin-bottom:16px;font-weight:700}
+#typed{font-size:clamp(20px,4.8vw,35px);line-height:1.75;font-weight:700;min-height:115px;text-align:right}
+#cursor{display:inline-block;width:3px;height:1em;background:#41faf2;vertical-align:middle;margin-right:5px;animation:blink .7s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+#subline{position:absolute;bottom:7.5%;width:100%;text-align:center;color:#d7f0ff85;opacity:0}
+@media(min-width:721px){#scene{height:min(100vh,1280px);width:calc(min(100vh,1280px)*.5625)}}
+</style></head>
+<body><main id="scene"><div class="glow"></div><div class="grid"></div>
+<div class="brand">OCTOOPUS <span style="color:#41faf2">/</span> DEEP WEB</div><div class="depth">DEPTH 0042 M<br><span style="opacity:.6">SIGNAL FOUND</span></div>
+<div id="message"><div class="kicker">یک پیام از اعماق دریا</div><div id="typed"></div><span id="cursor"></span></div>
+<div id="octo"><img src="octoopus-character.svg" alt="شخصیت اکتو"></div>
+<div id="subline">هشت بازو؛ یک ذهن کنجکاو</div></main>
+<script>
+const FULL='سلام من اکتو هستم یک توسعه‌دهنده در اعماق!';
+const octo=document.querySelector('#octo'),msg=document.querySelector('#message'),typed=document.querySelector('#typed'),cursor=document.querySelector('#cursor'),sub=document.querySelector('#subline');
+const happyMouth=()=>document.querySelector('#octo img');
+function clamp(v,a=0,b=1){return Math.max(a,Math.min(b,v))}
+function ease(v){v=clamp(v);return 1-Math.pow(1-v,3)}
+window.renderAt=function(t){
+ const rise=ease((t-.35)/1.65),bob=t>2?Math.sin((t-2)*2.1)*4:0;
+ octo.style.opacity=String(clamp((t-.25)/.6));
+ octo.style.transform='translateY('+((1-rise)*500+bob)+'px) scale('+(.9+.1*rise)+') rotate('+(t>1.7?Math.sin(t*1.7)*.65:0)+'deg)';
+ const m=ease((t-2)/.55);msg.style.opacity=String(m);msg.style.transform='translateY('+((1-m)*20)+'px)';
+ const chars=Array.from(FULL),count=Math.max(0,Math.min(chars.length,Math.floor((t-2.7)/.112)));
+ typed.textContent=chars.slice(0,count).join('');
+ cursor.style.opacity=t>2.7&&t<2.7+chars.length*.112+.2?'1':'0';
+ sub.style.opacity=String(ease((t-9.5)/.7));
+};
+window.renderAt(0);const start=performance.now();
+function play(now){const t=(now-start)/1000;window.renderAt(Math.min(t,10));if(t<10)requestAnimationFrame(play)}
+requestAnimationFrame(play);
+</script></body></html>
