@@ -18,7 +18,7 @@ python -m http.server 8000
 سپس آدرس `http://localhost:8000` را باز کنید.
 
 ## ساخت ویدئو
-نیاز دارید به Python 3، FFmpeg ו فونت‌های Noto Arabic/DejaVu در مسیرهای تعریف‌شده در اسکریپت.
+نیاز دارید به Python 3، FFmpeg و فونت‌های Noto Arabic/DejaVu در مسیرهای تعریف‌شده در اسکریپت.
 
 ```bash
 pip install -r requirements.txt
