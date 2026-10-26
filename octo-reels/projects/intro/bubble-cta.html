@@ -89,7 +89,7 @@ el.eyebrow.style.opacity=prog(t,.12,.35);el.eyebrow.style.transform=`translateY(
 el.words.forEach(w=>{const p=ease(t,Number(w.dataset.start)||0,.42),fade=prog(t,6.38,.28);w.style.opacity=p*(1-fade);w.style.transform=`translateY(${lerp(48,0,p)}px)`});
 const subP=ease(t,5.05,.5);el.sub.style.opacity=subP*(1-prog(t,6.34,.26));el.sub.style.transform=`translateY(${lerp(22,0,subP)}px)`;
 const tagP=ease(t,6.1,.55,p=>1-Math.pow(1-p,3));el.tag.style.opacity=tagP;el.tag.style.transform=`translate(-50%,${lerp(22,0,tagP)}px) scale(${lerp(.96,1,tagP)})`;
-const ctaP=ease(t,6.42,.48,p=>1-Math.pow(1-p,3));el.cta.style.opacity=ctaP;el.cta.style.transform=`translate(-50%,${lerp(24,0,ctaP)}px) scale(${lerp(.94,1,ctaP)})`;
+const ctaP=ease(t,5.82,.52,p=>1-Math.pow(1-p,3));el.cta.style.opacity=ctaP;el.cta.style.transform=`translate(-50%,${lerp(24,0,ctaP)}px) scale(${lerp(.94,1,ctaP)})`;
 const scan=prog(t,4.55,.75);el.sheen.style.transform=`translateY(${lerp(-20,1940,inOut(scan))}px)`;el.sheen.style.opacity=scan>0&&scan<1?Math.sin(Math.PI*scan)*.65:0;
 }
 // افکت‌ها در زمان واقعیِ انیمیشن تعریف شده‌اند؛ render.mjs آن‌ها را با FFmpeg می‌سازد.
@@ -107,8 +107,8 @@ window.OCTO_EVENTS=[
  {name:"whoosh",t:5.02},
  {name:"ding",t:5.48},
  {name:"ding",t:6.12},
- {name:"pop",t:6.48},
- {name:"ding",t:6.92}
+ {name:"pop",t:5.90},
+ {name:"ding",t:6.18}
 ];
 window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
 if(RENDER){el.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
