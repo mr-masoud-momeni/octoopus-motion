@@ -14,7 +14,7 @@
 .title{font-size:76px;line-height:1.38;font-weight:900;letter-spacing:-.035em;text-shadow:0 10px 40px rgba(0,0,0,.32);margin-top:24px}.line{display:block}.word{display:inline-block;opacity:0;transform:translateY(48px)}.accent{color:var(--cyan)}
 .sub{font-size:43px;line-height:1.65;color:var(--muted);font-weight:500;margin-top:24px;opacity:0;transform:translateY(22px)}
 #charWrap{position:absolute;left:50%;top:790px;width:790px;margin-left:-395px;transform-origin:50% 100%;filter:drop-shadow(0 38px 60px rgba(0,0,0,.36)) drop-shadow(0 0 42px rgba(65,250,241,.10));will-change:transform}#octo{display:block;width:100%;height:auto;overflow:visible}.octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
-#endTag{position:absolute;left:50%;top:1580px;transform:translate(-50%,22px);display:flex;align-items:center;gap:16px;padding:18px 30px;border:1px solid rgba(65,250,241,.35);border-radius:999px;background:rgba(7,24,43,.72);color:var(--cyan);font-size:30px;font-weight:700;white-space:nowrap;opacity:0}#endTag span{color:#d6e2ef;font-size:25px;direction:ltr;font-family:system-ui,sans-serif}
+#endTag{position:absolute;left:50%;top:1555px;transform:translate(-50%,22px);display:flex;align-items:center;gap:16px;padding:16px 28px;border:1px solid rgba(65,250,241,.35);border-radius:999px;background:rgba(7,24,43,.78);color:var(--cyan);font-size:28px;font-weight:700;white-space:nowrap;opacity:0}#endTag span{color:#d6e2ef;font-size:24px;direction:ltr;font-family:system-ui,sans-serif}\n#cta{position:absolute;left:50%;top:1665px;transform:translate(-50%,24px) scale(.94);display:flex;align-items:center;justify-content:center;gap:13px;padding:21px 34px;border-radius:24px;background:linear-gradient(135deg,#41FAF1,#8AFFF8);color:#071827;font-size:33px;font-weight:900;white-space:nowrap;box-shadow:0 14px 45px rgba(65,250,241,.24);opacity:0}#cta .cta-icon{font-size:38px;line-height:1}#cta .cta-spark{position:absolute;right:-13px;top:-18px;font-size:28px;transform:rotate(15deg)}
 .sheen{position:absolute;left:-10%;right:-10%;top:0;height:7px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 34px rgba(65,250,241,.3);opacity:0;pointer-events:none}
 #controls{position:fixed;z-index:20;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}#controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:60px;text-align:center}
 </style></head><body>
@@ -61,12 +61,12 @@
       </g>
     </g>
   </svg>
-</div><div id="endTag">طراحی و توسعهٔ وب <span>octoopus.ir</span></div><div class="sheen" id="sheen"></div></div>
+</div><div id="endTag">طراحی و توسعهٔ وب <span>octoopus.ir</span></div><div id="cta"><span class="cta-spark">✦</span><span class="cta-icon">🐙</span><span>اگه اکتو رو دوست داشتی، فالو کن!</span></div><div class="sheen" id="sheen"></div></div>
 <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="7.5" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 (()=>{
 const RENDER=new URLSearchParams(location.search).has("render"),DURATION=7.5,FPS=30,$=s=>document.querySelector(s);
-const el={stage:$("#stage"),grid:$("#grid"),halo:$("#halo"),bubbles:$("#bubbles"),char:$("#charInner"),wrap:$("#charWrap"),eyeL:$("#eyeL"),eyeR:$("#eyeR"),pupilL:$("#pupilL"),pupilR:$("#pupilR"),happy:$("#mHappy"),sad:$("#mSad"),surprise:$("#mSurprise"),eyebrow:$("#eyebrow"),sub:$("#sub"),tag:$("#endTag"),sheen:$("#sheen"),words:[...document.querySelectorAll(".word")],controls:$("#controls"),scrub:$("#scrub"),time:$("#time"),play:$("#play")};
+const el={stage:$("#stage"),grid:$("#grid"),halo:$("#halo"),bubbles:$("#bubbles"),char:$("#charInner"),wrap:$("#charWrap"),eyeL:$("#eyeL"),eyeR:$("#eyeR"),pupilL:$("#pupilL"),pupilR:$("#pupilR"),happy:$("#mHappy"),sad:$("#mSad"),surprise:$("#mSurprise"),eyebrow:$("#eyebrow"),sub:$("#sub"),tag:$("#endTag"),cta:$("#cta"),sheen:$("#sheen"),words:[...document.querySelectorAll(".word")],controls:$("#controls"),scrub:$("#scrub"),time:$("#time"),play:$("#play")};
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),inOut=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
 const ease=(t,a,d,fn=out)=>fn(prog(t,a,d));
 const rng=seed=>()=>{seed|=0;seed=seed+0x6D2B79F5|0;let n=Math.imul(seed^seed>>>15,1|seed);n=n+Math.imul(n^n>>>7,61|n)^n;return((n^n>>>14)>>>0)/4294967296};
@@ -87,7 +87,7 @@ const surprise=1-prog(t,.25,.24),happy=prog(t,.85,.35);el.surprise.style.opacity
 el.eyebrow.style.opacity=prog(t,.12,.35);el.eyebrow.style.transform=`translateY(${lerp(20,0,ease(t,.12,.45))}px)`;
 el.words.forEach(w=>{const p=ease(t,Number(w.dataset.start)||0,.42),fade=prog(t,7.05,.25);w.style.opacity=p*(1-fade);w.style.transform=`translateY(${lerp(48,0,p)}px)`});
 const subP=ease(t,5.05,.5);el.sub.style.opacity=subP*(1-prog(t,7.05,.25));el.sub.style.transform=`translateY(${lerp(22,0,subP)}px)`;
-const tagP=ease(t,6.1,.55,p=>1-Math.pow(1-p,3));el.tag.style.opacity=tagP;el.tag.style.transform=`translate(-50%,${lerp(22,0,tagP)}px) scale(${lerp(.96,1,tagP)})`;
+const tagP=ease(t,6.1,.55,p=>1-Math.pow(1-p,3));el.tag.style.opacity=tagP;el.tag.style.transform=`translate(-50%,${lerp(22,0,tagP)}px) scale(${lerp(.96,1,tagP)})`;\nconst ctaP=ease(t,6.55,.48,p=>1-Math.pow(1-p,3));el.cta.style.opacity=ctaP;el.cta.style.transform=`translate(-50%,${lerp(24,0,ctaP)}px) scale(${lerp(.94,1,ctaP)})`;
 const scan=prog(t,4.55,.75);el.sheen.style.transform=`translateY(${lerp(-20,1940,inOut(scan))}px)`;el.sheen.style.opacity=scan>0&&scan<1?Math.sin(Math.PI*scan)*.65:0;
 }
 // افکت‌ها در زمان واقعیِ انیمیشن تعریف شده‌اند؛ render.mjs آن‌ها را با FFmpeg می‌سازد.
