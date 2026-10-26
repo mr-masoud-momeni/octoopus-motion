@@ -90,6 +90,22 @@ const subP=ease(t,5.05,.5);el.sub.style.opacity=subP*(1-prog(t,7.05,.25));el.sub
 const tagP=ease(t,6.1,.55,p=>1-Math.pow(1-p,3));el.tag.style.opacity=tagP;el.tag.style.transform=`translate(-50%,${lerp(22,0,tagP)}px) scale(${lerp(.96,1,tagP)})`;
 const scan=prog(t,4.55,.75);el.sheen.style.transform=`translateY(${lerp(-20,1940,inOut(scan))}px)`;el.sheen.style.opacity=scan>0&&scan<1?Math.sin(Math.PI*scan)*.65:0;
 }
+// افکت‌ها در زمان واقعیِ انیمیشن تعریف شده‌اند؛ render.mjs آن‌ها را با FFmpeg می‌سازد.
+window.OCTO_EVENTS=[
+ {name:"rise",t:0.08},
+ {name:"pop",t:0.34},
+ {name:"tick",t:0.62},
+ {name:"tick",t:0.78},
+ {name:"pop",t:2.10},
+ {name:"tick",t:2.25},
+ {name:"tick",t:2.40},
+ {name:"tick",t:2.65},
+ {name:"pop",t:2.80},
+ {name:"sweep",t:4.58},
+ {name:"whoosh",t:5.02},
+ {name:"ding",t:5.48},
+ {name:"ding",t:6.12}
+];
 window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
 if(RENDER){el.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
 else{const fit=()=>{const s=Math.min(innerWidth/1080,(innerHeight-54)/1920);el.stage.style.transform=`scale(${s})`};fit();addEventListener("resize",fit);let playing=true,offset=0,start=performance.now();const tick=now=>{if(playing){offset=((now-start)/1000)%DURATION;el.scrub.value=offset}draw(offset);el.time.textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)};requestAnimationFrame(tick);el.play.onclick=()=>{playing=!playing;el.play.textContent=playing?"Pause":"Play";if(playing)start=performance.now()-offset*1000};el.scrub.oninput=()=>{offset=Number(el.scrub.value);if(playing)start=performance.now()-offset*1000;draw(offset)};$("#restart").onclick=()=>{offset=0;start=performance.now();draw(0)}}
