@@ -38,7 +38,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 .empty-sub{margin-top:12px;color:var(--muted);font-size:25px}
 #octoWrap{position:absolute;left:210px;top:1030px;width:370px;margin:0;opacity:0;transform:translate(270px,180px) rotate(12deg) scale(.8);filter:drop-shadow(0 22px 32px rgba(0,0,0,.3)) drop-shadow(0 0 22px rgba(65,250,241,.1));transform-origin:50% 100%;z-index:4}
 #octo{width:100%;height:auto;display:block;overflow:visible}.octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}#pupilL,#pupilR,#legLL,#legLM,#legRM,#legRL{transform-box:fill-box;transform-origin:center}#mSurprise,#mSad{opacity:0}#mHappy{opacity:1}
-#magnify{position:absolute;left:230px;top:82px;width:150px;height:150px;opacity:0;transform:scale(.5) rotate(-20deg);transform-origin:35% 65%;z-index:6;filter:drop-shadow(0 12px 20px rgba(0,0,0,.3))}#discoveryPath{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible;opacity:0}#dottedPath{fill:none;stroke:var(--cyan);stroke-width:7;stroke-linecap:round;stroke-dasharray:2 20;filter:drop-shadow(0 0 10px rgba(65,250,241,.5))}#zoomHalo{position:absolute;top:625px;right:380px;width:300px;height:115px;border:4px solid var(--cyan);border-radius:28px;box-shadow:0 0 0 12px rgba(65,250,241,.1),0 0 42px rgba(65,250,241,.25);opacity:0;z-index:7;pointer-events:none}#zoomDetail{position:absolute;top:825px;left:170px;width:620px;padding:24px 30px 22px;border:2px solid rgba(65,250,241,.7);border-radius:26px;background:linear-gradient(135deg,rgba(10,31,53,.98),rgba(8,20,37,.98));box-shadow:0 18px 65px rgba(0,0,0,.35),0 0 36px rgba(65,250,241,.13);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;opacity:0;transform:translateY(22px) scale(.88);z-index:8}#zoomDetail span{font-size:25px;color:var(--muted);font-weight:700}#zoomDetail strong{font-size:38px;color:var(--cyan);font-weight:900;white-space:nowrap}#zoomDetail small{flex-basis:100%;font-size:21px;color:#d8e4f0}
+#narration{position:absolute;top:875px;left:100px;right:100px;text-align:center;font-size:31px;line-height:1.8;font-weight:800;color:#F4F7FB;opacity:0;transform:translateY(16px);z-index:6}#narration em{font-style:normal;color:var(--cyan)}
 #shipping{position:absolute;top:560px;left:auto;right:65px;width:620px;padding:32px 30px 28px;border-radius:28px;background:rgba(10,25,47,.98);border:1px solid rgba(65,250,241,.46);box-shadow:0 25px 75px rgba(0,0,0,.28);opacity:0;transform:translateY(35px) scale(.96);z-index:5}
 .shipping-head{font-size:25px;color:var(--muted);font-weight:700}
 .shipping-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;font-size:30px;font-weight:900}
@@ -120,14 +120,14 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
         <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
       </g>
     </g>
-  </svg><svg id="magnify" viewBox="0 0 100 100" fill="none"><circle cx="42" cy="40" r="27" stroke="#41FAF1" stroke-width="8"/><path d="m62 61 25 25" stroke="#41FAF1" stroke-width="11" stroke-linecap="round"/><circle cx="42" cy="40" r="18" fill="#41FAF1" fill-opacity=".09"/></svg><svg id="grip" viewBox="0 0 80 80" style="position:absolute;left:270px;top:120px;width:78px;height:78px;z-index:7;opacity:0;overflow:visible"><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#41FAF1" stroke-width="17" stroke-linecap="round"/><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#bafffb" stroke-width="5" stroke-linecap="round"/></svg></div>
-<svg id="discoveryPath" viewBox="0 0 1080 1920" preserveAspectRatio="none" aria-hidden="true"><path id="dottedPath" d="M 500 1180 C 520 1080, 545 965, 560 850"/></svg><div id="zoomHalo"></div><div id="zoomDetail"><span>هزینهٔ ارسال</span><strong>۱۸۰٬۰۰۰ تومان</strong><small>هزینه‌ای که مشتری انتظارش را نداشت</small></div>
+  </svg></div>
+<div id="narration">شاید مشتری تازه اینجا <em>هزینهٔ ارسال</em> رو دیده.</div>
 <div id="shipping">
  <div class="shipping-head">مرحلهٔ پرداخت</div>
  <div class="shipping-row"><span>هزینهٔ ارسال</span><strong class="shipping-price">۱۸۰٬۰۰۰ تومان</strong></div>
  <div class="shipping-note">این هزینه تازه همین‌جا به مبلغ سفارش اضافه شد!</div>
 </div>
-<div id="aha">آهااا! 💡</div>
+
 <section id="fix">
  <div class="fix-label">راه‌حل ساده‌تر از چیزیه که فکر می‌کنی</div>
  <div class="fix-title">هزینهٔ نهایی رو<br><em>زودتر نشون بده.</em></div>
@@ -181,7 +181,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 </div>
 <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="21" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>const RENDER=new URLSearchParams(location.search).has("render"),DURATION=21,FPS=30,$=s=>document.querySelector(s);
-const E=Object.fromEntries(["stage","kicker","hook1","hook2","cartScene","finger","empty","octoWrap","magnify","discoveryPath","zoomHalo","zoomDetail","shipping","aha","fix","fixCard","final","finalOcto","endBrand","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
+const E=Object.fromEntries(["stage","kicker","hook1","hook2","cartScene","finger","empty","octoWrap","shipping","narration","fix","fixCard","final","finalOcto","endBrand","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),ease=(t,a,d)=>out(prog(t,a,d));
 function show(el,p,transform){el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
 function scene(t,a,b,fade=.35){return ease(t,a,.42)*(1-prog(t,b-fade,fade))}
@@ -206,41 +206,25 @@ function draw(t){
  const empty=scene(t,6.35,8.6,.42),ep=ease(t,6.35,.42);
  show(E.empty,empty,"translate(-50%,"+lerp(30,0,ep)+"px) scale("+lerp(.94,1,ep)+")");
 
- // Octo enters larger, notices the empty cart, reacts with eyes and tentacles,
- // then raises the magnifier as if it is holding it.
- const octo=scene(t,8.55,14.35,.38),op=ease(t,8.55,.7);
- const lean=Math.sin(Math.PI*prog(t,9.25,.95));
- show(E.octoWrap,octo,"translate("+lerp(230,0,op)+"px,"+(lerp(120,0,op)-lean*22)+"px) rotate("+lerp(10,-3,op)+"deg) scale("+lerp(.78,1.08,op)+")");
- const look=ease(t,9.25,.35);
- $("#pupilL").style.transform="translate("+lerp(0,12,look)+"px,"+lerp(0,-8,look)+"px)";
- $("#pupilR").style.transform="translate("+lerp(0,12,look)+"px,"+lerp(0,-8,look)+"px)";
- $("#mSurprise").style.opacity=String(prog(t,9.35,.18)*(1-prog(t,10.65,.25)));
- $("#mHappy").style.opacity=String(1-prog(t,9.35,.18));
+ // Octo settles in gently, then looks toward the unexpected shipping fee.
+ const octo=scene(t,8.55,14.35,.38),op=ease(t,8.55,.85);
+ show(E.octoWrap,octo,"translate(0px,"+lerp(28,0,op)+"px) rotate(0deg) scale("+lerp(.96,1,op)+")");
+ const look=ease(t,9.45,.75);
+ $("#pupilL").style.transform="translate("+lerp(0,17,look)+"px,"+lerp(0,-3,look)+"px)";
+ $("#pupilR").style.transform="translate("+lerp(0,17,look)+"px,"+lerp(0,-3,look)+"px)";
+ // Keep the tentacles still to avoid slippery, rubbery motion.
+ ["legLL","legLM","legRM","legRL"].forEach(id=>$("#"+id).style.transform="rotate(0deg)");
+ $("#mSurprise").style.opacity=String(prog(t,9.55,.22)*(1-prog(t,10.65,.25)));
+ $("#mHappy").style.opacity=String(1-prog(t,9.55,.22));
  $("#mSad").style.opacity="0";
- const wiggle=Math.sin(t*10)*3*prog(t,9.1,.25)*(1-prog(t,10.4,.3));
- $("#legLL").style.transform="rotate("+(-wiggle)+"deg)";
- $("#legLM").style.transform="rotate("+(wiggle*.7)+"deg)";
- $("#legRM").style.transform="rotate("+(-wiggle*.6)+"deg)";
- $("#legRL").style.transform="rotate("+(wiggle)+"deg)";
- const mag=ease(t,10.05,.45)*(1-prog(t,13.25,.3));
- show(E.magnify,mag,"translate("+(-4+Math.sin(t*3)*2)+"px,"+(5-Math.sin(t*3)*2)+"px) scale("+lerp(.55,1,ease(t,10.05,.45))+") rotate("+lerp(-35,-8,ease(t,10.05,.6))+"deg)");
- E.magnify.style.filter="drop-shadow(0 0 20px rgba(65,250,241,.65))";
- $("#grip").style.opacity=String(ease(t,10.25,.25)*(1-prog(t,13.25,.3)));
 
- // Dotted trail travels from the lens to the shipping charge; the fee is enlarged and highlighted.
- const ship=scene(t,10.85,14.35,.38),sp=ease(t,10.85,.48);
- show(E.shipping,ship,"translateY("+lerp(35,0,sp)+"px) scale("+lerp(.97,1,sp)+")");
- const trail=ease(t,11.2,.8)*(1-prog(t,13.95,.3));
- show(E.discoveryPath,trail);
- $("#dottedPath").style.strokeDashoffset=String(1600*(1-ease(t,11.2,1.05)));
- const halo=ease(t,11.75,.35)*(1-prog(t,14.0,.25));
- show(E.zoomHalo,halo,"scale("+lerp(.72,1,halo)+")");
- const detail=ease(t,12.0,.45)*(1-prog(t,14.0,.25));
- show(E.zoomDetail,detail,"translateY("+lerp(24,0,detail)+"px) scale("+lerp(.88,1,detail)+")");
- const pulse=Math.max(0,Math.sin((t-11.35)*4))*prog(t,11.35,.2)*(1-prog(t,13.9,.25));
- E.shipping.style.borderColor="rgba(65,250,241,"+(.28+.5*pulse)+")";
- const aha=scene(t,12.65,14.35,.3),ahap=ease(t,12.65,.28);
- show(E.aha,aha,"scale("+lerp(.75,1,ahap)+") rotate("+lerp(-5,0,ahap)+"deg)");
+ // The fee is the focus; the narration line appears clearly below it.
+ const ship=scene(t,10.25,14.35,.4),sp=ease(t,10.25,.55);
+ show(E.shipping,ship,"translateY("+lerp(22,0,sp)+"px) scale("+lerp(.985,1,sp)+")");
+ const narration=scene(t,11.05,14.15,.35),np=ease(t,11.05,.42);
+ show(E.narration,narration,"translateY("+lerp(16,0,np)+"px)");
+ const pulse=Math.max(0,Math.sin((t-10.8)*3))*prog(t,10.8,.25)*(1-prog(t,13.8,.3));
+ E.shipping.style.borderColor="rgba(65,250,241,"+(.32+.28*pulse)+")";
 
  // Solution: no character behind text, and the cost breakdown appears after the headline.
  const fix=scene(t,14.45,17.55,.35),fx=ease(t,14.45,.45);
