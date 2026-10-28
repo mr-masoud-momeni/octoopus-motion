@@ -36,10 +36,10 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 .empty-icon{width:160px;height:160px;margin:0 auto 26px;border-radius:50%;border:2px solid rgba(65,250,241,.35);background:rgba(65,250,241,.06);display:grid;place-items:center;color:var(--cyan);font-size:76px;box-shadow:0 0 65px rgba(65,250,241,.08)}
 .empty-title{font-size:43px;line-height:1.5;font-weight:900}
 .empty-sub{margin-top:12px;color:var(--muted);font-size:25px}
-#octoWrap{position:absolute;left:50%;top:1120px;width:250px;margin-left:-145px;opacity:0;transform:translate(270px,180px) rotate(12deg) scale(.8);filter:drop-shadow(0 22px 32px rgba(0,0,0,.3)) drop-shadow(0 0 22px rgba(65,250,241,.1));transform-origin:50% 100%}
-#octo{width:100%;height:auto;display:block;overflow:visible}.octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
-#magnify{position:absolute;left:calc(50% + 190px);top:790px;width:112px;height:112px;opacity:0;transform:scale(.5) rotate(-20deg);z-index:4}
-#shipping{position:absolute;top:625px;left:100px;right:100px;padding:35px 34px 32px;border-radius:28px;background:rgba(10,25,47,.96);border:1px solid rgba(65,250,241,.46);box-shadow:0 25px 75px rgba(0,0,0,.28);opacity:0;transform:translateY(35px) scale(.96);z-index:5}
+#octoWrap{position:absolute;left:210px;top:1030px;width:370px;margin:0;opacity:0;transform:translate(270px,180px) rotate(12deg) scale(.8);filter:drop-shadow(0 22px 32px rgba(0,0,0,.3)) drop-shadow(0 0 22px rgba(65,250,241,.1));transform-origin:50% 100%;z-index:4}
+#octo{width:100%;height:auto;display:block;overflow:visible}.octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}#pupilL,#pupilR,#legLL,#legLM,#legRM,#legRL{transform-box:fill-box;transform-origin:center}#mSurprise,#mSad{opacity:0}#mHappy{opacity:1}
+#magnify{position:absolute;left:230px;top:82px;width:150px;height:150px;opacity:0;transform:scale(.5) rotate(-20deg);transform-origin:35% 65%;z-index:6;filter:drop-shadow(0 12px 20px rgba(0,0,0,.3))}#discoveryPath{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible;opacity:0}#dottedPath{fill:none;stroke:var(--cyan);stroke-width:7;stroke-linecap:round;stroke-dasharray:2 20;filter:drop-shadow(0 0 10px rgba(65,250,241,.5))}#zoomHalo{position:absolute;top:704px;right:380px;width:300px;height:120px;border:4px solid var(--cyan);border-radius:28px;box-shadow:0 0 0 12px rgba(65,250,241,.1),0 0 42px rgba(65,250,241,.25);opacity:0;z-index:7;pointer-events:none}
+#shipping{position:absolute;top:560px;left:auto;right:65px;width:620px;padding:32px 30px 28px;border-radius:28px;background:rgba(10,25,47,.98);border:1px solid rgba(65,250,241,.46);box-shadow:0 25px 75px rgba(0,0,0,.28);opacity:0;transform:translateY(35px) scale(.96);z-index:5}
 .shipping-head{font-size:25px;color:var(--muted);font-weight:700}
 .shipping-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;font-size:30px;font-weight:900}
 .shipping-price{color:var(--cyan);font-size:37px}
@@ -120,8 +120,8 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
         <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
       </g>
     </g>
-  </svg></div>
-<svg id="magnify" viewBox="0 0 100 100" fill="none"><circle cx="42" cy="40" r="27" stroke="#41FAF1" stroke-width="8"/><path d="m62 61 25 25" stroke="#41FAF1" stroke-width="11" stroke-linecap="round"/><circle cx="42" cy="40" r="18" fill="#41FAF1" fill-opacity=".09"/></svg><svg id="grip" viewBox="0 0 80 80" style="position:absolute;left:280px;top:180px;width:78px;height:78px;z-index:7;opacity:0;overflow:visible"><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#41FAF1" stroke-width="17" stroke-linecap="round"/><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#bafffb" stroke-width="5" stroke-linecap="round"/></svg>
+  </svg><svg id="magnify" viewBox="0 0 100 100" fill="none"><circle cx="42" cy="40" r="27" stroke="#41FAF1" stroke-width="8"/><path d="m62 61 25 25" stroke="#41FAF1" stroke-width="11" stroke-linecap="round"/><circle cx="42" cy="40" r="18" fill="#41FAF1" fill-opacity=".09"/></svg><svg id="grip" viewBox="0 0 80 80" style="position:absolute;left:270px;top:120px;width:78px;height:78px;z-index:7;opacity:0;overflow:visible"><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#41FAF1" stroke-width="17" stroke-linecap="round"/><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#bafffb" stroke-width="5" stroke-linecap="round"/></svg></div>
+<svg id="discoveryPath" viewBox="0 0 1080 1920" preserveAspectRatio="none" aria-hidden="true"><path id="dottedPath" d="M 500 1180 C 520 1080, 535 930, 540 790"/></svg><div id="zoomHalo"></div>
 <div id="shipping">
  <div class="shipping-head">مرحلهٔ پرداخت</div>
  <div class="shipping-row"><span>هزینهٔ ارسال</span><strong class="shipping-price">۱۸۰٬۰۰۰ تومان</strong></div>
