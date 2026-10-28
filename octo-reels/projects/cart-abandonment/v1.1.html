@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اکتو | رها شدن سبد خرید — نسخهٔ ۱.۱</title>
+<link rel="stylesheet" href="../../template/fonts.css">
+<style>
+@font-face{font-family:Vazirmatn;src:url("../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:block}
+:root{--navy:#0A192F;--cyan:#41FAF1;--muted:#B4BCD0;--cream:#F4F7FB}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;isolation:isolate;transform-origin:center;background:radial-gradient(85% 60% at 50% 70%,#15365a 0%,var(--navy) 56%,#030914 100%)}
+.grid{position:absolute;inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.5;mask-image:radial-gradient(70% 58% at 50% 52%,#000,transparent)}
+.brand{position:absolute;top:86px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.72}
+.brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
+.safe{position:absolute;left:92px;right:92px}
+#hook{top:390px;text-align:center;z-index:4}
+.kicker{font-size:27px;font-weight:700;color:var(--muted);opacity:0;transform:translateY(24px)}
+.hook-main{margin-top:25px;font-size:66px;line-height:1.55;font-weight:900;letter-spacing:-.035em}
+.hook-line{display:block;opacity:0;transform:translateY(45px)}
+.accent{color:var(--cyan);font-size:1.27em;display:inline-block;text-shadow:0 0 35px rgba(65,250,241,.18)}
+#cartScene{position:absolute;left:50%;top:640px;width:680px;transform:translateX(-50%);opacity:0}
+.cart-card{position:relative;width:100%;padding:42px 42px 38px;border:1px solid rgba(180,195,218,.18);border-radius:32px;background:linear-gradient(145deg,rgba(21,43,68,.95),rgba(7,20,37,.94));box-shadow:0 35px 90px rgba(0,0,0,.22)}
+.cart-head{display:flex;justify-content:space-between;align-items:center;color:#dce6f3;font-size:30px;font-weight:800}
+.cart-count{font-size:20px;color:var(--muted);font-weight:500}
+.product{margin-top:34px;display:flex;align-items:center;gap:24px;padding:22px;border-radius:22px;background:rgba(255,255,255,.045)}
+.product-art{width:120px;height:120px;border-radius:20px;background:linear-gradient(145deg,#214a66,#0e253f);display:grid;place-items:center;flex-shrink:0}
+.product-art svg{width:76px;height:76px}
+.product-name{font-size:27px;font-weight:800}
+.product-desc{margin-top:8px;color:var(--muted);font-size:21px}
+.product-price{margin-top:14px;color:var(--cyan);font-size:24px;font-weight:800}
+.total{display:flex;justify-content:space-between;align-items:center;margin-top:28px;font-size:25px;color:#c4d1e2}
+.total strong{font-size:30px;color:white}
+#checkout{position:relative;margin-top:28px;width:100%;height:90px;border:0;border-radius:18px;background:var(--cyan);color:#071827;font:900 28px Vazirmatn,sans-serif;box-shadow:0 12px 40px rgba(65,250,241,.15)}
+#finger{position:absolute;z-index:8;left:90px;top:790px;width:150px;height:180px;opacity:0;transform:translate(150px,-40px) rotate(-14deg);filter:drop-shadow(0 14px 18px rgba(0,0,0,.3))}
+#empty{position:absolute;left:50%;top:680px;width:600px;transform:translate(-50%,24px) scale(.95);opacity:0;text-align:center}
+.empty-icon{width:160px;height:160px;margin:0 auto 26px;border-radius:50%;border:2px solid rgba(65,250,241,.35);background:rgba(65,250,241,.06);display:grid;place-items:center;color:var(--cyan);font-size:76px;box-shadow:0 0 65px rgba(65,250,241,.08)}
+.empty-title{font-size:43px;line-height:1.5;font-weight:900}
+.empty-sub{margin-top:12px;color:var(--muted);font-size:25px}
+#octoWrap{position:absolute;left:50%;top:1120px;width:250px;margin-left:-145px;opacity:0;transform:translate(270px,180px) rotate(12deg) scale(.8);filter:drop-shadow(0 22px 32px rgba(0,0,0,.3)) drop-shadow(0 0 22px rgba(65,250,241,.1));transform-origin:50% 100%}
+#octo{width:100%;height:auto;display:block;overflow:visible}.octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
+#magnify{position:absolute;left:calc(50% + 190px);top:790px;width:112px;height:112px;opacity:0;transform:scale(.5) rotate(-20deg);z-index:4}
+#shipping{position:absolute;top:625px;left:100px;right:100px;padding:35px 34px 32px;border-radius:28px;background:rgba(10,25,47,.96);border:1px solid rgba(65,250,241,.46);box-shadow:0 25px 75px rgba(0,0,0,.28);opacity:0;transform:translateY(35px) scale(.96);z-index:5}
+.shipping-head{font-size:25px;color:var(--muted);font-weight:700}
+.shipping-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;font-size:30px;font-weight:900}
+.shipping-price{color:var(--cyan);font-size:37px}
+.shipping-note{margin-top:17px;font-size:23px;color:#d8e4f0;line-height:1.6}
+#aha{position:absolute;top:1240px;left:0;right:0;text-align:center;font-size:58px;font-weight:900;color:var(--cyan);opacity:0;transform:scale(.65) rotate(-7deg)}
+#fix{position:absolute;top:390px;left:100px;right:100px;text-align:center;opacity:0;transform:translateY(28px)}
+.fix-label{font-size:25px;color:var(--muted);font-weight:700}
+.fix-title{margin-top:16px;font-size:52px;line-height:1.5;font-weight:900}
+.fix-title em{font-style:normal;color:var(--cyan)}
+#fixCard{position:absolute;top:790px;left:130px;right:130px;padding:28px 30px;border:1px solid rgba(65,250,241,.3);border-radius:26px;background:rgba(14,37,61,.86);opacity:0;transform:translateY(30px)}
+.fix-row{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:25px;color:#d7e3f0;padding:12px 0}
+.fix-row strong{font-size:26px;color:white;white-space:nowrap}
+.fix-row.total-final{border-top:1px solid rgba(180,195,218,.18);margin-top:12px;padding-top:22px;font-weight:800}
+.fix-row.total-final strong{color:var(--cyan);font-size:30px}
+#final{position:absolute;top:400px;left:95px;right:95px;text-align:center;opacity:0;transform:translateY(28px)}
+.final-title{font-size:53px;line-height:1.6;font-weight:900}
+.final-title em{font-style:normal;color:var(--cyan)}
+.final-sub{margin-top:22px;color:var(--muted);font-size:25px;line-height:1.7}
+#finalOcto{position:absolute;left:50%;top:1100px;width:220px;margin-left:-120px;opacity:0;transform:translateY(70px) scale(.85);filter:drop-shadow(0 20px 35px rgba(0,0,0,.3))}
+#endBrand{position:absolute;bottom:175px;left:0;right:0;text-align:center;font:600 24px system-ui,sans-serif;letter-spacing:.05em;color:#b4bfd1;opacity:0}
+#endBrand span{color:var(--cyan)}
+#controls{position:fixed;z-index:20;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
+#controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
+</style></head><body>
+<div id="stage"><div class="grid"></div><div class="brand"><i></i><span>octoopus.ir</span></div>
+<section id="hook" class="safe">
+ <div class="kicker" id="kicker">یه سؤال برای فروشگاهت</div>
+ <h1 class="hook-main"><span class="hook-line" id="hook1">مشتری تا دمِ پرداخت میاد...</span><span class="hook-line" id="hook2">بعد <span class="accent">غیبش می‌زنه؟!</span></span></h1>
+</section>
+<section id="cartScene">
+ <div class="cart-card">
+  <div class="cart-head"><span>سبد خرید</span><span class="cart-count">۱ محصول</span></div>
+  <div class="product">
+   <div class="product-art"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M20 25h40l-4 38H24L20 25Z" fill="#41FAF1" fill-opacity=".16" stroke="#41FAF1" stroke-width="2.5"/><path d="M29 26v-6a11 11 0 0 1 22 0v6" stroke="#41FAF1" stroke-width="3" stroke-linecap="round"/><path d="M30 43h20" stroke="#41FAF1" stroke-width="3" stroke-linecap="round"/></svg></div>
+   <div><div class="product-name">محصول انتخابی</div><div class="product-desc">آمادهٔ ثبت سفارش</div><div class="product-price">۱٬۲۰۰٬۰۰۰ تومان</div></div>
+  </div>
+  <div class="total"><span>جمع سبد خرید</span><strong>۱٬۲۰۰٬۰۰۰ تومان</strong></div>
+  <button id="checkout">ادامه و پرداخت ←</button>
+ </div>
+</section>
+<svg id="finger" viewBox="0 0 160 190" aria-label="انگشت در حال کلیک"><path d="M59 174c-17-14-29-32-35-49l-9-26c-3-9 2-17 10-19 7-2 14 2 18 10l13 23V28c0-10 7-17 16-17s16 7 16 17v62-24c0-9 7-16 16-16s15 7 15 16v30-16c0-9 7-15 15-15s14 6 14 15v46c0 30-20 51-49 51H82c-8 0-16-2-23-7Z" fill="#F4F7FB" stroke="#A9BBD0" stroke-width="4" stroke-linejoin="round"/><path d="M55 118v-23M88 90v-18M119 96v-13" stroke="#A9BBD0" stroke-width="3" stroke-linecap="round"/></svg>
+<section id="empty">
+ <div class="empty-icon">∅</div><div class="empty-title">و یهو... سبد خالی شد!</div><div class="empty-sub">مشتری منصرف شد؛ اما چرا؟</div>
+</section>
+<div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+    <g id="charInner">
+      <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+       <!-- چشم راست -->
+      <g id="eyeR">
+        <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilR">
+          <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+       <!-- چشم چپ -->
+      <g id="eyeL">
+        <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilL">
+          <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+       <!-- بازوها -->
+      <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+      <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+      <path id="legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+      <path id="legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+       <!-- دهان: سه حالت -->
+      <g id="mouth">
+        <g id="mSurprise" opacity="0">
+          <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+        </g>
+        <path id="mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+        <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+      </g>
+    </g>
+  </svg></div>
+<svg id="magnify" viewBox="0 0 100 100" fill="none"><circle cx="42" cy="40" r="27" stroke="#41FAF1" stroke-width="8"/><path d="m62 61 25 25" stroke="#41FAF1" stroke-width="11" stroke-linecap="round"/><circle cx="42" cy="40" r="18" fill="#41FAF1" fill-opacity=".09"/></svg>
+<div id="shipping">
+ <div class="shipping-head">مرحلهٔ پرداخت</div>
+ <div class="shipping-row"><span>هزینهٔ ارسال</span><strong class="shipping-price">۱۸۰٬۰۰۰ تومان</strong></div>
+ <div class="shipping-note">این هزینه تازه همین‌جا به مبلغ سفارش اضافه شد!</div>
+</div>
+<div id="aha">آهااا! 💡</div>
+<section id="fix">
+ <div class="fix-label">راه‌حل ساده‌تر از چیزیه که فکر می‌کنی</div>
+ <div class="fix-title">هزینهٔ نهایی رو<br><em>زودتر نشون بده.</em></div>
+</section>
+<div id="fixCard">
+ <div class="fix-row"><span>محصول</span><strong>۱٬۲۰۰٬۰۰۰ تومان</strong></div>
+ <div class="fix-row"><span>ارسال</span><strong>۱۸۰٬۰۰۰ تومان</strong></div>
+ <div class="fix-row total-final"><span>مبلغ نهایی</span><strong>۱٬۳۸۰٬۰۰۰ تومان</strong></div>
+</div>
+<section id="final">
+ <div class="final-title">غافلگیری خوبه؛<br><em>نه موقع پرداخت!</em></div>
+ <div class="final-sub">هزینهٔ نهایی رو قبل از مرحلهٔ آخر شفاف کن.</div>
+</section>
+<div id="finalOcto"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+    <g id="charInner">
+      <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+       <!-- چشم راست -->
+      <g id="eyeR">
+        <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilR">
+          <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+       <!-- چشم چپ -->
+      <g id="eyeL">
+        <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilL">
+          <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+       <!-- بازوها -->
+      <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+      <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+      <path id="legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+      <path id="legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+       <!-- دهان: سه حالت -->
+      <g id="mouth">
+        <g id="mSurprise" opacity="0">
+          <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+        </g>
+        <path id="mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+        <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+      </g>
+    </g>
+  </svg></div>
+<div id="endBrand">octoopus<span>.ir</span></div>
+</div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="21" step=".01" value="0"><span id="time">0.00s</span></div>
+<script>const RENDER=new URLSearchParams(location.search).has("render"),DURATION=21,FPS=30,$=s=>document.querySelector(s);
+const E=Object.fromEntries(["stage","kicker","hook1","hook2","cartScene","finger","empty","octoWrap","magnify","shipping","aha","fix","fixCard","final","finalOcto","endBrand","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),ease=(t,a,d)=>out(prog(t,a,d));
+function show(el,p,transform){el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
+function scene(t,a,b,fade=.35){return ease(t,a,.42)*(1-prog(t,b-fade,fade))}
+function draw(t){
+ t=clamp(Number(t)||0,0,DURATION);
+ // Hook: hold the words still and readable before moving on.
+ const hookOut=1-prog(t,2.8,.4),k=ease(t,.2,.45);
+ show(E.kicker,k*hookOut,"translateY("+lerp(24,0,k)+"px)");
+ const h1=ease(t,.55,.55),h2=ease(t,1.25,.58);
+ show(E.hook1,h1*hookOut,"translateY("+lerp(42,0,h1)+"px)");
+ show(E.hook2,h2*hookOut,"translateY("+lerp(42,0,h2)+"px)");
+
+ // Cart and finger: clear approach, click, then a short pause.
+ const cart=scene(t,3.2,6.3,.35),cp=ease(t,3.2,.55);
+ show(E.cartScene,cart,"translateX(-50%) translateY("+lerp(52,0,cp)+"px) scale("+lerp(.97,1,cp)+")");
+ const fp=prog(t,4.7,.72)*(1-prog(t,5.75,.15));
+ show(E.finger,fp,"translate("+lerp(145,0,ease(t,4.7,.72))+"px,"+lerp(-35,28,ease(t,4.7,.72))+"px) rotate("+lerp(-14,0,ease(t,4.7,.72))+"deg)");
+ const press=Math.sin(Math.PI*prog(t,5.38,.28));
+ $("#checkout").style.transform="translateY("+(-5*press)+"px) scale("+(1-.025*press)+")";
+
+ // Empty cart reveal, isolated from the hook and cart copy.
+ const empty=scene(t,6.35,8.6,.42),ep=ease(t,6.35,.42);
+ show(E.empty,empty,"translate(-50%,"+lerp(30,0,ep)+"px) scale("+lerp(.94,1,ep)+")");
+
+ // Octo arrives, notices the empty cart, looks around, and leans toward the clue.
+ const octo=scene(t,8.65,10.85,.35),op=ease(t,8.65,.58),lean=Math.sin(Math.PI*prog(t,9.45,.9));
+ show(E.octoWrap,octo,"translate("+lerp(190,0,op)+"px,"+(lerp(100,0,op)-lean*16)+"px) rotate("+lerp(8,-5,op)+"deg) scale("+lerp(.82,1,op)+")");
+ const mag=ease(t,9.45,.4)*(1-prog(t,10.7,.25)),scanY=Math.sin(t*4)*5;
+ show(E.magnify,mag,"translate("+(-10+scanY)+"px,"+(10-scanY)+"px) scale("+lerp(.55,1,ease(t,9.45,.4))+") rotate("+lerp(-25,4,ease(t,9.45,.4))+"deg)");
+ E.magnify.style.filter="drop-shadow(0 0 18px rgba(65,250,241,.55))";
+
+ // Shipping fee gets its own scene; the magnifier scans the charge.
+ const ship=scene(t,10.9,14.35,.38),sp=ease(t,10.9,.48);
+ show(E.shipping,ship,"translateY("+lerp(35,0,sp)+"px) scale("+lerp(.97,1,sp)+")");
+ const pulse=Math.max(0,Math.sin((t-11.35)*4))*prog(t,11.35,.2)*(1-prog(t,13.9,.25));
+ E.shipping.style.borderColor="rgba(65,250,241,"+(.28+.5*pulse)+")";
+ const aha=scene(t,12.65,14.35,.3),ahap=ease(t,12.65,.28);
+ show(E.aha,aha,"scale("+lerp(.75,1,ahap)+") rotate("+lerp(-5,0,ahap)+"deg)");
+
+ // Solution: no character behind text, and the cost breakdown appears after the headline.
+ const fix=scene(t,14.45,17.55,.35),fx=ease(t,14.45,.45);
+ show(E.fix,fix,"translateY("+lerp(25,0,fx)+"px)");
+ const fc=scene(t,15.15,17.55,.35),fcp=ease(t,15.15,.42);
+ show(E.fixCard,fc,"translateY("+lerp(28,0,fcp)+"px)");
+
+ // Calm close, with mascot and brand arriving after the message.
+ const final= ease(t,17.65,.48);
+ show(E.final,final,"translateY("+lerp(25,0,final)+"px)");
+ const fo=ease(t,18.35,.55);
+ show(E.finalOcto,fo,"translateY("+lerp(55,0,fo)+"px) scale("+lerp(.86,1,fo)+")");
+ E.endBrand.style.opacity=ease(t,18.95,.35);
+ E.stage.style.setProperty("--pulse",String(.5+.5*Math.sin(t*1.4)));
+}
+window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
+if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
+else{const fit=()=>{const s=Math.min(innerWidth/1080,(innerHeight-54)/1920);E.stage.style.transform="scale("+s+")"};fit();addEventListener("resize",fit);let playing=true,offset=0,start=performance.now();const tick=now=>{if(playing){offset=((now-start)/1000)%DURATION;E.scrub.value=offset}draw(offset);E.time.textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)};requestAnimationFrame(tick);E.play.onclick=()=>{playing=!playing;E.play.textContent=playing?"Pause":"Play";if(playing)start=performance.now()-offset*1000};E.scrub.oninput=()=>{offset=Number(E.scrub.value);if(playing)start=performance.now()-offset*1000;draw(offset)};$("#restart").onclick=()=>{offset=0;start=performance.now();draw(0)}}
+</script></body></html>
