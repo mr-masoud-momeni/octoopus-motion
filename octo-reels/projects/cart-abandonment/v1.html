@@ -238,7 +238,4 @@ function draw(t){
 window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
 if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
 else{const fit=()=>{const s=Math.min(innerWidth/1080,(innerHeight-54)/1920);E.stage.style.transform="scale("+s+")"};fit();addEventListener("resize",fit);let playing=true,offset=0,start=performance.now();const tick=now=>{if(playing){offset=((now-start)/1000)%DURATION;E.scrub.value=offset}draw(offset);E.time.textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)};requestAnimationFrame(tick);E.play.onclick=()=>{playing=!playing;E.play.textContent=playing?"Pause":"Play";if(playing)start=performance.now()-offset*1000};E.scrub.oninput=()=>{offset=Number(E.scrub.value);if(playing)start=performance.now()-offset*1000;draw(offset)};$("#restart").onclick=()=>{offset=0;start=performance.now();draw(0)}}
-})();
-}
-})();
 </script></body></html>
