@@ -180,7 +180,8 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 <div id="endBrand">octoopus<span>.ir</span></div>
 </div>
 <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="21" step=".01" value="0"><span id="time">0.00s</span></div>
-<script>const E=Object.fromEntries(["stage","kicker","hook1","hook2","cartScene","finger","empty","octoWrap","magnify","shipping","aha","fix","fixCard","final","finalOcto","endBrand","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
+<script>const RENDER=new URLSearchParams(location.search).has("render"),DURATION=21,FPS=30,$=s=>document.querySelector(s);
+const E=Object.fromEntries(["stage","kicker","hook1","hook2","cartScene","finger","empty","octoWrap","magnify","shipping","aha","fix","fixCard","final","finalOcto","endBrand","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),ease=(t,a,d)=>out(prog(t,a,d));
 function show(el,p,transform){el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
 function scene(t,a,b,fade=.35){return ease(t,a,.42)*(1-prog(t,b-fade,fade))}
