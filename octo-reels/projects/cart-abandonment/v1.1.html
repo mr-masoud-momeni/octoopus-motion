@@ -240,7 +240,7 @@ function draw(t){
  E.endBrand.style.opacity=ease(t,18.95,.35);
  E.stage.style.setProperty("--pulse",String(.5+.5*Math.sin(t*1.4)));
 }
-window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
+window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:3.2},{name:"click",t:5.05},{name:"zap",t:6.35},{name:"pop",t:6.55},{name:"whoosh",t:8.55},{name:"pop",t:10.25},{name:"sweep",t:14.45},{name:"pop",t:15.15},{name:"ding",t:17.65}];window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
 if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
 else{const fit=()=>{const s=Math.min(innerWidth/1080,(innerHeight-54)/1920);E.stage.style.transform="scale("+s+")"};fit();addEventListener("resize",fit);let playing=true,offset=0,start=performance.now();const tick=now=>{if(playing){offset=((now-start)/1000)%DURATION;E.scrub.value=offset}draw(offset);E.time.textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)};requestAnimationFrame(tick);E.play.onclick=()=>{playing=!playing;E.play.textContent=playing?"Pause":"Play";if(playing)start=performance.now()-offset*1000};E.scrub.oninput=()=>{offset=Number(E.scrub.value);if(playing)start=performance.now()-offset*1000;draw(offset)};$("#restart").onclick=()=>{offset=0;start=performance.now();draw(0)}}
 </script></body></html>
