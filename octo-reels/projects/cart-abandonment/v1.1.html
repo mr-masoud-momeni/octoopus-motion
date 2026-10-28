@@ -121,7 +121,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
       </g>
     </g>
   </svg></div>
-<svg id="magnify" viewBox="0 0 100 100" fill="none"><circle cx="42" cy="40" r="27" stroke="#41FAF1" stroke-width="8"/><path d="m62 61 25 25" stroke="#41FAF1" stroke-width="11" stroke-linecap="round"/><circle cx="42" cy="40" r="18" fill="#41FAF1" fill-opacity=".09"/></svg>
+<svg id="magnify" viewBox="0 0 100 100" fill="none"><circle cx="42" cy="40" r="27" stroke="#41FAF1" stroke-width="8"/><path d="m62 61 25 25" stroke="#41FAF1" stroke-width="11" stroke-linecap="round"/><circle cx="42" cy="40" r="18" fill="#41FAF1" fill-opacity=".09"/></svg><svg id="grip" viewBox="0 0 80 80" style="position:absolute;left:280px;top:180px;width:78px;height:78px;z-index:7;opacity:0;overflow:visible"><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#41FAF1" stroke-width="17" stroke-linecap="round"/><path d="M10 54 Q22 30 37 43 T62 40" fill="none" stroke="#bafffb" stroke-width="5" stroke-linecap="round"/></svg>
 <div id="shipping">
  <div class="shipping-head">مرحلهٔ پرداخت</div>
  <div class="shipping-row"><span>هزینهٔ ارسال</span><strong class="shipping-price">۱۸۰٬۰۰۰ تومان</strong></div>
@@ -181,7 +181,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 </div>
 <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="21" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>const RENDER=new URLSearchParams(location.search).has("render"),DURATION=21,FPS=30,$=s=>document.querySelector(s);
-const E=Object.fromEntries(["stage","kicker","hook1","hook2","cartScene","finger","empty","octoWrap","magnify","shipping","aha","fix","fixCard","final","finalOcto","endBrand","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
+const E=Object.fromEntries(["stage","kicker","hook1","hook2","cartScene","finger","empty","octoWrap","magnify","discoveryPath","zoomHalo","shipping","aha","fix","fixCard","final","finalOcto","endBrand","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),ease=(t,a,d)=>out(prog(t,a,d));
 function show(el,p,transform){el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
 function scene(t,a,b,fade=.35){return ease(t,a,.42)*(1-prog(t,b-fade,fade))}
@@ -206,16 +206,35 @@ function draw(t){
  const empty=scene(t,6.35,8.6,.42),ep=ease(t,6.35,.42);
  show(E.empty,empty,"translate(-50%,"+lerp(30,0,ep)+"px) scale("+lerp(.94,1,ep)+")");
 
- // Octo arrives, notices the empty cart, looks around, and leans toward the clue.
- const octo=scene(t,8.65,10.85,.35),op=ease(t,8.65,.58),lean=Math.sin(Math.PI*prog(t,9.45,.9));
- show(E.octoWrap,octo,"translate("+lerp(190,0,op)+"px,"+(lerp(100,0,op)-lean*16)+"px) rotate("+lerp(8,-5,op)+"deg) scale("+lerp(.82,1,op)+")");
- const mag=ease(t,9.45,.4)*(1-prog(t,10.7,.25)),scanY=Math.sin(t*4)*5;
- show(E.magnify,mag,"translate("+(-10+scanY)+"px,"+(10-scanY)+"px) scale("+lerp(.55,1,ease(t,9.45,.4))+") rotate("+lerp(-25,4,ease(t,9.45,.4))+"deg)");
- E.magnify.style.filter="drop-shadow(0 0 18px rgba(65,250,241,.55))";
+ // Octo enters larger, notices the empty cart, reacts with eyes and tentacles,
+ // then raises the magnifier as if it is holding it.
+ const octo=scene(t,8.55,14.35,.38),op=ease(t,8.55,.7);
+ const lean=Math.sin(Math.PI*prog(t,9.25,.95));
+ show(E.octoWrap,octo,"translate("+lerp(230,0,op)+"px,"+(lerp(120,0,op)-lean*22)+"px) rotate("+lerp(10,-3,op)+"deg) scale("+lerp(.78,1.08,op)+")");
+ const look=ease(t,9.25,.35);
+ $("#pupilL").style.transform="translate("+lerp(0,12,look)+"px,"+lerp(0,-8,look)+"px)";
+ $("#pupilR").style.transform="translate("+lerp(0,12,look)+"px,"+lerp(0,-8,look)+"px)";
+ $("#mSurprise").style.opacity=String(prog(t,9.35,.18)*(1-prog(t,10.65,.25)));
+ $("#mHappy").style.opacity=String(1-prog(t,9.35,.18));
+ $("#mSad").style.opacity="0";
+ const wiggle=Math.sin(t*10)*3*prog(t,9.1,.25)*(1-prog(t,10.4,.3));
+ $("#legLL").style.transform="rotate("+(-wiggle)+"deg)";
+ $("#legLM").style.transform="rotate("+(wiggle*.7)+"deg)";
+ $("#legRM").style.transform="rotate("+(-wiggle*.6)+"deg)";
+ $("#legRL").style.transform="rotate("+(wiggle)+"deg)";
+ const mag=ease(t,10.05,.45)*(1-prog(t,13.25,.3));
+ show(E.magnify,mag,"translate("+(-4+Math.sin(t*3)*2)+"px,"+(5-Math.sin(t*3)*2)+"px) scale("+lerp(.55,1,ease(t,10.05,.45))+") rotate("+lerp(-35,-8,ease(t,10.05,.6))+"deg)");
+ E.magnify.style.filter="drop-shadow(0 0 20px rgba(65,250,241,.65))";
+ $("#grip").style.opacity=String(ease(t,10.25,.25)*(1-prog(t,13.25,.3)));
 
- // Shipping fee gets its own scene; the magnifier scans the charge.
- const ship=scene(t,10.9,14.35,.38),sp=ease(t,10.9,.48);
+ // Dotted trail travels from the lens to the shipping charge; the fee is enlarged and highlighted.
+ const ship=scene(t,10.85,14.35,.38),sp=ease(t,10.85,.48);
  show(E.shipping,ship,"translateY("+lerp(35,0,sp)+"px) scale("+lerp(.97,1,sp)+")");
+ const trail=ease(t,11.2,.8)*(1-prog(t,13.95,.3));
+ show(E.discoveryPath,trail);
+ $("#dottedPath").style.strokeDashoffset=String(1600*(1-ease(t,11.2,1.05)));
+ const halo=ease(t,11.75,.35)*(1-prog(t,14.0,.25));
+ show(E.zoomHalo,halo,"scale("+lerp(.72,1,halo)+")");
  const pulse=Math.max(0,Math.sin((t-11.35)*4))*prog(t,11.35,.2)*(1-prog(t,13.9,.25));
  E.shipping.style.borderColor="rgba(65,250,241,"+(.28+.5*pulse)+")";
  const aha=scene(t,12.65,14.35,.3),ahap=ease(t,12.65,.28);
