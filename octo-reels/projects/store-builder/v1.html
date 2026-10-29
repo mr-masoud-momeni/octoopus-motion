@@ -103,9 +103,9 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 #shopBrandScene .shop-name{font-size:100px;line-height:1.35;font-weight:1000;letter-spacing:-.04em;color:var(--cyan);text-shadow:0 0 45px rgba(65,250,241,.18)}
 #shopBrandScene .shop-slogan{font-size:39px;font-weight:900;margin-top:20px}
 #shopBrandScene .shop-sub{font-size:25px;color:var(--muted);margin-top:18px}
-#finalQuestion{position:absolute;left:80px;right:80px;top:1635px;text-align:center;font-size:42px;font-weight:900;opacity:0}
+#finalQuestion{position:absolute;left:110px;right:110px;top:930px;text-align:center;font-size:42px;font-weight:900;opacity:0}
 #finalQuestion b{color:var(--cyan)}
-#octoWrap{top:1270px;width:280px;margin-left:-140px}
+#octoWrap{top:1220px;width:330px;margin-left:-165px}
 
 </style></head>
 <body>
@@ -118,16 +118,16 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  </section>
 
  <section id="burdenScene">
-  <h2 class="burden-title">برای راه‌اندازی فروشگاه، باید از <b>هزار جا</b> شروع کنی؟</h2>
+  <h2 class="burden-title">برای راه‌اندازی فروشگاه، از <b>کجا</b> شروع کنی؟</h2>
   <div id="popField">
-   <div class="burden-pop" style="top:8px;right:35px;--rot:7deg">طراح پیدا کن!<small>از کجا؟</small></div>
-   <div class="burden-pop" style="top:112px;left:38px;--rot:-8deg">هاست بخر</div>
-   <div class="burden-pop" style="top:215px;right:8px;--rot:-4deg">بین صدتا طرح بگرد</div>
-   <div class="burden-pop" style="top:320px;left:110px;--rot:6deg">مجوز بگیر!</div>
-   <div class="burden-pop" style="top:425px;right:65px;--rot:8deg">درگاه پرداخت بگیر</div>
-   <div class="burden-pop" style="top:530px;left:20px;--rot:-6deg">هزینه‌ها رو حساب کن</div>
-   <div class="burden-pop" style="top:630px;right:95px;--rot:-7deg">سایت رو راه بنداز</div>
-   <div class="burden-pop" style="top:735px;left:130px;--rot:4deg">و کلی دردسر دیگه…</div>
+   <div class="burden-pop" style="top:8px;left:50%;margin-left:-190px;--rot:5deg">طراح پیدا کن!<small>از کجا؟</small></div>
+   <div class="burden-pop" style="top:112px;left:50%;margin-left:-120px;--rot:-5deg">هاست بخر</div>
+   <div class="burden-pop" style="top:215px;left:50%;margin-left:-220px;--rot:4deg">بین صدتا طرح بگرد</div>
+   <div class="burden-pop" style="top:320px;left:50%;margin-left:-150px;--rot:6deg">مجوز بگیر!</div>
+   <div class="burden-pop" style="top:425px;left:50%;margin-left:-220px;--rot:-6deg">درگاه پرداخت بگیر</div>
+   <div class="burden-pop" style="top:530px;left:50%;margin-left:-180px;--rot:5deg">هزینه‌ها رو حساب کن</div>
+   <div class="burden-pop" style="top:630px;left:50%;margin-left:-100px;--rot:-5deg">سایت رو راه بنداز</div>
+   <div class="burden-pop" style="top:735px;left:50%;margin-left:-205px;--rot:4deg">و کلی دردسر دیگه…</div>
   </div>
  </section>
  <section id="solutionScene">
@@ -257,22 +257,22 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   for(const [el,at] of [[E.domainCheck,9.85],[E.cardCheck,11.15]]){
     const p=ease(t,at,.35);show(el,p*(1-prog(t,13.65,.35)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
-  const brand=scene(t,13.9,19.35,.45);
+  const brand=scene(t,13.9,19.0,.45);
   show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,13.9,.5))+"px) scale("+lerp(.96,1,ease(t,13.9,.5))+")");
-  show(E.finalQuestion,ease(t,18.8,.45),"translateY("+lerp(20,0,ease(t,18.8,.45))+"px)");
+  const q=ease(t,18.8,.38);\n  show(E.finalQuestion,q,"translateY("+lerp(35,0,q)+"px) scale("+lerp(.72,1,q)+")");
   const octoP=scene(t,.3,22.5,.45);
-  let y=lerp(180,0,ease(t,.45,.8)),rot=lerp(7,0,ease(t,.45,.8)),scale=.82;
-  if(t>3&&t<9.2){y=12+Math.sin(t*8)*5;rot=Math.sin(t*5)*3;scale=.82}
-  if(t>=9.2&&t<14){y=0;rot=Math.sin(t*2)*1.3;scale=.85}
-  if(t>=14){y=-15;rot=Math.sin(t*1.5)*1.2;scale=.82}
+  let y=lerp(85,0,ease(t,.45,.8)),rot=lerp(1.5,0,ease(t,.45,.8)),scale=.96;
+  if(t>3&&t<9.2){y=8+Math.sin(t*8)*4;rot=Math.sin(t*5)*1.5;scale=.96}
+  if(t>=9.2&&t<14){y=0;rot=Math.sin(t*2)*.8;scale=.96}
+  if(t>=14){y=-65;rot=Math.sin(t*1.5)*.7;scale=1.0}
   show(E.octoWrap,octoP,"translateY("+y+"px) rotate("+rot+"deg) scale("+scale+")");
   const happy=t>11.1;
   const surprise=$("#mSurprise"),happyM=$("#mHappy"),sad=$("#mSad");
   if(surprise)surprise.style.opacity=(t>3.2&&t<9.1)?1:0;
   if(happyM)happyM.style.opacity=happy?1:0;
   if(sad)sad.style.opacity=(t>3.2&&t<9.1)?1:0;
-  const look=t>9&&t<14?1:0;
-  ["#pupilL","#pupilR"].forEach(sel=>{const p=$(sel);if(p)p.style.transform="translate("+(look*7)+"px,"+(look*-2)+"px)"});
+  const look=t<3.2?1:(t>9&&t<14?1:0);
+  ["#pupilL","#pupilR"].forEach(sel=>{const p=$(sel);if(p)p.style.transform="translate("+(look*0)+"px,"+(look*-17)+"px)"});
  }
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
