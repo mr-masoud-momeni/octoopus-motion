@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اُکتو | فروشگاه‌ساز ساده برای کسب‌وکارها — نسخهٔ ۱</title>
+<link rel="stylesheet" href="../../template/fonts.css">
+<style>
+@font-face{font-family:Vazirmatn;src:url("../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:block}
+:root{--navy:#0A192F;--cyan:#41FAF1;--muted:#B4BCD0;--cream:#F4F7FB;--green:#72F0B4}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;isolation:isolate;transform-origin:center;background:radial-gradient(88% 66% at 50% 75%,#15365a 0%,var(--navy) 56%,#030914 100%)}
+.grid{position:absolute;inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.46;mask-image:radial-gradient(72% 60% at 50% 52%,#000,transparent)}
+.glow{position:absolute;left:50%;top:950px;width:1000px;height:900px;margin-left:-500px;border-radius:50%;background:radial-gradient(circle,rgba(65,250,241,.14),rgba(65,250,241,.035) 52%,transparent 72%);filter:blur(8px)}
+.brand{position:absolute;top:82px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.78}
+.brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
+.kicker{font-size:27px;font-weight:700;color:var(--muted);letter-spacing:0}
+.headline{font-size:68px;line-height:1.48;font-weight:900;letter-spacing:-.035em}
+.accent{color:var(--cyan);text-shadow:0 0 32px rgba(65,250,241,.16)}
+.scene{position:absolute;left:78px;right:78px;text-align:center;opacity:0}
+#hook{top:300px}
+#hook .kicker{margin-bottom:26px}
+#hook .headline span{display:block}
+#domainScene{top:540px}
+.section-label{font-size:26px;color:var(--muted);font-weight:700}
+.domain-card{margin:32px auto 0;width:790px;padding:30px 34px;border-radius:28px;border:1px solid rgba(65,250,241,.28);background:linear-gradient(145deg,rgba(20,47,74,.94),rgba(7,20,37,.94));box-shadow:0 25px 70px rgba(0,0,0,.24)}
+.browser-bar{display:flex;align-items:center;gap:9px;direction:ltr;justify-content:flex-start;border-bottom:1px solid rgba(180,195,218,.14);padding-bottom:20px}
+.browser-bar i{width:11px;height:11px;border-radius:50%;background:#7b8ca5}
+.url{margin:24px auto 0;display:flex;align-items:center;justify-content:center;gap:12px;padding:20px 18px;border-radius:16px;background:rgba(3,12,24,.7);border:1px solid rgba(65,250,241,.24);font:700 29px system-ui,sans-serif;direction:ltr;color:var(--cream)}
+.url b{color:var(--cyan);font-weight:800}
+.domain-caption{margin-top:22px;font-size:30px;font-weight:900}
+#storeScene{top:500px}
+.store-window{margin:30px auto 0;width:790px;padding:28px;border-radius:28px;background:linear-gradient(145deg,rgba(20,47,74,.96),rgba(7,20,37,.97));border:1px solid rgba(180,195,218,.18);box-shadow:0 28px 75px rgba(0,0,0,.24);text-align:right}
+.store-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-bottom:22px;border-bottom:1px solid rgba(180,195,218,.15)}
+.store-name{font-size:28px;font-weight:900}
+.store-url{margin-top:5px;font:500 17px system-ui,sans-serif;color:var(--muted);direction:ltr;text-align:right}
+.store-badge{padding:9px 14px;border-radius:999px;background:rgba(65,250,241,.1);color:var(--cyan);font-size:19px;font-weight:800;white-space:nowrap}
+.product-row{display:flex;align-items:center;gap:22px;margin-top:25px;padding:20px;border-radius:22px;background:rgba(255,255,255,.045)}
+.product-art{width:140px;height:140px;flex-shrink:0;border-radius:20px;background:linear-gradient(145deg,#264d68,#10273f);display:grid;place-items:center}
+.product-art svg{width:85px;height:85px}
+.product-copy{flex:1}
+.product-name{font-size:27px;font-weight:900}
+.product-sub{margin-top:8px;color:var(--muted);font-size:20px}
+.product-price{margin-top:13px;color:var(--cyan);font-size:25px;font-weight:900}
+.order-btn{margin-top:22px;width:100%;height:72px;border-radius:17px;background:var(--cyan);color:#061827;font-size:26px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:12px}
+.member-note{margin-top:22px;text-align:center;color:#c7d5e5;font-size:23px}
+.member-note b{color:var(--green)}
+#paymentScene{top:490px}
+.payment-card{margin:30px auto 0;width:790px;padding:32px;border-radius:28px;border:1px solid rgba(180,195,218,.18);background:linear-gradient(145deg,rgba(20,47,74,.96),rgba(7,20,37,.97));text-align:right}
+.payment-title{font-size:30px;font-weight:900}
+.payment-sub{margin-top:8px;color:var(--muted);font-size:21px}
+.transfer-row{margin-top:24px;padding:22px;border-radius:18px;background:rgba(255,255,255,.045);display:flex;justify-content:space-between;align-items:center;gap:15px}
+.transfer-row span{font-size:23px;color:#d4e1ef}
+.transfer-row strong{font-size:26px;color:var(--cyan);white-space:nowrap}
+.payment-status{margin-top:20px;display:flex;align-items:center;justify-content:center;gap:12px;color:var(--green);font-size:24px;font-weight:900}
+.status-dot{width:13px;height:13px;border-radius:50%;background:var(--green);box-shadow:0 0 18px rgba(114,240,180,.5)}
+#baleScene{top:485px}
+.bale-card{margin:30px auto 0;width:790px;border-radius:28px;overflow:hidden;background:#101f35;border:1px solid rgba(65,250,241,.25);box-shadow:0 28px 80px rgba(0,0,0,.3);text-align:right}
+.bale-head{display:flex;align-items:center;gap:16px;padding:24px 28px;background:#172d49}
+.bale-icon{width:60px;height:60px;border-radius:18px;background:linear-gradient(145deg,#4f9df8,#2f71d4);display:grid;place-items:center;font-size:34px;font-weight:900;color:white}
+.bale-title{font-size:26px;font-weight:900}
+.bale-sub{margin-top:4px;font-size:18px;color:#aabbd0}
+.bale-body{padding:28px}
+.bale-message{padding:24px;border-radius:20px;background:#203650;border:1px solid rgba(255,255,255,.07)}
+.bale-message-top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:23px;font-weight:900}
+.new-pill{background:rgba(114,240,180,.13);color:var(--green);font-size:17px;padding:6px 12px;border-radius:999px}
+.bale-detail{margin-top:16px;color:#d3dfed;font-size:22px;line-height:1.8}
+.bale-actions{display:flex;gap:14px;margin-top:22px}
+.bale-actions span{flex:1;text-align:center;border-radius:14px;padding:18px 10px;font-size:22px;font-weight:900}
+.confirm{background:var(--green);color:#062117}
+.later{border:1px solid rgba(180,195,218,.2);color:#d5e1ee}
+#confirmStamp{position:absolute;top:1125px;left:50%;margin-left:-190px;width:380px;padding:19px 20px;border-radius:18px;background:rgba(114,240,180,.12);border:1px solid rgba(114,240,180,.6);color:var(--green);font-size:29px;font-weight:900;text-align:center;opacity:0;transform:translateY(16px) scale(.94)}
+#closing{top:350px}
+#closing .headline{font-size:64px}
+#closing .closing-sub{margin:24px auto 0;max-width:780px;color:var(--muted);font-size:29px;line-height:1.75}
+#cta{position:absolute;left:50%;top:940px;transform:translate(-50%,24px) scale(.94);display:flex;align-items:center;justify-content:center;gap:14px;padding:22px 34px;border-radius:22px;background:linear-gradient(135deg,#41FAF1,#8AFFF8);color:#071827;font-size:31px;font-weight:900;white-space:nowrap;box-shadow:0 14px 45px rgba(65,250,241,.22);opacity:0}
+#cta .cta-icon{font-size:35px;line-height:1}
+#octoWrap{position:absolute;left:50%;top:1200px;width:350px;margin-left:-175px;opacity:0;transform:translateY(180px) rotate(7deg) scale(.88);transform-origin:50% 100%;filter:drop-shadow(0 25px 38px rgba(0,0,0,.34)) drop-shadow(0 0 28px rgba(65,250,241,.1));z-index:3}
+#octo{display:block;width:100%;height:auto;overflow:visible}
+.octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
+#controls{position:fixed;z-index:20;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
+#controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
+</style></head>
+<body>
+<div id="stage">
+ <div class="grid" id="grid"></div><div class="glow" id="glow"></div>
+ <div class="brand"><i></i><span>octoopus.ir</span></div>
+ <section id="hook" class="scene">
+  <div class="kicker" id="hookKicker">برای کسب‌وکارهای کوچک و متوسط</div>
+  <h1 class="headline"><span id="hookLine1">برای فروش آنلاین،</span><span id="hookLine2">همه‌چی باید <b class="accent">پیچیده</b> باشه؟</span></h1>
+ </section>
+ <section id="domainScene" class="scene">
+  <div class="section-label">فقط با دامنهٔ خودت شروع کن</div>
+  <div class="domain-card">
+   <div class="browser-bar"><i></i><i></i><i></i></div>
+   <div class="url"><b>shop</b><span>.</span><span>yourbrand</span><span>.ir</span></div>
+   <div class="domain-caption">دامنهٔ تو، فروشگاه تو.</div>
+  </div>
+ </section>
+ <section id="storeScene" class="scene">
+  <div class="section-label">فروشگاه آمادهٔ فروش</div>
+  <div class="store-window">
+   <div class="store-top"><div><div class="store-name">فروشگاه نمونه</div><div class="store-url">shop.yourbrand.ir</div></div><div class="store-badge">آنلاین</div></div>
+   <div class="product-row">
+    <div class="product-art"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true"><path d="M20 25h40l-4 38H24L20 25Z" fill="#41FAF1" fill-opacity=".16" stroke="#41FAF1" stroke-width="2.5"/><path d="M29 26v-6a11 11 0 0 1 22 0v6" stroke="#41FAF1" stroke-width="3" stroke-linecap="round"/><path d="M30 43h20" stroke="#41FAF1" stroke-width="3" stroke-linecap="round"/></svg></div>
+    <div class="product-copy"><div class="product-name">محصول دلخواه تو</div><div class="product-sub">ساده، مرتب و آمادهٔ سفارش</div><div class="product-price">۱٬۲۰۰٬۰۰۰ تومان</div></div>
+   </div>
+   <div class="order-btn"><span>ثبت سفارش</span><span>←</span></div>
+   <div class="member-note">مشتری؟ <b>بدون عضویت</b> سفارش بده.</div>
+  </div>
+ </section>
+ <section id="paymentScene" class="scene">
+  <div class="section-label">پرداخت ساده و آشنا</div>
+  <div class="payment-card">
+   <div class="payment-title">ثبت سفارش انجام شد</div>
+   <div class="payment-sub">برای این نسخه، پرداخت به‌صورت کارت‌به‌کارت است.</div>
+   <div class="transfer-row"><span>مبلغ سفارش</span><strong>۱٬۲۰۰٬۰۰۰ تومان</strong></div>
+   <div class="payment-status"><i class="status-dot"></i><span>مشتری پرداخت را انجام می‌دهد</span></div>
+  </div>
+ </section>
+ <section id="baleScene" class="scene">
+  <div class="section-label">و اینجاست که کار راه می‌افته</div>
+  <div class="bale-card">
+   <div class="bale-head"><div class="bale-icon">ب</div><div><div class="bale-title">بات بله · سفارش جدید</div><div class="bale-sub">اعلان برای فروشنده</div></div></div>
+   <div class="bale-body">
+    <div class="bale-message">
+     <div class="bale-message-top"><span>سفارش #۱۰۲۴</span><span class="new-pill">جدید</span></div>
+     <div class="bale-detail">مبلغ: ۱٬۲۰۰٬۰۰۰ تومان<br>وضعیت: در انتظار تأیید فروشنده</div>
+     <div class="bale-actions"><span class="confirm" id="confirmBtn">تأیید سفارش ✓</span><span class="later">بررسی بعدی</span></div>
+    </div>
+   </div>
+  </div>
+ </section>
+ <div id="confirmStamp">✓ سفارش توسط فروشنده تأیید شد</div>
+ <section id="closing" class="scene">
+  <h2 class="headline">فروشگاه آنلاین،<br><b class="accent">بدون دردسرهای اضافه.</b></h2>
+  <div class="closing-sub">برای شروع، لازم نیست از روز اول یک سیستم غول‌پیکر داشته باشی.</div>
+ </section>
+ <div id="cta"><span class="cta-icon">🐙</span><span>تو چی می‌فروشی؟</span><span>↓</span></div>
+ <div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+    <g id="charInner">
+      <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+       <!-- چشم راست -->
+      <g id="eyeR">
+        <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilR">
+          <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+       <!-- چشم چپ -->
+      <g id="eyeL">
+        <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilL">
+          <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+       <!-- بازوها -->
+      <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+      <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+      <path id="legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+      <path id="legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+       <!-- دهان: سه حالت -->
+      <g id="mouth">
+        <g id="mSurprise" opacity="0">
+          <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+        </g>
+        <path id="mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+        <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+      </g>
+    </g>
+  </svg></div>
+</div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="28" step=".01" value="0"><span id="time">0.00s</span></div>
+<script>
+(()=> {
+ const RENDER=new URLSearchParams(location.search).has("render"),DURATION=28,FPS=30,$=s=>document.querySelector(s);
+ const ids=["stage","grid","glow","hook","hookKicker","hookLine1","hookLine2","domainScene","storeScene","paymentScene","baleScene","closing","cta","octoWrap","confirmStamp","confirmBtn","controls","scrub","time","play"];
+ const E=Object.fromEntries(ids.map(id=>[id,$("#"+id)]));
+ const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),inOut=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+ const ease=(t,a,d,fn=out)=>fn(prog(t,a,d));
+ function show(el,p,transform){el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
+ function scene(t,a,b,fade=.38){return ease(t,a,.45)*(1-prog(t,b-fade,fade))}
+ function draw(t){
+  t=clamp(Number(t)||0,0,DURATION);
+  E.grid.style.transform="translate("+Math.sin(t*.18)*12+"px,"+(-t*5)+"px)";
+  E.glow.style.transform="scale("+(1+Math.sin(t*.7)*.025)+")";
+  const hook=scene(t,0,4.35,.42),hp=ease(t,.18,.5);
+  show(E.hook,hook,"translateY("+lerp(28,0,hp)+"px)");
+  show(E.hookKicker,hp*(1-prog(t,3.75,.35)),"translateY("+lerp(18,0,hp)+"px)");
+  const h1=ease(t,.38,.48),h2=ease(t,1.12,.52);
+  show(E.hookLine1,h1*(1-prog(t,3.72,.4)),"translateY("+lerp(35,0,h1)+"px)");
+  show(E.hookLine2,h2*(1-prog(t,3.72,.4)),"translateY("+lerp(35,0,h2)+"px)");
+
+  const domain=scene(t,4.25,8.15,.42),dp=ease(t,4.25,.5);
+  show(E.domainScene,domain,"translateY("+lerp(30,0,dp)+"px)");
+  const url=E.domainScene.querySelector(".url");
+  url.style.boxShadow="0 0 "+(12+14*Math.max(0,Math.sin((t-5)*2)))+"px rgba(65,250,241,.12)";
+
+  const store=scene(t,8.05,12.5,.42),sp=ease(t,8.05,.5);
+  show(E.storeScene,store,"translateY("+lerp(30,0,sp)+"px)");
+  const order=E.storeScene.querySelector(".order-btn");
+  const press=Math.max(0,Math.sin((t-10.45)*Math.PI))*prog(t,10.35,.2)*(1-prog(t,11.2,.25));
+  order.style.transform="translateY("+(-4*press)+"px) scale("+(1-.018*press)+")";
+
+  const payment=scene(t,12.35,16.05,.42),pp=ease(t,12.35,.5);
+  show(E.paymentScene,payment,"translateY("+lerp(30,0,pp)+"px)");
+  const paymentStatus=E.paymentScene.querySelector(".payment-status");
+  paymentStatus.style.opacity=.6+.4*(.5+.5*Math.sin(t*2.5));
+
+  const bale=scene(t,15.9,23.1,.42),bp=ease(t,15.9,.5);
+  show(E.baleScene,bale,"translateY("+lerp(30,0,bp)+"px)");
+  const tap=prog(t,19.5,.55);
+  E.confirmBtn.style.transform="scale("+(1-.035*Math.sin(Math.PI*tap))+")";
+  E.confirmBtn.style.boxShadow=tap>0&&tap<1?"0 0 24px rgba(114,240,180,.25)":"none";
+  const stamp=ease(t,20.1,.4);
+  show(E.confirmStamp,stamp,"translateY("+lerp(16,0,stamp)+"px) scale("+lerp(.94,1,stamp)+")");
+
+  const closing=ease(t,22.8,.48);
+  show(E.closing,closing,"translateY("+lerp(28,0,closing)+"px)");
+  const cta=ease(t,24.05,.5);
+  show(E.cta,cta,"translate(-50%,"+lerp(24,0,cta)+"px) scale("+lerp(.94,1,cta)+")");
+
+  const octoIn=ease(t,.6,.9);
+  let oy=lerp(200,0,octoIn),ox=0,rot=lerp(8,0,octoIn),scale=lerp(.88,1,octoIn);
+  if(t>4.2&&t<22.8){oy=0;scale=.94;rot=Math.sin(t*1.25)*1.2}
+  if(t>=22.8){oy=lerp(0,30,ease(t,22.8,.5));scale=lerp(.94,.82,ease(t,22.8,.5))}
+  show(E.octoWrap,scene(t,.35,27.5,.45),"translate("+ox+"px,"+oy+"px) rotate("+rot+"deg) scale("+scale+")");
+  const look=(t>15.8&&t<22.9)?1:0;
+  ["#pupilL","#pupilR"].forEach(sel=>{const p=$(sel);if(p)p.style.transform="translate("+(look*11)+"px,"+(look*-2)+"px)"});
+  const blink=1-.92*Math.max(0,Math.sin((t-6.3)*Math.PI*3))*(t>6.3&&t<7.4?1:0);
+  ["#eyeL","#eyeR"].forEach((sel,i)=>{const e=$(sel);if(e){const x=i?302.82:114.81;e.setAttribute("transform","translate("+x+" 157.74) scale(1 "+blink+") translate("+(-x)+" -157.74)")}});
+  const mouthHappy=$("#mHappy"),mouthSurprise=$("#mSurprise");
+  if(mouthHappy)mouthHappy.style.opacity=(t>1.0&&t<4.3)?"0":"1";
+  if(mouthSurprise)mouthSurprise.style.opacity=(t>1.0&&t<2.9)?"1":"0";
+ }
+ window.renderAt=draw;
+ window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
+ window.OCTO_EVENTS=[
+  {name:"rise",t:.55},{name:"pop",t:1.15},{name:"whoosh",t:4.25},
+  {name:"pop",t:5.1},{name:"click",t:10.5},{name:"ding",t:12.45},
+  {name:"whoosh",t:15.9},{name:"pop",t:19.5},{name:"ding",t:20.15},
+  {name:"sweep",t:22.8},{name:"pop",t:24.1}
+ ];
+ window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
+ if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
+ else{
+  const fit=()=>{const s=Math.min(innerWidth/1080,(innerHeight-54)/1920);E.stage.style.transform="scale("+s+")"};fit();addEventListener("resize",fit);
+  let playing=true,offset=0,start=performance.now();
+  const tick=now=>{if(playing){offset=((now-start)/1000)%DURATION;E.scrub.value=offset}draw(offset);E.time.textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)};
+  requestAnimationFrame(tick);
+  E.play.onclick=()=>{playing=!playing;E.play.textContent=playing?"Pause":"Play";if(playing)start=performance.now()-offset*1000};
+  E.scrub.oninput=()=>{offset=Number(E.scrub.value);if(playing)start=performance.now()-offset*1000;draw(offset)};
+  $("#restart").onclick=()=>{offset=0;start=performance.now();draw(0)};
+ }
+})();
+</script></body></html>
