@@ -94,6 +94,10 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 /* Centered, punchier popups */
 .burden-pop{left:50%!important;right:auto!important;padding:22px 28px;border-radius:24px;border-width:2px;background:linear-gradient(145deg,rgba(46,66,94,.99),rgba(12,29,51,.99));box-shadow:0 22px 48px rgba(0,0,0,.38),0 0 24px rgba(255,184,107,.08);transform-origin:50% 50%}
 .burden-pop small{color:#FFD09A}
+/* Two clear columns, both pulled toward the center */
+.burden-pop:nth-child(odd){left:29%!important}
+.burden-pop:nth-child(even){left:71%!important}
+#popField .burden-pop{font-size:30px;padding:23px 25px;max-width:46%;white-space:normal;min-height:72px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}
 .burden-pop small{display:block;font-size:17px;color:#FFB86B;font-weight:700;margin-top:5px}
 #solutionScene{position:absolute;inset:330px 70px auto;text-align:center;opacity:0}
 #solutionScene .solution-title{font-size:48px;line-height:1.55;font-weight:900;margin:0 auto 48px;max-width:850px}
@@ -106,10 +110,10 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 #shopBrandScene .shop-name{font-size:100px;line-height:1.35;font-weight:1000;letter-spacing:-.04em;color:var(--cyan);text-shadow:0 0 45px rgba(65,250,241,.18)}
 #shopBrandScene .shop-slogan{font-size:39px;font-weight:900;margin-top:20px}
 #shopBrandScene .shop-sub{font-size:25px;color:var(--muted);margin-top:18px}
-#finalQuestion{position:absolute;left:50%;right:auto;top:980px;min-width:500px;max-width:760px;padding:28px 42px;transform:translate(-50%,24px) scale(.9);text-align:center;font-size:42px;line-height:1.6;font-weight:900;color:#071827;background:linear-gradient(135deg,#F4F7FB,#D9FDFC);border:3px solid rgba(65,250,241,.9);border-radius:42px 42px 42px 12px;box-shadow:0 18px 55px rgba(65,250,241,.2);opacity:0;z-index:4}
+#finalQuestion{position:absolute;left:50%;right:auto;top:840px;min-width:500px;max-width:760px;padding:28px 42px;transform:translate(-50%,24px) scale(.9);text-align:center;font-size:42px;line-height:1.6;font-weight:900;color:#071827;background:linear-gradient(135deg,#F4F7FB,#D9FDFC);border:3px solid rgba(65,250,241,.9);border-radius:42px 42px 42px 12px;box-shadow:0 18px 55px rgba(65,250,241,.2);opacity:0;z-index:4}
 #finalQuestion:after{content:"";position:absolute;bottom:-22px;right:85px;width:35px;height:35px;background:#D9FDFC;border-right:3px solid var(--cyan);border-bottom:3px solid var(--cyan);transform:skewY(28deg) rotate(18deg);border-radius:0 0 7px 0}
 #finalQuestion b{color:#087F87}
-#octoWrap{top:1240px;width:320px;margin-left:-160px}
+#octoWrap{top:1210px;width:390px;margin-left:-195px;will-change:transform,opacity}
 
 </style></head>
 <body>
@@ -237,7 +241,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 (()=> {
  const RENDER=new URLSearchParams(location.search).has("render"),DURATION=23,FPS=30,$=s=>document.querySelector(s);
  const E=Object.fromEntries(["stage","grid","glow","hook","hookKicker","hookLine1","hookLine2","burdenScene","solutionScene","domainCheck","cardCheck","shopBrandScene","finalQuestion","octoWrap","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
- const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),ease=(t,a,d)=>out(prog(t,a,d));
+ const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),smooth=p=>{p=clamp(p);return p*p*p*(p*(p*6-15)+10)},ease=(t,a,d)=>out(prog(t,a,d));
  function show(el,p,transform){if(!el)return;el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
  function scene(t,a,b,fade=.4){return ease(t,a,.4)*(1-prog(t,b-fade,fade))}
  function draw(t){
@@ -252,31 +256,33 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   const busy=scene(t,3.15,9.1,.3);
   show(E.burdenScene,busy,"translateY("+lerp(24,0,ease(t,3.15,.35))+"px)");
   document.querySelectorAll(".burden-pop").forEach((el,i)=>{
-    const at=3.4+i*.48, p=ease(t,at,.28), fade=1-prog(t,8.25,.42);
+    const at=3.4+i*.48, p=ease(t,at,.34), fade=1-prog(t,8.25,.42);
     const wobble=Math.sin(t*7+i)*1.5;
-    show(el,p*fade,"translateX(-50%) scale("+lerp(.52,1.04,p)+") rotate(calc(var(--rot) + "+wobble+"deg))");
+    show(el,p*fade,"translateX(-50%) translateY("+lerp(24,0,p)+"px) scale("+lerp(.42,1.06,p)+") rotate(calc(var(--rot) + "+wobble+"deg))");
   });
   const sol=scene(t,8.85,14.15,.4);
   show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,8.85,.4))+"px)");
   for(const [el,at] of [[E.domainCheck,9.85],[E.cardCheck,11.15]]){
     const p=ease(t,at,.35);show(el,p*(1-prog(t,13.65,.35)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
-  const brand=scene(t,13.9,19.35,.45);
+  const brand=scene(t,13.9,19.55,.7);
   show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,13.9,.5))+"px) scale("+lerp(.96,1,ease(t,13.9,.5))+")");
-  show(E.finalQuestion,ease(t,18.8,.45),"translate(-50%,"+lerp(24,0,ease(t,18.8,.45))+"px) scale("+lerp(.9,1,ease(t,18.8,.45))+")");
-  const octoP=scene(t,.3,22.5,.45);
-  let y=lerp(180,0,ease(t,.45,.8)),rot=lerp(2,0,ease(t,.45,.8)),scale=.92;
-  if(t>3&&t<9.2){y=12+Math.sin(t*8)*5;rot=Math.sin(t*5)*1.8;scale=.92}
-  if(t>=9.2&&t<14){y=0;rot=Math.sin(t*2)*1;scale=.94}
-  if(t>=14){y=-95;rot=Math.sin(t*1.5)*.8;scale=.96}
+  const qIn=smooth(prog(t,20.05,.85));
+  show(E.finalQuestion,qIn,"translate(-50%,"+lerp(42,0,qIn)+"px) scale("+lerp(.82,1,qIn)+")");
+  const octoP=scene(t,.25,22.8,.5);
+  const entrance=smooth(prog(t,.25,1.15));
+  let y=lerp(210,0,entrance),rot=lerp(-1.5,0,entrance),scale=1.04;
+  if(t>3&&t<9.2){y=8+Math.sin(t*4.2)*3;rot=Math.sin(t*3.2)*.8;scale=1.18}
+  if(t>=9.2&&t<13.9){y=0;rot=Math.sin(t*1.4)*.45;scale=1.08}
+  const rise=smooth(prog(t,19.15,1.55));
+  if(t>=13.9){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.2)*.35,0,rise);scale=lerp(1.04,1.12,rise)}
   show(E.octoWrap,octoP,"translateY("+y+"px) rotate("+rot+"deg) scale("+scale+")");
-  const happy=t>11.1;
   const surprise=$("#mSurprise"),happyM=$("#mHappy"),sad=$("#mSad");
   if(surprise)surprise.style.opacity=(t>3.2&&t<9.1)?1:0;
-  if(happyM)happyM.style.opacity=happy?1:0;
-  if(sad)sad.style.opacity=(t>3.2&&t<9.1)?1:0;
-  const look=(t<3.5||t>18.4)?1:(t>9&&t<14?1:0);
-  ["#pupilL","#pupilR"].forEach(sel=>{const p=$(sel);if(p)p.style.transform="translate("+(look*5)+"px,"+(look*-10)+"px)"});
+  if(happyM)happyM.style.opacity=(t>=9.1)?1:0;
+  if(sad)sad.style.opacity=0;
+  const look=(t<3.5||t>20)?1:(t>9&&t<14?1:0);
+  ["#pupilL","#pupilR"].forEach(sel=>{const p=$(sel);if(p)p.style.transform="translate("+(look*7)+"px,"+(look*-13)+"px)"});
  }
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
