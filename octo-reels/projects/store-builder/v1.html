@@ -97,7 +97,9 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 /* Two clear columns, both pulled toward the center */
 .burden-pop:nth-child(odd){left:29%!important}
 .burden-pop:nth-child(even){left:71%!important}
-#popField .burden-pop{font-size:30px;padding:23px 25px;max-width:46%;white-space:normal;min-height:72px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+#popField .burden-pop{font-size:30px;padding:23px 25px;max-width:46%;white-space:normal;min-height:72px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;z-index:5}
+/* Final popup: airy glassmorphism with Octo-cyan edge */
+#popField .burden-pop:last-child{top:455px!important;margin-top:18px;padding:24px 30px;background:rgba(65,250,241,.075);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:2px solid rgba(65,250,241,.72);box-shadow:0 12px 38px rgba(0,0,0,.16),0 0 28px rgba(65,250,241,.12);color:#E9FFFF;letter-spacing:.01em}
 .burden-pop small{display:block;font-size:17px;color:#FFB86B;font-weight:700;margin-top:5px}
 #solutionScene{position:absolute;inset:330px 70px auto;text-align:center;opacity:0}
 #solutionScene .solution-title{font-size:48px;line-height:1.55;font-weight:900;margin:0 auto 48px;max-width:850px}
@@ -128,14 +130,14 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  <section id="burdenScene">
   <h2 class="burden-title">برای راه‌اندازی فروشگاه،<br>از <b>کجا</b> شروع کنی؟</h2>
   <div id="popField">
-   <div class="burden-pop" style="top:8px;right:35px;--rot:7deg">طراح پیدا کن!<small>از کجا؟</small></div>
-   <div class="burden-pop" style="top:112px;left:38px;--rot:-8deg">هاست بخر</div>
-   <div class="burden-pop" style="top:215px;right:8px;--rot:-4deg">بین صدتا طرح بگرد</div>
-   <div class="burden-pop" style="top:320px;left:110px;--rot:6deg">مجوز بگیر!</div>
-   <div class="burden-pop" style="top:425px;right:65px;--rot:8deg">درگاه پرداخت بگیر</div>
-   <div class="burden-pop" style="top:530px;left:20px;--rot:-6deg">هزینه‌ها رو حساب کن</div>
-   <div class="burden-pop" style="top:630px;right:95px;--rot:-7deg">سایت رو راه بنداز</div>
-   <div class="burden-pop" style="top:735px;left:130px;--rot:4deg">و کلی دردسر دیگه…</div>
+   <div class="burden-pop" style="top:8px;--rot:2deg">طراح پیدا کن!<small>از کجا؟</small></div>
+   <div class="burden-pop" style="top:8px;--rot:-2deg">هاست بخر</div>
+   <div class="burden-pop" style="top:150px;--rot:-2deg">بین صدتا طرح بگرد</div>
+   <div class="burden-pop" style="top:150px;--rot:2deg">مجوز بگیر!</div>
+   <div class="burden-pop" style="top:292px;--rot:2deg">درگاه پرداخت بگیر</div>
+   <div class="burden-pop" style="top:292px;--rot:-2deg">هزینه‌ها رو حساب کن</div>
+   <div class="burden-pop" style="top:434px;--rot:-2deg">سایت رو راه بنداز</div>
+   <div class="burden-pop" style="top:455px;--rot:0deg">و کلی دردسر دیگه…</div>
   </div>
  </section>
  <section id="solutionScene">
@@ -272,10 +274,10 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   const octoP=scene(t,.25,22.8,.5);
   const entrance=smooth(prog(t,.25,1.15));
   let y=lerp(210,0,entrance),rot=lerp(-1.5,0,entrance),scale=1.04;
-  if(t>3&&t<9.2){y=8+Math.sin(t*4.2)*3;rot=Math.sin(t*3.2)*.8;scale=1.18}
-  if(t>=9.2&&t<13.9){y=0;rot=Math.sin(t*1.4)*.45;scale=1.08}
+  if(t>3&&t<9.2){y=4+Math.sin(t*3.2)*1.5;rot=Math.sin(t*2.6)*.45;scale=1.04}
+  if(t>=9.2&&t<13.9){y=0;rot=Math.sin(t*1.1)*.25;scale=1.04}
   const rise=smooth(prog(t,19.15,1.55));
-  if(t>=13.9){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.2)*.35,0,rise);scale=lerp(1.04,1.12,rise)}
+  if(t>=13.9){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.0)*.2,0,rise);scale=1.04}
   show(E.octoWrap,octoP,"translateY("+y+"px) rotate("+rot+"deg) scale("+scale+")");
   const surprise=$("#mSurprise"),happyM=$("#mHappy"),sad=$("#mSad");
   if(surprise)surprise.style.opacity=(t>3.2&&t<9.1)?1:0;
