@@ -263,7 +263,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   }
   const brand=scene(t,13.9,19.35,.45);
   show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,13.9,.5))+"px) scale("+lerp(.96,1,ease(t,13.9,.5))+")");
-  show(E.finalQuestion,ease(t,18.8,.45),"translateY("+lerp(20,0,ease(t,18.8,.45))+"px)");
+  show(E.finalQuestion,ease(t,18.8,.45),"translate(-50%,"+lerp(24,0,ease(t,18.8,.45))+"px) scale("+lerp(.9,1,ease(t,18.8,.45))+")");
   const octoP=scene(t,.3,22.5,.45);
   let y=lerp(180,0,ease(t,.45,.8)),rot=lerp(2,0,ease(t,.45,.8)),scale=.92;
   if(t>3&&t<9.2){y=12+Math.sin(t*8)*5;rot=Math.sin(t*5)*1.8;scale=.92}
