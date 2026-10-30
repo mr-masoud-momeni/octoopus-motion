@@ -19,6 +19,13 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 .kicker{font-size:27px;font-weight:700;color:var(--muted)}
 .headline{font-size:66px;line-height:1.48;font-weight:900;letter-spacing:-.035em}
 .accent{color:var(--cyan);text-shadow:0 0 32px rgba(65,250,241,.16)}
+#titleScene{top:0;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 100px}
+#titleScene .series{font-size:29px;font-weight:800;letter-spacing:.02em;color:var(--cyan);margin-bottom:38px}
+#titleScene .episode{font-size:24px;color:#aebbd0;margin-bottom:22px}
+#titleScene h1{font-size:88px;line-height:1.55;font-weight:1000;letter-spacing:-.045em;text-align:center}
+#titleScene h1 span{display:block}
+#titleScene h1 b{color:var(--orange);text-shadow:0 0 45px #ffb86b30}
+#titleScene .ornament{width:150px;height:4px;margin-top:48px;border-radius:5px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
 #hook{top:265px}
 #hook .kicker{margin-bottom:22px}
 #hook .headline span{display:block}
@@ -76,7 +83,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 .check{width:62px;height:62px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#062117;font-size:42px;font-weight:1000;box-shadow:0 0 28px #72f0b455}
 .next-line{margin-top:22px;display:flex;align-items:center;justify-content:center;gap:16px;font-size:27px;font-weight:800;color:#d9e5f2}
 .next-line .check{width:46px;height:46px;font-size:31px}
-#octoWrap{position:absolute;left:50%;top:1280px;width:360px;margin-left:-180px;opacity:0;transform:translateY(180px) rotate(5deg) scale(.92);transform-origin:50% 100%;filter:drop-shadow(0 25px 38px rgba(0,0,0,.34)) drop-shadow(0 0 28px rgba(65,250,241,.1));z-index:3}
+#octoWrap{position:absolute;left:50%;top:1160px;width:460px;margin-left:-230px;opacity:0;transform:translateY(180px) rotate(5deg) scale(.92);transform-origin:50% 100%;filter:drop-shadow(0 25px 38px rgba(0,0,0,.34)) drop-shadow(0 0 28px rgba(65,250,241,.1));z-index:3}
 #octo{display:block;width:100%;height:auto;overflow:visible}
 .octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
 #controls{position:fixed;z-index:20;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
@@ -87,6 +94,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 <div id="stage">
  <div class="grid" id="grid"></div><div class="glow" id="glow"></div>
  <div class="brand"><i></i><span>octoopus.ir</span></div>
+ <section id="titleScene" class="scene"><div class="episode">سری ریلزهای اُکتوپوس</div><div class="series">چطور سایتت مشتری رو فراری می‌ده؟</div><h1><span>قسمت</span><span><b>اول</b></span></h1><div class="ornament"></div></section>
  <section id="hook" class="scene">
   <div class="kicker">چطور سایتت مشتری رو فراری می‌ده؟ · قسمت اول</div>
   <h1 class="headline"><span>اسلایدر سایتت</span><span>ویترین فروشگاهه یا</span><span><b>انبار تبلیغات؟</b></span></h1>
@@ -181,50 +189,61 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="35" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 (()=>{
- const RENDER=new URLSearchParams(location.search).has("render"),DURATION=35,FPS=30,$=s=>document.querySelector(s);
- const ids=["stage","grid","glow","hook","messScene","confuseScene","fixScene","outroScene","signature","octoWrap","controls","scrub","time","play"];
+ const RENDER=new URLSearchParams(location.search).has("render"),DURATION=40,FPS=30,$=s=>document.querySelector(s);
+ const ids=["stage","grid","glow","titleScene","hook","messScene","confuseScene","fixScene","outroScene","signature","octoWrap","controls","scrub","time","play"];
  const E=Object.fromEntries(ids.map(id=>[id,$("#"+id)]));
  const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),smooth=p=>{p=clamp(p);return p*p*p*(p*(p*6-15)+10)},ease=(t,a,d)=>out(prog(t,a,d));
  function show(el,p,transform){if(!el)return;el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
  function scene(t,a,b,fade=.45){return ease(t,a,.38)*(1-prog(t,b-fade,fade))}
  function draw(t){
   t=clamp(Number(t)||0,0,DURATION);
-  E.grid.style.transform="translate("+Math.sin(t*.18)*12+"px,"+(-t*5)+"px)";
-  E.glow.style.transform="scale("+(1+Math.sin(t*.7)*.025)+")";
-  const hook=scene(t,0,5.25,.45);
-  show(E.hook,hook,"translateY("+lerp(24,0,ease(t,.08,.3))+"px)");
-  const mess=scene(t,5.0,12.1,.45);
-  show(E.messScene,mess,"translateY("+lerp(30,0,ease(t,5.0,.4))+"px)");
-  const confuse=scene(t,11.8,20.2,.5);
-  show(E.confuseScene,confuse,"translateY("+lerp(30,0,ease(t,11.8,.4))+"px)");
+  E.grid.style.transform="translate("+Math.sin(t*.18)*16+"px,"+(-t*7)+"px)";
+  E.glow.style.transform="scale("+(1+Math.sin(t*.7)*.035)+")";
+  const title=scene(t,0,5.6,.55);
+  show(E.titleScene,title,"translateY("+lerp(30,0,ease(t,.08,.65))+"px)");
+  const hook=scene(t,5.35,10.65,.5);
+  show(E.hook,hook,"translateY("+lerp(35,0,ease(t,5.35,.45))+"px)");
+  const mess=scene(t,10.4,17.45,.5);
+  show(E.messScene,mess,"translateY("+lerp(38,0,ease(t,10.4,.5))+"px)");
+  const confuse=scene(t,17.2,24.85,.55);
+  show(E.confuseScene,confuse,"translateY("+lerp(38,0,ease(t,17.2,.5))+"px)");
   const leave=$("#leaveText");
-  show(leave,ease(t,17.0,.3),"translateY("+lerp(15,0,ease(t,17,.3))+"px)");
-  const fix=scene(t,19.8,28.5,.45);
-  show(E.fixScene,fix,"translateY("+lerp(35,0,ease(t,19.8,.45))+"px)");
-  const outro=scene(t,28.2,35,.35);
-  show(E.outroScene,outro,"translateY("+lerp(30,0,ease(t,28.2,.4))+"px)");
-  const sig=ease(t,30.0,.4);
-  show(E.signature,sig,"translate(-50%,"+lerp(30,0,sig)+"px) scale("+lerp(.92,1,sig)+")");
-  const octoIn=smooth(prog(t,.35,.9));
-  let y=lerp(220,0,octoIn),rot=lerp(5,0,octoIn),scale=.94;
-  if(t>5&&t<20){y=Math.sin(t*2.3)*5;rot=Math.sin(t*1.4)*.8}
-  if(t>=20){y=-30+Math.sin(t*1.7)*4;rot=Math.sin(t*1.1)*.4}
-  show(E.octoWrap,scene(t,.25,34.8,.4),"translateY("+y+"px) rotate("+rot+"deg) scale("+scale+")");
+  show(leave,ease(t,22.0,.35),"translateY("+lerp(18,0,ease(t,22,.35))+"px)");
+  const fix=scene(t,24.55,33.15,.5);
+  show(E.fixScene,fix,"translateY("+lerp(40,0,ease(t,24.55,.55))+"px)");
+  const outro=scene(t,32.85,40,.4);
+  show(E.outroScene,outro,"translateY("+lerp(35,0,ease(t,32.85,.5))+"px)");
+  const sig=ease(t,35.0,.45);
+  show(E.signature,sig,"translate(-50%,"+lerp(35,0,sig)+"px) scale("+lerp(.9,1,sig)+")");
+
+  // Octo enters only after the title card, then travels between safe zones.
+  const enter=smooth(prog(t,5.15,1.05));
+  let x=0,y=180,rot=0,tilt=0;
+  if(t<10.4){x=-255;y=lerp(180,-35,enter)+Math.sin(t*2.1)*8;rot=-8+Math.sin(t*2.4)*2}
+  else if(t<17.2){const p=smooth(prog(t,10.4,6.8));x=lerp(-255,245,p);y=lerp(-35,105,p)+Math.sin(t*3.2)*13;rot=lerp(-8,10,p)+Math.sin(t*2.8)*3}
+  else if(t<24.55){const p=smooth(prog(t,17.2,7.35));x=lerp(245,-220,p);y=lerp(105,-75,p)+Math.sin(t*3.4)*12;rot=lerp(10,-11,p)+Math.sin(t*2.7)*3}
+  else if(t<33){const p=smooth(prog(t,24.55,8.45));x=lerp(-220,210,p);y=lerp(-75,55,p)+Math.sin(t*3.1)*10;rot=lerp(-11,8,p)+Math.sin(t*2.5)*2.5}
+  else{x=150+Math.sin(t*1.5)*12;y=35+Math.sin(t*2.2)*7;rot=5+Math.sin(t*1.8)*2}
+  const visible=scene(t,5.2,40,.5);
+  show(E.octoWrap,visible,"translate("+x+"px,"+y+"px) rotate("+rot+"deg) scale("+lerp(.94,1.04,smooth(prog(t,5.2,1.2)))+")");
+  // Tentacles sway independently to make the character feel alive.
+  ["#legLL","#legLM","#legRM","#legRL"].forEach((sel,i)=>{const el=$(sel);if(el){const wave=Math.sin(t*4.2+i*1.35)* (t>5.2?7:0);el.style.transformOrigin="50% 0%";el.style.transform="rotate("+wave+"deg)" }});
   const surprised=$("#mSurprise"),happy=$("#mHappy"),sad=$("#mSad");
-  if(surprised)surprised.style.opacity=(t>5&&t<20)?1:0;
-  if(happy)happy.style.opacity=(t>=20)?1:0;
-  if(sad)sad.style.opacity=(t>15&&t<19)?1:0;
-  const look=t<5?0:(t<20?1:0);
-  ["#pupilL","#pupilR"].forEach(sel=>{const p=$(sel);if(p)p.style.transform="translate("+(look*7)+"px,"+(look*-10)+"px)"});
+  if(surprised)surprised.style.opacity=(t>10.4&&t<24.5)?1:0;
+  if(happy)happy.style.opacity=(t>=24.55)?1:0;
+  if(sad)sad.style.opacity=(t>21.5&&t<24.5)?1:0;
+  const lookX=t<10.4?-8:(t<17.2?12:(t<24.55?-10:8));
+  const lookY=t<10.4?0:(t<24.55?-8:2);
+  ["#pupilL","#pupilR"].forEach((sel,i)=>{const p=$(sel);if(p)p.style.transform="translate("+(lookX+(i?2:0))+"px,"+lookY+"px)"});
  }
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
  window.OCTO_EVENTS=[
-  {name:"rise",t:.55},
-  {name:"whoosh",t:5.0},{name:"pop",t:5.35},{name:"pop",t:6.0},{name:"pop",t:6.65},{name:"pop",t:7.3},
-  {name:"sweep",t:11.8},{name:"pop",t:17.0},
-  {name:"whoosh",t:19.8},{name:"ding",t:20.25},
-  {name:"whoosh",t:28.2},{name:"pop",t:30.0},{name:"ding",t:30.45},{name:"ding",t:32.3}
+  {name:"rise",t:5.65},
+  {name:"whoosh",t:10.4},{name:"pop",t:10.75},{name:"pop",t:11.4},{name:"pop",t:12.05},{name:"pop",t:12.7},
+  {name:"sweep",t:17.2},{name:"pop",t:22.0},
+  {name:"whoosh",t:24.55},{name:"ding",t:25.0},
+  {name:"whoosh",t:32.85},{name:"pop",t:35.0},{name:"ding",t:35.45},{name:"ding",t:37.3}
  ];
  window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
  if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
