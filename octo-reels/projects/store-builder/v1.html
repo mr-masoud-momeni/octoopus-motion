@@ -264,12 +264,12 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   });
   const sol=scene(t,25.0,39.0,.6);
   show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,25.0,.5))+"px)");
-  for(const [el,at] of [[E.domainCheck,29.2],[E.cardCheck,33.2]]){
+  for(const [el,at] of [[E.domainCheck,29.2],[E.cardCheck,31.8]]){
     const p=ease(t,at,.35);show(el,p*(1-prog(t,38.35,.55)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
-  const brand=scene(t,38.7,46.5,.75);
+  const brand=scene(t,38.7,44.6,.55);
   show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,38.7,.55))+"px) scale("+lerp(.96,1,ease(t,19.25,.5))+")");
-  const qIn=smooth(prog(t,47.0,1.1));
+  const qIn=smooth(prog(t,45.2,1.0));
   show(E.finalQuestion,qIn,"translate(-50%,"+lerp(42,0,qIn)+"px) scale("+lerp(.82,1,qIn)+")");
   const octoP=scene(t,.25,51.8,.5);
   const entrance=smooth(prog(t,.25,1.15));
@@ -291,9 +291,9 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  window.OCTO_EVENTS=[
   {name:"rise",t:.65},{name:"pop",t:1.0},
   {name:"whoosh",t:6.05},{name:"sweep",t:25.0},
-  {name:"ding",t:29.55},{name:"ding",t:33.55},
+  {name:"ding",t:29.55},{name:"ding",t:32.15},
   {name:"whoosh",t:38.8},{name:"pop",t:39.5},
-  {name:"ding",t:47.2}
+  {name:"ding",t:45.45}
  ];
  window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
  if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
