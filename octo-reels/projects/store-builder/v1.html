@@ -238,10 +238,10 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
     </g>
   </svg></div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="32" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="52" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 (()=> {
- const RENDER=new URLSearchParams(location.search).has("render"),DURATION=32,FPS=30,$=s=>document.querySelector(s);
+ const RENDER=new URLSearchParams(location.search).has("render"),DURATION=52,FPS=30,$=s=>document.querySelector(s);
  const E=Object.fromEntries(["stage","grid","glow","hook","hookKicker","hookLine1","hookLine2","burdenScene","solutionScene","domainCheck","cardCheck","shopBrandScene","finalQuestion","octoWrap","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
  const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),smooth=p=>{p=clamp(p);return p*p*p*(p*(p*6-15)+10)},ease=(t,a,d)=>out(prog(t,a,d));
  function show(el,p,transform){if(!el)return;el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
@@ -250,34 +250,34 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   t=clamp(Number(t)||0,0,DURATION);
   E.grid.style.transform="translate("+Math.sin(t*.18)*12+"px,"+(-t*5)+"px)";
   E.glow.style.transform="scale("+(1+Math.sin(t*.7)*.025)+")";
-  const hook=scene(t,0,4.4,.45),hp=ease(t,.12,.45);
+  const hook=scene(t,0,6.3,.55),hp=ease(t,.12,.45);
   show(E.hook,hook,"translateY("+lerp(24,0,hp)+"px)");
-  show(E.hookKicker,hp*(1-prog(t,3.75,.45)));
-  show(E.hookLine1,ease(t,.25,.4)*(1-prog(t,3.75,.45)),"translateY("+lerp(24,0,hp)+"px)");
-  show(E.hookLine2,ease(t,.85,.5)*(1-prog(t,3.75,.45)),"translateY("+lerp(24,0,hp)+"px)");
-  const busy=scene(t,4.05,13.1,.45);
-  show(E.burdenScene,busy,"translateY("+lerp(24,0,ease(t,4.05,.45))+"px)");
+  show(E.hookKicker,hp*(1-prog(t,5.75,.5)));
+  show(E.hookLine1,ease(t,.55,.45)*(1-prog(t,5.75,.5)),"translateY("+lerp(24,0,hp)+"px)");
+  show(E.hookLine2,ease(t,2.55,.5)*(1-prog(t,5.75,.5)),"translateY("+lerp(24,0,hp)+"px)");
+  const busy=scene(t,6.0,25.4,.65);
+  show(E.burdenScene,busy,"translateY("+lerp(24,0,ease(t,6.0,.5))+"px)");
   document.querySelectorAll(".burden-pop").forEach((el,i)=>{
-    const at=4.35+i*.8, p=ease(t,at,.42), fade=1-prog(t,12.25,.5);
+    const at=9.0+i*1.9, p=ease(t,at,.38), fade=1-prog(t,24.7,.65);
     const wobble=Math.sin(t*7+i)*1.5;
     show(el,p*fade,"translateX(-50%) translateY("+lerp(24,0,p)+"px) scale("+lerp(.42,1.06,p)+") rotate(calc(var(--rot) + "+wobble+"deg))");
   });
-  const sol=scene(t,12.7,19.7,.5);
-  show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,12.7,.5))+"px)");
-  for(const [el,at] of [[E.domainCheck,14.1],[E.cardCheck,16.5]]){
-    const p=ease(t,at,.35);show(el,p*(1-prog(t,19.1,.45)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
+  const sol=scene(t,25.0,39.0,.6);
+  show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,25.0,.5))+"px)");
+  for(const [el,at] of [[E.domainCheck,29.2],[E.cardCheck,33.2]]){
+    const p=ease(t,at,.35);show(el,p*(1-prog(t,38.35,.55)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
-  const brand=scene(t,19.25,26.2,.7);
-  show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,19.25,.5))+"px) scale("+lerp(.96,1,ease(t,19.25,.5))+")");
-  const qIn=smooth(prog(t,27.1,1.0));
+  const brand=scene(t,38.7,46.5,.75);
+  show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,38.7,.55))+"px) scale("+lerp(.96,1,ease(t,19.25,.5))+")");
+  const qIn=smooth(prog(t,47.0,1.1));
   show(E.finalQuestion,qIn,"translate(-50%,"+lerp(42,0,qIn)+"px) scale("+lerp(.82,1,qIn)+")");
-  const octoP=scene(t,.25,31.8,.5);
+  const octoP=scene(t,.25,51.8,.5);
   const entrance=smooth(prog(t,.25,1.15));
   let y=lerp(210,0,entrance),rot=lerp(-1.5,0,entrance),scale=1.04;
   if(t>3&&t<9.2){y=4+Math.sin(t*3.2)*1.5;rot=Math.sin(t*2.6)*.45;scale=1.04}
   if(t>=9.2&&t<13.9){y=0;rot=Math.sin(t*1.1)*.25;scale=1.04}
-  const rise=smooth(prog(t,25.4,1.8));
-  if(t>=19.25){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.0)*.2,0,rise);scale=1.04}
+  const rise=smooth(prog(t,39.0,1.8));
+  if(t>=38.7){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.0)*.2,0,rise);scale=1.04}
   show(E.octoWrap,octoP,"translateY("+y+"px) rotate("+rot+"deg) scale("+scale+")");
   const surprise=$("#mSurprise"),happyM=$("#mHappy"),sad=$("#mSad");
   if(surprise)surprise.style.opacity=(t>3.2&&t<9.1)?1:0;
@@ -289,12 +289,11 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
  window.OCTO_EVENTS=[
-  {name:"rise",t:.45},{name:"pop",t:.8},{name:"whoosh",t:4.1},
-  {name:"pop",t:4.35},{name:"pop",t:5.15},{name:"pop",t:5.95},
-  {name:"pop",t:6.75},{name:"pop",t:7.55},{name:"pop",t:8.35},
-  {name:"pop",t:9.15},{name:"pop",t:9.95},{name:"sweep",t:12.8},
-  {name:"ding",t:14.15},{name:"ding",t:16.55},{name:"whoosh",t:19.3},
-  {name:"pop",t:19.8},{name:"ding",t:27.2}
+  {name:"rise",t:.65},{name:"pop",t:1.0},
+  {name:"whoosh",t:6.05},{name:"sweep",t:25.0},
+  {name:"ding",t:29.55},{name:"ding",t:33.55},
+  {name:"whoosh",t:38.8},{name:"pop",t:39.5},
+  {name:"ding",t:47.2}
  ];
  window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
  if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
