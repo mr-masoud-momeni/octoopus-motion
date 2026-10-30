@@ -262,10 +262,10 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
     const wobble=Math.sin(t*7+i)*1.5;
     show(el,p*fade,"translateX(-50%) translateY("+lerp(24,0,p)+"px) scale("+lerp(.42,1.06,p)+") rotate(calc(var(--rot) + "+wobble+"deg))");
   });
-  const sol=scene(t,25.0,39.0,.6);
+  const sol=scene(t,25.0,37.8,.5);
   show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,25.0,.5))+"px)");
   for(const [el,at] of [[E.domainCheck,29.2],[E.cardCheck,31.8]]){
-    const p=ease(t,at,.35);show(el,p*(1-prog(t,38.35,.55)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
+    const p=ease(t,at,.35);show(el,p*(1-prog(t,37.25,.45)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
   const brand=scene(t,38.7,44.6,.55);
   show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,38.7,.55))+"px) scale("+lerp(.96,1,ease(t,19.25,.5))+")");
