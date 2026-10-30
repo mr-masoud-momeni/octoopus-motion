@@ -241,7 +241,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="23" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 (()=> {
- const RENDER=new URLSearchParams(location.search).has("render"),DURATION=23,FPS=30,$=s=>document.querySelector(s);
+ const RENDER=new URLSearchParams(location.search).has("render"),DURATION=32,FPS=30,$=s=>document.querySelector(s);
  const E=Object.fromEntries(["stage","grid","glow","hook","hookKicker","hookLine1","hookLine2","burdenScene","solutionScene","domainCheck","cardCheck","shopBrandScene","finalQuestion","octoWrap","controls","scrub","time","play"].map(id=>[id,$("#"+id)]));
  const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p,prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),smooth=p=>{p=clamp(p);return p*p*p*(p*(p*6-15)+10)},ease=(t,a,d)=>out(prog(t,a,d));
  function show(el,p,transform){if(!el)return;el.style.opacity=clamp(p);if(transform)el.style.transform=transform}
@@ -250,34 +250,34 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   t=clamp(Number(t)||0,0,DURATION);
   E.grid.style.transform="translate("+Math.sin(t*.18)*12+"px,"+(-t*5)+"px)";
   E.glow.style.transform="scale("+(1+Math.sin(t*.7)*.025)+")";
-  const hook=scene(t,0,3.5,.4),hp=ease(t,.12,.45);
+  const hook=scene(t,0,4.4,.45),hp=ease(t,.12,.45);
   show(E.hook,hook,"translateY("+lerp(24,0,hp)+"px)");
-  show(E.hookKicker,hp*(1-prog(t,2.85,.35)));
+  show(E.hookKicker,hp*(1-prog(t,3.75,.45)));
   show(E.hookLine1,ease(t,.25,.4)*(1-prog(t,2.85,.35)),"translateY("+lerp(24,0,hp)+"px)");
-  show(E.hookLine2,ease(t,.7,.45)*(1-prog(t,2.85,.35)),"translateY("+lerp(24,0,hp)+"px)");
-  const busy=scene(t,3.15,9.1,.3);
-  show(E.burdenScene,busy,"translateY("+lerp(24,0,ease(t,3.15,.35))+"px)");
+  show(E.hookLine2,ease(t,.85,.5)*(1-prog(t,3.75,.45)),"translateY("+lerp(24,0,hp)+"px)");
+  const busy=scene(t,4.05,13.1,.45);
+  show(E.burdenScene,busy,"translateY("+lerp(24,0,ease(t,4.05,.45))+"px)");
   document.querySelectorAll(".burden-pop").forEach((el,i)=>{
-    const at=3.4+i*.48, p=ease(t,at,.34), fade=1-prog(t,8.25,.42);
+    const at=4.35+i*.8, p=ease(t,at,.42), fade=1-prog(t,12.25,.5);
     const wobble=Math.sin(t*7+i)*1.5;
     show(el,p*fade,"translateX(-50%) translateY("+lerp(24,0,p)+"px) scale("+lerp(.42,1.06,p)+") rotate(calc(var(--rot) + "+wobble+"deg))");
   });
-  const sol=scene(t,8.85,14.15,.4);
-  show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,8.85,.4))+"px)");
-  for(const [el,at] of [[E.domainCheck,9.85],[E.cardCheck,11.15]]){
-    const p=ease(t,at,.35);show(el,p*(1-prog(t,13.65,.35)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
+  const sol=scene(t,12.7,19.7,.5);
+  show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,12.7,.5))+"px)");
+  for(const [el,at] of [[E.domainCheck,14.1],[E.cardCheck,16.5]]){
+    const p=ease(t,at,.35);show(el,p*(1-prog(t,19.1,.45)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
-  const brand=scene(t,13.9,19.55,.7);
-  show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,13.9,.5))+"px) scale("+lerp(.96,1,ease(t,13.9,.5))+")");
-  const qIn=smooth(prog(t,20.05,.85));
+  const brand=scene(t,19.25,26.2,.7);
+  show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,19.25,.5))+"px) scale("+lerp(.96,1,ease(t,13.9,.5))+")");
+  const qIn=smooth(prog(t,27.1,1.0));
   show(E.finalQuestion,qIn,"translate(-50%,"+lerp(42,0,qIn)+"px) scale("+lerp(.82,1,qIn)+")");
-  const octoP=scene(t,.25,22.8,.5);
+  const octoP=scene(t,.25,31.8,.5);
   const entrance=smooth(prog(t,.25,1.15));
   let y=lerp(210,0,entrance),rot=lerp(-1.5,0,entrance),scale=1.04;
   if(t>3&&t<9.2){y=4+Math.sin(t*3.2)*1.5;rot=Math.sin(t*2.6)*.45;scale=1.04}
   if(t>=9.2&&t<13.9){y=0;rot=Math.sin(t*1.1)*.25;scale=1.04}
-  const rise=smooth(prog(t,19.15,1.55));
-  if(t>=13.9){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.0)*.2,0,rise);scale=1.04}
+  const rise=smooth(prog(t,25.4,1.8));
+  if(t>=19.25){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.0)*.2,0,rise);scale=1.04}
   show(E.octoWrap,octoP,"translateY("+y+"px) rotate("+rot+"deg) scale("+scale+")");
   const surprise=$("#mSurprise"),happyM=$("#mHappy"),sad=$("#mSad");
   if(surprise)surprise.style.opacity=(t>3.2&&t<9.1)?1:0;
@@ -289,7 +289,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
  window.OCTO_EVENTS=[
-  {name:"rise",t:.45},{name:"pop",t:.8},{name:"whoosh",t:3.2},
+  {name:"rise",t:.45},{name:"pop",t:.8},{name:"whoosh",t:4.1},
   {name:"pop",t:3.42},{name:"pop",t:3.99},{name:"pop",t:4.56},
   {name:"pop",t:5.13},{name:"pop",t:5.7},{name:"pop",t:6.27},
   {name:"pop",t:6.84},{name:"pop",t:7.41},{name:"sweep",t:8.9},
