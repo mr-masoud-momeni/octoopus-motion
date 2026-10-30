@@ -238,7 +238,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
     </g>
   </svg></div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="23" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="32" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 (()=> {
  const RENDER=new URLSearchParams(location.search).has("render"),DURATION=32,FPS=30,$=s=>document.querySelector(s);
@@ -253,7 +253,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   const hook=scene(t,0,4.4,.45),hp=ease(t,.12,.45);
   show(E.hook,hook,"translateY("+lerp(24,0,hp)+"px)");
   show(E.hookKicker,hp*(1-prog(t,3.75,.45)));
-  show(E.hookLine1,ease(t,.25,.4)*(1-prog(t,2.85,.35)),"translateY("+lerp(24,0,hp)+"px)");
+  show(E.hookLine1,ease(t,.25,.4)*(1-prog(t,3.75,.45)),"translateY("+lerp(24,0,hp)+"px)");
   show(E.hookLine2,ease(t,.85,.5)*(1-prog(t,3.75,.45)),"translateY("+lerp(24,0,hp)+"px)");
   const busy=scene(t,4.05,13.1,.45);
   show(E.burdenScene,busy,"translateY("+lerp(24,0,ease(t,4.05,.45))+"px)");
@@ -268,7 +268,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
     const p=ease(t,at,.35);show(el,p*(1-prog(t,19.1,.45)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
   const brand=scene(t,19.25,26.2,.7);
-  show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,19.25,.5))+"px) scale("+lerp(.96,1,ease(t,13.9,.5))+")");
+  show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,19.25,.5))+"px) scale("+lerp(.96,1,ease(t,19.25,.5))+")");
   const qIn=smooth(prog(t,27.1,1.0));
   show(E.finalQuestion,qIn,"translate(-50%,"+lerp(42,0,qIn)+"px) scale("+lerp(.82,1,qIn)+")");
   const octoP=scene(t,.25,31.8,.5);
@@ -290,11 +290,11 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
  window.OCTO_EVENTS=[
   {name:"rise",t:.45},{name:"pop",t:.8},{name:"whoosh",t:4.1},
-  {name:"pop",t:3.42},{name:"pop",t:3.99},{name:"pop",t:4.56},
-  {name:"pop",t:5.13},{name:"pop",t:5.7},{name:"pop",t:6.27},
-  {name:"pop",t:6.84},{name:"pop",t:7.41},{name:"sweep",t:8.9},
-  {name:"ding",t:9.9},{name:"ding",t:11.2},{name:"whoosh",t:13.95},
-  {name:"pop",t:14.4},{name:"ding",t:18.85}
+  {name:"pop",t:4.35},{name:"pop",t:5.15},{name:"pop",t:5.95},
+  {name:"pop",t:6.75},{name:"pop",t:7.55},{name:"pop",t:8.35},
+  {name:"pop",t:9.15},{name:"pop",t:9.95},{name:"sweep",t:12.8},
+  {name:"ding",t:14.15},{name:"ding",t:16.55},{name:"whoosh",t:19.3},
+  {name:"pop",t:19.8},{name:"ding",t:27.2}
  ];
  window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
  if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
