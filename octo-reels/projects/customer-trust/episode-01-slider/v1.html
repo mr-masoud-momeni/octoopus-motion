@@ -238,7 +238,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   const angry=(t>13.1&&t<16.9)||(t>19.4&&t<21.7);
   const concerned=t>17.2&&t<24.55;
   const brows=$("#brows");
-  if(brows){$("#browL").style.opacity=angry?1:(concerned?.35:0);$("#browR").style.opacity=angry?1:(concerned?.35:0)}
+  if(brows){$("#browL").style.opacity=angry?1:(concerned ? .35 : 0);$("#browR").style.opacity=angry?1:(concerned?.35:0)}
   if(angry){
     $("#browL").setAttribute("d","M52 91 Q112 48 174 66");
     $("#browR").setAttribute("d","M251 66 Q313 48 373 91");
