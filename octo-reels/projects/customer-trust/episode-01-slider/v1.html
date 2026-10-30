@@ -84,8 +84,8 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
 .next-line{margin-top:22px;display:flex;align-items:center;justify-content:center;gap:16px;font-size:27px;font-weight:800;color:#d9e5f2}
 .next-line .check{width:46px;height:46px;font-size:31px}
 #octoWrap{position:absolute;left:50%;top:1160px;width:460px;margin-left:-230px;opacity:0;transform:translateY(180px) rotate(5deg) scale(.92);transform-origin:50% 100%;filter:drop-shadow(0 25px 38px rgba(0,0,0,.34)) drop-shadow(0 0 28px rgba(65,250,241,.1));z-index:3}
-#octo{display:block;width:100%;height:auto;overflow:visible}
-.octo-body{fill:var(--cyan)}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
+#octo{display:block;width:100%;height:auto;overflow:visible}#octoWrap{will-change:transform,filter}#browL,#browR{fill:none;stroke:#08283b;stroke-width:13;stroke-linecap:round;opacity:0;transition:opacity .25s ease}
+.octo-body{fill:var(--octo-tone,var(--cyan));transition:fill .55s ease}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
 #controls{position:fixed;z-index:20;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
 #controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
 #scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
@@ -170,6 +170,10 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
           <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
         </g>
       </g>
+      <g id="brows">
+        <path id="browL" d="M52 75 Q112 45 174 78"/>
+        <path id="browR" d="M251 78 Q313 45 373 75"/>
+      </g>
        <!-- بازوها -->
       <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
       <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
@@ -216,25 +220,41 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   const sig=ease(t,35.0,.45);
   show(E.signature,sig,"translate(-50%,"+lerp(35,0,sig)+"px) scale("+lerp(.9,1,sig)+")");
 
-  // Octo enters only after the title card, then travels between safe zones.
-  const enter=smooth(prog(t,5.15,1.05));
-  let x=0,y=180,rot=0,tilt=0;
-  if(t<10.4){x=-255;y=lerp(180,-35,enter)+Math.sin(t*2.1)*8;rot=-8+Math.sin(t*2.4)*2}
-  else if(t<17.2){const p=smooth(prog(t,10.4,6.8));x=lerp(-255,245,p);y=lerp(-35,105,p)+Math.sin(t*3.2)*13;rot=lerp(-8,10,p)+Math.sin(t*2.8)*3}
-  else if(t<24.55){const p=smooth(prog(t,17.2,7.35));x=lerp(245,-220,p);y=lerp(105,-75,p)+Math.sin(t*3.4)*12;rot=lerp(10,-11,p)+Math.sin(t*2.7)*3}
-  else if(t<33){const p=smooth(prog(t,24.55,8.45));x=lerp(-220,210,p);y=lerp(-75,55,p)+Math.sin(t*3.1)*10;rot=lerp(-11,8,p)+Math.sin(t*2.5)*2.5}
-  else{x=150+Math.sin(t*1.5)*12;y=35+Math.sin(t*2.2)*7;rot=5+Math.sin(t*1.8)*2}
+  // Octo moves as one connected character: no detached limb rotation.
+  const enter=smooth(prog(t,5.15,1.15));
+  let x=0,y=0,rot=0;
+  const drift=(a,b,p)=>lerp(a,b,smooth(p));
+  if(t<10.4){x=-118;y=drift(24,-10,prog(t,5.15,2.4));rot=-1.4}
+  else if(t<17.2){const p=prog(t,10.4,6.8);x=drift(-118,112,p);y=drift(-10,18,p);rot=drift(-1.4,1.8,p)}
+  else if(t<24.55){const p=prog(t,17.2,7.35);x=drift(112,-92,p);y=drift(18,-12,p);rot=drift(1.8,-1.5,p)}
+  else if(t<33){const p=prog(t,24.55,8.45);x=drift(-92,92,p);y=drift(-12,12,p);rot=drift(-1.5,1.2,p)}
+  else{x=80;y=4;rot=0.8}
+  const bob=Math.sin(t*1.35)*4.5;
+  const breathe=1+Math.sin(t*1.05)*.008;
   const visible=scene(t,5.2,40,.5);
-  show(E.octoWrap,visible,"translate("+x+"px,"+y+"px) rotate("+rot+"deg) scale("+lerp(.94,1.04,smooth(prog(t,5.2,1.2)))+")");
-  // Tentacles sway independently to make the character feel alive.
-  ["#legLL","#legLM","#legRM","#legRL"].forEach((sel,i)=>{const el=$(sel);if(el){const wave=Math.sin(t*4.2+i*1.35)* (t>5.2?7:0);el.style.transformOrigin="50% 0%";el.style.transform="rotate("+wave+"deg)" }});
+  show(E.octoWrap,visible,"translate("+x+"px,"+(y+bob+lerp(34,0,enter))+"px) rotate("+(rot+Math.sin(t*.8)*.55)+"deg) scale("+breathe+")");
+
+  // Expressions are led by eyes, brows and color, not frantic limb motion.
+  const angry=(t>13.1&&t<16.9)||(t>19.4&&t<21.7);
+  const concerned=t>17.2&&t<24.55;
+  const brows=$("#brows");
+  if(brows){$("#browL").style.opacity=angry?1:(concerned?.35:0);$("#browR").style.opacity=angry?1:(concerned?.35:0)}
+  if(angry){
+    $("#browL").setAttribute("d","M52 91 Q112 48 174 66");
+    $("#browR").setAttribute("d","M251 66 Q313 48 373 91");
+  }else{
+    $("#browL").setAttribute("d","M52 75 Q112 45 174 78");
+    $("#browR").setAttribute("d","M251 78 Q313 45 373 75");
+  }
+  E.octoWrap.style.setProperty("--octo-tone",angry?"#ff987f":(concerned?"#70d9df":"#41FAF1"));
   const surprised=$("#mSurprise"),happy=$("#mHappy"),sad=$("#mSad");
-  if(surprised)surprised.style.opacity=(t>10.4&&t<24.5)?1:0;
+  if(surprised)surprised.style.opacity=(t>10.4&&t<13.1)?1:0;
   if(happy)happy.style.opacity=(t>=24.55)?1:0;
-  if(sad)sad.style.opacity=(t>21.5&&t<24.5)?1:0;
-  const lookX=t<10.4?-8:(t<17.2?12:(t<24.55?-10:8));
-  const lookY=t<10.4?0:(t<24.55?-8:2);
-  ["#pupilL","#pupilR"].forEach((sel,i)=>{const p=$(sel);if(p)p.style.transform="translate("+(lookX+(i?2:0))+"px,"+lookY+"px)"});
+  if(sad)sad.style.opacity=concerned?1:0;
+  const lookX=t<10.4?-5:(t<17.2?7:(t<24.55?-6:5));
+  const lookY=t<10.4?1:(concerned?-4:2);
+  ["#pupilL","#pupilR"].forEach((sel,i)=>{const p=$(sel);if(p)p.style.transform="translate("+(lookX+(i?1.5:0))+"px,"+lookY+"px)"});
+
  }
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
