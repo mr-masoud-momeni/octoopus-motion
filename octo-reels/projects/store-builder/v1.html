@@ -262,21 +262,21 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
     const wobble=Math.sin(t*7+i)*1.5;
     show(el,p*fade,"translateX(-50%) translateY("+lerp(24,0,p)+"px) scale("+lerp(.42,1.06,p)+") rotate(calc(var(--rot) + "+wobble+"deg))");
   });
-  const sol=scene(t,25.0,37.8,.5);
+  const sol=scene(t,25.0,35.8,.35);
   show(E.solutionScene,sol,"translateY("+lerp(35,0,ease(t,25.0,.5))+"px)");
   for(const [el,at] of [[E.domainCheck,29.2],[E.cardCheck,31.8]]){
-    const p=ease(t,at,.35);show(el,p*(1-prog(t,37.25,.45)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
+    const p=ease(t,at,.35);show(el,p*(1-prog(t,35.45,.35)),"translateY("+lerp(28,0,p)+"px) scale("+lerp(.92,1,p)+")");
   }
-  const brand=scene(t,38.7,44.6,.55);
+  const brand=scene(t,38.7,42.7,.35);
   show(E.shopBrandScene,brand,"translateY("+lerp(30,0,ease(t,38.7,.55))+"px) scale("+lerp(.96,1,ease(t,19.25,.5))+")");
-  const qIn=smooth(prog(t,45.2,1.0));
+  const qIn=smooth(prog(t,43.2,.55));
   show(E.finalQuestion,qIn,"translate(-50%,"+lerp(42,0,qIn)+"px) scale("+lerp(.82,1,qIn)+")");
   const octoP=scene(t,.25,51.8,.5);
   const entrance=smooth(prog(t,.25,1.15));
   let y=lerp(210,0,entrance),rot=lerp(-1.5,0,entrance),scale=1.04;
   if(t>3&&t<9.2){y=4+Math.sin(t*3.2)*1.5;rot=Math.sin(t*2.6)*.45;scale=1.04}
   if(t>=9.2&&t<13.9){y=0;rot=Math.sin(t*1.1)*.25;scale=1.04}
-  const rise=smooth(prog(t,39.0,1.8));
+  const rise=smooth(prog(t,39.0,.85));
   if(t>=38.7){y=lerp(0,-190,rise);rot=lerp(Math.sin(t*1.0)*.2,0,rise);scale=1.04}
   show(E.octoWrap,octoP,"translateY("+y+"px) rotate("+rot+"deg) scale("+scale+")");
   const surprise=$("#mSurprise"),happyM=$("#mHappy"),sad=$("#mSad");
@@ -293,7 +293,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   {name:"whoosh",t:6.05},{name:"sweep",t:25.0},
   {name:"ding",t:29.55},{name:"ding",t:32.15},
   {name:"whoosh",t:38.8},{name:"pop",t:39.5},
-  {name:"ding",t:45.45}
+  {name:"ding",t:43.45}
  ];
  window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
  if(RENDER){E.controls.style.display="none";draw(parseFloat(new URLSearchParams(location.search).get("t")||"0"))}
