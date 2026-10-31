@@ -34,11 +34,31 @@ The module currently provides:
 - `sampleMouth(time, beats)`
 - `sampleOctoMotion(time, config)`
 
-These functions are the first extracted layer. The existing approved reel is
-left untouched while the values are verified. The next integration step is to
-connect this module to the reference reel's SVG rig, then add semantic actions
-(point, explain, react, think, wave) as layered pose tracks rather than
-replacing the base motion.
+The reference reel `octo-reels/template/reel-01.html` now imports this module
+and uses it for the character's entrance, landing, breathing, tentacle sway,
+gaze, blink, and mouth expression. Scene timing, camera, typography, monitor,
+cursor, cards, and sound-event timing remain in the reel.
+
+The SVG rig and its original numeric curves are intentionally preserved.
+Semantic actions (point, explain, react, think, wave) are the next layer; they
+must be added as layered pose tracks rather than replacing the base motion.
+
+Run the deterministic regression tests from the repository root:
+
+```bash
+node --test tests/octo-motion.test.mjs
+```
+
+For a visual smoke test from `octo-reels/template`:
+
+```bash
+node scripts/render.mjs --html reel-01.html --stills 0.2,0.8,1.2,4.5,10,21,30,35
+node scripts/render.mjs --html reel-01.html --video --out octo-engine-test.mp4
+```
+
+The first command creates stills in `octo-reels/template/out/stills`; the
+second renders a full test video. Compare the entrance/landing, gaze changes,
+blinks, and expressions with the previous `reel-01.html` output.
 
 ## Project contract (target)
 
