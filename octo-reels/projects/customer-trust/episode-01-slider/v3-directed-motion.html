@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اُکتوپوس | چطور سایتت مشتری رو فراری می‌ده؟ قسمت اول</title>
+<link rel="stylesheet" href="../../../template/fonts.css">
+<style>
+@font-face{font-family:Vazirmatn;src:url("../../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:block}
+:root{--navy:#0A192F;--cyan:#41FAF1;--muted:#B4BCD0;--cream:#F4F7FB;--green:#72F0B4;--orange:#FFB86B;--red:#FF6F78}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;isolation:isolate;transform-origin:center;background:radial-gradient(88% 66% at 50% 75%,#15365a 0%,var(--navy) 56%,#030914 100%)}
+.grid{position:absolute;inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.42;mask-image:radial-gradient(72% 60% at 50% 52%,#000,transparent)}
+.glow{position:absolute;left:50%;top:950px;width:1000px;height:900px;margin-left:-500px;border-radius:50%;background:radial-gradient(circle,rgba(65,250,241,.14),rgba(65,250,241,.035) 52%,transparent 72%);filter:blur(8px)}
+.brand{position:absolute;top:78px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.72}
+.brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
+.scene{position:absolute;left:64px;right:64px;text-align:center;opacity:0}
+.kicker{font-size:27px;font-weight:700;color:var(--muted)}
+.headline{font-size:66px;line-height:1.48;font-weight:900;letter-spacing:-.035em}
+.accent{color:var(--cyan);text-shadow:0 0 32px rgba(65,250,241,.16)}
+#titleScene{top:0;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 100px}
+#titleScene .series{font-size:29px;font-weight:800;letter-spacing:.02em;color:var(--cyan);margin-bottom:38px}
+#titleScene .episode{font-size:24px;color:#aebbd0;margin-bottom:22px}
+#titleScene h1{font-size:88px;line-height:1.55;font-weight:1000;letter-spacing:-.045em;text-align:center}
+#titleScene h1 span{display:block}
+#titleScene h1 b{color:var(--orange);text-shadow:0 0 45px #ffb86b30}
+#titleScene .ornament{width:150px;height:4px;margin-top:48px;border-radius:5px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+#hook{top:265px}
+#hook .kicker{margin-bottom:22px}
+#hook .headline span{display:block}
+#hook .headline b{color:var(--orange)}
+#messScene{top:330px}
+#messScene .mess-title{font-size:47px;line-height:1.5;font-weight:900;margin:0 auto 38px;max-width:900px}
+#messScene .mess-title b{color:var(--orange)}
+.slider-chaos{position:relative;width:850px;height:540px;margin:0 auto;border:2px solid rgba(255,184,107,.45);border-radius:32px;background:#10243c;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.browser{height:58px;display:flex;align-items:center;gap:10px;padding:0 24px;background:#172e49;border-bottom:1px solid rgba(255,255,255,.1);direction:ltr}
+.browser i{width:12px;height:12px;border-radius:50%;background:#73849a}
+.browser .address{margin-left:14px;color:#aebdd0;font:16px system-ui,sans-serif}
+.banner{position:absolute;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;border-radius:18px;font-weight:900;box-shadow:0 16px 32px rgba(0,0,0,.3);text-align:center}
+.banner small{font-size:18px;font-weight:700}
+.b1{top:88px;right:28px;width:380px;height:190px;background:linear-gradient(135deg,#ffb86b,#ef765f);color:#351b18;transform:rotate(-4deg)}
+.b2{top:115px;left:25px;width:365px;height:170px;background:linear-gradient(135deg,#41faf1,#3c9ab0);color:#06242e;transform:rotate(5deg)}
+.b3{top:300px;right:75px;width:340px;height:170px;background:linear-gradient(135deg,#9c8cff,#6758b9);color:white;transform:rotate(3deg)}
+.b4{top:310px;left:55px;width:390px;height:165px;background:linear-gradient(135deg,#f16b87,#a72f5a);color:white;transform:rotate(-5deg)}
+.banner strong{font-size:34px}
+.banner small{font-size:19px}
+.flash{position:absolute;top:240px;left:50%;transform:translateX(-50%) rotate(-7deg);padding:14px 24px;border-radius:14px;background:#fff;color:#18263a;font-size:27px;font-weight:1000;box-shadow:0 12px 35px #0008;z-index:4}
+#messScene .caption{font-size:29px;font-weight:900;margin-top:32px;color:#ffd5a8}
+#confuseScene{top:390px}
+#confuseScene .confuse-title{font-size:48px;line-height:1.55;font-weight:900;max-width:900px;margin:0 auto 32px}
+#confuseScene .confuse-title b{color:var(--orange)}
+.customer{width:790px;margin:0 auto;padding:30px;border-radius:30px;background:linear-gradient(145deg,rgba(20,47,74,.98),rgba(7,20,37,.98));border:1px solid rgba(255,111,120,.45);box-shadow:0 25px 70px #0006}
+.customer-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff20;padding-bottom:20px}
+.customer-top strong{font-size:27px}
+.customer-top span{font-size:18px;color:var(--muted)}
+.customer-options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.option{padding:20px 12px;border-radius:16px;background:#ffffff0c;border:1px solid #ffffff18;font-size:24px;font-weight:800}
+.cursor{position:absolute;width:70px;height:70px;border:5px solid white;border-radius:50%;box-shadow:0 0 0 12px #ffffff22;left:180px;top:1040px;opacity:0}
+.leave{margin:30px auto 0;color:var(--red);font-size:30px;font-weight:900;opacity:0}
+#fixScene{top:280px}
+#fixScene .fix-title{font-size:48px;line-height:1.5;font-weight:900;margin-bottom:28px}
+#fixScene .fix-title b{color:var(--green)}
+.clean-hero{position:relative;width:850px;height:600px;margin:0 auto;border:1px solid rgba(65,250,241,.35);border-radius:32px;overflow:hidden;background:linear-gradient(145deg,#142e49,#071629);box-shadow:0 30px 80px #0006;text-align:right}
+.clean-nav{height:68px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;background:#ffffff08;border-bottom:1px solid #ffffff18}
+.clean-nav strong{font-size:25px}.clean-nav span{font-size:18px;color:#c0cede}
+.clean-content{display:flex;align-items:center;gap:20px;padding:42px 34px}
+.clean-copy{flex:1}
+.clean-copy small{font-size:18px;color:var(--cyan);font-weight:800}
+.clean-copy h3{font-size:39px;line-height:1.5;margin-top:12px}
+.clean-copy p{font-size:20px;color:var(--muted);margin-top:12px}
+.clean-cta{display:inline-flex;margin-top:24px;padding:16px 26px;border-radius:14px;background:var(--cyan);color:#06202c;font-size:21px;font-weight:900}
+.product-visual{width:300px;height:330px;border-radius:24px;background:radial-gradient(circle at 50% 35%,#477b91,#183a54 68%);display:grid;place-items:center;flex-shrink:0}
+.product-visual svg{width:190px;height:230px}
+.clean-note{position:absolute;bottom:22px;left:28px;color:var(--green);font-size:20px;font-weight:800}
+#fixScene .fix-caption{margin-top:28px;font-size:28px;color:#d7e3ef;font-weight:800}
+#outroScene{top:280px}
+#outroScene .outro-title{font-size:52px;line-height:1.5;font-weight:900}
+#outroScene .outro-title b{color:var(--cyan)}
+#outroScene .outro-sub{margin-top:22px;font-size:29px;color:var(--muted);line-height:1.7}
+#signature{position:absolute;top:920px;left:50%;width:850px;transform:translate(-50%,30px) scale(.92);opacity:0;z-index:5}
+.signature-line{display:flex;align-items:center;justify-content:center;gap:20px;padding:24px 28px;border-radius:24px;background:linear-gradient(135deg,rgba(65,250,241,.16),rgba(65,250,241,.04));border:1px solid rgba(65,250,241,.55);font-size:34px;font-weight:900;text-align:center;box-shadow:0 18px 55px #0005}
+.check{width:62px;height:62px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#062117;font-size:42px;font-weight:1000;box-shadow:0 0 28px #72f0b455}
+.next-line{margin-top:22px;display:flex;align-items:center;justify-content:center;gap:16px;font-size:27px;font-weight:800;color:#d9e5f2}
+.next-line .check{width:46px;height:46px;font-size:31px}
+#octoWrap{position:absolute;left:50%;top:1160px;width:460px;margin-left:-230px;opacity:0;transform:translateY(180px) rotate(5deg) scale(.92);transform-origin:50% 100%;filter:drop-shadow(0 25px 38px rgba(0,0,0,.34)) drop-shadow(0 0 28px rgba(65,250,241,.1));z-index:3}
+#octo{display:block;width:100%;height:auto;overflow:visible}#octoWrap{will-change:transform,filter}#browL,#browR{fill:none;stroke:#08283b;stroke-width:13;stroke-linecap:round;opacity:0;transition:opacity .25s ease}
+.octo-body{fill:var(--octo-tone,var(--cyan));transition:fill .55s ease}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
+#controls{position:fixed;z-index:20;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
+#controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
+</style></head>
+<body>
+<div id="stage">
+ <div class="grid" id="grid"></div><div class="glow" id="glow"></div>
+ <div class="brand"><i></i><span>octoopus.ir</span></div>
+ <section id="titleScene" class="scene"><div class="episode">سری ریلزهای اُکتوپوس</div><div class="series">چطور سایتت مشتری رو فراری می‌ده؟</div><h1><span>قسمت</span><span><b>اول</b></span></h1><div class="ornament"></div></section>
+ <section id="hook" class="scene">
+  <div class="kicker">چطور سایتت مشتری رو فراری می‌ده؟ · قسمت اول</div>
+  <h1 class="headline"><span>اسلایدر سایتت</span><span>ویترین فروشگاهه یا</span><span><b>انبار تبلیغات؟</b></span></h1>
+ </section>
+ <section id="messScene" class="scene">
+  <h2 class="mess-title">تخفیف ویژه! ارسال رایگان!<br><b>جشنواره فروش! محصولات جدید!</b></h2>
+  <div class="slider-chaos">
+   <div class="browser"><i></i><i></i><i></i><span class="address">yourstore.ir</span></div>
+   <div class="banner b1"><strong>تخفیف ویژه</strong><small>فقط تا امشب!</small></div>
+   <div class="banner b2"><strong>ارسال رایگان</strong><small>برای همه سفارش‌ها</small></div>
+   <div class="banner b3"><strong>کالکشن جدید</strong><small>همین حالا ببین</small></div>
+   <div class="banner b4"><strong>جشنواره فروش</strong><small>فرصت رو از دست نده</small></div>
+   <div class="flash">همین الان بخر!</div>
+  </div>
+  <div class="caption">همه می‌خوان دیده بشن؛ اما آخرش چی؟</div>
+ </section>
+ <section id="confuseScene" class="scene">
+  <h2 class="confuse-title">هیچ‌کدوم درست دیده نمی‌شن!<br><b>مشتری نمی‌دونه به چی توجه کنه.</b></h2>
+  <div class="customer">
+   <div class="customer-top"><strong>فروشگاه اینترنتی</strong><span>در حال بررسی محصولات…</span></div>
+   <div class="customer-options">
+    <div class="option">تخفیف ویژه؟</div><div class="option">ارسال رایگان؟</div>
+    <div class="option">محصول جدید؟</div><div class="option">جشنواره؟</div>
+   </div>
+  </div>
+  <div class="leave" id="leaveText">بی‌خیال… از اینجا می‌رم!</div>
+ </section>
+ <section id="fixScene" class="scene">
+  <h2 class="fix-title">راه‌حل؟ ساده‌ش کن.<br><b>یک پیام اصلی، یک پیشنهاد، یک دکمه.</b></h2>
+  <div class="clean-hero">
+   <div class="clean-nav"><strong>فروشگاه تو</strong><span>محصولات　 درباره ما　 تماس</span></div>
+   <div class="clean-content">
+    <div class="clean-copy">
+     <small>پیشنهاد منتخب این هفته</small>
+     <h3>محصولی که<br>دنبالش بودی</h3>
+     <p>یک پیام روشن که به مشتری می‌گه چرا باید بیشتر ببینه.</p>
+     <span class="clean-cta">مشاهده محصولات ←</span>
+    </div>
+    <div class="product-visual">
+     <svg viewBox="0 0 190 230" fill="none" aria-hidden="true"><path d="M47 67h96l-10 126H57L47 67Z" fill="#41FAF1" fill-opacity=".17" stroke="#9CFFF8" stroke-width="4"/><path d="M67 69V51a28 28 0 0 1 56 0v18" stroke="#9CFFF8" stroke-width="5" stroke-linecap="round"/><path d="M72 119h46" stroke="#9CFFF8" stroke-width="4" stroke-linecap="round"/></svg>
+    </div>
+   </div>
+   <div class="clean-note">✓ یک مسیر واضح برای خرید</div>
+  </div>
+  <div class="fix-caption">ویترین خوب، انتخاب رو برای مشتری راحت می‌کنه.</div>
+ </section>
+ <section id="outroScene" class="scene">
+  <h2 class="outro-title">تو روی کسب‌وکارت تمرکز کن؛<br><b>سایتت با ما!</b></h2>
+  <div class="outro-sub">طراحی و توسعه فروشگاهت رو به اُکتوپوس بسپار.</div>
+ </section>
+ <div id="signature">
+  <div class="signature-line"><span class="check">✓</span><span>مشکل سایتت رو بسپار به ما!</span></div>
+  <div class="next-line"><span class="check">✓</span><span>قسمت بعد، یه مشکل دیگه رو حل می‌کنیم.</span></div>
+ </div>
+ <div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+    <g id="charInner">
+      <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+       <!-- چشم راست -->
+      <g id="eyeR">
+        <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilR">
+          <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+       <!-- چشم چپ -->
+      <g id="eyeL">
+        <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+        <g id="pupilL">
+          <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+          <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+          <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+        </g>
+      </g>
+      <g id="brows">
+        <path id="browL" d="M52 75 Q112 45 174 78"/>
+        <path id="browR" d="M251 78 Q313 45 373 75"/>
+      </g>
+       <!-- بازوها -->
+      <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+      <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+      <path id="legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+      <path id="legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+       <!-- دهان: سه حالت -->
+      <g id="mouth">
+        <g id="mSurprise" opacity="0">
+          <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+        </g>
+        <path id="mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+        <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+      </g>
+    </g>
+  </svg></div>
+</div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="35" step=".01" value="0"><span id="time">0.00s</span></div>
+<script>
+(()=>{
+ const RENDER=new URLSearchParams(location.search).has("render"),DURATION=40,FPS=30,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+ const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,p)=>a+(b-a)*p;
+ const prog=(t,a,d)=>clamp((t-a)/d),out=p=>1-Math.pow(1-p,3),expo=p=>p>=1?1:1-Math.pow(2,-10*p);
+ const smooth=p=>{p=clamp(p);return p*p*p*(p*(p*6-15)+10)};
+ const back=(p,s=1.15)=>1+(s+1)*Math.pow(p-1,3)+s*Math.pow(p-1,2);
+ const $id=id=>document.getElementById(id);
+ const E=Object.fromEntries(["stage","grid","glow","titleScene","hook","messScene","confuseScene","fixScene","outroScene","signature","octoWrap","controls","scrub","time","play"].map(id=>[id,$id(id)]));
+ const limbs=[["legLL",31.89,0,-1],["legLM",152.34,.8,-1],["legRM",272.93,1.6,1],["legRL",393.3,2.4,1]].map(([id,pivot,phase,dir])=>({node:$id(id),pivot,phase,dir}));
+ const eyes=[$id("eyeL"),$id("eyeR")],pupils=[$id("pupilL"),$id("pupilR")];
+ const beats=[
+  {id:"titleScene",a:0,b:5.6,from:34},
+  {id:"hook",a:5.35,b:10.65,from:48},
+  {id:"messScene",a:10.4,b:17.45,from:52},
+  {id:"confuseScene",a:17.2,b:24.85,from:48},
+  {id:"fixScene",a:24.55,b:33.15,from:48},
+  {id:"outroScene",a:32.85,b:40,from:40}
+ ];
+ const tracks={
+  camera:[{t:0,s:1,x:0,y:0},{t:5.35,s:1.035,x:0,y:-12},{t:10.4,s:1.015,x:0,y:0},{t:12.1,s:1.065,x:0,y:-18},{t:17.2,s:1.025,x:0,y:0},{t:20.1,s:1.055,x:0,y:12},{t:24.55,s:1.02,x:0,y:0},{t:28.3,s:1.055,x:0,y:-8},{t:32.85,s:1.025,x:0,y:0},{t:35.1,s:1,x:0,y:0}],
+  char:[{t:5.2,x:-118,y:12,s:.91,r:-2},{t:6.2,x:-118,y:0,s:.91,r:0},{t:10.4,x:-118,y:-4,s:.91,r:-1},{t:12.0,x:105,y:12,s:.88,r:2},{t:17.2,x:105,y:8,s:.88,r:1},{t:19.0,x:-90,y:-10,s:.9,r:-2},{t:24.55,x:-90,y:-5,s:.9,r:-1},{t:26.1,x:88,y:8,s:.88,r:2},{t:32.85,x:88,y:5,s:.88,r:1},{t:34.2,x:0,y:0,s:.94,r:0},{t:40,x:0,y:0,s:.94,r:0}]
+ };
+ function sample(list,t){if(t<=list[0].t)return {...list[0]};for(let i=0;i<list.length-1;i++){const a=list[i],b=list[i+1];if(t<=b.t){const p=smooth(prog(t,a.t,b.t-a.t));const o={};for(const k of Object.keys(b))o[k]=k==="t"?t:typeof b[k]==="number"?lerp(a[k],b[k],p):b[k];return o}}return {...list[list.length-1]}}
+ function scene(t,a,b,fade=.48){return out(prog(t,a,.42))*(1-prog(t,b-fade,fade))}
+ function setScene(node,alpha,dy){node.style.opacity=alpha;node.style.transform="translate3d(0,"+dy+"px,0)"}
+ function draw(input){
+  const t=clamp(Number(input)||0,0,DURATION);
+  E.grid.style.transform="translate3d("+Math.sin(t*.16)*12+"px,"+(-t*5)+ "px,0)";
+  E.glow.style.transform="scale("+(1+Math.sin(t*.72)*.025)+")";
+  E.glow.style.opacity=.8+Math.sin(t*.72)*.08;
+  for(const b of beats){const p=scene(t,b.a,b.b);setScene($id(b.id),p,lerp(b.from,0,out(prog(t,b.a,.55))))}
+  const sig=out(prog(t,35,.5));E.signature.style.opacity=sig;E.signature.style.transform="translate(-50%,"+lerp(36,0,sig)+"px) scale("+lerp(.92,1,back(prog(t,35,.5)))+")";
+  const leave=$id("leaveText"),leaveP=out(prog(t,22,.38))*(1-prog(t,24.2,.25));leave.style.opacity=leaveP;leave.style.transform="translateY("+lerp(20,0,leaveP)+"px)";
+  // Animate each banner as its own graphic layer; all values are derived only from time.
+  $$(".banner").forEach((node,i)=>{const delay=[10.85,11.18,11.52,11.86][i],p=back(prog(t,delay,.58),1.25);const fade=1-prog(t,16.95,.35);node.style.opacity=clamp(p*1.5)*fade;node.style.transform="translate3d(0,"+lerp(76,0,p)+"px,0) rotate("+([ -4,5,3,-5 ][i]*(1-.14*p))+"deg) scale("+lerp(.82,1,p)+")"});
+  const flash=$(".flash"),fp=back(prog(t,12.5,.42),1.35);flash.style.opacity=clamp(fp*1.4)*(1-prog(t,16.8,.35));flash.style.transform="translateX(-50%) translateY("+lerp(40,0,fp)+"px) rotate(-7deg) scale("+lerp(.8,1,fp)+")";
+  // Character entrance and landing: spring overshoot, squash, then a calm breathing cycle.
+  const enter=prog(t,5.18,1.12),land=prog(t,6.0,.42),chr=sample(tracks.char,t);
+  const entranceY=lerp(250,0,back(enter,1.12));
+  const settle=Math.sin(Math.PI*land)*.065;
+  const breath=Math.sin((t-6)*1.65)*.006;
+  const bob=Math.sin((t-6)*1.05)*3.2;
+  const visible=scene(t,5.15,40,.45);
+  E.octoWrap.style.opacity=visible;
+  E.octoWrap.style.transform="translate3d("+chr.x+"px,"+(chr.y+entranceY+bob)+"px,0) rotate("+chr.r+"deg) scale("+chr.s*(1+settle*.45+breath)+","+chr.s*(1-settle+breath)+")";
+  // Four connected tentacles: small independent rotations around their actual attachment line.
+  const activity= t<10.4?1:t<17.2?.8:t<24.55?1.05:t<33?.82:.65;
+  limbs.forEach((l,i)=>{const wave=Math.sin(t*1.72+l.phase)*1.45*activity;const accent=(i===0||i===3?Math.sin(t*.9+l.phase)*.38:0);l.node.setAttribute("transform","rotate("+ (wave*l.dir+accent).toFixed(3)+" "+l.pivot+" 308.65)")});
+  // Face performance: intentional gaze targets, blinks and expression changes.
+  const gaze=t<10.4?[-.35,-.05]:t<17.2?[.55,-.2]:t<24.55?[-.55,-.35]:t<33?[.42,-.12]:[0,0];
+  pupils.forEach((p,i)=>p.setAttribute("transform","translate("+((gaze[0]*8)+(i?1:0))+" "+(gaze[1]*7)+")"));
+  let blink=1;for(const bt of [6.7,9.85,13.65,17.85,21.8,26.9,30.9,35.8,38.4]){const q=(t-bt)/.15;if(q>0&&q<1)blink=Math.min(blink,1-.94*Math.sin(Math.PI*q))}
+  eyes.forEach((e,i)=>{const c=i?[302.82,157.74]:[114.81,157.74];e.setAttribute("transform","translate("+c[0]+" "+c[1]+") scale(1 "+blink+") translate("+(-c[0])+" "+(-c[1])+")")});
+  const surprise=t>10.4&&t<13.2,sad=t>=17.2&&t<24.55,happy=t>=24.55;
+  $id("mSurprise").style.opacity=surprise?1:0;$id("mSad").style.opacity=sad?1:0;$id("mHappy").style.opacity=happy||(!surprise&&!sad)?1:0;
+  const concerned=sad|| (t>13.2&&t<17.2);
+  $id("browL").style.opacity=concerned?1:0;$id("browR").style.opacity=concerned?1:0;
+  $id("browL").setAttribute("d",concerned?"M52 91 Q112 48 174 66":"M52 75 Q112 45 174 78");
+  $id("browR").setAttribute("d",concerned?"M251 66 Q313 48 373 91":"M251 78 Q313 45 373 75");
+  E.octoWrap.style.setProperty("--octo-tone",concerned?"#70d9df":happy?"#72F0B4":"#41FAF1");
+  // Deterministic camera track, composed with viewport fit.
+  const cam=sample(tracks.camera,t);E.stage.style.transform="scale("+FIT+") translate("+cam.x+"px,"+cam.y+"px) scale("+cam.s+")";
+ }
+ let FIT=1;
+ window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
+ window.OCTO_EVENTS=[
+  {name:"rise",t:5.65},{name:"whoosh",t:10.4},{name:"pop",t:10.85},{name:"pop",t:11.18},{name:"pop",t:11.52},{name:"pop",t:11.86},{name:"sweep",t:17.2},{name:"pop",t:22},
+  {name:"whoosh",t:24.55},{name:"ding",t:25},{name:"whoosh",t:32.85},{name:"pop",t:35},{name:"ding",t:35.45},{name:"ding",t:37.3}
+ ];
+ window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
+ if(RENDER){E.controls.style.display="none";draw(new URLSearchParams(location.search).get("t")||0)}
+ else{
+  const fit=()=>{FIT=Math.min(innerWidth/1080,(innerHeight-54)/1920);draw(offset)};let playing=true,offset=0,start=performance.now();
+  const tick=now=>{if(playing){offset=((now-start)/1000)%DURATION;E.scrub.value=offset}draw(offset);E.time.textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)};
+  fit();addEventListener("resize",fit);requestAnimationFrame(tick);
+  E.play.onclick=()=>{playing=!playing;E.play.textContent=playing?"Pause":"Play";if(playing)start=performance.now()-offset*1000};
+  E.scrub.oninput=()=>{offset=Number(E.scrub.value);if(playing)start=performance.now()-offset*1000;draw(offset)};
+  $id("restart").onclick=()=>{offset=0;start=performance.now();draw(0)};
+ }
+})();
+</script></body></html>
