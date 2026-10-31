@@ -95,7 +95,7 @@ const panels=[
 ];
 function setInfo(p,alpha){$("num").textContent=p.num;$("infoTitle").textContent=p.title;$("infoText").textContent=p.text;info.style.opacity=alpha;info.style.transform="translateY("+lerp(24,0,alpha)+"px)"}
 function draw(t){
- time=clamp(t);const fit=Math.min(innerWidth/1080,(innerHeight-48)/1920);scale=fit;stage.style.transform="scale("+fit+")";
+ time=Math.max(0,Math.min(D,Number(t)||0));const fit=Math.min(innerWidth/1080,(innerHeight-48)/1920);scale=fit;stage.style.transform="scale("+fit+")";
  const c=1-ramp(time,4.25,5.0);cover.style.opacity=c;cover.style.transform="translateY("+lerp(0,-32,ramp(time,4.0,4.9))+"px)";
  const m=ramp(time,4.2,5.7);monitor.style.opacity=m;monitor.style.transform="translateX(-50%) perspective(1800px) rotateY(-5deg) scale("+lerp(.88,1,m)+")";
  const active=panels.find(p=>time>=p.a&&time<p.b);
@@ -126,7 +126,7 @@ function draw(t){
 }
 window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"rise",t:1.6},{name:"whoosh",t:4.2},{name:"pop",t:7.1},{name:"sweep",t:13},{name:"sweep",t:19},{name:"pop",t:25},{name:"ding",t:30.8}];
 const ready=()=>{if(page.complete&&page.naturalWidth){pageHeight=page.getBoundingClientRect().height;screenHeight=screen.clientHeight;draw(time)}else page.addEventListener("load",()=>{pageHeight=page.getBoundingClientRect().height;screenHeight=screen.clientHeight;draw(time)},{once:true})};document.fonts.ready.then(ready);ready();
-function tick(now){if(!playing)return;const t=Math.min(D,(now-start)/1000);draw(t);if(t>=D){playing=false;$("play").textContent="Play";return}raf=requestAnimationFrame(tick)}
+function tick(){if(!playing)return;const t=Math.min(D,(performance.now()-start)/1000);draw(t);if(t>=D){playing=false;$("play").textContent="Play";return}raf=requestAnimationFrame(tick)}
 $("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing){start=performance.now()-time*1000;raf=requestAnimationFrame(tick)}else cancelAnimationFrame(raf)};
 $("restart").onclick=()=>{playing=false;cancelAnimationFrame(raf);$("play").textContent="Play";draw(0)};
 $("scrub").oninput=e=>{playing=false;cancelAnimationFrame(raf);$("play").textContent="Play";draw(+e.target.value)};
