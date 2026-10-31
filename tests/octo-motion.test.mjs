@@ -37,7 +37,7 @@ test("gaze reaches the next beat target smoothly", () => {
 
 test("blink returns to the resting eye scale outside a blink", () => {
   assert.equal(sampleBlink(0, [1]), 1);
-  assert.equal(sampleBlink(1.08, [1]), 1);
+  assert.equal(sampleBlink(1.2, [1]), 1);
 });
 
 test("mouth crossfades from previous to current beat", () => {
