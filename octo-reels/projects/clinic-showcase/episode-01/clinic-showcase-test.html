@@ -146,7 +146,7 @@ const limbs=[
 {rig:$("legRMRig"),key:"RM",pivot:272.93},
 {rig:$("legRLRig"),key:"RL",pivot:393.3}];
 const pupils=[$("pupilL"),$("pupilR")],eyes=[[$("eyeL"),114.81,157.74],[$("eyeR"),302.82,157.74]],mouth={happy:$("mHappy"),sad:$("mSad"),surprise:$("mSurprise")};
-const shapes=[{x:260,y:890,w:650},{x:455,y:900,w:570},{x:330,y:850,w:640},{x:470,y:895,w:560},{x:240,y:860,w:650},{x:260,y:880,w:650}];
+
 const callData=p=>{$("callIndex").innerHTML=p.index;$("callTitle").innerHTML=p.title;$("callText").textContent=p.text};
 
 let pageH=0,screenH=850,time=0,playing=false,raf=0,start=0;
@@ -158,8 +158,7 @@ headline.style.opacity=out(time/.8)*(1-ramp(time,3.3,4.1));headline.style.transf
 const siteIn=out((time-3.3)/1.05),siteOut=1-ramp(time,20.4,21.3);site.style.opacity=siteIn*siteOut;site.style.transform="translateY("+lerp(95,0,siteIn)+"px) scale("+lerp(.94,1,siteIn)+")";
 const maxScroll=Math.max(0,pageH-screenH),panel=panels.find(x=>time>=x.a&&time<x.b);
 if(panel){const q=ramp(time,panel.a,panel.a+.85),i=panels.indexOf(panel),prev=i?panels[i-1].scroll:0;siteImage.style.transform="translateY("+(-lerp(maxScroll*prev,maxScroll*panel.scroll,q))+"px)";callData(panel);const v=out((time-panel.a)/.6)*(1-ramp(time,panel.b-.45,panel.b));call.style.opacity=v;call.style.transform="translateX("+lerp(-55,0,out((time-panel.a)/.65))+"px)"}else call.style.opacity=0;
-const octoFade=out((time-.1)/1.05)*(1-ramp(time,22.1,23)),scene=shapes[Math.min(5,Math.floor(time/4.2))];
-octo.style.opacity=octoFade;octo.style.left=lerp(260,scene.x,out((time-3.6)/1.2))+"px";octo.style.top=lerp(1960,scene.y,out((time-.15)/1.2))+"px";octo.style.width=lerp(650,scene.w,out((time-3.6)/1.2))+"px";
+octo.style.opacity=out((time-.1)/1.05)*(1-ramp(time,20.8,21.5));octo.style.left="340px";octo.style.top="1000px";octo.style.width="400px";
 char.setAttribute("transform","translate(0 "+(pose.entrance.y+pose.idle.breathY)+") translate(212.6 471.93) scale("+pose.entrance.scaleX+" "+((1-pose.entrance.squash)*pose.idle.breathScale)+") translate(-212.6 -471.93)");
 const angles=pose.idle.tentacleAngles;
 limbs.forEach((limb,index)=>limb.rig.setAttribute("transform","rotate("+angles[index].toFixed(2)+" "+limb.pivot+" 308.65)"));
