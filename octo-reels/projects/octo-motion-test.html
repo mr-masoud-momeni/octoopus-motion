@@ -334,7 +334,7 @@ const POINTING_PATH=`M 361.41 308.65
  C 410 259, 406 294, 390 315
  C 380 329, 368 322, 361.41 308.65 Z`;
 function mixPath(from,to,amount){
- const tokenPattern=/[A-Za-z]|-?\\d*\\.?\\d+(?:e[-+]?\\d+)?/gi;
+ const tokenPattern=/[A-Za-z]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi;
  const a=from.match(tokenPattern)||[], b=to.match(tokenPattern)||[];
  if(a.length!==b.length) return amount<.5?from:to;
  return a.map((token,index)=>{
