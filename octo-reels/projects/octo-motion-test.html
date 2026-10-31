@@ -19,7 +19,6 @@ body{margin:0;min-height:100vh;background:#05080f;color:#eef4ff;font-family:Vazi
 #charWrap{position:absolute;width:78.7%;left:10.65%;top:40.6%;transform-origin:50% 50%;z-index:2}
 #octo{display:block;width:100%;height:auto;overflow:visible}
 .octo-body{fill:var(--cyan)}.octo-ring{fill:#071321}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
-#legLL,#legLM,#legRM,#legRL{transform-box:fill-box;transform-origin:50% 0%}
 .panel{border:1px solid #ffffff1c;background:linear-gradient(145deg,#14243cdd,#0b1526ee);border-radius:20px;padding:22px;box-shadow:0 18px 50px #0005}
 h1{font-size:22px;margin:0 0 6px}p{color:var(--muted);font-size:13px;line-height:1.9;margin:0 0 22px}
 .controls{display:grid;gap:16px}
@@ -45,7 +44,6 @@ select{background:#0a192f;color:#eef4ff;border:1px solid #ffffff2b;border-radius
       <div class="stage-label">OCTOOPUS · MOTION ENGINE</div>
       <div id="charWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
       <g id="charInner">
-        <path id="tentacleTest" class="octo-body" d="M0 302 H63.78 V430 C63.78 453.1 49.5 471.93 31.89 471.93 C14.28 471.93 0 453.1 0 430 Z"/>
         <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
 
         <!-- چشم راست -->
@@ -72,7 +70,7 @@ select{background:#0a192f;color:#eef4ff;border:1px solid #ffffff2b;border-radius
         <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
         <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
         <path id="legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
-        
+        <path id="legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
 
         <!-- دهان: سه حالت -->
         <g id="mouth">
@@ -296,8 +294,6 @@ const $=id=>document.getElementById(id);
 const el={
   char:$("charInner"),wrap:$("charWrap"),
   pupilL:$("pupilL"),pupilR:$("pupilR"),eyeL:$("eyeL"),eyeR:$("eyeR"),
-  legs:{LM:$("legLM"),RM:$("legRM"),RL:$("legRL")},
-  tentacleTest:$("tentacleTest"),
   mouth:{happy:$("mHappy"),sad:$("mSad"),surprise:$("mSurprise")}
 };
 const EYE={L:[114.81,157.74],R:[302.82,157.74]};
@@ -318,29 +314,6 @@ function draw(t){
  const sy=(1-pose.entrance.squash)*pose.idle.breathScale;
  el.char.setAttribute("transform",
   `translate(0 ${pose.entrance.y+pose.idle.breathY}) translate(212.6 471.93) scale(${sx} ${sy}) translate(-212.6 -471.93)`);
- ["LM","RM","RL"].forEach((key,i)=>{
-  const pivots={LM:152.34,RM:272.93,RL:393.3};
-  el.legs[key].setAttribute("transform",`rotate(${pose.idle.tentacleAngles[i].toFixed(2)} ${pivots[key]} 308.65)`);
- });
- // Smooth multi-station deformation: the root remains anchored beneath the body.
- const wave=(y)=>Math.sin(t*1.72-(y-302)/72)*0.82+Math.sin(t*0.83)*0.18;
- const stations=[
-  {y:302,w:31.89,a:0},{y:340,w:31.2,a:0.9},{y:380,w:30.4,a:2.8},
-  {y:420,w:29.2,a:5.2},{y:450,w:23.0,a:6.5},{y:471.93,w:0,a:4.2}
- ];
- const left=stations.map(p=>({x:31.89-p.w+p.a*wave(p.y),y:p.y}));
- const right=stations.slice().reverse().map(p=>({x:31.89+p.w+p.a*wave(p.y),y:p.y}));
- const smooth=(pts)=>{
-  let d=`M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
-  for(let i=0;i<pts.length-1;i++){
-   const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
-   const c1={x:p1.x+(p2.x-p0.x)/6,y:p1.y+(p2.y-p0.y)/6};
-   const c2={x:p2.x-(p3.x-p1.x)/6,y:p2.y-(p3.y-p1.y)/6};
-   d+=` C ${c1.x.toFixed(2)} ${c1.y.toFixed(2)}, ${c2.x.toFixed(2)} ${c2.y.toFixed(2)}, ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
-  }
-  return d;
- };
- el.tentacleTest.setAttribute("d",smooth(left)+" "+smooth(right).replace(/^M[^C]+/,"L")+" Z");
  const gx=pose.pupilOffset.x,gy=pose.pupilOffset.y;
  el.pupilL.setAttribute("transform",`translate(${gx} ${gy})`);
  el.pupilR.setAttribute("transform",`translate(${gx} ${gy})`);
