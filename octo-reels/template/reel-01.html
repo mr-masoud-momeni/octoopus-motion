@@ -489,7 +489,7 @@
   <button id="restartBtn">Restart</button>
 </div>
 
-<script>
+<script type="module">
 /* =====================================================================
    OCTOOPUS · REEL ENGINE v2
    کل انیمیشن یک تابع خالص از زمان است: draw(t) — هیچ stateی نگه
@@ -500,6 +500,10 @@
    تایم‌لاین همه‌چیز نسبت به «بیت‌ها» تعریف می‌شود (b + o) تا با
    جابه‌جا شدن صدا، کل صحنه خودکار جابه‌جا شود.
    ===================================================================== */
+
+import {
+  sampleOctoMotion
+} from "../../engine/octo/motion.mjs";
 
 const RENDER = new URLSearchParams(location.search).has("render");
 const params = new URLSearchParams(location.search);
@@ -874,46 +878,17 @@ const CX = 212.6, CY = 471.93;
 const EYE = { L: [114.81, 157.74], R: [302.82, 157.74] };
 let FIT = 1;
 
-function mouthWeights(t) {
-  const w = { happy: 0, sad: 0, surprise: 0 };
-  let idx = 0;
-  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) idx = i;
-  const cur = CFG.beats[idx];
-  const p = clamp((t - cur.t0) / 0.1);
-  w[cur.mouth] = p;
-  if (idx > 0) w[CFG.beats[idx - 1].mouth] += 1 - p;
-  return w;
-}
-
-function gazeAt(t) {
-  let idx = 0;
-  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) idx = i;
-  const cur = CFG.beats[idx];
-  if (idx === 0) return cur.gaze;
-  const p = eInOutCubic(clamp((t - cur.t0) / 0.45));
-  const prev = CFG.beats[idx - 1].gaze;
-  return [lerp(prev[0], cur.gaze[0], p), lerp(prev[1], cur.gaze[1], p)];
-}
-
-// پلک زدن بر اساس طول هر بیت ساخته می‌شود تا با صدا جابه‌جا شود
-function blinkTimes() {
-  const out = [...(CFG.blinks || [])];
-  for (const b of CFG.beats) {
-    const len = Math.max(0.6, b.t1 - b.t0);
-    out.push(b.t0 + Math.min(0.50, len * 0.18));
-    out.push(b.t0 + Math.min(0.85, len * 0.32));
-    out.push(b.t0 + len * 0.74);
-  }
-  return out;
-}
-
-function blinkAt(t) {
-  let sy = 1;
-  for (const bt of blinkTimes()) {
-    const p = (t - bt) / 0.16;
-    if (p > 0 && p < 1) sy = Math.min(sy, 1 - 0.94 * Math.sin(Math.PI * p));
-  }
-  return sy;
+// حرکت پایهٔ اکتو از موتور مشترک خوانده می‌شود؛ تایمینگ همچنان از بیت‌های همین ریل می‌آید.
+function octoPoseAt(t) {
+  return sampleOctoMotion(t, {
+    entrance: {
+      start: CFG.rise.start,
+      duration: CFG.rise.dur,
+      from: CFG.rise.from
+    },
+    beats: CFG.beats,
+    blinks: CFG.blinks
+  });
 }
 
 // نویز قطعی برای فلیکر صفحهٔ سفید
@@ -946,14 +921,14 @@ function draw(t) {
   el.stage.style.transform =
     `scale(${FIT}) translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px) scale(${cs.toFixed(4)})`;
 
-  /* --- کاراکتر: بالا آمدن + تنفس + فشردگی --- */
-  const riseP = prog(t, CFG.rise.start, CFG.rise.dur);
-  const riseY = lerp(CFG.rise.from, 0, eOutBack(riseP, 1.05));
-  const breath = Math.sin(t * 1.85) * 5;
-  const landAt = CFG.rise.start + CFG.rise.dur * 0.82;
-  const squash = 0.075 * Math.sin(Math.PI * prog(t, landAt, 0.4));
-  const sy = (1 - squash) * (1 + Math.sin(t * 1.85) * 0.006);
-  const sx = 1 + squash * 0.55;
+  /* --- کاراکتر: موتور مشترک اکتو (همان منحنی‌های مرجع REEL ENGINE v2) --- */
+  const octoPose = octoPoseAt(t);
+  const riseP = octoPose.entrance.progress;
+  const riseY = octoPose.entrance.y;
+  const breath = octoPose.idle.breathY;
+  const squash = octoPose.entrance.squash;
+  const sy = (1 - squash) * octoPose.idle.breathScale;
+  const sx = octoPose.entrance.scaleX;
 
   el.char.setAttribute("transform",
     `translate(0 ${riseY + breath}) translate(${CX} ${CY}) scale(${sx} ${sy}) translate(${-CX} ${-CY})`);
@@ -964,27 +939,26 @@ function draw(t) {
     `translate(${(chr.x || 0).toFixed(1)}px, ${(chr.y || 0).toFixed(1)}px) scale(${(chr.scale || 1).toFixed(3)})`;
 
   /* --- بازوها --- */
-  const swayAmp = 1.4 + (1 - riseP) * 5;
-  const legs = [["LL", 0, -1], ["LM", 0.6, -1], ["RM", 1.2, 1], ["RL", 1.8, 1]];
-  for (const [key, phase, dir] of legs) {
-    const a = Math.sin(t * 2.1 + phase) * swayAmp * dir;
+  const legKeys = ["LL", "LM", "RM", "RL"];
+  const legPivots = { LL: 31.89, LM: 152.34, RM: 272.93, RL: 393.3 };
+  legKeys.forEach((key, index) => {
+    const angle = octoPose.idle.tentacleAngles[index];
     el.legs[key].setAttribute("transform",
-      `rotate(${a.toFixed(2)} ${key === "LL" ? 31.89 : key === "LM" ? 152.34 : key === "RM" ? 272.93 : 393.3} 308.65)`);
-  }
+      `rotate(${angle.toFixed(2)} ${legPivots[key]} 308.65)`);
+  });
 
   /* --- چشم‌ها --- */
-  const g = gazeAt(t);
-  const gx = g[0] * 9, gy = g[1] * 7;
+  const gx = octoPose.pupilOffset.x, gy = octoPose.pupilOffset.y;
   el.pupilL.setAttribute("transform", `translate(${gx.toFixed(2)} ${gy.toFixed(2)})`);
   el.pupilR.setAttribute("transform", `translate(${gx.toFixed(2)} ${gy.toFixed(2)})`);
-  const bsy = blinkAt(t);
+  const bsy = octoPose.blinkScaleY;
   for (const [k, c] of [["eyeL", EYE.L], ["eyeR", EYE.R]]) {
     el[k].setAttribute("transform",
       `translate(${c[0]} ${c[1]}) scale(1 ${bsy.toFixed(3)}) translate(${-c[0]} ${-c[1]})`);
   }
 
   /* --- دهان --- */
-  const mw = mouthWeights(t);
+  const mw = octoPose.mouth;
   el.mHappy.style.opacity = mw.happy;
   el.mSad.style.opacity = mw.sad;
   el.mSurprise.style.opacity = mw.surprise;
