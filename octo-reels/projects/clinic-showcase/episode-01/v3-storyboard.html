@@ -105,7 +105,7 @@ function draw(t){
   screen.classList.remove("overview");
   const q=ramp(time,active.a,active.a+.9),settle=ramp(time,active.b-.7,active.b);
   zoom=lerp(1,active.zoom,q);scroll=active.scroll;
-  const scrollPx=Math.max(0,page.scrollHeight-screen.clientHeight)*scroll;
+  const scrollPx=Math.max(0,page.offsetHeight-screen.clientHeight)*scroll;
   page.style.transform="translateY("+(-scrollPx)+"px) scale("+zoom+")";
   focus.style.left=(50-active.fw/2)+"%";focus.style.top=(active.fy*100)+"%";focus.style.width=(active.fw*100)+"%";focus.style.height=(active.fh*100)+"%";
   focus.style.opacity=out(ramp(time,active.a+.65,active.a+1.05))*(1-ramp(time,active.b-.55,active.b));
