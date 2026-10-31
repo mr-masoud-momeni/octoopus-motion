@@ -87,7 +87,7 @@ body.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.rende
   </div>
   <section class="panel">
     <h1>تست حرکت اکتو</h1>
-    <p>این نسخه ریشه شاخک‌ها را تقریباً ثابت نگه می‌دارد و به‌جای چرخش یک‌تکه، انحنای حرکت را به‌تدریج از میانه به سمت انتهای گرد پا منتقل می‌کند. با تایم‌لاین، طبیعی بودن قوس و حفظ فرم نوک‌ها را بررسی کن.</p>
+    <p>این نسخه علاوه بر خم‌شدن نرم شاخک‌ها، یک ژست اشاره هم دارد. از منوی الگوی نگاه، «اشاره با شاخک راست» را انتخاب کن تا شاخک سمت راست بالا بیاید و اکتو به همان سمت نگاه کند.</p>
     <div class="controls">
       <div class="actions">
         <button class="primary" id="playBtn">توقف</button>
@@ -109,6 +109,7 @@ body.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.rende
           <option value="left">نگاه به چپ</option>
           <option value="right">نگاه به راست</option>
           <option value="up">نگاه بالا</option>
+          <option value="point">اشاره با شاخک راست</option>
         </select>
       </div>
       <div class="readout">
@@ -118,7 +119,7 @@ body.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.rende
         <div class="metric"><small>پلک</small><strong id="blinkValue">—</strong></div>
       </div>
     </div>
-    <div class="hint">ریشه فقط یک چرخش بسیار کم دارد؛ جابه‌جایی اصلی به‌صورت منحنی و تدریجی در طول پا اعمال می‌شود. انتهای هر شاخک با یک کَپ Bézier گرد ساخته می‌شود تا نوک‌ها تیز یا شکسته نشوند.</div>
+    <div class="hint">در حالت اشاره، فقط شاخک سمت راست تغییر ژست می‌دهد؛ ریشه ثابت می‌ماند و فرم مسیر به‌صورت منحنی تا نوک باریک و گرد بالا می‌رود. انتخاب حالت‌های دیگر، حرکت عادی چهار شاخک را برمی‌گرداند.</div>
   </section>
 </main>
 <script>
@@ -313,21 +314,44 @@ function bentTentaclePath(shape, bend){
  };
  const sl=shiftAt(leftJoin), sr=shiftAt(rightJoin);
  const lx=left+sl, rx=right+sr, cx=bottomX+bend;
+ const leftMid=lx+(cx-lx)*.5, rightMid=cx+(rx-cx)*.5;
  return [
   `M ${left} ${top}`,
   `C ${left+bend*.025} ${top+46}, ${left+sl*.48} ${leftJoin-43}, ${lx} ${leftJoin}`,
-  `C ${lx} ${leftJoin+20}, ${cx-width*.52} ${bottomY}, ${cx} ${bottomY}`,
-  `C ${cx+width*.52} ${bottomY}, ${rx} ${rightJoin+20}, ${rx} ${rightJoin}`,
-  `C ${right-sl*.0+sr*.48} ${rightJoin-43}, ${right+bend*.025} ${top+46}, ${right} ${top}`,
+  `C ${lx} ${leftJoin+20}, ${lx+(cx-lx)*.35} ${bottomY-25}, ${leftMid} ${bottomY-12}`,
+  `C ${leftMid+(cx-leftMid)*.45} ${bottomY-2}, ${cx-width*.15} ${bottomY}, ${cx} ${bottomY}`,
+  `C ${cx+width*.15} ${bottomY}, ${cx+(rx-cx)*.55} ${bottomY-2}, ${rightMid} ${bottomY-12}`,
+  `C ${rightMid+(rx-rightMid)*.65} ${bottomY-25}, ${rx} ${rightJoin+20}, ${rx} ${rightJoin}`,
+  `C ${right+sr*.48} ${rightJoin-43}, ${right+bend*.025} ${top+46}, ${right} ${top}`,
   "Z"
  ].join(" ");
+}
+const POINTING_PATH=`M 361.41 308.65
+ C 357 339, 374 356, 393 350
+ C 413 344, 427 300, 438 271
+ C 445 251, 450 241, 447 231
+ C 444 220, 430 219, 424 231
+ C 410 259, 406 294, 390 315
+ C 380 329, 368 322, 361.41 308.65 Z`;
+function mixPath(from,to,amount){
+ const tokenPattern=/[A-Za-z]|-?\\d*\\.?\\d+(?:e[-+]?\\d+)?/gi;
+ const a=from.match(tokenPattern)||[], b=to.match(tokenPattern)||[];
+ if(a.length!==b.length) return amount<.5?from:to;
+ return a.map((token,index)=>{
+  if(/[A-Za-z]/.test(token)) return token;
+  return String(lerp(Number(token),Number(b[index]),amount));
+ }).join(" ");
+}
+function smooth01(value){
+ const t=clamp(value);
+ return t*t*(3-2*t);
 }
 let current=0,playing=true,speed=1,last=0,raf=0;
 const sceneTargets={center:[0,0],left:[-.75,0],right:[.75,0],up:[0,-.75]};
 function activeBeats(){
  const scene=$("scene").value;
  if(scene==="demo") return beats;
- const gaze=sceneTargets[scene]||[0,0];
+ const gaze=scene==="point"?[.72,-.7]:(sceneTargets[scene]||[0,0]);
  return beats.map((b,i)=>({...b,gaze,mouth:i===0?"surprise":"happy"}));
 }
 function draw(t){
@@ -341,10 +365,11 @@ function draw(t){
   `translate(0 ${pose.entrance.y+pose.idle.breathY}) translate(212.6 471.93) scale(${sx} ${sy}) translate(-212.6 -471.93)`);
  pose.idle.tentacleAngles.forEach((angle,index)=>{
   const tentacle=el.tentacles[index];
-  // Keep the root almost still; let the lower length describe a soft arc.
-  tentacle.path.setAttribute("d",bentTentaclePath(tentacle.shape,angle*3.35));
+  const idlePath=bentTentaclePath(tentacle.shape,angle*3.35);
+  const pointAmount=( $("scene").value==="point" && index===0 )?1:0;
+  tentacle.path.setAttribute("d",mixPath(idlePath,POINTING_PATH,pointAmount));
   const pivots=[393.68,272.09,152.34,31.89];
-  tentacle.rig.setAttribute("transform",`rotate(${(angle*.12).toFixed(3)} ${pivots[index]} 316)`);
+  tentacle.rig.setAttribute("transform",`rotate(${(angle*.12*(1-pointAmount)).toFixed(3)} ${pivots[index]} 316)`);
  });
  const gx=pose.pupilOffset.x,gy=pose.pupilOffset.y;
  el.pupilL.setAttribute("transform",`translate(${gx} ${gy})`);
