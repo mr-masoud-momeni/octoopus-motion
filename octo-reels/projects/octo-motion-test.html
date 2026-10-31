@@ -87,7 +87,7 @@ body.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.rende
   </div>
   <section class="panel">
     <h1>تست حرکت اکتو</h1>
-    <p>این فایل، ریگ حرکت چرخشی چهار شاخک را با فرم اصلی و انتهای گردشان آزمایش می‌کند. محور حرکت کمی پایین‌تر از ریشه قرار دارد تا اتصال زیر لبه بدن طبیعی‌تر دیده شود. حرکت هر شاخک کمی اختلاف فاز و دامنه دارد؛ با تایم‌لاین، اتصال ریشه‌ها و نرمی حرکت را بررسی کن.</p>
+    <p>این نسخه ریشه شاخک‌ها را تقریباً ثابت نگه می‌دارد و به‌جای چرخش یک‌تکه، انحنای حرکت را به‌تدریج از میانه به سمت انتهای گرد پا منتقل می‌کند. با تایم‌لاین، طبیعی بودن قوس و حفظ فرم نوک‌ها را بررسی کن.</p>
     <div class="controls">
       <div class="actions">
         <button class="primary" id="playBtn">توقف</button>
@@ -118,7 +118,7 @@ body.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.rende
         <div class="metric"><small>پلک</small><strong id="blinkValue">—</strong></div>
       </div>
     </div>
-    <div class="hint">محور چرخش هر شاخک در نزدیکی ریشه و زیر لبه بدن قرار گرفته است تا اتصال حفظ شود. زاویه‌ها عمداً محدود و با فازهای متفاوت‌اند؛ اگر حرکت طبیعی بود، مرحله بعدی تغییر فرم نرم در طول شاخک خواهد بود.</div>
+    <div class="hint">ریشه فقط یک چرخش بسیار کم دارد؛ جابه‌جایی اصلی به‌صورت منحنی و تدریجی در طول پا اعمال می‌شود. انتهای هر شاخک با یک کَپ Bézier گرد ساخته می‌شود تا نوک‌ها تیز یا شکسته نشوند.</div>
   </section>
 </main>
 <script>
@@ -295,10 +295,33 @@ const $=id=>document.getElementById(id);
 const el={
   char:$("charInner"),wrap:$("charWrap"),
   pupilL:$("pupilL"),pupilR:$("pupilR"),eyeL:$("eyeL"),eyeR:$("eyeR"),
-  tentacles:["legRLRig","legRMRig","legLMRig","legLLRig"].map(id=>$(id)),
+  tentacles:[
+    {rig:$("legRLRig"),path:$("legRL"),shape:{left:361.41,right:425.19,bottomX:391.79,bottomY:471.93,leftJoin:438.28,rightJoin:434.92}},
+    {rig:$("legRMRig"),path:$("legRM"),shape:{left:241.04,right:304.82,bottomX:273.75,bottomY:471.93,leftJoin:436.20,rightJoin:438.02}},
+    {rig:$("legLMRig"),path:$("legLM"),shape:{left:120.45,right:184.23,bottomX:153.16,bottomY:471.93,leftJoin:435.69,rightJoin:437.51}},
+    {rig:$("legLLRig"),path:$("legLL"),shape:{left:0,right:63.78,bottomX:32.71,bottomY:471.93,leftJoin:435.69,rightJoin:437.51}}
+  ],
   mouth:{happy:$("mHappy"),sad:$("mSad"),surprise:$("mSurprise")}
 };
 const EYE={L:[114.81,157.74],R:[302.82,157.74]};
+function bentTentaclePath(shape, bend){
+ const {left,right,bottomX,bottomY,leftJoin,rightJoin}=shape;
+ const width=right-left, top=308.65;
+ const shiftAt=y=>{
+  const t=clamp((y-top)/(bottomY-top));
+  return bend*t*t*(3-2*t);
+ };
+ const sl=shiftAt(leftJoin), sr=shiftAt(rightJoin);
+ const lx=left+sl, rx=right+sr, cx=bottomX+bend;
+ return [
+  `M ${left} ${top}`,
+  `C ${left+bend*.025} ${top+46}, ${left+sl*.48} ${leftJoin-43}, ${lx} ${leftJoin}`,
+  `C ${lx} ${leftJoin+20}, ${cx-width*.52} ${bottomY}, ${cx} ${bottomY}`,
+  `C ${cx+width*.52} ${bottomY}, ${rx} ${rightJoin+20}, ${rx} ${rightJoin}`,
+  `C ${right-sl*.0+sr*.48} ${rightJoin-43}, ${right+bend*.025} ${top+46}, ${right} ${top}`,
+  "Z"
+ ].join(" ");
+}
 let current=0,playing=true,speed=1,last=0,raf=0;
 const sceneTargets={center:[0,0],left:[-.75,0],right:[.75,0],up:[0,-.75]};
 function activeBeats(){
@@ -317,10 +340,11 @@ function draw(t){
  el.char.setAttribute("transform",
   `translate(0 ${pose.entrance.y+pose.idle.breathY}) translate(212.6 471.93) scale(${sx} ${sy}) translate(-212.6 -471.93)`);
  pose.idle.tentacleAngles.forEach((angle,index)=>{
-  // Preserve the original rounded silhouette; pivot slightly below the root.
-  const pivots=[[393.68,342],[272.09,342],[152.34,342],[31.89,342]];
-  const [px,py]=pivots[index];
-  el.tentacles[index].setAttribute("transform",`rotate(${angle.toFixed(3)} ${px} ${py})`);
+  const tentacle=el.tentacles[index];
+  // Keep the root almost still; let the lower length describe a soft arc.
+  tentacle.path.setAttribute("d",bentTentaclePath(tentacle.shape,angle*3.35));
+  const pivots=[393.68,272.09,152.34,31.89];
+  tentacle.rig.setAttribute("transform",`rotate(${(angle*.12).toFixed(3)} ${pivots[index]} 316)`);
  });
  const gx=pose.pupilOffset.x,gy=pose.pupilOffset.y;
  el.pupilL.setAttribute("transform",`translate(${gx} ${gy})`);
