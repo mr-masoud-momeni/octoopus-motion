@@ -87,7 +87,7 @@ body.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.rende
   </div>
   <section class="panel">
     <h1>تست حرکت اکتو</h1>
-    <p>این فایل، ریگ چرخشی چهار شاخک را با محور مستقل در محل اتصال به بدن آزمایش می‌کند. حرکت هر شاخک کمی اختلاف فاز و دامنه دارد؛ با تایم‌لاین، اتصال ریشه‌ها و نرمی حرکت را بررسی کن.</p>
+    <p>این فایل، ریگ خم‌شدن چهار شاخک را آزمایش می‌کند: ریشه ثابت می‌ماند و انحنا به‌تدریج تا نوک افزایش پیدا می‌کند. حرکت هر شاخک کمی اختلاف فاز و دامنه دارد؛ با تایم‌لاین، اتصال ریشه‌ها و نرمی حرکت را بررسی کن.</p>
     <div class="controls">
       <div class="actions">
         <button class="primary" id="playBtn">توقف</button>
@@ -317,9 +317,25 @@ function draw(t){
  el.char.setAttribute("transform",
   `translate(0 ${pose.entrance.y+pose.idle.breathY}) translate(212.6 471.93) scale(${sx} ${sy}) translate(-212.6 -471.93)`);
  pose.idle.tentacleAngles.forEach((angle,index)=>{
-  const pivots=[[393.68,316],[273.09,316],[152.34,316],[31.89,316]];
-  const [px,py]=pivots[index];
-  el.tentacles[index].setAttribute("transform",`rotate(${angle.toFixed(3)} ${px} ${py})`);
+  // Keep the root fixed. Bend the silhouette progressively toward the tip.
+  const roots=[
+   {x:393.30,y:308.65,w:63.78,bottom:471.93},
+   {x:272.93,y:308.66,w:63.78,bottom:471.93},
+   {x:152.34,y:308.65,w:63.78,bottom:471.93},
+   {x:31.89,y:308.65,w:63.78,bottom:471.93}
+  ];
+  const {x,y,w,bottom}=roots[index];
+  const half=w/2, length=bottom-y, bend=angle*2.0;
+  const left=x-half, right=x+half, tipY=bottom-32;
+  const d=[
+   `M ${left} ${y}`,
+   `C ${left} ${y+length*.22}, ${left+bend*.12} ${y+length*.62}, ${left+bend-half} ${tipY}`,
+   `Q ${x+bend} ${bottom+3}, ${x+bend+half} ${tipY}`,
+   `C ${right+bend*.12} ${y+length*.62}, ${right} ${y+length*.22}, ${right} ${y}`,
+   "Z"
+  ].join(" ");
+  const path=el.tentacles[index].querySelector("path");
+  path.setAttribute("d",d);
  });
  const gx=pose.pupilOffset.x,gy=pose.pupilOffset.y;
  el.pupilL.setAttribute("transform",`translate(${gx} ${gy})`);
