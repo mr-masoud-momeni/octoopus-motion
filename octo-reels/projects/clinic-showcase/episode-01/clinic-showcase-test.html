@@ -72,7 +72,30 @@
 </div>
 <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="25" step=".01" value="0"><span id="time">0.00s</span></div>
 <script type="module">
-import {sampleOctoMotion} from "../../../../engine/octo/motion.mjs";
+// Inline mirror of engine/octo/motion.mjs for direct file:// preview compatibility.
+const clamp=(value,min=0,max=1)=>Math.min(max,Math.max(min,value));
+const lerp=(from,to,amount)=>from+(to-from)*amount;
+const progress=(time,start,duration)=>clamp((time-start)/Math.max(.000001,duration));
+const ease={inOutCubic:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,outBack:(t,overshoot=1.05)=>1+(overshoot+1)*Math.pow(t-1,3)+overshoot*Math.pow(t-1,2)};
+function sampleOctoMotion(time,config={}){
+ const beats=config.beats??[],start=config.entrance?.start??.05,duration=config.entrance?.duration??.95,from=config.entrance?.from??980;
+ const p=progress(time,start,duration),squash=.075*Math.sin(Math.PI*progress(time,start+duration*.82,.4));
+ const entrance={progress:p,y:lerp(from,0,1+(1.05+1)*Math.pow(p-1,3)+1.05*Math.pow(p-1,2)),squash,scaleX:1+squash*.55,scaleY:(1-squash)*(1+Math.sin(time*1.85)*.006)};
+ const phase=time*1.85,amp=1.4+(1-p)*5,phases=[0,.6,1.2,1.8],directions=[-1,-1,1,1];
+ const idle={breathY:Math.sin(phase)*5,breathScale:1+Math.sin(phase)*.006,tentacleAngles:phases.map((v,i)=>Math.sin(time*2.1+v)*amp*directions[i])};
+ let index=0;for(let i=0;i<beats.length;i++)if(time>=beats[i].t0)index=i;
+ const current=beats[index]||{},previous=beats[index-1]||{};
+ const gaze=index===0?(current.gaze??[0,0]):[
+  lerp(previous.gaze?.[0]??0,current.gaze?.[0]??0,ease.inOutCubic(progress(time,current.t0,.45))),
+  lerp(previous.gaze?.[1]??0,current.gaze?.[1]??0,ease.inOutCubic(progress(time,current.t0,.45)))
+ ];
+ const blinkTimes=[...(config.blinks??[])];for(const beat of beats){const len=Math.max(.6,beat.t1-beat.t0);blinkTimes.push(beat.t0+Math.min(.5,len*.18),beat.t0+Math.min(.85,len*.32),beat.t0+len*.74)}
+ let blinkScaleY=1;for(const bt of blinkTimes){const q=(time-bt)/.16;if(q>0&&q<1)blinkScaleY=Math.min(blinkScaleY,1-.94*Math.sin(Math.PI*q))}
+ const mouth={happy:0,sad:0,surprise:0},amount=progress(time,current.t0??0,.1);
+ if(current.mouth in mouth)mouth[current.mouth]=amount;
+ if(index>0&&previous.mouth in mouth)mouth[previous.mouth]+=1-amount;
+ return {entrance,idle,gaze,pupilOffset:{x:gaze[0]*9,y:gaze[1]*7},blinkScaleY,mouth};
+}
 (()=>{
 const D=25,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
 const clamp=v=>Math.max(0,Math.min(1,v)),lerp=(a,b,p)=>a+(b-a)*p,ease=p=>{p=clamp(p);return p*p*(3-2*p)},out=p=>1-Math.pow(1-clamp(p),3),ramp=(t,a,b)=>ease((t-a)/(b-a));
