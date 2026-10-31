@@ -34,7 +34,7 @@ select{background:#0a192f;color:#eef4ff;border:1px solid #ffffff2b;border-radius
 .metric{background:#ffffff09;border:1px solid #ffffff10;border-radius:10px;padding:10px}
 .metric small{display:block;color:#8f9db4;font-size:11px}.metric strong{font-size:14px;font-variant-numeric:tabular-nums}
 .hint{margin:16px 0 0;padding-top:14px;border-top:1px solid #ffffff16;color:#8998b1;font-size:11px;line-height:1.8}
-@media(max-width:760px){body{padding:14px}.app{grid-template-columns:1fr;max-width:540px}.stage-shell{max-width:min(100%,390px)}.panel{padding:18px}}
+@media(max-width:760px){body{padding:14px}.app{grid-template-columns:1fr;max-width:540px}.stage-shell{max-width:min(100%,390px)}.panel{padding:18px}}\nbody.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.render-mode .app{display:block;width:1080px;height:1920px;max-width:none}body.render-mode .stage-shell{width:1080px;max-width:none;margin:0}body.render-mode .stage{width:1080px;height:1920px;aspect-ratio:auto;border-radius:0;box-shadow:none}body.render-mode .panel{display:none}
 </style>
 </head>
 <body>
@@ -192,7 +192,7 @@ $("restartBtn").addEventListener("click",()=>{current=0;draw(current);updateUI()
 $("scrub").addEventListener("input",e=>{current=Number(e.target.value);draw(current);updateUI()});
 $("speed").addEventListener("change",e=>{speed=Number(e.target.value)});
 $("scene").addEventListener("change",()=>draw(current));
-draw(0);raf=requestAnimationFrame(frame);
+window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};\nwindow.renderAt=(time)=>{current=Math.max(0,Math.min(DURATION,Number(time)||0));draw(current);updateUI();};\nwindow.__ready=false;\nPromise.resolve(document.fonts?.ready).then(()=>{window.__ready=true;});\nwindow.renderAt(0);\nif(!RENDER) raf=requestAnimationFrame(frame);
 </script>
 </body>
 </html>
