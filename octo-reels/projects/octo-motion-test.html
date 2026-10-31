@@ -33,7 +33,8 @@ select{background:#0a192f;color:#eef4ff;border:1px solid #ffffff2b;border-radius
 .metric{background:#ffffff09;border:1px solid #ffffff10;border-radius:10px;padding:10px}
 .metric small{display:block;color:#8f9db4;font-size:11px}.metric strong{font-size:14px;font-variant-numeric:tabular-nums}
 .hint{margin:16px 0 0;padding-top:14px;border-top:1px solid #ffffff16;color:#8998b1;font-size:11px;line-height:1.8}
-@media(max-width:760px){body{padding:14px}.app{grid-template-columns:1fr;max-width:540px}.stage-shell{max-width:min(100%,390px)}.panel{padding:18px}}\nbody.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.render-mode .app{display:block;width:1080px;height:1920px;max-width:none}body.render-mode .stage-shell{width:1080px;max-width:none;margin:0}body.render-mode .stage{width:1080px;height:1920px;aspect-ratio:auto;border-radius:0;box-shadow:none}body.render-mode .panel{display:none}
+@media(max-width:760px){body{padding:14px}.app{grid-template-columns:1fr;max-width:540px}.stage-shell{max-width:min(100%,390px)}.panel{padding:18px}}
+body.render-mode{display:block;padding:0;min-height:0;overflow:hidden}body.render-mode .app{display:block;width:1080px;height:1920px;max-width:none}body.render-mode .stage-shell{width:1080px;max-width:none;margin:0}body.render-mode .stage{width:1080px;height:1920px;aspect-ratio:auto;border-radius:0;box-shadow:none}body.render-mode .panel{display:none}
 </style>
 </head>
 <body>
@@ -293,7 +294,8 @@ const beats=[
 const $=id=>document.getElementById(id);
 const el={
   char:$("charInner"),wrap:$("charWrap"),
-  pupilL:$("pupilL"),pupilR:$("pupilR"),eyeL:$("eyeL"),eyeR:$("eyeR"),\n  tentacles:["legRLRig","legRMRig","legLMRig","legLLRig"].map(id=>$(id)),
+  pupilL:$("pupilL"),pupilR:$("pupilR"),eyeL:$("eyeL"),eyeR:$("eyeR"),
+  tentacles:["legRLRig","legRMRig","legLMRig","legLLRig"].map(id=>$(id)),
   mouth:{happy:$("mHappy"),sad:$("mSad"),surprise:$("mSurprise")}
 };
 const EYE={L:[114.81,157.74],R:[302.82,157.74]};
@@ -314,7 +316,12 @@ function draw(t){
  const sy=(1-pose.entrance.squash)*pose.idle.breathScale;
  el.char.setAttribute("transform",
   `translate(0 ${pose.entrance.y+pose.idle.breathY}) translate(212.6 471.93) scale(${sx} ${sy}) translate(-212.6 -471.93)`);
- pose.idle.tentacleAngles.forEach((angle,index)=>{\n  const pivots=[[393.68,316],[273.09,316],[152.34,316],[31.89,316]];\n  const [px,py]=pivots[index];\n  el.tentacles[index].setAttribute("transform",`rotate(${angle.toFixed(3)} ${px} ${py})`);\n });\n const gx=pose.pupilOffset.x,gy=pose.pupilOffset.y;
+ pose.idle.tentacleAngles.forEach((angle,index)=>{
+  const pivots=[[393.68,316],[273.09,316],[152.34,316],[31.89,316]];
+  const [px,py]=pivots[index];
+  el.tentacles[index].setAttribute("transform",`rotate(${angle.toFixed(3)} ${px} ${py})`);
+ });
+ const gx=pose.pupilOffset.x,gy=pose.pupilOffset.y;
  el.pupilL.setAttribute("transform",`translate(${gx} ${gy})`);
  el.pupilR.setAttribute("transform",`translate(${gx} ${gy})`);
  for(const [key,center] of [["eyeL",EYE.L],["eyeR",EYE.R]]){
