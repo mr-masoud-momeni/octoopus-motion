@@ -351,7 +351,12 @@ $("restartBtn").addEventListener("click",()=>{current=0;draw(current);updateUI()
 $("scrub").addEventListener("input",e=>{current=Number(e.target.value);draw(current);updateUI()});
 $("speed").addEventListener("change",e=>{speed=Number(e.target.value)});
 $("scene").addEventListener("change",()=>draw(current));
-window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};\nwindow.renderAt=(time)=>{current=Math.max(0,Math.min(DURATION,Number(time)||0));draw(current);updateUI();};\nwindow.__ready=false;\nPromise.resolve(document.fonts?.ready).then(()=>{window.__ready=true;});\nwindow.renderAt(0);\nif(!RENDER) raf=requestAnimationFrame(frame);
+window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
+window.renderAt=(time)=>{current=Math.max(0,Math.min(DURATION,Number(time)||0));draw(current);updateUI();};
+window.__ready=false;
+Promise.resolve(document.fonts?.ready).then(()=>{window.__ready=true;});
+window.renderAt(0);
+if(!RENDER) raf=requestAnimationFrame(frame);
 </script>
 </body>
 </html>
