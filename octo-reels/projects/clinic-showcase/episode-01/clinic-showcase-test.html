@@ -163,6 +163,7 @@ function measure(){const meta=imageMeta[currentImage];pageH=meta?meta.h*(site.cl
 function changeImage(src,full=false){
  if(currentImage!==src){currentImage=src;siteImage.src=src}
  site.classList.toggle("full-page",full);
+ if(full){site.style.left="50px";site.style.top="330px";site.style.width="980px";site.style.height="690px"}else{site.style.left="100px";site.style.top="390px";site.style.width="880px"}
  const meta=imageMeta[src];
  if(meta&&!full){const height=880*meta.h/meta.w;site.style.height=height+"px";siteImage.style.width="100%";siteImage.style.height="100%";siteImage.style.objectFit="fill"}
  if(full){site.style.height="690px";siteImage.style.width="100%";siteImage.style.height="auto";siteImage.style.objectFit="initial";siteImage.style.transform="translate3d(0,0,0)"}
@@ -194,8 +195,12 @@ if(panel){
  site.style.clipPath="inset(0 0 0)";
  $("frameBeam").style.opacity=0;
  const maxScroll=Math.max(0,pageH-screenH);
- const scrollP=ease((time-32.3)/(41.3-32.3));
+ const scrollP=ease((time-32.3)/(39.7-32.3));
+ const focusIn=out((time-39.7)/.75);
+ const fadeOut=1-ramp(time,40.55,41.35);
  siteImage.style.transform="translate3d(0,"+(-maxScroll*scrollP).toFixed(3)+"px,0)";
+ site.style.transform="translateY("+lerp(65,0,reveal)+"px) scale("+lerp(1,1.12,focusIn)+")";
+ site.style.opacity=reveal*fadeOut;
  call.style.opacity=0;
 }else{
  site.style.opacity=time<3.3?0:siteIn;
