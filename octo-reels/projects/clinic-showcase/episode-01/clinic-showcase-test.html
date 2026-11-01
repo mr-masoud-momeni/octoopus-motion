@@ -218,6 +218,7 @@ const beat=activePanel>=0?activePanel:-1;
 const local=beat>=0?clamp((time-panels[beat].a)/(panels[beat].b-panels[beat].a)):0;
 const pulse=Math.sin(Math.PI*local);
 const gesture=beat<0?0:Math.sin(Math.PI*clamp((local-.12)/.72));
+const endGesture=time>=41.5?Math.sin(Math.PI*clamp((time-41.5)/1.35)):0;
 const dxByBeat=[-38,42,-28,48,-12],tiltByBeat=[-4.5,5,-5.5,6,-2];
 const dx=beat>=0?dxByBeat[beat]*Math.sin(Math.PI*local):0;
 const tilt=beat>=0?tiltByBeat[beat]*gesture:0;
@@ -233,13 +234,13 @@ char.setAttribute("transform","translate(0 "+(entranceY+pose.idle.breathY+(beat>
 const baseAngles=pose.idle.tentacleAngles;
 const gestureSets=[[-3,2,-5,-32],[28,4,-4,-8],[-8,27,-28,5],[8,-25,25,-8],[24,-8,8,-26]];
 limbs.forEach((limb,index)=>{
- const action=beat>=0?gestureSets[beat][index]*gesture:0;
- const wave=beat>=0?Math.sin(local*Math.PI*4+index*.8)*pulse*4:Math.sin(time*1.4+index)*2;
+ const action=beat>=0?gestureSets[beat][index]*gesture:(index===3?-30*endGesture:index===0?18*endGesture:0);
+ const wave=beat>=0?Math.sin(local*Math.PI*4+index*.8)*pulse*4:Math.sin(time*1.4+index)*2+Math.sin(time*7+index)*endGesture*5;
  limb.rig.setAttribute("transform","rotate("+(baseAngles[index]+action+wave).toFixed(2)+" "+limb.pivot+" 308.65)");
 });
 const gazeTargets=[[-.45,-.55],[.55,-.35],[-.4,-.45],[.45,-.35],[0,-.25]];
 const gx=beat>=0?lerp(pose.pupilOffset.x,gazeTargets[beat][0]*9,gesture):pose.pupilOffset.x;
-const gy=beat>=0?lerp(pose.pupilOffset.y,gazeTargets[beat][1]*7,gesture):pose.pupilOffset.y;
+const gy=beat>=0?lerp(pose.pupilOffset.y,gazeTargets[beat][1]*7,gesture):(endOcto>0?lerp(pose.pupilOffset.y,4,endOcto):pose.pupilOffset.y);
 pupils.forEach(el=>el.setAttribute("transform","translate("+gx+" "+gy+")"));
 eyes.forEach(([el,x,y])=>el.setAttribute("transform","translate("+x+" "+y+") scale(1 "+pose.blinkScaleY+") translate("+(-x)+" "+(-y)+")"));
 Object.keys(mouth).forEach(k=>mouth[k].style.opacity=pose.mouth[k]||0);
