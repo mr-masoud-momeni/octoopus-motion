@@ -9,7 +9,12 @@ echo  بدون موسیقی و بدون نریشن
 echo  لطفاً پنجره را تا پایان رندر نبند.
 echo.
 
-node scripts\render.mjs --html ..\projects\clinic-showcase\episode-01\clinic-showcase-test.html --video --sfx --out clinic-showcase-episode-01.mp4
+if exist "out\.silent.mp4" (
+  echo فایل Silent موجود است؛ فقط صداگذاری و ساخت خروجی نهایی انجام می‌شود.
+  node scripts\render.mjs --html ..\projects\clinic-showcase\episode-01\clinic-showcase-test.html --video --sfx --mux-only --out clinic-showcase-episode-01.mp4
+) else (
+  node scripts\render.mjs --html ..\projects\clinic-showcase\episode-01\clinic-showcase-test.html --video --sfx --out clinic-showcase-episode-01.mp4
+)
 
 echo.
 if errorlevel 1 (
