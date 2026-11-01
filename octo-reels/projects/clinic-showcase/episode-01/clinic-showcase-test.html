@@ -73,7 +73,7 @@
 
 <div id="end"><div class="mini">BUILT WITH INTENTION · OCTOOPUS</div><h2>یک تجربه‌ی بهتر،<br><strong>برای یک انتخاب مطمئن.</strong></h2><p>طراحی و توسعه‌ی وب‌سایت، با نگاه به تجربه‌ی واقعی کاربر.</p><div class="cta">بیایید تجربه‌ی بعدی را بسازیم <i>↗</i></div></div>
 <div class="vignette"></div></div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="42.2" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="43.2" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 // Exact motion sampling from the original reel-01 motion language.
 const clamp=(value,min=0,max=1)=>Math.min(max,Math.max(min,value));
@@ -132,7 +132,7 @@ function sampleOctoMotion(time,config={}){
  return {entrance,idle,gaze,pupilOffset:{x:gaze[0]*9,y:gaze[1]*7},blinkScaleY:sampleBlink(time,buildBlinkTimes(beats,config.blinks??[])),mouth:sampleMouth(time,beats)};
 }
 (()=>{
-const D=42.2,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
+const D=43.2,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
 const clamp=v=>Math.max(0,Math.min(1,v)),lerp=(a,b,p)=>a+(b-a)*p,ease=p=>{p=clamp(p);return p*p*(3-2*p)},out=p=>1-Math.pow(1-clamp(p),3),ramp=(t,a,b)=>ease((t-a)/(b-a));
 const beats=[
 {t0:0,t1:4.2,gaze:[0,-.12],mouth:"surprise"},{t0:4.2,t1:8.3,gaze:[-.65,-.25],mouth:"happy"},
@@ -159,13 +159,13 @@ const BUBBLES=[];
 let pageH=0,screenH=610,time=0,playing=false,raf=0,start=0,lastPanel=-1,currentImage="",imageMeta={};
 const imageNames=["Hero.jpg","Reserve.jpg","Services.jpg","Consultation.jpg","Footer.jpg","clinic-overview.jpg"];
 const preloads=imageNames.map(src=>new Promise(resolve=>{const im=new Image();im.onload=()=>{imageMeta[src]={w:im.naturalWidth,h:im.naturalHeight};resolve()};im.onerror=resolve;im.src=src}));
-function measure(){pageH=siteImage.naturalHeight*(site.clientWidth/siteImage.naturalWidth);screenH=site.clientHeight}
+function measure(){const meta=imageMeta[currentImage];pageH=meta?meta.h*(site.clientWidth/meta.w):siteImage.naturalHeight*(site.clientWidth/siteImage.naturalWidth);screenH=site.clientHeight}
 function changeImage(src,full=false){
  if(currentImage!==src){currentImage=src;siteImage.src=src}
  site.classList.toggle("full-page",full);
  const meta=imageMeta[src];
  if(meta&&!full){const height=880*meta.h/meta.w;site.style.height=height+"px";siteImage.style.width="100%";siteImage.style.height="100%";siteImage.style.objectFit="fill"}
- if(full){site.style.height="610px";siteImage.style.width="100%";siteImage.style.height="auto";siteImage.style.objectFit="initial"}
+ if(full){site.style.height="610px";siteImage.style.width="100%";siteImage.style.height="auto";siteImage.style.objectFit="initial";siteImage.style.transform="translate3d(0,0,0)"}
  measure();
 }
 function draw(t){
@@ -194,8 +194,8 @@ if(panel){
  site.style.clipPath="inset(0 0 0)";
  $("frameBeam").style.opacity=0;
  const maxScroll=Math.max(0,pageH-screenH);
- const scrollP=ease((time-32.3)/(38.5-32.3));
- siteImage.style.transform="translateY("+(-maxScroll*scrollP)+"px)";
+ const scrollP=ease((time-32.3)/(41.3-32.3));
+ siteImage.style.transform="translate3d(0,"+(-maxScroll*scrollP).toFixed(3)+"px,0)";
  call.style.opacity=0;
 }else{
  site.style.opacity=time<3.3?0:siteIn;
@@ -212,10 +212,10 @@ pupils.forEach(el=>el.setAttribute("transform","translate("+pose.pupilOffset.x+"
 eyes.forEach(([el,x,y])=>el.setAttribute("transform","translate("+x+" "+y+") scale(1 "+pose.blinkScaleY+") translate("+(-x)+" "+(-y)+")"));
 Object.keys(mouth).forEach(k=>mouth[k].style.opacity=pose.mouth[k]||0);
 
-const finish=out((time-38.5)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
+const finish=out((time-41.5)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
 $("scrub").value=time;$("time").textContent=time.toFixed(2)+"s";
 }
-window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:9.6},{name:"sweep",t:15},{name:"sweep",t:20.4},{name:"sweep",t:25.8},{name:"reveal",t:31.2},{name:"ding",t:41.4}];window.__ready=false;
+window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:9.6},{name:"sweep",t:15},{name:"sweep",t:20.4},{name:"sweep",t:25.8},{name:"reveal",t:31.2},{name:"ding",t:42.7}];window.__ready=false;
 const ready=()=>Promise.all(preloads).then(()=>{if(imageMeta["Hero.jpg"]){siteImage.src="Hero.jpg";changeImage("Hero.jpg",false)}measure();window.__ready=true;draw(0)});
 document.fonts.ready.then(ready);ready();
 function tick(){if(!playing)return;const t=Math.min(D,(performance.now()-start)/1000);draw(t);if(t>=D){playing=false;$("play").textContent="Play";return}raf=requestAnimationFrame(tick)}
