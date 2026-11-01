@@ -23,7 +23,7 @@
 #callout{position:absolute;left:80px;right:80px;top:1480px;width:auto;z-index:16;opacity:0;transform:translateX(-55px)}#callout .index{font:700 18px system-ui;letter-spacing:.18em;color:var(--cyan);direction:ltr;text-align:left}#callout h2{font-size:48px;line-height:1.42;margin:12px 0 10px;font-weight:900}#callout p{font-size:25px;line-height:1.9;color:#b7c6d8;margin:0}#callout .line{width:110px;height:3px;background:linear-gradient(90deg,var(--cyan),transparent);margin-top:24px}
 #chips{display:none}.chip{font-size:21px;color:#e9f7ff;padding:13px 21px;border-radius:15px;background:#ffffff0b;border:1px solid #b9d8e52b;backdrop-filter:blur(12px)}.chip b{color:var(--cyan);margin-left:8px}
 #end{position:absolute;left:80px;right:80px;top:1245px;bottom:auto;z-index:22;opacity:0;transform:translateY(35px);text-align:right}#end .mini{font-size:19px;color:var(--cyan);letter-spacing:.08em;direction:ltr;text-align:left}#end h2{font-size:52px;line-height:1.42;margin:13px 0 9px;font-weight:900}#end h2 strong{color:var(--cyan)}#end p{font-size:23px;line-height:1.75;color:#b8c7d8;margin:0;max-width:850px}#end .cta{display:inline-flex;align-items:center;gap:16px;margin-top:25px;padding:16px 25px;border-radius:16px;background:var(--cyan);color:#061626;font-size:22px;font-weight:900}#end .cta i{font-style:normal;font-size:30px}
-.octo-cue{position:absolute;z-index:13;left:650px;top:900px;min-width:190px;padding:13px 20px;border:1px solid #41faf17a;border-radius:15px;background:linear-gradient(135deg,#102c43f2,#091a2cf2);box-shadow:0 12px 34px #0007,0 0 24px #41faf126;color:#eaffff;font-size:23px;font-weight:800;opacity:0;transform:translate(-25px,35px) scale(.72);transform-origin:15% 100%;white-space:nowrap;will-change:transform,opacity}.octo-cue:before{content:"";position:absolute;left:22px;bottom:-9px;width:16px;height:16px;background:#0b1d30;border-right:1px solid #41faf17a;border-bottom:1px solid #41faf17a;transform:rotate(45deg)}.octo-cue:after{content:"";position:absolute;left:-9px;top:50%;width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px var(--cyan);transform:translateY(-50%)}.octo-cue b{color:var(--cyan);margin-left:8px}
+.octo-cue{position:absolute;z-index:13;width:430px;min-height:142px;padding:25px 30px;border:1px solid #41faf18a;border-radius:25px;background:linear-gradient(145deg,#142e48f5,#091a2df5);box-shadow:0 18px 46px #0008,0 0 30px #41faf125;color:#f3fbff;font-size:28px;line-height:1.85;font-weight:800;display:flex;align-items:center;opacity:0;will-change:transform,opacity;backdrop-filter:blur(14px)}.octo-cue b{color:var(--cyan);font-size:30px;margin-left:14px;flex:none}.octo-cue:before{content:"";position:absolute;top:50%;width:25px;height:25px;background:#10263df5;border:1px solid #41faf18a;transform:translateY(-50%) rotate(45deg)}.octo-cue.from-left:before{left:-14px;border-top:0;border-right:0}.octo-cue.from-right:before{right:-14px;border-bottom:0;border-left:0}.nurse-hat{pointer-events:none}.nurse-hat .cap{fill:#f5fbff;stroke:#071a2c;stroke-width:5;stroke-linejoin:round}.nurse-hat .band{fill:#d9f8f7}.nurse-hat .cross{fill:#12b9b7;stroke:#087f89;stroke-width:1.5;stroke-linejoin:round}
 #controls{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;gap:12px;padding:12px 16px;background:#050c18f2;border-top:1px solid #41faf133;color:#cbd5e1;font:13px ui-monospace,Consolas,monospace;direction:ltr}button{background:#102a43;color:var(--cyan);border:1px solid #41faf155;border-radius:8px;padding:8px 13px;font:inherit;cursor:pointer}#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:75px;text-align:center}
 </style></head><body>
 <div id="stage"><div class="dots" id="dots"></div><div class="glow" id="glow"></div><div class="bubbles" id="bubbles"></div>
@@ -34,6 +34,11 @@
       <g id="charInner">
         <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
 
+        <g id="nurseHat" class="nurse-hat">
+          <path class="cap" d="M155 48 C158 18 180 2 212.5 2 C245 2 267 18 270 48 L262 59 L163 59 Z"/>
+          <path class="band" d="M161 46 Q212 55 264 46 L262 58 Q212 66 163 58 Z"/>
+          <path class="cross" d="M205 17h15v9h9v15h-9v9h-15v-9h-9V26h9z"/>
+        </g>
         <!-- چشم راست -->
         <g id="eyeR">
           <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
@@ -213,46 +218,42 @@ if(panel){
 }
 const endOcto=out((time-41.35)/.95);
 const introOcto=out((time-.1)/1.05)*(1-ramp(time,30.4,31.2));
-const activePanel=panels.findIndex(p=>time>=p.a&&time<p.b);
-const beat=activePanel>=0?activePanel:-1;
+const beat=panels.findIndex(p=>time>=p.a&&time<p.b);
 const local=beat>=0?clamp((time-panels[beat].a)/(panels[beat].b-panels[beat].a)):0;
-const pulse=Math.sin(Math.PI*local);
-const gesture=beat<0?0:Math.sin(Math.PI*clamp((local-.12)/.72));
-const endGesture=time>=41.5?Math.sin(Math.PI*clamp((time-41.5)/1.35)):0;
-const dxByBeat=[-38,42,-28,48,-12],tiltByBeat=[-4.5,5,-5.5,6,-2];
-const dx=beat>=0?dxByBeat[beat]*Math.sin(Math.PI*local):0;
-const tilt=beat>=0?tiltByBeat[beat]*gesture:0;
-const introX=350+dx+Math.sin(time*1.7)*7;
-const introY=1000+Math.sin(time*2.1)*8-(beat>=0?pulse*13:0);
+const sideByBeat=[0,1,0,1,0]; // 0: Octo left / bubble right, 1: Octo right / bubble left
+const side=beat>=0?sideByBeat[beat]:0;
+const targetLeft=side===0?72:638;
+const slideIn=out((local-.02)/.32),slideOut=1-ramp(time,30.35,31.2);
+const restingLeft=lerp(350,targetLeft,slideIn);
+const introX=restingLeft+Math.sin(time*1.1)*3;
+const introY=1000+Math.sin(time*1.8)*5;
 octo.style.opacity=Math.max(introOcto,endOcto);
-octo.style.left=(endOcto>0?350:introX)+"px";octo.style.width="380px";
+octo.style.left=(endOcto>0?350:introX)+"px";
+octo.style.width="370px";
 octo.style.top=(endOcto>0?lerp(1920,700,endOcto):introY)+"px";
-octo.style.transform="rotate("+(endOcto>0?lerp(0,-2,endOcto):tilt+Math.sin(time*1.1)*.8)+"deg) scale("+(endOcto>0?lerp(.94,1,endOcto):1+Math.sin(time*2.1)*.008)+")";
+octo.style.transform="rotate("+(endOcto>0?0:Math.sin(time*1.05)*.35)+"deg) scale("+(endOcto>0?lerp(.94,1,endOcto):1+Math.sin(time*1.8)*.004)+")";
 const entranceY=time<2?pose.entrance.y:0;
-const bodyLean=beat>=0?Math.sin(Math.PI*clamp((local-.08)/.78))*[2,-2,3,-3,1][beat]:0;
-char.setAttribute("transform","translate(0 "+(entranceY+pose.idle.breathY+(beat>=0?Math.sin(Math.PI*local)*-5:0))+") translate(212.6 471.93) rotate("+bodyLean+" 212.6 220) scale("+pose.entrance.scaleX+" "+((1-pose.entrance.squash)*pose.idle.breathScale)+") translate(-212.6 -471.93)");
+char.setAttribute("transform","translate(0 "+(entranceY+pose.idle.breathY)+") translate(212.6 471.93) scale("+pose.entrance.scaleX+" "+((1-pose.entrance.squash)*pose.idle.breathScale)+") translate(-212.6 -471.93)");
 const baseAngles=pose.idle.tentacleAngles;
-const gestureSets=[[-3,2,-5,-32],[28,4,-4,-8],[-8,27,-28,5],[8,-25,25,-8],[24,-8,8,-26]];
-limbs.forEach((limb,index)=>{
- const action=beat>=0?gestureSets[beat][index]*gesture:(index===3?-30*endGesture:index===0?18*endGesture:0);
- const wave=beat>=0?Math.sin(local*Math.PI*4+index*.8)*pulse*4:Math.sin(time*1.4+index)*2+Math.sin(time*7+index)*endGesture*5;
- limb.rig.setAttribute("transform","rotate("+(baseAngles[index]+action+wave).toFixed(2)+" "+limb.pivot+" 308.65)");
-});
-const gazeTargets=[[-.45,-.55],[.55,-.35],[-.4,-.45],[.45,-.35],[0,-.25]];
-const gx=beat>=0?lerp(pose.pupilOffset.x,gazeTargets[beat][0]*9,gesture):pose.pupilOffset.x;
-const gy=beat>=0?lerp(pose.pupilOffset.y,gazeTargets[beat][1]*7,gesture):(endOcto>0?lerp(pose.pupilOffset.y,4,endOcto):pose.pupilOffset.y);
+limbs.forEach((limb,index)=>limb.rig.setAttribute("transform","rotate("+(baseAngles[index]*.42).toFixed(2)+" "+limb.pivot+" 308.65)"));
+const targetGazeX=beat>=0?(side===0?6.5:-6.5):0;
+const targetGazeY=beat>=0?-1.5:0;
+const gazeIn=beat>=0?out((local-.18)/.3):0;
+const gx=lerp(pose.pupilOffset.x,targetGazeX,gazeIn),gy=lerp(pose.pupilOffset.y,targetGazeY,gazeIn);
 pupils.forEach(el=>el.setAttribute("transform","translate("+gx+" "+gy+")"));
 eyes.forEach(([el,x,y])=>el.setAttribute("transform","translate("+x+" "+y+") scale(1 "+pose.blinkScaleY+") translate("+(-x)+" "+(-y)+")"));
 Object.keys(mouth).forEach(k=>mouth[k].style.opacity=pose.mouth[k]||0);
-const cue=$("octoCue"),cueText=$("octoCueText"),cueLabels=["هویت کلینیک","رزرو آنلاین","خدمات تخصصی","مشاوره","راه‌های ارتباطی"];
+const cue=$("octoCue"),cueText=$("octoCueText");
+const cueLabels=["اینجا اولین حس اعتماد شکل می‌گیره","رزرو نوبت، فقط با چند قدم ساده","خدمات رو سریع و واضح پیدا کن","برای مشاوره، راحت ارتباط بگیر","راه‌های تماس همیشه در دسترسن"];
 if(beat>=0){
  cueText.textContent=cueLabels[beat];
- const cueIn=out((local-.28)/.2)*(1-ramp(local,.88,1));
- cue.style.opacity=cueIn*.96;
- cue.style.left=(beat%2===0?650:230)+"px";
- cue.style.top=lerp(1030,790,clamp((local-.28)/.5))+"px";
- cue.style.transform="translate("+lerp(-25,0,gesture)+"px,"+lerp(32,-8,gesture)+"px) scale("+lerp(.72,1,gesture)+")";
-}else{cue.style.opacity=0;cue.style.transform="translate(-25px,35px) scale(.72)"}
+ const cueIn=out((local-.2)/.28)*(1-ramp(local,.9,1));
+ cue.className="octo-cue "+(side===0?"from-left":"from-right");
+ cue.style.opacity=cueIn*.98;
+ cue.style.left=(side===0?575:75)+"px";
+ cue.style.top="1040px";
+ cue.style.transform="translateY("+lerp(24,0,cueIn)+"px) scale("+lerp(.94,1,cueIn)+")";
+}else{cue.style.opacity=0;cue.style.transform="translateY(24px) scale(.94)"}
 
 const finish=out((time-41.5)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
 $("scrub").value=time;$("time").textContent=time.toFixed(2)+"s";
