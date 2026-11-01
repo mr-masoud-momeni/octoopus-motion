@@ -76,7 +76,7 @@
 
 <div id="end"><div class="mini">BUILT WITH INTENTION · OCTOOPUS</div><h2>یک تجربه‌ی بهتر،<br><strong>برای یک انتخاب مطمئن.</strong></h2><p>طراحی و توسعه‌ی وب‌سایت، با نگاه به تجربه‌ی واقعی کاربر.</p><div class="cta">بیایید تجربه‌ی بعدی را بسازیم <i>↗</i></div></div>
 <div class="vignette"></div></div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="25" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="57" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 // Exact motion sampling from the original reel-01 motion language.
 const clamp=(value,min=0,max=1)=>Math.min(max,Math.max(min,value));
@@ -135,18 +135,18 @@ function sampleOctoMotion(time,config={}){
  return {entrance,idle,gaze,pupilOffset:{x:gaze[0]*9,y:gaze[1]*7},blinkScaleY:sampleBlink(time,buildBlinkTimes(beats,config.blinks??[])),mouth:sampleMouth(time,beats)};
 }
 (()=>{
-const D=52,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
+const D=57,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
 const clamp=v=>Math.max(0,Math.min(1,v)),lerp=(a,b,p)=>a+(b-a)*p,ease=p=>{p=clamp(p);return p*p*(3-2*p)},out=p=>1-Math.pow(1-clamp(p),3),ramp=(t,a,b)=>ease((t-a)/(b-a));
 const beats=[
 {t0:0,t1:4.2,gaze:[0,-.12],mouth:"surprise"},{t0:4.2,t1:8.3,gaze:[-.65,-.25],mouth:"happy"},
 {t0:8.3,t1:12.4,gaze:[.72,-.12],mouth:"happy"},{t0:12.4,t1:16.6,gaze:[-.35,-.45],mouth:"surprise"},
 {t0:16.6,t1:20.8,gaze:[.35,-.1],mouth:"happy"},{t0:20.8,t1:25,gaze:[0,0],mouth:"happy"}];
 const panels=[
-{a:4.2,b:12.2,index:"01 / HERO",title:"اولین نگاه،<br>شروع یک تجربه",text:"هدر سایت؛ جایی که هویت کلینیک و حس اعتماد در اولین برخورد شکل می‌گیرد.",image:"Hero.jpg",pose:"present"},
-{a:12.2,b:20.2,index:"02 / RESERVATION",title:"رزرو نوبت،<br>ساده و در دسترس",text:"مسیر رزرو باید واضح باشد تا کاربر بدون مکث، قدم بعدی را پیدا کند.",image:"Reserve.jpg",pose:"invite"},
-{a:20.2,b:28.2,index:"03 / SERVICES",title:"خدمات،<br>روشن و قابل فهم",text:"کاربر باید خدمات کلینیک را سریع بشناسد و اطلاعات موردنیازش را راحت پیدا کند.",image:"Services.jpg",pose:"explain"},
-{a:28.2,b:36.2,index:"04 / CONSULTATION",title:"مشاوره،<br>با حس اطمینان",text:"بخش مشاوره مسیر ارتباط را شفاف می‌کند و رسیدن به راهنمایی را ساده‌تر می‌سازد.",image:"Consultation.jpg",pose:"curious"},
-{a:36.2,b:44.2,index:"05 / FOOTER",title:"تجربه‌ای کامل،<br>تا آخرین بخش",text:"اطلاعات تماس و مسیرهای ارتباطی در پایان صفحه هم به‌سادگی در دسترس‌اند.",image:"Footer.jpg",pose:"invite"}];
+{a:4.2,b:13.2,index:"01 / HERO",title:"اولین نگاه،<br>شروع یک تجربه",text:"هدر سایت؛ جایی که هویت کلینیک و حس اعتماد در اولین برخورد شکل می‌گیرد.",image:"Hero.jpg",pose:"present"},
+{a:13.2,b:22.2,index:"02 / RESERVATION",title:"رزرو نوبت،<br>ساده و در دسترس",text:"مسیر رزرو باید واضح باشد تا کاربر بدون مکث، قدم بعدی را پیدا کند.",image:"Reserve.jpg",pose:"invite"},
+{a:22.2,b:31.2,index:"03 / SERVICES",title:"خدمات،<br>روشن و قابل فهم",text:"کاربر باید خدمات کلینیک را سریع بشناسد و اطلاعات موردنیازش را راحت پیدا کند.",image:"Services.jpg",pose:"explain"},
+{a:31.2,b:40.2,index:"04 / CONSULTATION",title:"مشاوره،<br>با حس اطمینان",text:"بخش مشاوره مسیر ارتباط را شفاف می‌کند و رسیدن به راهنمایی را ساده‌تر می‌سازد.",image:"Consultation.jpg",pose:"curious"},
+{a:40.2,b:49.2,index:"05 / FOOTER",title:"تجربه‌ای کامل،<br>تا آخرین بخش",text:"اطلاعات تماس و مسیرهای ارتباطی در پایان صفحه هم به‌سادگی در دسترس‌اند.",image:"Footer.jpg",pose:"invite"}];
 const limbs=[
 {rig:$("legLLRig"),key:"LL",pivot:31.89},
 {rig:$("legLMRig"),key:"LM",pivot:152.34},
@@ -190,14 +190,14 @@ if(panel){
  callData(panel);
  const voiceHold=out((time-panel.a-1.1)/.45)*(1-ramp(time,panel.b-.7,panel.b));
  call.style.opacity=voiceHold;call.style.transform="translateX("+lerp(-55,0,out((time-panel.a-1.1)/.55))+"px)";
-}else if(time>=44.2){
+}else if(time>=49.2){
  if(lastPanel!==-2){lastPanel=-2;changeImage("clinic-overview.jpg",true);call.style.opacity=0}
- const reveal=out((time-44.2)/1.1);
+ const reveal=out((time-49.2)/1.1);
  site.style.opacity=reveal;site.style.transform="translateY("+lerp(65,0,reveal)+"px) scale("+lerp(.97,1,reveal)+")";
  site.style.clipPath="inset(0 0 0)";
  $("frameBeam").style.opacity=0;
  const maxScroll=Math.max(0,pageH-screenH);
- const scrollP=ease((time-45.5)/(51.5-45.5));
+ const scrollP=ease((time-50.5)/(56.5-50.5));
  siteImage.style.transform="translateY("+(-maxScroll*scrollP)+"px)";
  call.style.opacity=0;
 }else{
@@ -207,7 +207,7 @@ if(panel){
  $("frameBeam").style.transform="translateY(-50%) scaleX(.02)";
  call.style.opacity=0;
 }
-octo.style.opacity=out((time-.1)/1.05)*(1-ramp(time,20.8,21.5));octo.style.left="340px";octo.style.top="1000px";octo.style.width="400px";
+octo.style.opacity=out((time-.1)/1.05)*(1-ramp(time,48.4,49.2));octo.style.left="340px";octo.style.top="1000px";octo.style.width="400px";
 char.setAttribute("transform","translate(0 "+(pose.entrance.y+pose.idle.breathY)+") translate(212.6 471.93) scale("+pose.entrance.scaleX+" "+((1-pose.entrance.squash)*pose.idle.breathScale)+") translate(-212.6 -471.93)");
 const angles=pose.idle.tentacleAngles;
 limbs.forEach((limb,index)=>limb.rig.setAttribute("transform","rotate("+angles[index].toFixed(2)+" "+limb.pivot+" 308.65)"));
@@ -215,10 +215,10 @@ pupils.forEach(el=>el.setAttribute("transform","translate("+pose.pupilOffset.x+"
 eyes.forEach(([el,x,y])=>el.setAttribute("transform","translate("+x+" "+y+") scale(1 "+pose.blinkScaleY+") translate("+(-x)+" "+(-y)+")"));
 Object.keys(mouth).forEach(k=>mouth[k].style.opacity=pose.mouth[k]||0);
 
-const finish=out((time-21)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
+const finish=out((time-53.2)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
 $("scrub").value=time;$("time").textContent=time.toFixed(2)+"s";
 }
-window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:12.2},{name:"sweep",t:20.2},{name:"sweep",t:28.2},{name:"sweep",t:36.2},{name:"reveal",t:44.2},{name:"ding",t:51.5}];window.__ready=false;
+window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:13.2},{name:"sweep",t:22.2},{name:"sweep",t:31.2},{name:"sweep",t:40.2},{name:"reveal",t:49.2},{name:"ding",t:56.5}];window.__ready=false;
 const ready=()=>Promise.all(preloads).then(()=>{if(imageMeta["Hero.jpg"]){siteImage.src="Hero.jpg";changeImage("Hero.jpg",false)}measure();window.__ready=true;draw(0)});
 document.fonts.ready.then(ready);ready();
 function tick(){if(!playing)return;const t=Math.min(D,(performance.now()-start)/1000);draw(t);if(t>=D){playing=false;$("play").textContent="Play";return}raf=requestAnimationFrame(tick)}
