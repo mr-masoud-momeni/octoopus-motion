@@ -19,6 +19,10 @@ export const SFX = {
   rise: {
     src: "aevalsrc=0.42*sin(2*PI*(170-95*t)*t)*exp(-5*t):d=0.85:s=44100", vol: 0.9
   },
+  reveal: {
+    src: "anoisesrc=d=0.75:c=pink:r=44100, highpass=f=500, lowpass=f=7000, volume=0.30, afade=t=in:st=0:d=0.18, afade=t=out:st=0.35:d=0.4",
+    vol: 0.55
+  },
   pop: {
     src: "aevalsrc=0.40*sin(2*PI*720*t)*exp(-15*t):d=0.24:s=44100", vol: 0.85
   },
@@ -63,12 +67,17 @@ export async function buildSfxTrack(events, outPath, total = 0) {
 
   const args = ["-y"];
   const chains = [];
-  events.forEach((e, i) => {
+  let inputIndex = 0;
+  events.forEach((e) => {
     const r = SFX[e.name];
-    if (!r) return;
+    if (!r) {
+      console.warn("افکت ناشناخته نادیده گرفته شد:", e.name);
+      return;
+    }
     const ms = Math.max(0, Math.round(e.t * 1000));
     args.push("-f", "lavfi", "-i", r.src);
-    chains.push(`[${i}:a]adelay=${ms}|${ms},volume=${r.vol}[s${i}]`);
+    chains.push(`[${inputIndex}:a]adelay=${ms}|${ms},volume=${r.vol}[s${inputIndex}]`);
+    inputIndex++;
   });
   if (!chains.length) return null;
 
