@@ -14,6 +14,12 @@
 #headline{position:absolute;top:155px;left:80px;right:80px;z-index:15;font-size:58px;line-height:1.48;font-weight:900;opacity:0;transform:translateY(34px);text-align:right}#headline strong{color:var(--cyan)}#headline .sub{display:block;color:#b8c9d9;font-size:27px;font-weight:500;margin-top:14px}
 #siteCanvas{position:absolute;left:100px;top:365px;width:880px;height:610px;border-radius:34px;overflow:hidden;opacity:0;transform:translateY(90px) scale(.92);transform-origin:50% 50%;z-index:3;box-shadow:0 50px 110px #0008,0 0 0 1px #b6f8ff35;will-change:transform,opacity}
 #siteCanvas:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(130deg,#fff3,transparent 22%,transparent 70%,#41faf116);mix-blend-mode:screen}
+#siteCanvas:after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;border:1px solid #c5fbff88;box-shadow:inset 0 0 28px #41faf11a,0 0 24px #41faf133}
+#siteImage{width:100%;height:100%;object-fit:contain;object-position:center top;display:block;max-width:none;transform:translateY(0);will-change:transform; background:#f5f7f8}
+#siteCanvas.full-page #siteImage{height:auto;object-fit:initial}
+#frameBeam{position:absolute;inset:0;z-index:8;pointer-events:none;opacity:0;background:linear-gradient(110deg,transparent 0%,#bfffff22 42%,#fff 49%,#41faf1 51%,#bfffff22 58%,transparent 100%);background-size:240% 100%;mix-blend-mode:screen}
+#siteCanvas.opening #frameBeam{opacity:.9;animation:frameSweep .85s cubic-bezier(.2,.7,.2,1) both}
+@keyframes frameSweep{from{background-position:120% 0}to{background-position:-120% 0}}
 #siteCanvas:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1px #fff3,inset 0 -160px 140px -100px #071426}
 #siteImage{width:100%;height:auto;display:block;max-width:none;transform:translateY(0);will-change:transform}
 .siteTag{position:absolute;z-index:5;top:26px;right:28px;padding:11px 18px;border-radius:99px;background:#071426d9;border:1px solid #41faf16b;color:var(--cyan);font-size:18px;backdrop-filter:blur(12px)}
@@ -27,7 +33,7 @@
 <div id="stage"><div class="dots" id="dots"></div><div class="glow" id="glow"></div><div class="bubbles" id="bubbles"></div>
 <div class="topline"><div class="brand"><i></i><span>OCTOOPUS</span></div><div class="eyebrow">DIGITAL EXPERIENCE / CLINIC</div></div>
 <div id="headline">تجربه‌ی یک کلینیک،<br><strong>از اولین نگاه شروع می‌شود.</strong><span class="sub">طراحی رابط کاربری و تجربه‌ی دیجیتال</span></div>
-<div id="siteCanvas"><img id="siteImage" src="clinic-overview.jpg" alt="نمای طراحی وب‌سایت کلینیک"><div class="siteTag">CLINIC WEBSITE · UI/UX</div></div>
+<div id="siteCanvas"><img id="siteImage" src="Hero.jpg" alt="نمای طراحی وب‌سایت کلینیک"><div id="frameBeam"></div><div class="siteTag">CLINIC WEBSITE · UI/UX</div></div>
 <div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
       <g id="charInner">
         <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
@@ -138,10 +144,11 @@ const beats=[
 {t0:8.3,t1:12.4,gaze:[.72,-.12],mouth:"happy"},{t0:12.4,t1:16.6,gaze:[-.35,-.45],mouth:"surprise"},
 {t0:16.6,t1:20.8,gaze:[.35,-.1],mouth:"happy"},{t0:20.8,t1:25,gaze:[0,0],mouth:"happy"}];
 const panels=[
-{a:4.2,b:8.3,index:"01 / FIRST IMPRESSION",title:"هویت بصری<br>در یک نگاه",text:"اولین برخورد باید حس اعتماد بسازد؛ بدون شلوغی و بدون سردرگمی.",scroll:0,pose:"present"},
-{a:8.3,b:12.4,index:"02 / CLEAR STRUCTURE",title:"خدمات،<br>روشن و قابل فهم",text:"کاربر باید سریع مسیر خودش را پیدا کند؛ از معرفی خدمات تا جزئیات موردنیاز.",scroll:.28,pose:"explain"},
-{a:12.4,b:16.6,index:"03 / USER JOURNEY",title:"هر قدم،<br>یک مسیر ساده‌تر",text:"چیدمان درست، فاصله‌گذاری و اولویت محتوا، تجربه را روان‌تر می‌کنند.",scroll:.58,pose:"curious"},
-{a:16.6,b:20.8,index:"04 / CONTACT",title:"راه ارتباط،<br>همیشه در دسترس",text:"وقتی قدم بعدی واضح باشد، تصمیم‌گیری هم ساده‌تر می‌شود.",scroll:.9,pose:"invite"}];
+{a:4.2,b:7.5,index:"01 / FIRST IMPRESSION",title:"هویت بصری<br>در یک نگاه",text:"اولین برخورد باید حس اعتماد بسازد؛ طراحی‌ای که از همان ابتدا حس حرفه‌ای‌بودن را منتقل کند.",image:"Hero.jpg",pose:"present"},
+{a:7.5,b:10.8,index:"02 / SERVICES",title:"خدمات،<br>روشن و قابل فهم",text:"کاربر باید خدمات کلینیک را سریع بشناسد و بدون جست‌وجوی اضافه به اطلاعات موردنیاز برسد.",image:"Services.jpg",pose:"explain"},
+{a:10.8,b:14.1,index:"03 / CONSULTATION",title:"ارتباطی ساده،<br>با حس اطمینان",text:"بخش مشاوره مسیر ارتباط را شفاف می‌کند و فاصله‌ی کاربر تا دریافت راهنمایی را کوتاه‌تر.",image:"Consultation.jpg",pose:"curious"},
+{a:14.1,b:17.4,index:"04 / APPOINTMENT",title:"رزرو نوبت،<br>بدون پیچیدگی",text:"فرآیند رزرو باید واضح و سرراست باشد؛ تا کاربر بداند قدم بعدی دقیقاً چیست.",image:"Reserve.jpg",pose:"invite"},
+{a:17.4,b:20.8,index:"05 / THE DETAILS",title:"تجربه‌ای کامل،<br>تا آخرین بخش",text:"حتی انتهای صفحه هم بخشی از تجربه است؛ اطلاعات مهم و راه‌های ارتباطی در دسترس می‌مانند.",image:"Footer.jpg",pose:"invite"}];
 const limbs=[
 {rig:$("legLLRig"),key:"LL",pivot:31.89},
 {rig:$("legLMRig"),key:"LM",pivot:152.34},
@@ -151,15 +158,38 @@ const pupils=[$("pupilL"),$("pupilR")],eyes=[[$("eyeL"),114.81,157.74],[$("eyeR"
 
 const callData=p=>{$("callIndex").innerHTML=p.index;$("callTitle").innerHTML=p.title;$("callText").textContent=p.text};
 
-let pageH=0,screenH=850,time=0,playing=false,raf=0,start=0;
+let pageH=0,screenH=850,time=0,playing=false,raf=0,start=0,lastPanel=-1,currentImage="";
 function measure(){pageH=siteImage.naturalHeight*(site.clientWidth/siteImage.naturalWidth);screenH=site.clientHeight}
+function changeImage(src,full=false){
+ if(currentImage===src)return;
+ currentImage=src;site.classList.toggle("full-page",full);site.classList.remove("opening");
+ siteImage.style.opacity="0";
+ const reveal=()=>{siteImage.style.transform="translateY(0)";siteImage.style.opacity="1";site.classList.add("opening");setTimeout(()=>site.classList.remove("opening"),900);measure()};
+ siteImage.onload=reveal;siteImage.src=src;
+ if(siteImage.complete&&siteImage.naturalWidth)reveal();
+}
 function draw(t){
 time=Math.max(0,Math.min(D,Number(t)||0));const fit=Math.min(innerWidth/1080,(innerHeight-48)/1920);stage.style.transform="scale("+fit+")";
 const pose=sampleOctoMotion(time,{entrance:{start:.15,duration:1.15,from:1180},beats,blinks:[2.7,7.4,11.2,15.4,19.6,23.2]});
 headline.style.opacity=out(time/.8)*(1-ramp(time,3.3,4.1));headline.style.transform="translateY("+lerp(36,0,out(time/.8))+"px)";
-const siteIn=out((time-3.3)/1.05),siteOut=1-ramp(time,20.4,21.3);site.style.opacity=siteIn*siteOut;site.style.transform="translateY("+lerp(95,0,siteIn)+"px) scale("+lerp(.94,1,siteIn)+")";
-const maxScroll=Math.max(0,pageH-screenH),panel=panels.find(x=>time>=x.a&&time<x.b);
-if(panel){const q=ramp(time,panel.a,panel.a+.85),i=panels.indexOf(panel),prev=i?panels[i-1].scroll:0;siteImage.style.transform="translateY("+(-lerp(maxScroll*prev,maxScroll*panel.scroll,q))+"px)";callData(panel);const v=out((time-panel.a)/.6)*(1-ramp(time,panel.b-.45,panel.b));call.style.opacity=v;call.style.transform="translateX("+lerp(-55,0,out((time-panel.a)/.65))+"px)"}else call.style.opacity=0;
+const siteIn=out((time-3.3)/1.05),siteOut=1-ramp(time,20.4,21.3);if(time<20.8){site.style.opacity=siteIn*siteOut;site.style.transform="translateY("+lerp(95,0,siteIn)+"px) scale("+lerp(.94,1,siteIn)+")"}
+const panel=panels.find(x=>time>=x.a&&time<x.b);
+if(panel){
+ const i=panels.indexOf(panel);
+ if(i!==lastPanel){lastPanel=i;changeImage(panel.image,false);siteImage.style.transform="translateY(0)";call.style.opacity=0}
+ callData(panel);
+ const v=out((time-panel.a)/.58)*(1-ramp(time,panel.b-.42,panel.b));
+ call.style.opacity=v;call.style.transform="translateX("+lerp(-55,0,out((time-panel.a)/.62))+"px)";
+ site.style.clipPath="inset(0 0 0 0 round 34px)";
+}else if(time>=20.8){
+ if(lastPanel!==-2){lastPanel=-2;changeImage("clinic-overview.jpg",true);siteImage.style.transform="translateY(0)"}
+ const reveal=out((time-20.8)/.75);
+ site.style.opacity=reveal;site.style.transform="translateY("+lerp(65,0,reveal)+"px) scale("+lerp(.97,1,reveal)+")";
+ const maxScroll=Math.max(0,pageH-screenH);
+ const scrollP=ease((time-21.55)/(24.5-21.55));
+ siteImage.style.transform="translateY("+(-maxScroll*scrollP)+"px)";
+ call.style.opacity=0;
+}else{call.style.opacity=0;}
 octo.style.opacity=out((time-.1)/1.05)*(1-ramp(time,20.8,21.5));octo.style.left="340px";octo.style.top="1000px";octo.style.width="400px";
 char.setAttribute("transform","translate(0 "+(pose.entrance.y+pose.idle.breathY)+") translate(212.6 471.93) scale("+pose.entrance.scaleX+" "+((1-pose.entrance.squash)*pose.idle.breathScale)+") translate(-212.6 -471.93)");
 const angles=pose.idle.tentacleAngles;
@@ -171,7 +201,7 @@ Object.keys(mouth).forEach(k=>mouth[k].style.opacity=pose.mouth[k]||0);
 const finish=out((time-21)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
 $("scrub").value=time;$("time").textContent=time.toFixed(2)+"s";
 }
-window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:8.3},{name:"pop",t:12.4},{name:"sweep",t:16.6},{name:"ding",t:21.3}];window.__ready=false;
+window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:7.5},{name:"sweep",t:10.8},{name:"sweep",t:14.1},{name:"sweep",t:17.4},{name:"reveal",t:21.0},{name:"ding",t:24.6}];window.__ready=false;
 const ready=()=>{if(siteImage.complete&&siteImage.naturalWidth){measure();window.__ready=true;draw(0)}else siteImage.addEventListener("load",()=>{measure();window.__ready=true;draw(0)},{once:true})};document.fonts.ready.then(ready);ready();
 function tick(){if(!playing)return;const t=Math.min(D,(performance.now()-start)/1000);draw(t);if(t>=D){playing=false;$("play").textContent="Play";return}raf=requestAnimationFrame(tick)}
 $("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing){start=performance.now()-time*1000;raf=requestAnimationFrame(tick)}else cancelAnimationFrame(raf)};
