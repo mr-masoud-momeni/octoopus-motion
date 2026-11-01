@@ -5,21 +5,19 @@
 :root{--cyan:#41FAF1;--white:#F5F8FC;--muted:#A9B9CC;--navy:#0A192F}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#05080f;color:var(--white);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
 #stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;isolation:isolate;transform-origin:center;perspective:1800px;background:radial-gradient(120% 80% at 50% 78%,#10233f 0%,var(--navy) 46%,#050c17 100%)}
-.dots{position:absolute;inset:-140px;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(65,250,241,.20) 2.4px,transparent 2.4px);background-size:64px 64px;opacity:.5;mask-image:radial-gradient(75% 60% at 50% 55%,#000 0%,transparent 100%);-webkit-mask-image:radial-gradient(75% 60% at 50% 55%,#000 0%,transparent 100%)}
-.glow{position:absolute;left:50%;bottom:-280px;width:1500px;height:1100px;margin-left:-750px;z-index:0;pointer-events:none;background:radial-gradient(closest-side,rgba(65,250,241,.22),rgba(65,250,241,.06) 55%,transparent 72%);filter:blur(6px)}
-.bubbles{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}.bubbles i{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(65,250,241,.85),rgba(65,250,241,.10) 70%);box-shadow:0 0 18px rgba(65,250,241,.35);will-change:transform,opacity}
+.dots{position:absolute;inset:-140px;background-image:radial-gradient(rgba(65,250,241,.20) 2.4px,transparent 2.4px);background-size:64px 64px;opacity:.5;mask-image:radial-gradient(75% 60% at 50% 55%,#000 0%,transparent 100%);-webkit-mask-image:radial-gradient(75% 60% at 50% 55%,#000 0%,transparent 100%)}
+.glow{position:absolute;left:50%;bottom:-280px;width:1500px;height:1100px;margin-left:-750px;background:radial-gradient(closest-side,rgba(65,250,241,.22),rgba(65,250,241,.06) 55%,transparent 72%);filter:blur(6px);pointer-events:none}
+.bubbles{position:absolute;inset:0;overflow:hidden;pointer-events:none}.bubbles i{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(65,250,241,.85),rgba(65,250,241,.10) 70%);box-shadow:0 0 18px rgba(65,250,241,.35);will-change:transform,opacity}
 .vignette{position:absolute;inset:0;z-index:30;pointer-events:none;background:radial-gradient(78% 62% at 50% 52%,transparent 40%,rgba(2,6,14,.55) 100%)}
 .topline{position:absolute;top:68px;left:76px;right:76px;display:flex;align-items:center;justify-content:space-between;z-index:20;color:#b9c8d8;font-size:22px}
 .brand{direction:ltr;letter-spacing:.12em;font:700 24px system-ui;display:flex;align-items:center;gap:12px}.brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 24px var(--cyan)}.eyebrow{color:var(--cyan);font-size:20px;letter-spacing:.04em}
 #headline{position:absolute;top:155px;left:80px;right:80px;z-index:15;font-size:58px;line-height:1.48;font-weight:900;opacity:0;transform:translateY(34px);text-align:right}#headline strong{color:var(--cyan)}#headline .sub{display:block;color:#b8c9d9;font-size:27px;font-weight:500;margin-top:14px}
-#siteCanvas{position:absolute;left:100px;top:365px;width:880px;height:610px;border-radius:34px;overflow:hidden;opacity:0;transform:translateY(90px) scale(.92);transform-origin:50% 50%;z-index:3;box-shadow:0 50px 110px #0008,0 0 0 1px #b6f8ff35;will-change:transform,opacity}
-#siteCanvas:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(130deg,#fff3,transparent 22%,transparent 70%,#41faf116);mix-blend-mode:screen}
-#siteCanvas:after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;border:1px solid #c5fbff88;box-shadow:inset 0 0 28px #41faf11a,0 0 24px #41faf133}
-#siteImage{width:100%;height:100%;object-fit:contain;object-position:center top;display:block;max-width:none;transform:translateY(0);will-change:transform; background:#f5f7f8}
-#siteCanvas.full-page #siteImage{height:auto;object-fit:initial}
-#frameBeam{position:absolute;inset:0;z-index:8;pointer-events:none;opacity:0;background:linear-gradient(110deg,transparent 0%,#bfffff22 42%,#fff 49%,#41faf1 51%,#bfffff22 58%,transparent 100%);background-size:240% 100%;mix-blend-mode:screen}
-#siteCanvas.opening #frameBeam{opacity:.9;animation:frameSweep .85s cubic-bezier(.2,.7,.2,1) both}
-@keyframes frameSweep{from{background-position:120% 0}to{background-position:-120% 0}}
+#siteCanvas{position:absolute;left:100px;top:390px;width:880px;height:443px;border-radius:8px;overflow:hidden;opacity:0;transform:translateY(90px) scale(.98);transform-origin:50% 50%;z-index:3;background:transparent;box-shadow:0 28px 72px #0006;will-change:transform,opacity;clip-path:inset(50% 0)}
+#siteImage{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;max-width:none;transform:translateY(0);will-change:transform,opacity}
+#frameBeam{position:absolute;left:0;right:0;top:50%;height:3px;z-index:4;pointer-events:none;opacity:0;transform:translateY(-50%) scaleX(.02);transform-origin:center;background:linear-gradient(90deg,transparent,#41faf1 18%,#fff 50%,#41faf1 82%,transparent);box-shadow:0 0 18px 5px #41faf188}
+#siteCanvas.full-page{height:610px;border-radius:12px;clip-path:none}
+#siteCanvas.full-page #siteImage{height:auto;object-fit:initial;inset:0 auto auto 0}
+
 #siteCanvas:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1px #fff3,inset 0 -160px 140px -100px #071426}
 #siteImage{width:100%;height:auto;display:block;max-width:none;transform:translateY(0);will-change:transform}
 .siteTag{position:absolute;z-index:5;top:26px;right:28px;padding:11px 18px;border-radius:99px;background:#071426d9;border:1px solid #41faf16b;color:var(--cyan);font-size:18px;backdrop-filter:blur(12px)}
@@ -33,7 +31,7 @@
 <div id="stage"><div class="dots" id="dots"></div><div class="glow" id="glow"></div><div class="bubbles" id="bubbles"></div>
 <div class="topline"><div class="brand"><i></i><span>OCTOOPUS</span></div><div class="eyebrow">DIGITAL EXPERIENCE / CLINIC</div></div>
 <div id="headline">تجربه‌ی یک کلینیک،<br><strong>از اولین نگاه شروع می‌شود.</strong><span class="sub">طراحی رابط کاربری و تجربه‌ی دیجیتال</span></div>
-<div id="siteCanvas"><img id="siteImage" src="Hero.jpg" alt="نمای طراحی وب‌سایت کلینیک"><div id="frameBeam"></div><div class="siteTag">CLINIC WEBSITE · UI/UX</div></div>
+<div id="siteCanvas"><img id="siteImage" src="Hero.jpg" alt="نمای طراحی وب‌سایت کلینیک"><div id="frameBeam"></div></div>
 <div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
       <g id="charInner">
         <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
@@ -137,18 +135,18 @@ function sampleOctoMotion(time,config={}){
  return {entrance,idle,gaze,pupilOffset:{x:gaze[0]*9,y:gaze[1]*7},blinkScaleY:sampleBlink(time,buildBlinkTimes(beats,config.blinks??[])),mouth:sampleMouth(time,beats)};
 }
 (()=>{
-const D=25,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
+const D=52,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
 const clamp=v=>Math.max(0,Math.min(1,v)),lerp=(a,b,p)=>a+(b-a)*p,ease=p=>{p=clamp(p);return p*p*(3-2*p)},out=p=>1-Math.pow(1-clamp(p),3),ramp=(t,a,b)=>ease((t-a)/(b-a));
 const beats=[
 {t0:0,t1:4.2,gaze:[0,-.12],mouth:"surprise"},{t0:4.2,t1:8.3,gaze:[-.65,-.25],mouth:"happy"},
 {t0:8.3,t1:12.4,gaze:[.72,-.12],mouth:"happy"},{t0:12.4,t1:16.6,gaze:[-.35,-.45],mouth:"surprise"},
 {t0:16.6,t1:20.8,gaze:[.35,-.1],mouth:"happy"},{t0:20.8,t1:25,gaze:[0,0],mouth:"happy"}];
 const panels=[
-{a:4.2,b:7.5,index:"01 / FIRST IMPRESSION",title:"هویت بصری<br>در یک نگاه",text:"اولین برخورد باید حس اعتماد بسازد؛ طراحی‌ای که از همان ابتدا حس حرفه‌ای‌بودن را منتقل کند.",image:"Hero.jpg",pose:"present"},
-{a:7.5,b:10.8,index:"02 / SERVICES",title:"خدمات،<br>روشن و قابل فهم",text:"کاربر باید خدمات کلینیک را سریع بشناسد و بدون جست‌وجوی اضافه به اطلاعات موردنیاز برسد.",image:"Services.jpg",pose:"explain"},
-{a:10.8,b:14.1,index:"03 / CONSULTATION",title:"ارتباطی ساده،<br>با حس اطمینان",text:"بخش مشاوره مسیر ارتباط را شفاف می‌کند و فاصله‌ی کاربر تا دریافت راهنمایی را کوتاه‌تر.",image:"Consultation.jpg",pose:"curious"},
-{a:14.1,b:17.4,index:"04 / APPOINTMENT",title:"رزرو نوبت،<br>بدون پیچیدگی",text:"فرآیند رزرو باید واضح و سرراست باشد؛ تا کاربر بداند قدم بعدی دقیقاً چیست.",image:"Reserve.jpg",pose:"invite"},
-{a:17.4,b:20.8,index:"05 / THE DETAILS",title:"تجربه‌ای کامل،<br>تا آخرین بخش",text:"حتی انتهای صفحه هم بخشی از تجربه است؛ اطلاعات مهم و راه‌های ارتباطی در دسترس می‌مانند.",image:"Footer.jpg",pose:"invite"}];
+{a:4.2,b:12.2,index:"01 / HERO",title:"اولین نگاه،<br>شروع یک تجربه",text:"هدر سایت؛ جایی که هویت کلینیک و حس اعتماد در اولین برخورد شکل می‌گیرد.",image:"Hero.jpg",pose:"present"},
+{a:12.2,b:20.2,index:"02 / RESERVATION",title:"رزرو نوبت،<br>ساده و در دسترس",text:"مسیر رزرو باید واضح باشد تا کاربر بدون مکث، قدم بعدی را پیدا کند.",image:"Reserve.jpg",pose:"invite"},
+{a:20.2,b:28.2,index:"03 / SERVICES",title:"خدمات،<br>روشن و قابل فهم",text:"کاربر باید خدمات کلینیک را سریع بشناسد و اطلاعات موردنیازش را راحت پیدا کند.",image:"Services.jpg",pose:"explain"},
+{a:28.2,b:36.2,index:"04 / CONSULTATION",title:"مشاوره،<br>با حس اطمینان",text:"بخش مشاوره مسیر ارتباط را شفاف می‌کند و رسیدن به راهنمایی را ساده‌تر می‌سازد.",image:"Consultation.jpg",pose:"curious"},
+{a:36.2,b:44.2,index:"05 / FOOTER",title:"تجربه‌ای کامل،<br>تا آخرین بخش",text:"اطلاعات تماس و مسیرهای ارتباطی در پایان صفحه هم به‌سادگی در دسترس‌اند.",image:"Footer.jpg",pose:"invite"}];
 const limbs=[
 {rig:$("legLLRig"),key:"LL",pivot:31.89},
 {rig:$("legLMRig"),key:"LM",pivot:152.34},
@@ -157,39 +155,58 @@ const limbs=[
 const pupils=[$("pupilL"),$("pupilR")],eyes=[[$("eyeL"),114.81,157.74],[$("eyeR"),302.82,157.74]],mouth={happy:$("mHappy"),sad:$("mSad"),surprise:$("mSurprise")};
 
 const callData=p=>{$("callIndex").innerHTML=p.index;$("callTitle").innerHTML=p.title;$("callText").textContent=p.text};
+const BUBBLES=[];
+(function makeBubbles(){let seed=20260119;const rng=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};for(let i=0;i<16;i++){const node=document.createElement("i"),size=lerp(8,34,rng());node.style.width=size+"px";node.style.height=size+"px";$("bubbles").appendChild(node);BUBBLES.push({node,x:lerp(40,1040,rng()),y0:lerp(0,2100,rng()),speed:lerp(45,150,rng()),wob:lerp(12,48,rng()),phase:rng()*Math.PI*2,alpha:lerp(.10,.42,rng())})}})();
 
-let pageH=0,screenH=850,time=0,playing=false,raf=0,start=0,lastPanel=-1,currentImage="";
+
+let pageH=0,screenH=610,time=0,playing=false,raf=0,start=0,lastPanel=-1,currentImage="",imageMeta={};
+const imageNames=["Hero.jpg","Reserve.jpg","Services.jpg","Consultation.jpg","Footer.jpg","clinic-overview.jpg"];
+const preloads=imageNames.map(src=>new Promise(resolve=>{const im=new Image();im.onload=()=>{imageMeta[src]={w:im.naturalWidth,h:im.naturalHeight};resolve()};im.onerror=resolve;im.src=src}));
 function measure(){pageH=siteImage.naturalHeight*(site.clientWidth/siteImage.naturalWidth);screenH=site.clientHeight}
 function changeImage(src,full=false){
- if(currentImage===src)return;
- currentImage=src;site.classList.toggle("full-page",full);site.classList.remove("opening");
- siteImage.style.opacity="0";
- const reveal=()=>{siteImage.style.transform="translateY(0)";siteImage.style.opacity="1";site.classList.add("opening");setTimeout(()=>site.classList.remove("opening"),900);measure()};
- siteImage.onload=reveal;siteImage.src=src;
- if(siteImage.complete&&siteImage.naturalWidth)reveal();
+ if(currentImage!==src){currentImage=src;siteImage.src=src}
+ site.classList.toggle("full-page",full);
+ const meta=imageMeta[src];
+ if(meta&&!full){const height=880*meta.h/meta.w;site.style.height=height+"px";siteImage.style.width="100%";siteImage.style.height="100%";siteImage.style.objectFit="fill"}
+ if(full){site.style.height="610px";siteImage.style.width="100%";siteImage.style.height="auto";siteImage.style.objectFit="initial"}
+ measure();
 }
 function draw(t){
 time=Math.max(0,Math.min(D,Number(t)||0));const fit=Math.min(innerWidth/1080,(innerHeight-48)/1920);stage.style.transform="scale("+fit+")";
+for(const b of BUBBLES){const y=2100-(((b.y0+time*b.speed)%2300));const x=b.x+Math.sin(time*1.1+b.phase)*b.wob;b.node.style.transform="translate("+x+"px,"+y+"px)";b.node.style.opacity=b.alpha*(.55+.45*Math.sin(time*1.6+b.phase))}
+$("glow").style.opacity=.85+Math.sin(time*1.15)*.15;
 const pose=sampleOctoMotion(time,{entrance:{start:.15,duration:1.15,from:1180},beats,blinks:[2.7,7.4,11.2,15.4,19.6,23.2]});
 headline.style.opacity=out(time/.8)*(1-ramp(time,3.3,4.1));headline.style.transform="translateY("+lerp(36,0,out(time/.8))+"px)";
-const siteIn=out((time-3.3)/1.05),siteOut=1-ramp(time,20.4,21.3);if(time<20.8){site.style.opacity=siteIn*siteOut;site.style.transform="translateY("+lerp(95,0,siteIn)+"px) scale("+lerp(.94,1,siteIn)+")"}
+const siteIn=out((time-3.3)/.9);
 const panel=panels.find(x=>time>=x.a&&time<x.b);
 if(panel){
  const i=panels.indexOf(panel);
- if(i!==lastPanel){lastPanel=i;changeImage(panel.image,false);siteImage.style.transform="translateY(0)";call.style.opacity=0}
+ if(i!==lastPanel){lastPanel=i;changeImage(panel.image,false);call.style.opacity=0}
+ const open=out((time-panel.a)/1.35);
+ site.style.opacity=siteIn;site.style.transform="translateY("+lerp(70,0,siteIn)+"px) scale("+lerp(.985,1,siteIn)+")";
+ site.style.clipPath="inset("+((1-open)*50).toFixed(2)+"% 0)";
+ $("frameBeam").style.opacity=1-open;
+ $("frameBeam").style.transform="translateY(-50%) scaleX("+lerp(.02,1,open)+")";
  callData(panel);
- const v=out((time-panel.a)/.58)*(1-ramp(time,panel.b-.42,panel.b));
- call.style.opacity=v;call.style.transform="translateX("+lerp(-55,0,out((time-panel.a)/.62))+"px)";
- site.style.clipPath="inset(0 0 0 0 round 34px)";
-}else if(time>=20.8){
- if(lastPanel!==-2){lastPanel=-2;changeImage("clinic-overview.jpg",true);siteImage.style.transform="translateY(0)"}
- const reveal=out((time-20.8)/.75);
+ const voiceHold=out((time-panel.a-1.1)/.45)*(1-ramp(time,panel.b-.7,panel.b));
+ call.style.opacity=voiceHold;call.style.transform="translateX("+lerp(-55,0,out((time-panel.a-1.1)/.55))+"px)";
+}else if(time>=44.2){
+ if(lastPanel!==-2){lastPanel=-2;changeImage("clinic-overview.jpg",true);call.style.opacity=0}
+ const reveal=out((time-44.2)/1.1);
  site.style.opacity=reveal;site.style.transform="translateY("+lerp(65,0,reveal)+"px) scale("+lerp(.97,1,reveal)+")";
+ site.style.clipPath="inset(0 0 0)";
+ $("frameBeam").style.opacity=0;
  const maxScroll=Math.max(0,pageH-screenH);
- const scrollP=ease((time-21.55)/(24.5-21.55));
+ const scrollP=ease((time-45.5)/(51.5-45.5));
  siteImage.style.transform="translateY("+(-maxScroll*scrollP)+"px)";
  call.style.opacity=0;
-}else{call.style.opacity=0;}
+}else{
+ site.style.opacity=time<3.3?0:siteIn;
+ site.style.clipPath="inset(50% 0)";
+ $("frameBeam").style.opacity=time>3.3?1:0;
+ $("frameBeam").style.transform="translateY(-50%) scaleX(.02)";
+ call.style.opacity=0;
+}
 octo.style.opacity=out((time-.1)/1.05)*(1-ramp(time,20.8,21.5));octo.style.left="340px";octo.style.top="1000px";octo.style.width="400px";
 char.setAttribute("transform","translate(0 "+(pose.entrance.y+pose.idle.breathY)+") translate(212.6 471.93) scale("+pose.entrance.scaleX+" "+((1-pose.entrance.squash)*pose.idle.breathScale)+") translate(-212.6 -471.93)");
 const angles=pose.idle.tentacleAngles;
@@ -201,8 +218,9 @@ Object.keys(mouth).forEach(k=>mouth[k].style.opacity=pose.mouth[k]||0);
 const finish=out((time-21)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
 $("scrub").value=time;$("time").textContent=time.toFixed(2)+"s";
 }
-window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:7.5},{name:"sweep",t:10.8},{name:"sweep",t:14.1},{name:"sweep",t:17.4},{name:"reveal",t:21.0},{name:"ding",t:24.6}];window.__ready=false;
-const ready=()=>{if(siteImage.complete&&siteImage.naturalWidth){measure();window.__ready=true;draw(0)}else siteImage.addEventListener("load",()=>{measure();window.__ready=true;draw(0)},{once:true})};document.fonts.ready.then(ready);ready();
+window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:12.2},{name:"sweep",t:20.2},{name:"sweep",t:28.2},{name:"sweep",t:36.2},{name:"reveal",t:44.2},{name:"ding",t:51.5}];window.__ready=false;
+const ready=()=>Promise.all(preloads).then(()=>{if(imageMeta["Hero.jpg"]){siteImage.src="Hero.jpg";changeImage("Hero.jpg",false)}measure();window.__ready=true;draw(0)});
+document.fonts.ready.then(ready);ready();
 function tick(){if(!playing)return;const t=Math.min(D,(performance.now()-start)/1000);draw(t);if(t>=D){playing=false;$("play").textContent="Play";return}raf=requestAnimationFrame(tick)}
 $("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing){start=performance.now()-time*1000;raf=requestAnimationFrame(tick)}else cancelAnimationFrame(raf)};
 $("restart").onclick=()=>{playing=false;cancelAnimationFrame(raf);$("play").textContent="Play";draw(0)};
