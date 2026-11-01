@@ -25,6 +25,7 @@
 #end{position:absolute;left:80px;right:80px;top:1245px;bottom:auto;z-index:22;opacity:0;transform:translateY(35px);text-align:right}#end .mini{font-size:19px;color:var(--cyan);letter-spacing:.08em;direction:ltr;text-align:left}#end h2{font-size:52px;line-height:1.42;margin:13px 0 9px;font-weight:900}#end h2 strong{color:var(--cyan)}#end p{font-size:23px;line-height:1.75;color:#b8c7d8;margin:0;max-width:850px}#end .cta{display:inline-flex;align-items:center;gap:16px;margin-top:25px;padding:16px 25px;border-radius:16px;background:var(--cyan);color:#061626;font-size:22px;font-weight:900}#end .cta i{font-style:normal;font-size:30px}
 .octo-cue{position:absolute;z-index:13;width:430px;min-height:142px;padding:25px 30px;border:1px solid #41faf18a;border-radius:25px;background:linear-gradient(145deg,#142e48f5,#091a2df5);box-shadow:0 18px 46px #0008,0 0 30px #41faf125;color:#f3fbff;font-size:28px;line-height:1.85;font-weight:800;display:flex;align-items:center;opacity:0;will-change:transform,opacity;backdrop-filter:blur(14px)}.octo-cue b{color:var(--cyan);font-size:30px;margin-left:14px;flex:none}.octo-cue:before{content:"";position:absolute;top:50%;width:25px;height:25px;background:#10263df5;border:1px solid #41faf18a;transform:translateY(-50%) rotate(45deg)}.octo-cue.from-left:before{left:-14px;border-top:0;border-right:0}.octo-cue.from-right:before{right:-14px;border-bottom:0;border-left:0}.nurse-hat{pointer-events:none;filter:drop-shadow(0 3px 3px #00101d66)}.nurse-hat .cap-shadow{fill:#071a2c;opacity:.42}.nurse-hat .cap{fill:#f8fcff;stroke:#d5e7ef;stroke-width:2.2;stroke-linejoin:round}.nurse-hat .band{fill:#c9f2f0;stroke:#a8dcdd;stroke-width:1.4;stroke-linejoin:round}.nurse-hat .cap-seam{fill:none;stroke:#d5e7ef;stroke-width:1.7;stroke-linecap:round;opacity:.9}.nurse-hat .cross{fill:#12b9b7;stroke:#087f89;stroke-width:1;stroke-linejoin:round}
 #controls{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;align-items:center;gap:12px;padding:12px 16px;background:#050c18f2;border-top:1px solid #41faf133;color:#cbd5e1;font:13px ui-monospace,Consolas,monospace;direction:ltr}button{background:#102a43;color:var(--cyan);border:1px solid #41faf155;border-radius:8px;padding:8px 13px;font:inherit;cursor:pointer}#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:75px;text-align:center}
+.render-mode #controls{display:none!important}
 </style></head><body>
 <div id="stage"><div class="dots" id="dots"></div><div class="glow" id="glow"></div><div class="bubbles" id="bubbles"></div>
 <div class="topline"><div class="brand"><i></i><span>OCTOOPUS</span></div><div class="eyebrow">DIGITAL EXPERIENCE / CLINIC</div></div>
@@ -82,8 +83,10 @@
 
 <div id="end"><div class="mini">BUILT WITH INTENTION · OCTOOPUS</div><h2>ایده‌هات رو به یک وب‌سایت تبدیل کن!<br><strong>طراحی و توسعه وب‌سایت، تخصص ماست.</strong></h2><p>از ایده و طراحی رابط کاربری تا توسعه و اجرای یک وب‌سایت حرفه‌ای.</p><div class="cta">پروژه بعدی رو با هم بسازیم <i>↗</i></div></div>
 <div class="vignette"></div></div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="43.2" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="49.2" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
+// Hide the preview transport controls in captured render frames.
+if(new URLSearchParams(location.search).has("render"))document.body.classList.add("render-mode");
 // Exact motion sampling from the original reel-01 motion language.
 const clamp=(value,min=0,max=1)=>Math.min(max,Math.max(min,value));
 const lerp=(from,to,amount)=>from+(to-from)*amount;
@@ -179,7 +182,7 @@ function changeImage(src,full=false){
  measure();
 }
 function draw(t){
-time=Math.max(0,Math.min(D,Number(t)||0));const fit=Math.min(innerWidth/1080,(innerHeight-48)/1920);stage.style.transform="scale("+fit+")";
+time=Math.max(0,Math.min(D,Number(t)||0));const fit=Math.min(innerWidth/1080,(innerHeight-(document.body.classList.contains("render-mode")?0:48))/1920);stage.style.transform="scale("+fit+")";
 for(const b of BUBBLES){const y=2100-(((b.y0+time*b.speed)%2300));const x=b.x+Math.sin(time*1.1+b.phase)*b.wob;b.node.style.transform="translate("+x+"px,"+y+"px)";b.node.style.opacity=b.alpha*(.55+.45*Math.sin(time*1.6+b.phase))}
 $("glow").style.opacity=.85+Math.sin(time*1.15)*.15;
 const pose=sampleOctoMotion(time,{entrance:{start:.15,duration:1.15,from:1180},beats,blinks:[2.7,7.4,11.2,15.4,19.6,23.2]});
