@@ -141,7 +141,7 @@ function sampleOctoMotion(time,config={}){
  return {entrance,idle,gaze,pupilOffset:{x:gaze[0]*9,y:gaze[1]*7},blinkScaleY:sampleBlink(time,buildBlinkTimes(beats,config.blinks??[])),mouth:sampleMouth(time,beats)};
 }
 (()=>{
-const D=43.2,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
+const D=49.2,$=id=>document.getElementById(id),stage=$("stage"),site=$("siteCanvas"),siteImage=$("siteImage"),octo=$("octoWrap"),char=$("charInner"),call=$("callout"),headline=$("headline"),end=$("end");
 const clamp=v=>Math.max(0,Math.min(1,v)),lerp=(a,b,p)=>a+(b-a)*p,ease=p=>{p=clamp(p);return p*p*(3-2*p)},out=p=>1-Math.pow(1-clamp(p),3),ramp=(t,a,b)=>ease((t-a)/(b-a));
 const beats=[
 {t0:0,t1:4.2,gaze:[0,-.12],mouth:"surprise"},{t0:4.2,t1:8.3,gaze:[-.65,-.25],mouth:"happy"},
@@ -263,7 +263,7 @@ if(beat>=0){
 const finish=out((time-41.5)/.85);end.style.opacity=finish;end.style.transform="translateY("+lerp(35,0,finish)+"px)";
 $("scrub").value=time;$("time").textContent=time.toFixed(2)+"s";
 }
-window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:9.6},{name:"sweep",t:15},{name:"sweep",t:20.4},{name:"sweep",t:25.8},{name:"reveal",t:31.2},{name:"ding",t:42.7}];window.__ready=false;
+window.renderAt=draw;window.OCTO_META={duration:D,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"whoosh",t:.2},{name:"pop",t:3.5},{name:"sweep",t:4.2},{name:"sweep",t:9.6},{name:"sweep",t:15},{name:"sweep",t:20.4},{name:"sweep",t:25.8},{name:"reveal",t:31.2},{name:"rise",t:41.35},{name:"pop",t:42.25},{name:"ding",t:43.1}];window.__ready=false;
 const ready=()=>Promise.all(preloads).then(()=>{if(imageMeta["Hero.jpg"]){siteImage.src="Hero.jpg";changeImage("Hero.jpg",false)}measure();window.__ready=true;draw(0)});
 document.fonts.ready.then(ready);ready();
 function tick(){if(!playing)return;const t=Math.min(D,(performance.now()-start)/1000);draw(t);if(t>=D){playing=false;$("play").textContent="Play";return}raf=requestAnimationFrame(tick)}
