@@ -118,8 +118,22 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #steps{display:none!important}
 .bubble{top:1310px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
 .deep-sea{position:absolute;left:-70px;top:700px;width:1080px;height:620px;opacity:.78;pointer-events:none;z-index:1}.deep-sea svg{width:100%;height:100%}
-.sea-thought{position:absolute;z-index:6;opacity:0;min-width:190px;padding:15px 22px;border-radius:30px;background:rgba(235,249,250,.96);color:#102b43;border:2px solid #41FAF1;box-shadow:0 10px 35px #0005;font-size:25px;font-weight:900;text-align:center;white-space:nowrap;will-change:transform,opacity}
-.thought-a{left:135px;top:805px}.thought-b{left:435px;top:735px}.thought-c{left:730px;top:825px}
+.sea-thought{position:absolute;z-index:6;display:flex;align-items:center;justify-content:center;opacity:0;padding:14px 20px;border-radius:50%;background:radial-gradient(ellipse at 32% 22%,rgba(255,255,255,.92) 0%,rgba(224,250,255,.54) 23%,rgba(94,208,226,.22) 62%,rgba(65,250,241,.12) 100%);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:#102b43;border:1.5px solid rgba(235,255,255,.9);box-shadow:inset 0 3px 9px rgba(255,255,255,.8),inset 0 -8px 18px rgba(65,190,220,.12),0 9px 26px rgba(0,0,0,.2),0 0 20px rgba(65,250,241,.13);font-size:23px;font-weight:900;text-align:center;white-space:nowrap;will-change:transform,opacity}
+.sea-thought:before{content:"";position:absolute;left:20%;top:14%;width:24%;height:12%;border-radius:50%;background:rgba(255,255,255,.78);filter:blur(2px);transform:rotate(-28deg)}
+.sea-thought:after{content:"";position:absolute;right:13%;bottom:13%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.78);box-shadow:-12px 8px 0 -2px rgba(255,255,255,.58)}
+.thought-a{left:190px;top:900px;width:180px;height:116px}
+.thought-b{left:365px;top:820px;width:205px;height:132px}
+.thought-c{left:535px;top:905px;width:220px;height:125px}
+#closingScene{top:390px;z-index:6}
+.closing-kicker{font-size:25px;font-weight:850;color:var(--cyan);letter-spacing:.02em}
+.closing-title{max-width:900px;margin:22px auto 16px;font-size:68px;line-height:1.45;font-weight:1000;color:#fff;text-shadow:0 12px 34px #0005}
+.closing-title em{font-style:normal;color:var(--cyan);text-shadow:0 0 34px #41FAF144}
+.closing-copy{max-width:790px;margin:0 auto;color:#cbd6e5;font-size:27px;line-height:1.9;font-weight:600}
+.next-episode{display:inline-flex;flex-direction:column;gap:8px;margin-top:62px;padding:22px 38px;border:1px solid rgba(65,250,241,.48);border-radius:22px;background:linear-gradient(135deg,rgba(20,43,77,.82),rgba(7,19,36,.82));box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.next-episode small{font-size:19px;color:#aabbd0;font-weight:700}
+.next-episode strong{font-size:29px;color:#fff;font-weight:950}
+.next-episode strong em{font-style:normal;color:var(--cyan)}
+#closingScene~#octoWrap{z-index:5}
 #octoWrap{z-index:5}#controls{z-index:1000}
 
 </style>
@@ -196,6 +210,13 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="question-card"><div class="q">مشتری دنبال چه چیزیه؟</div><div class="hint">از کلمه‌هایی شروع کن که مردم واقعاً برای پیدا کردن محصول یا خدماتت جست‌وجو می‌کنن.</div></div>
  </section>
 
+ <section id="closingScene" class="scene">
+  <div class="closing-kicker">اُکتوپوس؛ همراه رشد کسب‌وکار شما</div>
+  <h2 class="closing-title">دیده‌شدن شما، <em>تخصص ماست.</em></h2>
+  <p class="closing-copy">ما مسیر رسیدن مشتری‌ها به کسب‌وکار شما رو هموار می‌کنیم؛ از جست‌وجوی گوگل تا انتخاب شما.</p>
+  <div class="next-episode"><small>در قسمت بعدی</small><strong>مشتری‌ها دقیقاً <em>چی جست‌وجو می‌کنن؟</em></strong></div>
+ </section>
+
  <div class="bubble" id="speech">از همین سؤال شروع کن!</div>
  <div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
       <g id="charInner">
@@ -243,11 +264,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
  </div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="40" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="46" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 (function(){
  "use strict";
- var DURATION=40, RENDER=new URLSearchParams(location.search).has("render");
+ var DURATION=46, RENDER=new URLSearchParams(location.search).has("render");
  var $=function(id){return document.getElementById(id)};
  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
  var lerp=function(a,b,p){return a+(b-a)*p};
@@ -256,13 +277,14 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var smooth=function(p){p=clamp(p,0,1);return p*p*p*(p*(p*6-15)+10)};
  var back=function(p,s){return 1+(s+1)*Math.pow(p-1,3)+s*Math.pow(p-1,2)};
  var scene=function(t,a,b,fade){return expo(prog(t,a,.45))*(1-prog(t,b-fade,fade))};
- var scenes=[["titleScene",0,5.6,38],["ownerScene",5.6,13,48],["resultsScene",13,22,48],["siteScene",22,32,48],["questionScene",32,40,42]];
+ var scenes=[["titleScene",0,5.6,38],["ownerScene",5.6,13,48],["resultsScene",13,22,48],["siteScene",22,32,48],["questionScene",32,40,42],["closingScene",40,46,48]];
  var poses=[
   {t:1.6,x:-300,y:-80,s:.55},{t:5.6,x:-300,y:-80,s:.57},
   {t:12.6,x:300,y:-80,s:.57},{t:13.2,x:-300,y:-80,s:.55},
   {t:14.2,x:-300,y:-80,s:.57},{t:21.8,x:-300,y:-80,s:.57},
   {t:30.8,x:300,y:-80,s:.57},{t:32,x:300,y:-80,s:.55},
-  {t:40,x:300,y:-80,s:.57}
+  {t:39.8,x:300,y:-80,s:.57},{t:40.5,x:300,y:110,s:.43},
+  {t:46,x:300,y:110,s:.43}
  ];
  var limbs=[];
  var eyes=[{node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},{node:$("eyeR"),x:302.82,y:157.74,pupil:$("pupilR")}];
@@ -294,7 +316,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var gaze=t<5.6?[0,0]:t<13?[.15,-.65]:t<22?[.78,-.18]:t<32?[.15,-.15]:[0,0];
   var sy=blink(t);
   eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
-  var discovery=t>=13.2&&t<15.4,sad=t>=32;
+  var discovery=t>=13.2&&t<15.4,sad=t>=32&&t<40;
   $("mSurprise").style.opacity=discovery?1:0;$("mHappy").style.opacity=sad?0:1;$("mSad").style.opacity=sad?1:0;
   document.querySelectorAll(".sea-thought").forEach(function(n){
    var start=Number(n.getAttribute("data-start")),end=Number(n.getAttribute("data-end"));
