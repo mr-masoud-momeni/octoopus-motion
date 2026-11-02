@@ -80,8 +80,9 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #octoWrap{position:absolute;left:50%;top:1010px;width:560px;margin-left:-280px;opacity:0;transform:translate3d(250px,160px,0) scale(.72);transform-origin:50% 100%;filter:drop-shadow(0 34px 48px rgba(0,0,0,.42)) drop-shadow(0 0 30px rgba(65,250,241,.12));z-index:3;will-change:transform,opacity,filter}
 #octo{display:block;width:100%;height:auto;overflow:visible}
 .octo-body{fill:#41FAF1}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
-.bubble{position:absolute;z-index:7;left:50%;top:870px;min-width:370px;max-width:600px;padding:24px 30px;border-radius:26px;background:#f4f7fb;color:#10243c;font-size:30px;font-weight:900;text-align:center;box-shadow:0 18px 55px #0006;opacity:0;transform:translate(-50%,25px) scale(.85)}
-.bubble:after{content:"";position:absolute;left:48%;bottom:-18px;border-width:20px 18px 0;border-style:solid;border-color:#f4f7fb transparent transparent}
+.bubble{position:absolute;z-index:7;left:50%;top:805px;min-width:370px;max-width:600px;padding:19px 27px;border-radius:20px;background:transparent;color:#f4f7fb;border:1px solid rgba(210,239,245,.5);font-size:27px;font-weight:900;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.14);opacity:0;transform:translate(-50%,25px) scale(.85)}
+.bubble:after{content:"";position:absolute;left:48%;bottom:-13px;border-width:13px 12px 0;border-style:solid;border-color:rgba(210,239,245,.5) transparent transparent}
+.bubble:before{content:"";position:absolute;left:calc(48% + 1px);bottom:-11px;border-width:12px 11px 0;border-style:solid;border-color:#0A192F transparent transparent}
 #steps{position:absolute;top:145px;left:100px;right:100px;display:flex;align-items:center;gap:16px;z-index:9;opacity:0}
 .step{display:flex;align-items:center;gap:10px;color:#71829a;font-size:23px;font-weight:800;white-space:nowrap}
 .step i{width:16px;height:16px;border:3px solid currentColor;border-radius:50%}
@@ -118,12 +119,10 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #steps{display:none!important}
 .bubble{top:1310px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
 .deep-sea{position:absolute;left:-70px;top:700px;width:1080px;height:620px;opacity:.78;pointer-events:none;z-index:1}.deep-sea svg{width:100%;height:100%}
-.sea-thought{position:absolute;z-index:6;display:flex;align-items:center;justify-content:center;opacity:0;padding:14px 20px;border-radius:50%;background:radial-gradient(ellipse at 32% 22%,rgba(255,255,255,.92) 0%,rgba(224,250,255,.54) 23%,rgba(94,208,226,.22) 62%,rgba(65,250,241,.12) 100%);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:#102b43;border:1.5px solid rgba(235,255,255,.9);box-shadow:inset 0 3px 9px rgba(255,255,255,.8),inset 0 -8px 18px rgba(65,190,220,.12),0 9px 26px rgba(0,0,0,.2),0 0 20px rgba(65,250,241,.13);font-size:23px;font-weight:900;text-align:center;white-space:nowrap;will-change:transform,opacity}
-.sea-thought:before{content:"";position:absolute;left:20%;top:14%;width:24%;height:12%;border-radius:50%;background:rgba(255,255,255,.78);filter:blur(2px);transform:rotate(-28deg)}
-.sea-thought:after{content:"";position:absolute;right:13%;bottom:13%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.78);box-shadow:-12px 8px 0 -2px rgba(255,255,255,.58)}
-.thought-a{left:190px;top:900px;width:180px;height:116px}
-.thought-b{left:365px;top:820px;width:205px;height:132px}
-.thought-c{left:535px;top:905px;width:220px;height:125px}
+.sea-thought{position:absolute;z-index:6;display:flex;align-items:center;justify-content:center;opacity:0;padding:13px 19px;border-radius:22px;background:transparent;color:#f4f7fb;border:1px solid rgba(210,239,245,.48);box-shadow:0 5px 18px rgba(0,0,0,.12);font-size:22px;font-weight:850;text-align:center;white-space:nowrap;will-change:transform,opacity}
+.thought-a{left:390px;top:875px;width:175px;height:64px}
+.thought-b{left:485px;top:805px;width:190px;height:66px}
+.thought-c{left:565px;top:880px;width:205px;height:68px}
 #closingScene{top:390px;z-index:6}
 .closing-kicker{font-size:25px;font-weight:850;color:var(--cyan);letter-spacing:.02em}
 .closing-title{max-width:900px;margin:22px auto 16px;font-size:68px;line-height:1.45;font-weight:1000;color:#fff;text-shadow:0 12px 34px #0005}
