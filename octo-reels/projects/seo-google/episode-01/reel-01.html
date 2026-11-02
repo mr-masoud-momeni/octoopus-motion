@@ -548,11 +548,11 @@ const CFG = {
   blinks: [3.4, 8.2, 14.5, 21.2, 28.4],
 
   beats: [
-    { t0: 0, t1: 5.2, title: "هر سایتی رو گوگل نشون نمی‌ده!", sub: "چطور از گوگل مشتری بگیریم؟ | قسمت اول", mouth: "surprise", gaze: [0.0,-0.12], sweep: false },
-    { t0: 5.2, t1: 11.0, title: "اول، منظور کاربر رو می‌فهمه", sub: "فقط کلمه‌ها مهم نیستن؛ هدف جست‌وجو مهمه.", mouth: "happy", gaze: [0.25,-0.45], sweep: true },
-    { t0: 11.0, t1: 18.0, title: "بعد، ارتباط صفحه رو می‌سنجه", sub: "محتوا باید دقیقاً به سؤال کاربر جواب بده.", mouth: "surprise", gaze: [0.35,-0.35], sweep: true },
-    { t0: 18.0, t1: 25.0, title: "کیفیت و اعتبار هم مهمه", sub: "محتوای مفید، قابل اعتماد و تجربهٔ خوب.", mouth: "sad", gaze: [0.42,-0.18], sweep: true },
-    { t0: 25.0, t1: 33.0, title: "در نهایت، بهترین پاسخ‌ها رو مرتب می‌کنه", sub: "این‌ها بخشی از معیارهاشن؛ بهترین پاسخ رو بساز.", mouth: "happy", gaze: [0.0,0.0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
+    { t0: 0, t1: 4.8, title: "چطور از گوگل مشتری بگیریم؟", sub: "قسمت اول", mouth: "surprise", gaze: [0.0,-0.12], sweep: false },
+    { t0: 4.8, t1: 10.0, title: "هر سایتی رو گوگل نشون نمی‌ده!", sub: "اول باید بفهمیم کاربر دنبال چیه.", mouth: "happy", gaze: [0.25,-0.45], sweep: true },
+    { t0: 10.0, t1: 16.2, title: "صفحه باید مرتبط باشه", sub: "محتوا باید دقیقاً به جست‌وجوی کاربر جواب بده.", mouth: "surprise", gaze: [0.35,-0.35], sweep: true },
+    { t0: 16.2, t1: 23.0, title: "مفید و قابل اعتماد باش", sub: "فقط تکرار کلمه‌ها کافی نیست.", mouth: "happy", gaze: [0.42,-0.18], sweep: true },
+    { t0: 23.0, t1: 33.0, title: "تجربهٔ خوب هم مهمه", sub: "گوگل می‌خواد بهترین پاسخ رو به کاربر نشون بده.", mouth: "happy", gaze: [0.0,0.0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
   ],
 
   camera: [
@@ -561,15 +561,24 @@ const CFG = {
     { b:3,o:0,s:1.04,x:0,y:0 }, { b:4,o:0,s:1,x:0,y:0 }
   ],
   char: [
-    { b:0,o:0,scale:0.76,x:0,y:330 }, { b:1,o:0,scale:0.76,x:0,y:330 },
-    { b:2,o:0,scale:0.76,x:0,y:330 }, { b:3,o:0,scale:0.76,x:0,y:330 },
-    { b:4,o:0,scale:0.76,x:0,y:330 }
+    // ورود اول دقیقاً مثل پروژهٔ مبنا: اکتو از پایین قاب بالا می‌آید.
+    { b:0,o:0,scale:1.00,x:0,y:0 },
+    { b:0,ref:"end",o:0,scale:1.00,x:0,y:0 },
+    // بعد از معرفی عنوان، اکتو کوچک می‌شود و کنار محتوای آموزشی قرار می‌گیرد.
+    { b:1,o:0.35,scale:0.52,x:-300,y:40 },
+    { b:1,ref:"end",o:0,scale:0.52,x:-300,y:40 },
+    { b:2,o:0.20,scale:0.50,x:-320,y:60 },
+    { b:2,ref:"end",o:0,scale:0.50,x:-320,y:60 },
+    { b:3,o:0.20,scale:0.52,x:-320,y:50 },
+    { b:3,ref:"end",o:0,scale:0.52,x:-320,y:50 },
+    { b:4,o:0.20,scale:0.48,x:320,y:80 }
   ],
   monitor: [
     { b:0,o:0,opacity:0,x:0,y:45,scale:.94,rotY:-12,state:"white" },
-    { b:0,o:.55,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:1,o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:2,o:-.2,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"log" },
+    { b:1,o:-.45,opacity:0,x:0,y:45,scale:.94,rotY:-12,state:"white" },
+    { b:1,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
+    { b:1,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
+    { b:2,o:-.20,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"log" },
     { b:2,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"log" },
     { b:3,o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"log" },
     { b:4,o:-.25,opacity:0,x:0,y:25,scale:.96,rotY:0,state:"site" },
@@ -1002,8 +1011,8 @@ function draw(t) {
 
   /* --- حباب گفتار اکتو: در بخش توضیح کیفیت واکنش نشان می‌دهد --- */
   const speech = $("#speech");
-  const speechP = eOutBack(prog(t, 18.55, 0.42), 1.35);
-  const speechOut = prog(t, 24.45, 0.35);
+  const speechP = eOutBack(prog(t, 16.85, 0.42), 1.35);
+  const speechOut = prog(t, 22.55, 0.35);
   speech.style.opacity = clamp(speechP * 1.3) * (1 - eInCubic(speechOut));
   speech.style.transform = `translateY(${lerp(24,0,speechP)}px) scale(${lerp(.82,1,speechP)})`;
 
