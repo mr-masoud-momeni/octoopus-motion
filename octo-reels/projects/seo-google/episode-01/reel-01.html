@@ -91,7 +91,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #controls{position:fixed;z-index:100;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
 #controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
 #scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
-@media(max-height:700px){#controls{display:none}}
+
 
 /* بازچینی صحنه‌ها: فضای مستقل برای تصویر و اکتو */
 #ownerScene,#resultsScene,#siteScene,#questionScene{left:70px;right:70px;top:0;height:100%;padding-top:235px}
@@ -113,10 +113,10 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #siteScene .site-body{padding:24px 30px}
 #siteScene .product-art{height:290px}
 #questionScene .question-card{top:700px;width:850px}
-#octoWrap{top:1245px;width:420px;margin-left:-210px;z-index:5}
+#octoWrap{top:1010px;width:560px;margin-left:-280px;z-index:5}
 #octo{width:100%;height:auto}
 #steps{display:none!important}
-.bubble{top:1130px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
+.bubble{top:870px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
 
 </style>
 </head>
@@ -134,28 +134,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="kicker">یک سؤال مهم برای صاحب هر کسب‌وکار</div>
   <h2 class="scene-title">مشتری چطور قراره<br><b>سایت تو رو پیدا کنه؟</b></h2>
   <p class="scene-sub">مگه آدرس سایتت رو از قبل می‌دونه؟</p>
-  <div class="owner-illustration">
-   <svg viewBox="0 0 850 470" role="img" aria-label="صاحب فروشگاه پشت میز و روبه‌روی لپ‌تاپ">
-    <defs><linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9fbfd"/><stop offset="1" stop-color="#dfe8f1"/></linearGradient></defs>
-    <ellipse cx="430" cy="414" rx="340" ry="25" fill="#020914" opacity=".35"/>
-    <path d="M250 380v-88q0-52 52-52h40q52 0 52 52v88" fill="#1c3552" stroke="#46627f" stroke-width="8"/>
-    <path d="M290 248q-4-40 27-63 30-20 61 1 29 20 22 61l-10 57H300z" fill="#41FAF1" opacity=".9"/>
-    <path d="M322 185q-4-49 34-65 40-14 65 20 13 19 5 47-10-20-29-24-27 22-75 22z" fill="#0b1d34"/>
-    <path d="M330 254q-25 15-35 54l-10 63h202l-10-64q-9-39-37-53l-36 24h-42z" fill="#173f5b"/>
-    <path d="M300 294q-34 10-57 42l-50 40 18 18 75-35q31-14 44-43" fill="#41FAF1"/>
-    <path d="M482 356h245" stroke="#304b68" stroke-width="22" stroke-linecap="round"/>
-    <path d="M520 368v45m175-45v45" stroke="#304b68" stroke-width="14" stroke-linecap="round"/>
-    <rect x="500" y="112" width="260" height="220" rx="18" fill="#152b45" stroke="#5d7691" stroke-width="8"/>
-    <rect x="516" y="128" width="228" height="184" rx="9" fill="url(#screenGrad)"/>
-    <text x="630" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="44" font-weight="700" fill="#4285f4">G</text>
-    <rect x="548" y="213" width="164" height="40" rx="20" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
-    <text x="630" y="239" text-anchor="middle" font-family="Vazirmatn,sans-serif" font-size="16" fill="#334155">خرید کفش ورزشی</text>
-    <path d="M485 338h290l-25 20H510z" fill="#7d91a8"/><circle cx="630" cy="347" r="4" fill="#dce5ef"/>
-    <path d="M110 385h630" stroke="#4b6682" stroke-width="14" stroke-linecap="round" opacity=".65"/>
-   </svg>
-   <div class="owner-caption">صاحب فروشگاه، پشت سیستم؛ منتظر دیده‌شدن در گوگل</div>
-  </div>
- </section>
+  </section>
 
  <section id="resultsScene" class="scene">
   <div class="kicker">بیشتر جست‌وجوها از اینجا شروع می‌شن</div>
@@ -260,9 +239,9 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var scene=function(t,a,b,fade){return expo(prog(t,a,.45))*(1-prog(t,b-fade,fade))};
  var scenes=[["titleScene",0,5.6,38],["ownerScene",5.6,13,48],["resultsScene",13,22,48],["siteScene",22,32,48],["questionScene",32,40,42]];
  var poses=[
-  {t:5.6,x:0,y:150,s:.78},{t:6.5,x:0,y:0,s:.80},
-  {t:13,x:0,y:0,s:.80},{t:22,x:0,y:0,s:.80},
-  {t:32,x:0,y:0,s:.80},{t:40,x:0,y:0,s:.80}
+  {t:1.6,x:-300,y:-80,s:.55},{t:5.6,x:-300,y:-80,s:.57},
+  {t:13,x:-300,y:-80,s:.57},{t:22,x:-300,y:-80,s:.57},
+  {t:32,x:-300,y:-80,s:.57},{t:40,x:-300,y:-80,s:.57}
  ];
  var limbs=[];
  var eyes=[{node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},{node:$("eyeR"),x:302.82,y:157.74,pupil:$("pupilR")}];
@@ -288,7 +267,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var settle=prog(t,5.95,.42),squash=Math.sin(Math.PI*settle)*.055;
   var breath=Math.sin((t-6)*1.55)*.004,floatY=Math.sin((t-6)*1.05)*1.8;
   $("octoWrap").style.opacity=scene(t,1.6,DURATION,.5);
-  $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY+lerp(170,0,enter))+"px,0) scale("+(pose.s*(1+breath+squash*.55))+","+(pose.s*(1+breath-squash))+")";
+  $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY)+"px,0) scale("+(pose.s*(1+breath+squash*.55))+","+(pose.s*(1+breath-squash))+")";
   $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
   /* شاخک‌ها ثابت می‌مانند تا روی تنه نیفتند؛ حرکت نرم از شناوری و نگاه تأمین می‌شود. */
   var gaze=t<13?[.28,-.12]:t<22?[.68,-.18]:t<32?[-.48,-.14]:[0,0];
