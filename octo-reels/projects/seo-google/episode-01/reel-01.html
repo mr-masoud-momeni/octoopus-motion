@@ -92,6 +92,32 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
 #scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
 @media(max-height:700px){#controls{display:none}}
+
+/* بازچینی صحنه‌ها: فضای مستقل برای تصویر و اکتو */
+#ownerScene,#resultsScene,#siteScene,#questionScene{left:70px;right:70px;top:0;height:100%;padding-top:235px}
+#ownerScene .scene-title,#resultsScene .scene-title,#siteScene .scene-title,#questionScene .scene-title{font-size:56px;line-height:1.45}
+#ownerScene .scene-sub,#resultsScene .scene-sub,#siteScene .scene-sub{max-width:850px;font-size:27px;line-height:1.7;margin-top:14px}
+.owner-illustration{position:absolute;top:650px;left:50%;width:850px;height:475px;transform:translateX(-50%);display:flex;align-items:center;justify-content:center}
+.owner-illustration svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 28px 45px rgba(0,0,0,.28))}
+.owner-caption{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);font-size:22px;font-weight:750;color:#c9d8e7;white-space:nowrap}
+#resultsScene .visual,#siteScene .visual{top:640px;width:850px;height:480px}
+#resultsScene .browser{height:455px}
+#resultsScene .google-results{padding:17px 42px}
+#resultsScene .google-results .google-word{font-size:28px;margin:2px 0 10px}
+#resultsScene .result-search{height:42px;font-size:18px}
+#resultsScene .result-hint{margin:8px 0 10px}
+#resultsScene .result{padding:9px 5px}
+#resultsScene .result strong{font-size:20px;margin:2px 0}
+#resultsScene .result p{font-size:13px}
+#siteScene .site-browser{height:455px}
+#siteScene .site-body{padding:24px 30px}
+#siteScene .product-art{height:290px}
+#questionScene .question-card{top:700px;width:850px}
+#octoWrap{top:1245px;width:420px;margin-left:-210px;z-index:5}
+#octo{width:100%;height:auto}
+#steps{display:none!important}
+.bubble{top:1130px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
+
 </style>
 </head>
 <body>
@@ -108,11 +134,26 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="kicker">یک سؤال مهم برای صاحب هر کسب‌وکار</div>
   <h2 class="scene-title">مشتری چطور قراره<br><b>سایت تو رو پیدا کنه؟</b></h2>
   <p class="scene-sub">مگه آدرس سایتت رو از قبل می‌دونه؟</p>
-  <div class="visual owner-wrap">
-   <div class="owner"><i class="hair"></i><i class="head"></i><i class="neck"></i><i class="body"></i><i class="arm"></i></div>
-   <div class="desk"></div>
-   <div class="laptop"><div class="laptop-screen"><div class="google-word"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div><div class="searchbar"><span>خرید کفش ورزشی</span><strong>⌕</strong></div></div><div class="laptop-base"></div></div>
-   <div class="visual-label">صاحب فروشگاه منتظر مشتریه…</div>
+  <div class="owner-illustration">
+   <svg viewBox="0 0 850 470" role="img" aria-label="صاحب فروشگاه پشت میز و روبه‌روی لپ‌تاپ">
+    <defs><linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9fbfd"/><stop offset="1" stop-color="#dfe8f1"/></linearGradient></defs>
+    <ellipse cx="430" cy="414" rx="340" ry="25" fill="#020914" opacity=".35"/>
+    <path d="M250 380v-88q0-52 52-52h40q52 0 52 52v88" fill="#1c3552" stroke="#46627f" stroke-width="8"/>
+    <path d="M290 248q-4-40 27-63 30-20 61 1 29 20 22 61l-10 57H300z" fill="#41FAF1" opacity=".9"/>
+    <path d="M322 185q-4-49 34-65 40-14 65 20 13 19 5 47-10-20-29-24-27 22-75 22z" fill="#0b1d34"/>
+    <path d="M330 254q-25 15-35 54l-10 63h202l-10-64q-9-39-37-53l-36 24h-42z" fill="#173f5b"/>
+    <path d="M300 294q-34 10-57 42l-50 40 18 18 75-35q31-14 44-43" fill="#41FAF1"/>
+    <path d="M482 356h245" stroke="#304b68" stroke-width="22" stroke-linecap="round"/>
+    <path d="M520 368v45m175-45v45" stroke="#304b68" stroke-width="14" stroke-linecap="round"/>
+    <rect x="500" y="112" width="260" height="220" rx="18" fill="#152b45" stroke="#5d7691" stroke-width="8"/>
+    <rect x="516" y="128" width="228" height="184" rx="9" fill="url(#screenGrad)"/>
+    <text x="630" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="44" font-weight="700" fill="#4285f4">G</text>
+    <rect x="548" y="213" width="164" height="40" rx="20" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="630" y="239" text-anchor="middle" font-family="Vazirmatn,sans-serif" font-size="16" fill="#334155">خرید کفش ورزشی</text>
+    <path d="M485 338h290l-25 20H510z" fill="#7d91a8"/><circle cx="630" cy="347" r="4" fill="#dce5ef"/>
+    <path d="M110 385h630" stroke="#4b6682" stroke-width="14" stroke-linecap="round" opacity=".65"/>
+   </svg>
+   <div class="owner-caption">صاحب فروشگاه، پشت سیستم؛ منتظر دیده‌شدن در گوگل</div>
   </div>
  </section>
 
@@ -217,16 +258,13 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var smooth=function(p){p=clamp(p,0,1);return p*p*p*(p*(p*6-15)+10)};
  var back=function(p,s){return 1+(s+1)*Math.pow(p-1,3)+s*Math.pow(p-1,2)};
  var scene=function(t,a,b,fade){return expo(prog(t,a,.45))*(1-prog(t,b-fade,fade))};
- var scenes=[["titleScene",0,5.6,38],["ownerScene",5.45,10.45,48],["resultsScene",10.2,17.35,48],["siteScene",17.1,28.15,48],["questionScene",27.9,40,42]];
+ var scenes=[["titleScene",0,5.6,.55],["ownerScene",5.6,13,.55],["resultsScene",13,22,.55],["siteScene",22,32,.55],["questionScene",32,40,.55]];
  var poses=[
-  {t:5.15,x:-300,y:-80,s:.55},{t:6.15,x:-300,y:-80,s:.57},
-  {t:10.2,x:-300,y:-80,s:.57},{t:10.45,x:300,y:-80,s:.55},
-  {t:11.2,x:300,y:-80,s:.57},{t:17.0,x:300,y:-80,s:.57},
-  {t:17.2,x:-300,y:-80,s:.55},{t:18.0,x:-300,y:-80,s:.57},
-  {t:27.8,x:-300,y:-80,s:.57},{t:28.0,x:0,y:-80,s:.55},
-  {t:29.0,x:0,y:-80,s:.57},{t:40,x:0,y:-80,s:.57}
+  {t:5.6,x:0,y:150,s:.78},{t:6.5,x:0,y:0,s:.80},
+  {t:13,x:0,y:0,s:.80},{t:22,x:0,y:0,s:.80},
+  {t:32,x:0,y:0,s:.80},{t:40,x:0,y:0,s:.80}
  ];
- var limbs=[["legLL",31.89,0,-1],["legLM",152.34,1.4,-1],["legRM",272.93,2.8,1],["legRL",393.3,4.2,1]].map(function(v){return {node:$(v[0]),x:v[1],phase:v[2],dir:v[3]};});
+ var limbs=[];
  var eyes=[{node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},{node:$("eyeR"),x:302.82,y:157.74,pupil:$("pupilR")}];
  function sample(t){
   if(t<=poses[0].t)return poses[0];
@@ -252,19 +290,18 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("octoWrap").style.opacity=scene(t,1.6,DURATION,.5);
   $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY+lerp(170,0,enter))+"px,0) scale("+(pose.s*(1+breath+squash*.55))+","+(pose.s*(1+breath-squash))+")";
   $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
-  var intensity=t<10.4?.75:t<17.2?.9:t<28?.85:.65;
-  limbs.forEach(function(l){var swing=Math.sin(t*1.8+l.phase)*1.55*intensity,accent=Math.sin(t*.78+l.phase)*.42;l.node.setAttribute("transform","rotate("+((swing+accent)*l.dir).toFixed(2)+" "+l.x+" 308.65)");});
-  var gaze=t<10.4?[-.3,-.15]:t<17.2?[.72,-.38]:t<28?[-.72,-.22]:[0,0];
+  /* شاخک‌ها ثابت می‌مانند تا روی تنه نیفتند؛ حرکت نرم از شناوری و نگاه تأمین می‌شود. */
+  var gaze=t<13?[.28,-.12]:t<22?[.68,-.18]:t<32?[-.48,-.14]:[0,0];
   var sy=blink(t);
   eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
   $("mSurprise").style.opacity=t<10.4?1:0;
   $("mHappy").style.opacity=t>=10.4?1:0;
   $("mSad").style.opacity=0;
-  var speechIn=back(prog(t,32,.42),1.35),speechOut=prog(t,38.6,.35);
+  var speechIn=back(prog(t,33.2,.55),1.15),speechOut=prog(t,39,.35);
   $("speech").style.opacity=clamp(speechIn*1.3,0,1)*(1-speechOut);
   $("speech").style.transform="translate(-50%,"+lerp(25,0,speechIn)+"px) scale("+lerp(.82,1,speechIn)+")";
   $("steps").style.opacity=expo(prog(t,5.25,.35));
-  var step=t<10.4?0:t<17.2?1:t<28?2:2;
+  var step=t<13?0:t<22?1:2;
   document.querySelectorAll(".step").forEach(function(n,i){n.classList.toggle("on",i===step);n.classList.toggle("done",i<step);});
  }
  window.renderAt=draw;
