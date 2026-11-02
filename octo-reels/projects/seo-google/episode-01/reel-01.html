@@ -854,6 +854,7 @@ let FIT = 1;
 
 function mouthWeights(t) {
   const w = { happy: 0, sad: 0, surprise: 0 };
+  if (t < CFG.beats[0].t0) return { happy: 1, sad: 0, surprise: 0 };
   let idx = 0;
   for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) idx = i;
   const cur = CFG.beats[idx];
