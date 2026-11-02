@@ -116,7 +116,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #octoWrap{top:1010px;width:560px;margin-left:-280px;z-index:5}
 #octo{width:100%;height:auto}
 #steps{display:none!important}
-.bubble{top:870px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
+.bubble{top:1310px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
+.deep-sea{position:absolute;left:-70px;top:700px;width:1080px;height:620px;opacity:.78;pointer-events:none;z-index:1}.deep-sea svg{width:100%;height:100%}
+.sea-thought{position:absolute;z-index:6;opacity:0;min-width:190px;padding:15px 22px;border-radius:30px;background:rgba(235,249,250,.96);color:#102b43;border:2px solid #41FAF1;box-shadow:0 10px 35px #0005;font-size:25px;font-weight:900;text-align:center;white-space:nowrap;will-change:transform,opacity}
+.thought-a{left:135px;top:805px}.thought-b{left:435px;top:735px}.thought-c{left:730px;top:825px}
+#octoWrap{z-index:5}#controls{z-index:1000;display:flex!important}
+@media(max-height:700px){#controls{display:flex!important}}
 
 </style>
 </head>
@@ -134,6 +139,21 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="kicker">یک سؤال مهم برای صاحب هر کسب‌وکار</div>
   <h2 class="scene-title">مشتری چطور قراره<br><b>سایت تو رو پیدا کنه؟</b></h2>
   <p class="scene-sub">مگه آدرس سایتت رو از قبل می‌دونه؟</p>
+  <div class="deep-sea" aria-hidden="true"><svg viewBox="0 0 1080 620" xmlns="http://www.w3.org/2000/svg">
+   <defs><linearGradient id="wreck" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#47647a"/><stop offset="1" stop-color="#172f48"/></linearGradient><linearGradient id="coral" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#41FAF1"/><stop offset="1" stop-color="#247d91"/></linearGradient></defs>
+   <path d="M0 540 Q180 505 330 540 T650 535 T1080 530 V620 H0Z" fill="#102d47" opacity=".72"/>
+   <path d="M300 470 L350 340 L720 350 L810 480 L730 515 L390 510Z" fill="url(#wreck)" stroke="#7893a7" stroke-width="8" opacity=".72"/>
+   <path d="M390 350 L500 275 L610 350 M500 275 L510 180 M610 350 L720 290" fill="none" stroke="#7893a7" stroke-width="13" stroke-linecap="round" opacity=".6"/>
+   <g fill="none" stroke="url(#coral)" stroke-width="15" stroke-linecap="round" opacity=".85">
+    <path d="M75 565 Q95 500 75 440 M75 500 Q30 470 28 425 M78 485 Q130 445 128 400 M75 530 Q135 520 160 470"/>
+    <path d="M1000 570 Q980 500 1010 440 M1000 510 Q950 475 940 430 M1000 490 Q1040 455 1055 410 M1000 535 Q945 525 920 480"/>
+    <path d="M225 570 Q240 520 215 485 M220 535 Q185 510 185 475 M220 530 Q260 495 260 460"/>
+    <path d="M865 570 Q840 520 860 480 M860 535 Q825 510 820 475 M860 530 Q895 500 900 465"/>
+   </g><g fill="#8fe9e5" opacity=".48"><circle cx="180" cy="360" r="7"/><circle cx="205" cy="315" r="4"/><circle cx="875" cy="350" r="6"/><circle cx="900" cy="300" r="4"/></g>
+  </svg></div>
+  <div class="sea-thought thought-a" data-start="6.0" data-end="8.0">آدرس سایت؟</div>
+  <div class="sea-thought thought-b" data-start="7.4" data-end="9.5">اسم فروشگاه؟</div>
+  <div class="sea-thought thought-c" data-start="9.0" data-end="11.6">از کجا پیدام کنه؟</div>
   </section>
 
  <section id="resultsScene" class="scene">
@@ -240,8 +260,10 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var scenes=[["titleScene",0,5.6,38],["ownerScene",5.6,13,48],["resultsScene",13,22,48],["siteScene",22,32,48],["questionScene",32,40,42]];
  var poses=[
   {t:1.6,x:-300,y:-80,s:.55},{t:5.6,x:-300,y:-80,s:.57},
-  {t:13,x:-300,y:-80,s:.57},{t:22,x:-300,y:-80,s:.57},
-  {t:32,x:-300,y:-80,s:.57},{t:40,x:-300,y:-80,s:.57}
+  {t:12.6,x:300,y:-80,s:.57},{t:13.2,x:-300,y:-80,s:.55},
+  {t:14.2,x:-300,y:-80,s:.57},{t:21.8,x:-300,y:-80,s:.57},
+  {t:30.8,x:300,y:-80,s:.57},{t:32,x:300,y:-80,s:.55},
+  {t:40,x:300,y:-80,s:.57}
  ];
  var limbs=[];
  var eyes=[{node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},{node:$("eyeR"),x:302.82,y:157.74,pupil:$("pupilR")}];
@@ -267,21 +289,27 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var settle=prog(t,5.95,.42),squash=Math.sin(Math.PI*settle)*.055;
   var breath=Math.sin((t-6)*1.55)*.004,floatY=Math.sin((t-6)*1.05)*1.8;
   $("octoWrap").style.opacity=scene(t,1.6,DURATION,.5);
-  $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY)+"px,0) scale("+(pose.s*(1+breath+squash*.55))+","+(pose.s*(1+breath-squash))+")";
+  $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY+lerp(170,0,enter))+"px,0) scale("+(pose.s*(1+breath+squash*.55))+","+(pose.s*(1+breath-squash))+")";
   $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
   /* شاخک‌ها ثابت می‌مانند تا روی تنه نیفتند؛ حرکت نرم از شناوری و نگاه تأمین می‌شود. */
-  var gaze=t<13?[.28,-.12]:t<22?[.68,-.18]:t<32?[-.48,-.14]:[0,0];
+  var gaze=t<5.6?[0,0]:t<13?[.15,-.65]:t<22?[.78,-.18]:t<32?[.15,-.15]:[0,0];
   var sy=blink(t);
   eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
-  $("mSurprise").style.opacity=t<10.4?1:0;
-  $("mHappy").style.opacity=t>=10.4?1:0;
-  $("mSad").style.opacity=0;
-  var speechIn=back(prog(t,33.2,.55),1.15),speechOut=prog(t,39,.35);
-  $("speech").style.opacity=clamp(speechIn*1.3,0,1)*(1-speechOut);
+  var discovery=t>=13.2&&t<15.4,sad=t>=32;
+  $("mSurprise").style.opacity=discovery?1:0;$("mHappy").style.opacity=sad?0:1;$("mSad").style.opacity=sad?1:0;
+  document.querySelectorAll(".sea-thought").forEach(function(n){
+   var start=Number(n.getAttribute("data-start")),end=Number(n.getAttribute("data-end"));
+   var rise=expo(prog(t,start,.35)),fade=1-prog(t,end-.55,.55);
+   n.style.opacity=t>=5.6&&t<13?clamp(rise*fade,0,1):0;
+   n.style.transform="translate3d(0,"+(-78*prog(t,start,end-start))+"px,0) scale("+(.92+.08*rise)+")";
+  });
+  var speechText="",speechStart=0,speechEnd=0;
+  if(t>=13.35&&t<21.65){speechText="آهان! گوگل واسش پیدا می‌کنه!";speechStart=13.55;speechEnd=21.3;}
+  else if(t>=28.7&&t<32){speechText="آخ جون مشتری!";speechStart=29.0;speechEnd=31.75;}
+  $("speech").textContent=speechText;
+  var speechIn=back(prog(t,speechStart,.5),1.15),speechOut=prog(t,speechEnd-.35,.35);
+  $("speech").style.opacity=speechText?clamp(speechIn*1.25,0,1)*(1-speechOut):0;
   $("speech").style.transform="translate(-50%,"+lerp(25,0,speechIn)+"px) scale("+lerp(.82,1,speechIn)+")";
-  $("steps").style.opacity=expo(prog(t,5.25,.35));
-  var step=t<13?0:t<22?1:2;
-  document.querySelectorAll(".step").forEach(function(n,i){n.classList.toggle("on",i===step);n.classList.toggle("done",i<step);});
  }
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
