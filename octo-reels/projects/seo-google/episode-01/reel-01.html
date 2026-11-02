@@ -75,13 +75,11 @@
   .brand{position:absolute;top:78px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.72}
   .brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
   #dots{inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.42;mask-image:radial-gradient(72% 60% at 50% 52%,#000,transparent)}
-  #titleScene{top:0;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 100px}
-  #titleScene .cover-part{font-size:38px;font-weight:900;color:#41FAF1;margin-top:32px;padding:7px 30px;border-top:2px solid #41FAF188;border-bottom:2px solid #41FAF188;letter-spacing:.02em}
-  #titleScene .episode{font-size:25px;color:#aebbd0;margin-bottom:30px;font-weight:800;letter-spacing:.04em}
-  #titleScene h1{font-size:112px;line-height:1.32;font-weight:1000;letter-spacing:-.055em;text-align:center;max-width:940px;text-shadow:0 12px 34px #0005}
-  #titleScene h1 span{display:block}
-  #titleScene h1 .cover-accent{color:#41FAF1;text-shadow:0 0 38px #41FAF144}
-  #titleScene .ornament{width:230px;height:4px;margin-top:32px;border-radius:5px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+  #titleScene{position:absolute;top:0;left:0;right:0;bottom:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 100px;text-align:center;background:radial-gradient(ellipse at 50% 48%,rgba(20,43,77,.30),transparent 66%);}
+  #titleScene h1{font-size:112px;line-height:1.42;font-weight:1000;letter-spacing:-.055em;text-align:center;max-width:960px;color:#fff;text-shadow:0 12px 34px #0005}
+  #titleScene h1 span{display:block;white-space:nowrap}
+  #titleScene h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 38px #41FAF144}
+  #titleScene .cover-part{font-size:34px;font-weight:850;color:#fff;margin-top:34px;padding:8px 30px;border-top:1px solid rgba(65,250,241,.6);border-bottom:1px solid rgba(65,250,241,.6);letter-spacing:.02em}
 
   /* ---------- نوار مسیر (stepper) ---------- */
   .steps-nav{
@@ -151,6 +149,7 @@
   .mon-log .l{color:#7f8da5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mon-log .l.hi{color:#ff8b84;opacity:.34;padding-left:14px;margin-left:-14px;border-left:4px solid transparent}
   .mon-log .l.hi.on{opacity:1;background:rgba(255,80,80,.13);border-left-color:#ff5f57}
+  .query-page{position:absolute;inset:56px 0 0;background:#fff;padding:55px 48px;color:#202124;direction:rtl;text-align:center}.query-page .google-word{margin:16px 0 34px}.query-prompt{font-size:30px;font-weight:800;color:#202124;margin:0 0 24px}.site-product{margin:34px auto 0;max-width:570px;padding:28px;border-radius:18px;background:#eef3f8;display:flex;align-items:center;justify-content:space-between;color:#26364d;font-size:22px}.site-product strong{color:#168b88;font-size:20px}
   .mon-site{
     position:absolute;inset:0;
     background:linear-gradient(180deg,#0A192F,#142B4D);
@@ -354,15 +353,15 @@
 
   <div class="brand"><i></i><span>octoopus.ir</span></div>
 
-  <section id="titleScene" class="scene"><div class="episode">اُکتوپوس تقدیم می‌کند</div><h1><span>چطور از گوگل</span><span class="cover-accent">مشتری بگیریم؟</span></h1><div class="ornament"></div><div class="cover-part">قسمت اول</div></section>
+  <section id="titleScene" class="scene" aria-label="عنوان قسمت اول"><h1><span>چطور از گوگل</span><span><em>مشتری</em> بگیریم؟</span></h1><div class="cover-part">قسمت اول</div></section>
 
   <!-- مسیر ثابت مجموعه -->
   <div class="steps-nav" id="stepsNav">
     <div class="sn" data-i="0"><i></i><span>جست‌وجو</span></div>
     <div class="bar"></div>
-    <div class="sn" data-i="1"><i></i><span>بررسی</span></div>
+    <div class="sn" data-i="1"><i></i><span>نتایج گوگل</span></div>
     <div class="bar"></div>
-    <div class="sn" data-i="2"><i></i><span>نمایش</span></div>
+    <div class="sn" data-i="2"><i></i><span>ورود به سایت</span></div>
   </div>
 
   <!-- مانیتور -->
@@ -376,11 +375,11 @@
           </div>
           <div class="google-page" id="monBlank">
             <div class="google-word" aria-label="Google"><b>G</b><i>o</i><em>o</em><strong>g</strong><u>l</u><small>e</small></div>
-            <div class="google-search"><span>طراحی سایت فروشگاهی</span><b>⌕</b></div>
-            <div class="google-hint">حدود ۱۲٬۴۰۰٬۰۰۰ نتیجه</div>
-            <div class="google-result"><small>example.com › shop</small><b>طراحی سایت فروشگاهی | راهنمای انتخاب</b><p>راهنمای کامل ساخت فروشگاه اینترنتی، امکانات و تجربه خرید بهتر...</p></div>
-            <div class="google-result"><small>webstudio.ir › ecommerce</small><b>ساخت فروشگاه اینترنتی حرفه‌ای</b><p>راهکارهای طراحی فروشگاه آنلاین متناسب با نیاز کسب‌وکار شما...</p></div>
-            <div class="google-result"><small>academy.ir › guide</small><b>چطور فروش آنلاین را شروع کنیم؟</b><p>نکته‌های کاربردی برای راه‌اندازی و رشد کسب‌وکار اینترنتی...</p></div>
+            <div class="google-search"><span>خرید کفش ورزشی</span><b>⌕</b></div>
+            <div class="google-hint">نتایج جست‌وجو برای خرید کفش ورزشی</div>
+            <div class="google-result"><small>sportshop.ir › shoes</small><b>خرید کفش ورزشی | مدل‌های جدید</b><p>انواع کفش ورزشی برای دویدن و تمرین؛ مشخصات و راهنمای انتخاب...</p></div>
+            <div class="google-result"><small>runclub.ir › running</small><b>بهترین کفش برای پیاده‌روی و دویدن</b><p>مقایسه مدل‌ها و انتخاب کفش مناسب برای فعالیت روزانه...</p></div>
+            <div class="google-result"><small>shoestore.ir › collection</small><b>فروشگاه تخصصی کفش ورزشی</b><p>مدل‌های متنوع کفش ورزشی با امکان بررسی و خرید آنلاین...</p></div>
           </div>
         </div>
 
@@ -394,7 +393,11 @@
         </div>
 
         <div class="scr" id="scrSite">
-          <div class="mon-site"><b>بهترین پاسخ برای کاربر</b><u>مرتبط · مفید · قابل اعتماد</u></div>
+          <div class="mon-site"><b>کفش ورزشی مناسب خودت رو پیدا کن</b><u>مشاهدهٔ محصولات · انتخاب سایز · افزودن به سبد خرید</u><div class="site-product"><span>کفش ورزشی</span><strong>مشاهدهٔ محصول ←</strong></div></div>
+        </div>
+        <div class="scr" id="scrQuery">
+          <div class="mon-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="u">google.com</div></div>
+          <div class="query-page"><div class="google-word"><b>G</b><i>o</i><em>o</em><strong>g</strong><u>l</u><small>e</small></div><div class="query-prompt">مشتری چی سرچ می‌کنه؟</div><div class="google-search"><span>کفش ورزشی؟ خدمات تو؟</span><b>⌕</b></div></div>
         </div>
 
         <div class="mon-glare"></div>
@@ -503,7 +506,7 @@
     </svg>
   </div>
 
-  <div class="speech" id="speech">فقط تکرار کلمه؟ نه!<small>باید بهترین جواب باشی.</small></div>
+  <div class="speech" id="speech">مشتری دنبال چه چیزیه؟<small>از همون‌جا شروع کن!</small></div>
   <div class="copy" id="copy"></div>
 
   <div class="sweep" id="sweep"></div>
@@ -541,17 +544,16 @@ const params = new URLSearchParams(location.search);
    ۱) تنظیمات ریلز
    --------------------------------------------------------------------- */
 const CFG = {
-  duration: 38.4,
+  duration: 40,
   fps: 30,
   rise: { start: 1.65, dur: 1.05, from: 170 },
-  blinks: [6.7, 9.85, 13.65, 17.85, 21.8, 26.9, 30.9, 35.8, 38.1],
+  blinks: [2.7, 4.4, 7.8, 11.5, 14.1, 18.2, 21.4, 25.6, 29.5, 33.6, 37.4, 39.4],
 
   beats: [
-    { t0: 5.35, t1: 10.65, title: "هر سایتی رو گوگل نشون نمی‌ده!", sub: "اول باید بفهمیم کاربر دنبال چیه.", mouth: "surprise", gaze: [-0.3,-0.15], sweep: true },
-    { t0: 10.4, t1: 17.45, title: "صفحه باید مرتبط باشه", sub: "محتوا باید دقیقاً به جست‌وجوی کاربر جواب بده.", mouth: "happy", gaze: [0.72,-0.38], sweep: true },
-    { t0: 17.2, t1: 24.85, title: "مفید و قابل اعتماد باش", sub: "فقط تکرار کلمه‌ها کافی نیست.", mouth: "surprise", gaze: [-0.72,-0.22], sweep: true },
-    { t0: 24.55, t1: 29.0, title: "تجربهٔ خوب هم مهمه", sub: "سرعت و راحتی استفاده هم اهمیت دارن.", mouth: "happy", gaze: [0.52,-0.28], sweep: true },
-    { t0: 28.8, t1: 38.35, title: "گوگل بهترین پاسخ رو انتخاب می‌کنه", sub: "برای مشتری، بهترین جواب رو آماده کن.", mouth: "happy", gaze: [0,0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
+    { t0: 0, t1: 5, title: "فکر می‌کنی مشتری چطور سایتت رو پیدا می‌کنه؟", sub: "مگه آدرس سایتت رو از قبل می‌دونه؟", mouth: "surprise", gaze: [-0.3,-0.15], sweep: false },
+    { t0: 5, t1: 15, title: "بیشتر مشتری‌ها اول [[سراغ گوگل]] می‌رن", sub: "محصول یا خدماتشون رو جست‌وجو می‌کنن؛ گوگل نتایج مرتبط رو پیشنهاد می‌ده.", mouth: "happy", gaze: [0.72,-0.38], sweep: true },
+    { t0: 15, t1: 28, title: "از جست‌وجو تا [[خرید]]", sub: "مشتری وارد سایتت می‌شه، محصول رو می‌بینه و می‌تونه به خریدار واقعی تبدیل بشه.", mouth: "surprise", gaze: [-0.72,-0.22], sweep: true },
+    { t0: 28, t1: 40, title: "[[مشتری چی سرچ می‌کنه؟]]", sub: "اولین قدم اینه که بفهمی مردم دنبال چی می‌گردن.", mouth: "happy", gaze: [0,0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
   ],
 
   camera: [
@@ -571,20 +573,20 @@ const CFG = {
     { b:0,o:0,opacity:0,x:0,y:45,scale:.94,rotY:-12,state:"white" },
     { b:0,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
     { b:0,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:1,o:-.20,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"log" },
+    { b:1,o:-.15,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"white" },
     { b:1,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
     { b:1,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:2,o:-.20,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"log" },
-    { b:2,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"log" },
-    { b:3,o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"log" },
-    { b:4,o:-.25,opacity:0,x:0,y:25,scale:.96,rotY:0,state:"site" },
-    { b:4,o:.25,opacity:1,x:0,y:0,scale:1,rotY:0,state:"site" }
+    { b:2,o:-.20,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"site" },
+    { b:2,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"site" },
+    { b:2,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"site" },
+    { b:3,o:-.20,opacity:0,x:0,y:25,scale:.96,rotY:0,state:"query" },
+    { b:3,o:.30,opacity:1,x:0,y:0,scale:1,rotY:0,state:"query" }
   ],
   cursor: [],
   causes: [],
   questions: [],
   stepper: [
-    { b:0,o:0,step:0 }, { b:2,o:0,step:1 }, { b:4,o:0,step:2 }
+    { b:0,o:0,step:0 }, { b:1,o:0,step:1 }, { b:2,o:0,step:2 }, { b:3,o:0,step:2 }
   ]
 };
 
@@ -622,7 +624,7 @@ const el = {
   legs: { LL: $("#legLL"), LM: $("#legLM"), RM: $("#legRM"), RL: $("#legRL") },
   chip: null, copy: $("#copy"), sweep: $("#sweep"), bubbles: $("#bubbles"),
   monitor: $("#monitor"), monBlank: $("#monBlank"),
-  screens: { white: $("#scrWhite"), log: $("#scrLog"), site: $("#scrSite") },
+  screens: { white: $("#scrWhite"), log: $("#scrLog"), site: $("#scrSite"), query: $("#scrQuery") },
   logHi: $("#logHi"), cursor: $("#cursor"), ring: $("#clickRing"),
   causes: $$("#causes .cause"), questions: $$("#qs .q"), stepsNav: $$("#stepsNav .sn")
 };
@@ -782,7 +784,7 @@ function computeEvents() {
   for (let i = 1; i < B.length; i++) ev.push({ name: "sweep", t: t0(i) - 0.04 });
   ev.push({ name: "whoosh", t: t0(0) + 0.25 });
   ev.push({ name: "pop", t: t0(2) + 0.35 });
-  ev.push({ name: "ding", t: t0(4) + 0.55 });
+  ev.push({ name: "ding", t: t0(3) + 0.55 });
   window.OCTO_EVENTS = EVENTS;
 }
 resolveAll();
@@ -829,10 +831,9 @@ function track(list, t) {
 const CX = 212.6, CY = 471.93;
 const EYE = { L: [114.81, 157.74], R: [302.82, 157.74] };
 const OCTO_POSES = [
-  {t:5.15,x:-300,y:-80,s:.55},{t:6.15,x:-300,y:-80,s:.57},{t:10.4,x:-300,y:-80,s:.57},
-  {t:11.2,x:-300,y:-80,s:.57},{t:16.95,x:-300,y:-80,s:.57},{t:17.2,x:300,y:-80,s:.55},
-  {t:18.2,x:300,y:-80,s:.57},{t:24.55,x:-300,y:-80,s:.55},{t:25.4,x:-300,y:-80,s:.57},
-  {t:32.85,x:0,y:-80,s:.55},{t:34.0,x:0,y:-80,s:.57},{t:40,x:0,y:-80,s:.57}
+  {t:5.0,x:-300,y:-80,s:.55},{t:6.0,x:-300,y:-80,s:.57},{t:14.8,x:-300,y:-80,s:.57},
+  {t:15.0,x:300,y:-80,s:.55},{t:16.0,x:300,y:-80,s:.57},{t:27.8,x:-300,y:-80,s:.55},
+  {t:28.0,x:0,y:-80,s:.55},{t:29.0,x:0,y:-80,s:.57},{t:40,x:0,y:-80,s:.57}
 ];
 function sampleOctoPose(list,t){
   if(t<=list[0].t)return {...list[0]};
@@ -1014,8 +1015,8 @@ function draw(t) {
 
   /* --- حباب گفتار اکتو: در بخش توضیح کیفیت واکنش نشان می‌دهد --- */
   const speech = $("#speech");
-  const speechP = eOutBack(prog(t, 22.2, 0.42), 1.35);
-  const speechOut = prog(t, 27.9, 0.35);
+  const speechP = eOutBack(prog(t, 32.0, 0.42), 1.35);
+  const speechOut = prog(t, 38.6, 0.35);
   speech.style.opacity = clamp(speechP * 1.3) * (1 - eInCubic(speechOut));
   speech.style.transform = `translateY(${lerp(24,0,speechP)}px) scale(${lerp(.82,1,speechP)})`;
 
