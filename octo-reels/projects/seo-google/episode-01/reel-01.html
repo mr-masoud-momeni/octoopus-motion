@@ -950,30 +950,6 @@ function draw(t) {
   $("#stepsNav").style.opacity = eOutExpo(prog(t, 5.25, .35));
   el.bubbles.style.opacity = eOutExpo(prog(t, 5.3, .5));
 
-  /* --- بازوها --- */
-  const swayAmp = 1.4 + (1 - riseP) * 5;
-  const legs = [["LL", 0, -1], ["LM", 0.6, -1], ["RM", 1.2, 1], ["RL", 1.8, 1]];
-  let poseIndex = 0;
-  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) poseIndex = i;
-  const poses = [
-    [-7, -3, 3, 7],       // ورود کنجکاو و غافلگیر
-    [-17, -10, 11, 18],   // اشاره و معرفی جست‌وجو
-    [-10, 8, -8, 10],     // توضیح و تحلیل
-    [13, 8, -8, -13],      // واکنش هنگام حرف زدن
-    [-12, -16, 16, 12]     // جمع‌بندی و دعوت به قسمت بعد
-  ];
-  const prevPose = poses[Math.max(0, poseIndex - 1)];
-  const currentPose = poses[poseIndex];
-  const poseMix = eOutCubic(clamp((t - CFG.beats[poseIndex].t0) / 0.55));
-  for (let i = 0; i < legs.length; i++) {
-    const [key, phase, dir] = legs[i];
-    const gesture = lerp(prevPose[i], currentPose[i], poseMix);
-    const talkMotion = poseIndex === 3 ? Math.sin(t * 5.2 + phase) * 3.2 : 0;
-    const a = Math.sin(t * 2.1 + phase) * swayAmp * dir + gesture + talkMotion;
-    el.legs[key].setAttribute("transform",
-      `rotate(${a.toFixed(2)} ${key === "LL" ? 31.89 : key === "LM" ? 152.34 : key === "RM" ? 272.93 : 393.3} 308.65)`);
-  }
-
   /* --- چشم‌ها --- */
   const g = gazeAt(t);
   const gx = g[0] * 9, gy = g[1] * 7;
