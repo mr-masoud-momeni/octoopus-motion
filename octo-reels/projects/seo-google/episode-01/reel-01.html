@@ -258,7 +258,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var smooth=function(p){p=clamp(p,0,1);return p*p*p*(p*(p*6-15)+10)};
  var back=function(p,s){return 1+(s+1)*Math.pow(p-1,3)+s*Math.pow(p-1,2)};
  var scene=function(t,a,b,fade){return expo(prog(t,a,.45))*(1-prog(t,b-fade,fade))};
- var scenes=[["titleScene",0,5.6,.55],["ownerScene",5.6,13,.55],["resultsScene",13,22,.55],["siteScene",22,32,.55],["questionScene",32,40,.55]];
+ var scenes=[["titleScene",0,5.6,38],["ownerScene",5.6,13,48],["resultsScene",13,22,48],["siteScene",22,32,48],["questionScene",32,40,42]];
  var poses=[
   {t:5.6,x:0,y:150,s:.78},{t:6.5,x:0,y:0,s:.80},
   {t:13,x:0,y:0,s:.80},{t:22,x:0,y:0,s:.80},
