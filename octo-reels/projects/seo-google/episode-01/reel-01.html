@@ -2,469 +2,163 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Octoopus · SEO Reel 01 — گوگل چطور انتخاب می‌کند؟</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اُکتوپوس | چطور از گوگل مشتری بگیریم؟ قسمت اول</title>
 <link rel="stylesheet" href="../../../template/fonts.css">
 <style>
-  /* ============================================================
-     پالت برند — از سایت octoopus.ir استخراج شده
-     ============================================================ */
-  :root{
-    --navy:#0A192F;
-    --navy-2:#142B4D;
-    --cyan:#41FAF1;
-    --muted:#B4BCD0;
-    --stage-w:1080;
-    --stage-h:1920;
-  }
-
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    background:#05080f;
-    font-family:"Vazirmatn", system-ui, sans-serif;
-    overflow:hidden;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:geometricPrecision;
-  }
-
-  /* ---------- صحنه ۱۰۸۰×۱۹۲۰ ---------- */
-  #stage{
-    position:absolute;top:50%;left:50%;
-    margin:-960px 0 0 -540px;
-    width:1080px;height:1920px;
-    transform-origin:50% 50%;
-    overflow:hidden;
-    perspective:1800px;
-    background:radial-gradient(120% 80% at 50% 78%, #10233f 0%, var(--navy) 46%, #050c17 100%);
-    isolation:isolate;
-    will-change:transform;
-  }
-
-  /* ---------- پس‌زمینه ---------- */
-  .dots{
-    position:absolute;inset:-140px;
-    background-image:radial-gradient(rgba(65,250,241,.20) 2.4px, transparent 2.4px);
-    background-size:64px 64px;
-    opacity:.5;
-    mask-image:radial-gradient(75% 60% at 50% 55%, #000 0%, transparent 100%);
-    -webkit-mask-image:radial-gradient(75% 60% at 50% 55%, #000 0%, transparent 100%);
-  }
-  .glow{
-    position:absolute;left:50%;bottom:-280px;
-    width:1500px;height:1100px;margin-left:-750px;
-    background:radial-gradient(closest-side, rgba(65,250,241,.22), rgba(65,250,241,.06) 55%, transparent 72%);
-    filter:blur(6px);
-    pointer-events:none;
-  }
-  .bubbles{position:absolute;inset:0;overflow:hidden}
-  .bubbles i{
-    position:absolute;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, rgba(65,250,241,.85), rgba(65,250,241,.10) 70%);
-    box-shadow:0 0 18px rgba(65,250,241,.35);
-    will-change:transform,opacity;
-  }
-  .vignette{
-    position:absolute;inset:0;
-    background:radial-gradient(78% 62% at 50% 52%, transparent 40%, rgba(2,6,14,.55) 100%);
-    pointer-events:none;
-  }
-
-  /* ---------- نوار برند ---------- */
-  .brand{position:absolute;top:78px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.72}
-  .brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
-  #dots{inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.42;mask-image:radial-gradient(72% 60% at 50% 52%,#000,transparent)}
-  #titleScene{position:absolute;top:0;left:0;right:0;bottom:0;z-index:90;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 100px;text-align:center;background:radial-gradient(ellipse at 50% 48%,rgba(20,43,77,.30),transparent 66%);}
-  #titleScene h1{font-size:112px;line-height:1.42;font-weight:1000;letter-spacing:-.055em;text-align:center;max-width:960px;color:#fff;text-shadow:0 12px 34px #0005}
-  #titleScene h1 span{display:block;white-space:nowrap}
-  #titleScene h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 38px #41FAF144}
-  #titleScene .cover-part{font-size:34px;font-weight:850;color:#fff;margin-top:34px;padding:8px 30px;border-top:1px solid rgba(65,250,241,.6);border-bottom:1px solid rgba(65,250,241,.6);letter-spacing:.02em}
-
-  /* ---------- نوار مسیر (stepper) ---------- */
-  .steps-nav{
-    position:absolute;top:152px;left:84px;right:84px;z-index:38;
-    display:flex;align-items:center;gap:20px;direction:rtl;
-  }
-  .steps-nav .sn{
-    display:flex;align-items:center;gap:12px;
-    font-size:28px;font-weight:700;color:#6f7d95;white-space:nowrap;
-  }
-  .steps-nav .sn i{
-    width:20px;height:20px;border-radius:50%;
-    border:3px solid currentColor;display:block;flex:none;
-  }
-  .steps-nav .sn.on{color:var(--cyan)}
-  .steps-nav .sn.on i{background:var(--cyan);box-shadow:0 0 20px rgba(65,250,241,.65)}
-  .steps-nav .sn.done{color:rgba(65,250,241,.5)}
-  .steps-nav .sn.done i{background:rgba(65,250,241,.5)}
-  .steps-nav .bar{flex:1;height:3px;background:rgba(255,255,255,.12);border-radius:3px;max-width:260px}
-
-  /* ---------- مانیتور ---------- */
-  .monitor{
-    position:absolute;top:590px;left:50%;width:900px;margin-left:-450px;
-    z-index:28;opacity:0;will-change:transform,opacity;
-    transform-style:preserve-3d;
-  }
-  .mon-frame{
-    border-radius:28px;padding:26px;
-    background:linear-gradient(180deg,#1d2a44 0%,#0d1626 100%);
-    border:1px solid rgba(65,250,241,.20);
-    box-shadow:0 60px 120px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06);
-  }
-  .mon-screen{
-    position:relative;width:848px;height:500px;
-    border-radius:14px;overflow:hidden;background:#05080f;
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,.6);
-  }
-  .scr{position:absolute;inset:0;opacity:0}
-  .scr.on{opacity:1}
-  .mon-bar{
-    position:absolute;top:0;left:0;right:0;height:56px;
-    display:flex;align-items:center;gap:10px;padding:0 18px;
-    background:#eceff4;border-bottom:1px solid #d5dae2;direction:ltr;
-  }
-  .mon-bar i{width:14px;height:14px;border-radius:50%;display:block;flex:none}
-  .mon-bar .u{
-    flex:1;height:34px;border-radius:8px;background:#fff;
-    display:flex;align-items:center;padding:0 16px;
-    font:600 20px/1 Consolas,monospace;color:#4b5872;direction:ltr;
-  }
-  .mon-blank{
-    position:absolute;top:56px;left:0;right:0;bottom:0;background:#fff;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .mon-blank span{font:700 30px/1 Consolas,monospace;color:#d6dae0;direction:ltr}
-  .mon-log-head{
-    position:absolute;top:0;left:0;right:0;height:46px;
-    display:flex;align-items:center;padding:0 30px;direction:ltr;
-    background:#131a28;border-bottom:1px solid rgba(255,255,255,.07);
-    font:600 20px/1 Consolas,monospace;color:#5d6a80;
-  }
-  .mon-log{
-    position:absolute;top:46px;left:0;right:0;bottom:0;background:#0a0e15;direction:ltr;
-    padding:0 30px;display:flex;flex-direction:column;justify-content:center;gap:8px;
-    font:500 24px/1.55 Consolas,monospace;
-  }
-  .mon-log .l{color:#7f8da5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .mon-log .l.hi{color:#ff8b84;opacity:.34;padding-left:14px;margin-left:-14px;border-left:4px solid transparent}
-  .mon-log .l.hi.on{opacity:1;background:rgba(255,80,80,.13);border-left-color:#ff5f57}
-  .query-page{position:absolute;inset:56px 0 0;background:#fff;padding:55px 48px;color:#202124;direction:rtl;text-align:center}.query-page .google-word{margin:16px 0 34px}.query-prompt{font-size:30px;font-weight:800;color:#202124;margin:0 0 24px}.site-product{margin:34px auto 0;max-width:570px;padding:28px;border-radius:18px;background:#eef3f8;display:flex;align-items:center;justify-content:space-between;color:#26364d;font-size:22px}.site-product strong{color:#168b88;font-size:20px}
-  .mon-site{
-    position:absolute;inset:0;
-    background:linear-gradient(180deg,#0A192F,#142B4D);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
-  }
-  .mon-site b{font-size:44px;font-weight:900;color:#fff}
-  .mon-site u{
-    text-decoration:none;background:var(--cyan);color:#06202c;
-    font-size:26px;font-weight:800;padding:12px 28px;border-radius:999px;
-  }
-  .mon-glare{
-    position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,transparent 42%);
-  }
-
-  /* ---------- کارت‌های سه علت ---------- */
-  .causes{
-    position:absolute;top:620px;left:84px;right:84px;z-index:36;
-    display:flex;flex-direction:column;gap:24px;
-  }
-  .cause{
-    display:flex;align-items:center;gap:26px;
-    padding:24px 28px;border-radius:24px;
-    background:linear-gradient(90deg,rgba(20,43,77,.90),rgba(10,25,47,.78));
-    border:1px solid rgba(65,250,241,.18);
-    opacity:0;will-change:transform,opacity;
-  }
-  .cause .n{
-    width:72px;height:72px;border-radius:50%;flex:none;
-    display:grid;place-items:center;
-    font:900 38px/1 Vazirmatn,sans-serif;color:#06202c;
-    background:var(--cyan);box-shadow:0 0 34px rgba(65,250,241,.35);
-  }
-  .cause .tx{flex:1;min-width:0}
-  .cause .t{font-size:44px;font-weight:900;color:#fff;line-height:1.25}
-  .cause .f{
-    font-size:28px;font-weight:700;color:var(--cyan);
-    direction:rtl;text-align:right;margin-top:10px;line-height:1.4;
-  }
-
-  /* ---------- سوال‌ها ---------- */
-  .qs{
-    position:absolute;top:700px;left:84px;right:84px;z-index:36;
-    display:flex;flex-direction:column;gap:28px;
-  }
-  .q{
-    display:flex;align-items:center;gap:24px;
-    padding:26px 30px;border-radius:24px;
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.10);
-    opacity:0;will-change:transform,opacity;
-  }
-  .q .tick{
-    width:60px;height:60px;border-radius:50%;flex:none;
-    border:4px solid rgba(65,250,241,.30);
-    display:grid;place-items:center;
-  }
-  .q .tick svg{width:30px;height:30px;opacity:0}
-  .q.on .tick{border-color:var(--cyan);background:rgba(65,250,241,.14)}
-  .q.on .tick svg{opacity:1}
-  .q .qt{font-size:42px;font-weight:800;color:#fff}
-  .q .qa{font-size:27px;color:var(--muted);margin-top:8px}
-
-  /* ---------- کرسر ---------- */
-  .cursor{
-    position:absolute;left:0;top:0;z-index:70;
-    opacity:0;will-change:transform;pointer-events:none;
-  }
-  .cursor svg{width:46px;height:46px;display:block;filter:drop-shadow(0 8px 14px rgba(0,0,0,.55))}
-  .cursor .ring{
-    position:absolute;left:-28px;top:-28px;width:56px;height:56px;
-    border-radius:50%;border:3px solid var(--cyan);opacity:0;
-  }
-
-  /* ---------- کاراکتر ---------- */
-  .char{position:absolute;left:50%;top:1010px;width:560px;margin-left:-280px;opacity:0;transform:translate3d(250px,160px,0) scale(.72);transform-origin:50% 100%;filter:drop-shadow(0 34px 48px rgba(0,0,0,.42)) drop-shadow(0 0 30px rgba(65,250,241,.12));z-index:3;will-change:transform,opacity,filter}
-  .char svg{display:block;width:100%;height:auto;overflow:visible}
-  .octo-body{fill:var(--cyan)}
-  .octo-ring{fill:#000}
-  .octo-pupil{fill:#03080f}
-  .octo-shine{fill:#fff}
-
-  /* ---------- متن ---------- */
-  .copy{
-    position:absolute;top:235px;left:92px;right:92px;z-index:40;
-    display:grid;
-  }
-  .beat{align-items:center;text-align:center;gap:18px}
-  .title{font-size:82px;line-height:1.34;text-align:center}
-  .sub{font-size:39px;line-height:1.5;text-align:center}
-  .google-page{position:absolute;inset:56px 0 0;background:#fff;padding:24px 42px;color:#202124;direction:rtl}
-  .google-word{direction:ltr;text-align:center;font:700 68px/1 Arial,sans-serif;letter-spacing:-5px;margin:4px 0 18px}
-  .google-word b{color:#4285f4}.google-word i{color:#ea4335;font-style:normal}.google-word em{color:#fbbc05;font-style:normal}.google-word strong{color:#4285f4}.google-word u{color:#34a853;text-decoration:none}.google-word small{color:#ea4335;font-size:68px}
-  .google-search{height:58px;border:1px solid #dfe1e5;border-radius:30px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:22px;color:#303134;box-shadow:0 2px 7px #00000012}
-  .google-search b{font-size:32px;color:#4285f4}
-  .google-hint{font-size:15px;color:#70757a;margin:16px 4px}
-  .google-result{margin:13px 4px 18px;text-align:right;direction:rtl}
-  .google-result small{display:block;font-size:14px;color:#5f6368}
-  .google-result b{display:block;font-size:22px;font-weight:600;color:#1a0dab;margin:3px 0}
-  .google-result p{font-size:16px;line-height:1.4;color:#4d5156}
-  .ranking-check{position:absolute;inset:46px 0 0;background:#0a0e15;display:flex;flex-direction:column;justify-content:center;padding:30px;gap:22px;direction:rtl}
-  .rank-row{display:flex;align-items:center;gap:18px;padding:20px 22px;border:1px solid rgba(65,250,241,.2);border-radius:18px;background:rgba(20,43,77,.55);color:#fff}
-  .rank-row>i{font:800 22px Consolas;color:var(--cyan);font-style:normal}
-  .rank-row span{flex:1}.rank-row b{display:block;font-size:25px}.rank-row small{display:block;color:var(--muted);font-size:17px;margin-top:5px}
-  .rank-row>strong{font-size:28px;color:var(--cyan)}
-  .speech{
-    position:absolute;top:1250px;right:105px;z-index:45;width:390px;
-    padding:22px 28px;border-radius:28px 28px 8px 28px;
-    background:#fff;color:#10233f;font-size:34px;font-weight:900;text-align:center;
-    box-shadow:0 18px 55px rgba(0,0,0,.28);opacity:0;transform:translateY(25px) scale(.82);
-  }
-  .speech:after{content:"";position:absolute;right:34px;bottom:-22px;border-width:24px 0 0 28px;border-style:solid;border-color:transparent transparent transparent #fff}
-  .speech small{display:block;font-size:19px;color:#607089;font-weight:700;margin-top:5px}
-  .beat{
-    grid-area:1 / 1;
-    display:flex;flex-direction:column;align-items:flex-start;
-    gap:26px;
-  }
-  .title{
-    font-size:92px;font-weight:900;line-height:1.3;color:#fff;
-    text-shadow:0 10px 40px rgba(0,0,0,.45);
-    direction:rtl;
-  }
-  .sub{
-    font-size:42px;font-weight:500;line-height:1.6;color:var(--muted);
-    direction:rtl;
-  }
-  .w{display:inline-block;will-change:transform,opacity}
-  .hl{color:var(--cyan);position:relative;z-index:0}
-  .hl::after{
-    content:"";position:absolute;left:-0.02em;right:-0.02em;bottom:0.02em;height:0.045em;
-    border-radius:0.03em;
-    background:rgba(65,250,241,.85);
-    transform:scaleX(var(--u, 0));
-    transform-origin:100% 50%;
-    z-index:-1;
-  }
-  /* کلمه‌ای که خودش «صفحهٔ سفید» می‌شود */
-  .hl.wblock{
-    background:#fff;color:#0A192F;
-    border-radius:18px;
-    padding:0 .18em;
-    margin:0 .03em;
-    text-shadow:none;
-    box-shadow:0 0 0 3px rgba(255,255,255,.55), 0 20px 46px rgba(0,0,0,.5), 0 0 70px rgba(65,250,241,.22);
-  }
-  .hl.wblock::after{display:none}
-  .chip{
-    margin-top:6px;
-    display:inline-flex;align-items:center;gap:18px;
-    background:var(--cyan);color:#06202c;
-    font-size:40px;font-weight:800;
-    padding:22px 42px;border-radius:999px;
-    box-shadow:0 18px 50px rgba(65,250,241,.28);
-    opacity:0;will-change:transform,opacity;
-  }
-  .chip .ltr{direction:ltr;font-weight:700;letter-spacing:.02em;opacity:.85;font-size:34px}
-  .chip svg{width:30px;height:30px}
-
-  /* ---------- جلوه‌ها ---------- */
-  .sweep{
-    position:absolute;top:0;left:0;right:0;height:9px;
-    background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-    box-shadow:0 0 40px 10px rgba(65,250,241,.35);
-    opacity:0;pointer-events:none;z-index:60;
-  }
-
-  /* ---------- راهنمای سیف‌زون اینستاگرام ---------- */
-  .guides{position:absolute;inset:0;display:none;pointer-events:none}
-  .guides.on{display:block}
-  .guides .zone{position:absolute;left:0;right:0;border:2px dashed rgba(255,90,90,.45)}
-  .guides .zone.top{top:0;height:130px;background:rgba(255,60,60,.06)}
-  .guides .zone.bottom{bottom:0;height:430px;background:rgba(255,60,60,.06)}
-  .guides .zone .tag{position:absolute;right:16px;bottom:10px;font-size:24px;color:rgba(255,140,140,.8)}
-
-  /* ---------- نوار کنترل (فقط پیش‌نمایش) ---------- */
-  #ui{
-    position:fixed;left:0;right:0;bottom:0;z-index:50;
-    display:flex;align-items:center;gap:14px;
-    padding:12px 20px;background:rgba(8,14,24,.92);
-    border-top:1px solid rgba(65,250,241,.18);
-    font-size:13px;color:#cfd8e6;direction:ltr;
-    font-family:ui-monospace,Consolas,monospace;
-  }
-  #ui button{
-    background:rgba(65,250,241,.12);color:#41FAF1;border:1px solid rgba(65,250,241,.35);
-    border-radius:8px;padding:7px 14px;font:inherit;cursor:pointer;
-  }
-  #ui button:hover{background:rgba(65,250,241,.22)}
-  #ui input[type=range]{flex:1;accent-color:#41FAF1;height:4px}
-  #ui label{display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
-  #ui .time{min-width:120px;text-align:center;color:#7f8ea6}
+@font-face{font-family:Vazirmatn;src:url("../../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:swap}
+:root{--navy:#0A192F;--navy2:#142B4D;--cyan:#41FAF1;--white:#F4F7FB;--muted:#B4BCD0;--ink:#152238}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;isolation:isolate;transform-origin:center;background:radial-gradient(90% 65% at 50% 72%,#173657 0%,var(--navy) 58%,#030914 100%)}
+#grid{position:absolute;inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.42;mask-image:radial-gradient(72% 60% at 50% 52%,#000,transparent)}
+#glow{position:absolute;left:50%;top:950px;width:1000px;height:900px;margin-left:-500px;border-radius:50%;background:radial-gradient(circle,rgba(65,250,241,.14),rgba(65,250,241,.035) 52%,transparent 72%);filter:blur(8px)}
+.brand{position:absolute;top:78px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.72;z-index:8}
+.brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
+.scene{position:absolute;left:70px;right:70px;text-align:center;opacity:0;z-index:4;will-change:opacity,transform}
+#titleScene{inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 90px;background:radial-gradient(ellipse at 50% 48%,rgba(20,43,77,.34),transparent 66%)}
+#titleScene h1{font-size:112px;line-height:1.42;font-weight:1000;letter-spacing:-.055em;text-align:center;max-width:960px;color:#fff;text-shadow:0 12px 34px #0005}
+#titleScene h1 span{display:block;white-space:nowrap}
+#titleScene h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 38px #41FAF144}
+.cover-part{font-size:34px;font-weight:850;color:#fff;margin-top:34px;padding:8px 30px;border-top:1px solid rgba(65,250,241,.6);border-bottom:1px solid rgba(65,250,241,.6);letter-spacing:.02em}
+.kicker{font-size:28px;font-weight:800;color:var(--cyan);margin-bottom:20px}
+.scene-title{font-size:56px;line-height:1.5;font-weight:950;letter-spacing:-.025em;color:#fff}
+.scene-title b{font-weight:950;color:var(--cyan)}
+.scene-sub{max-width:850px;margin:18px auto 0;font-size:29px;line-height:1.8;color:#d0d9e6;font-weight:600}
+#ownerScene{top:260px}
+#resultsScene{top:245px}
+#siteScene{top:245px}
+#questionScene{top:260px}
+.visual{position:absolute;left:50%;top:660px;transform:translateX(-50%);width:850px;height:560px;z-index:2}
+.owner-wrap{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center}
+.owner{position:absolute;right:90px;bottom:140px;width:230px;height:270px}
+.owner .hair{position:absolute;top:0;left:66px;width:100px;height:82px;border-radius:48% 48% 38% 38%;background:#182b43}
+.owner .head{position:absolute;top:30px;left:74px;width:88px;height:100px;border-radius:42% 42% 48% 48%;background:#d9a783;box-shadow:inset -9px -5px 0 #bd896f}
+.owner .neck{position:absolute;top:116px;left:106px;width:28px;height:34px;background:#c88e70}
+.owner .body{position:absolute;left:24px;bottom:0;width:200px;height:150px;border-radius:90px 90px 18px 18px;background:linear-gradient(135deg,#267b89,#16435d)}
+.owner .arm{position:absolute;right:12px;bottom:55px;width:150px;height:28px;border-radius:30px;background:#d9a783;transform:rotate(-15deg);transform-origin:right center}
+.desk{position:absolute;bottom:112px;left:65px;right:45px;height:20px;border-radius:20px;background:#52647a;box-shadow:0 14px 0 #263b53}
+.laptop{position:absolute;left:120px;bottom:132px;width:330px;height:225px;z-index:2}
+.laptop-screen{height:190px;border:12px solid #1b2c43;border-bottom-width:18px;border-radius:18px 18px 8px 8px;background:#f6f8fb;box-shadow:0 20px 45px #0006;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px}
+.laptop-base{height:14px;margin:0 -20px;background:linear-gradient(#9eacbd,#53677e);border-radius:0 0 20px 20px}
+.laptop-screen .google-word{font:700 39px/1 Arial,sans-serif;direction:ltr;letter-spacing:-2px}
+.google-word span:nth-child(1){color:#4285f4}.google-word span:nth-child(2){color:#ea4335}.google-word span:nth-child(3){color:#fbbc05}.google-word span:nth-child(4){color:#4285f4}.google-word span:nth-child(5){color:#34a853}.google-word span:nth-child(6){color:#ea4335}
+.searchbar{width:245px;height:42px;border:1px solid #d8dce4;border-radius:24px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:#596579;font-size:15px;box-shadow:0 3px 9px #0001}
+.searchbar strong{font-size:20px;color:#4285f4}
+.visual-label{position:absolute;left:50%;bottom:42px;transform:translateX(-50%);padding:12px 24px;border-radius:14px;background:#102641;border:1px solid #41FAF155;color:#dff;white-space:nowrap;font-size:24px;font-weight:800}
+.browser{position:absolute;inset:0;border-radius:28px;background:#eef2f7;overflow:hidden;box-shadow:0 35px 90px #0008;border:10px solid #21324b}
+.browser-top{height:55px;background:#dfe5ed;display:flex;align-items:center;gap:9px;padding:0 20px;direction:ltr}
+.browser-top i{width:12px;height:12px;border-radius:50%;background:#f06b65}.browser-top i:nth-child(2){background:#f5c45b}.browser-top i:nth-child(3){background:#62c987}
+.browser-top span{margin-left:16px;background:#fff;border-radius:7px;padding:6px 16px;font:14px Arial,sans-serif;color:#68778a;flex:1}
+.google-results{padding:28px 45px;color:#263449;direction:rtl;text-align:right}
+.google-results .google-word{font-size:35px;margin-bottom:18px;text-align:center}
+.result-search{height:48px;border-radius:28px;border:1px solid #d5dbe4;background:#fff;padding:9px 20px;color:#354257;font-size:20px;box-shadow:0 2px 8px #0001}
+.result-hint{font-size:14px;color:#758195;margin:13px 0 18px}
+.result{padding:13px 5px 12px;border-bottom:1px solid #dce2ea}
+.result small{display:block;color:#4285a8;font:13px Arial,sans-serif;direction:ltr;text-align:left}
+.result strong{display:block;color:#1a56b4;font-size:23px;margin:4px 0}
+.result p{font-size:15px;line-height:1.5;color:#4e596b}
+.result.highlight{background:#eaf8f7;border-right:5px solid #27a9a3;padding-right:14px;border-radius:8px}
+.site-browser{position:absolute;inset:0;border-radius:28px;overflow:hidden;background:#f6f7f9;border:10px solid #21324b;box-shadow:0 35px 90px #0008;color:#20314a}
+.site-nav{height:58px;background:#fff;border-bottom:1px solid #e2e7ed;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-size:18px;font-weight:800}
+.site-nav span{color:#68768a;font-size:14px}
+.site-body{display:flex;align-items:center;gap:24px;padding:35px 34px;direction:rtl}
+.product-art{width:280px;height:330px;border-radius:22px;background:radial-gradient(circle at 50% 30%,#c4d5e2,#7796ad 72%,#46677e);display:grid;place-items:center;flex:none}
+.shoe{width:210px;height:100px;border-radius:75% 25% 35% 35%;background:linear-gradient(160deg,#f8fbff,#b9c9d8 65%,#6d8399);transform:rotate(-13deg);box-shadow:inset 0 -13px 0 #879bad,0 20px 25px #26394a55;position:relative}
+.shoe:before{content:"";position:absolute;left:32px;top:20px;width:90px;height:3px;background:#8297a9;box-shadow:0 13px #8297a9,0 26px #8297a9}
+.product-copy{flex:1;text-align:right}
+.product-copy small{font-size:15px;color:#168d8c;font-weight:900}
+.product-copy h3{font-size:29px;line-height:1.5;margin:10px 0;color:#20314a}
+.product-copy p{font-size:16px;line-height:1.8;color:#64748b}
+.product-copy button{margin-top:22px;border:0;border-radius:10px;padding:12px 22px;background:#1aa9a3;color:#fff;font:800 17px Vazirmatn}
+.site-foot{position:absolute;bottom:16px;right:28px;font-size:14px;color:#718096}
+.question-card{position:absolute;left:50%;top:690px;transform:translateX(-50%);width:850px;padding:42px 40px;border-radius:30px;background:linear-gradient(135deg,rgba(20,43,77,.95),rgba(7,19,36,.96));border:1px solid rgba(65,250,241,.32);box-shadow:0 28px 75px #0007}
+.question-card .q{font-size:50px;font-weight:950;line-height:1.5}
+.question-card .q b{color:var(--cyan)}
+.question-card .hint{font-size:27px;line-height:1.8;color:#c5d2e2;margin-top:15px}
+#octoWrap{position:absolute;left:50%;top:1010px;width:560px;margin-left:-280px;opacity:0;transform:translate3d(250px,160px,0) scale(.72);transform-origin:50% 100%;filter:drop-shadow(0 34px 48px rgba(0,0,0,.42)) drop-shadow(0 0 30px rgba(65,250,241,.12));z-index:3;will-change:transform,opacity,filter}
+#octo{display:block;width:100%;height:auto;overflow:visible}
+.octo-body{fill:#41FAF1}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
+.bubble{position:absolute;z-index:7;left:50%;top:870px;min-width:370px;max-width:600px;padding:24px 30px;border-radius:26px;background:#f4f7fb;color:#10243c;font-size:30px;font-weight:900;text-align:center;box-shadow:0 18px 55px #0006;opacity:0;transform:translate(-50%,25px) scale(.85)}
+.bubble:after{content:"";position:absolute;left:48%;bottom:-18px;border-width:20px 18px 0;border-style:solid;border-color:#f4f7fb transparent transparent}
+#steps{position:absolute;top:145px;left:100px;right:100px;display:flex;align-items:center;gap:16px;z-index:9;opacity:0}
+.step{display:flex;align-items:center;gap:10px;color:#71829a;font-size:23px;font-weight:800;white-space:nowrap}
+.step i{width:16px;height:16px;border:3px solid currentColor;border-radius:50%}
+.step.on{color:var(--cyan)}.step.on i{background:var(--cyan);box-shadow:0 0 18px #41FAF1aa}
+.step.done{color:#41FAF177}.step.done i{background:#41FAF177}
+.step-line{height:2px;background:#ffffff25;flex:1}
+#controls{position:fixed;z-index:100;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
+#controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
+@media(max-height:700px){#controls{display:none}}
 </style>
 </head>
 <body>
-
 <div id="stage">
-  <div class="dots" id="dots"></div>
-  <div class="glow" id="glow"></div>
-  <div class="bubbles" id="bubbles"></div>
+ <div id="grid"></div><div id="glow"></div>
+ <div class="brand"><i></i><span>octoopus.ir</span></div>
 
-  <div class="brand"><i></i><span>octoopus.ir</span></div>
+ <section id="titleScene" class="scene">
+  <h1><span>چطور از گوگل</span><span><em>مشتری</em> بگیریم؟</span></h1>
+  <div class="cover-part">قسمت اول</div>
+ </section>
 
-  <section id="titleScene" class="scene" aria-label="عنوان قسمت اول"><h1><span>چطور از گوگل</span><span><em>مشتری</em> بگیریم؟</span></h1><div class="cover-part">قسمت اول</div></section>
-
-  <!-- مسیر ثابت مجموعه -->
-  <div class="steps-nav" id="stepsNav">
-    <div class="sn" data-i="0"><i></i><span>جست‌وجو</span></div>
-    <div class="bar"></div>
-    <div class="sn" data-i="1"><i></i><span>نتایج گوگل</span></div>
-    <div class="bar"></div>
-    <div class="sn" data-i="2"><i></i><span>ورود به سایت</span></div>
+ <section id="ownerScene" class="scene">
+  <div class="kicker">یک سؤال مهم برای صاحب هر کسب‌وکار</div>
+  <h2 class="scene-title">مشتری چطور قراره<br><b>سایت تو رو پیدا کنه؟</b></h2>
+  <p class="scene-sub">مگه آدرس سایتت رو از قبل می‌دونه؟</p>
+  <div class="visual owner-wrap">
+   <div class="owner"><i class="hair"></i><i class="head"></i><i class="neck"></i><i class="body"></i><i class="arm"></i></div>
+   <div class="desk"></div>
+   <div class="laptop"><div class="laptop-screen"><div class="google-word"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div><div class="searchbar"><span>خرید کفش ورزشی</span><strong>⌕</strong></div></div><div class="laptop-base"></div></div>
+   <div class="visual-label">صاحب فروشگاه منتظر مشتریه…</div>
   </div>
+ </section>
 
-  <!-- مانیتور -->
-  <div class="monitor" id="monitor">
-    <div class="mon-frame">
-      <div class="mon-screen" id="monScreen">
-        <div class="scr" id="scrWhite">
-          <div class="mon-bar">
-            <i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i>
-            <div class="u">google.com</div>
-          </div>
-          <div class="google-page" id="monBlank">
-            <div class="google-word" aria-label="Google"><b>G</b><i>o</i><em>o</em><strong>g</strong><u>l</u><small>e</small></div>
-            <div class="google-search"><span>خرید کفش ورزشی</span><b>⌕</b></div>
-            <div class="google-hint">نتایج جست‌وجو برای خرید کفش ورزشی</div>
-            <div class="google-result"><small>sportshop.ir › shoes</small><b>خرید کفش ورزشی | مدل‌های جدید</b><p>انواع کفش ورزشی برای دویدن و تمرین؛ مشخصات و راهنمای انتخاب...</p></div>
-            <div class="google-result"><small>runclub.ir › running</small><b>بهترین کفش برای پیاده‌روی و دویدن</b><p>مقایسه مدل‌ها و انتخاب کفش مناسب برای فعالیت روزانه...</p></div>
-            <div class="google-result"><small>shoestore.ir › collection</small><b>فروشگاه تخصصی کفش ورزشی</b><p>مدل‌های متنوع کفش ورزشی با امکان بررسی و خرید آنلاین...</p></div>
-          </div>
-        </div>
-
-        <div class="scr" id="scrLog">
-          <div class="mon-log-head">GOOGLE · PAGE QUALITY CHECK</div>
-          <div class="ranking-check">
-            <div class="rank-row" id="logHi"><i>01</i><span><b>ارتباط با جست‌وجو</b><small>آیا صفحه دقیقاً به نیاز کاربر جواب می‌دهد؟</small></span><strong>✓</strong></div>
-            <div class="rank-row"><i>02</i><span><b>محتوای مفید و قابل اعتماد</b><small>آیا پاسخ روشن، دقیق و ارزشمند است؟</small></span><strong>✓</strong></div>
-            <div class="rank-row"><i>03</i><span><b>تجربهٔ کاربری</b><small>آیا صفحه سریع و قابل استفاده است؟</small></span><strong>✓</strong></div>
-          </div>
-        </div>
-
-        <div class="scr" id="scrSite">
-          <div class="mon-site"><b>کفش ورزشی مناسب خودت رو پیدا کن</b><u>مشاهدهٔ محصولات · انتخاب سایز · افزودن به سبد خرید</u><div class="site-product"><span>کفش ورزشی</span><strong>مشاهدهٔ محصول ←</strong></div></div>
-        </div>
-        <div class="scr" id="scrQuery">
-          <div class="mon-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="u">google.com</div></div>
-          <div class="query-page"><div class="google-word"><b>G</b><i>o</i><em>o</em><strong>g</strong><u>l</u><small>e</small></div><div class="query-prompt">مشتری چی سرچ می‌کنه؟</div><div class="google-search"><span>کفش ورزشی؟ خدمات تو؟</span><b>⌕</b></div></div>
-        </div>
-
-        <div class="mon-glare"></div>
-      </div>
+ <section id="resultsScene" class="scene">
+  <div class="kicker">بیشتر جست‌وجوها از اینجا شروع می‌شن</div>
+  <h2 class="scene-title">مشتری می‌ره سراغ <b>گوگل</b></h2>
+  <p class="scene-sub">محصول یا خدماتش رو جست‌وجو می‌کنه؛ گوگل نتایج مرتبط رو پیشنهاد می‌ده.</p>
+  <div class="visual">
+   <div class="browser">
+    <div class="browser-top"><i></i><i></i><i></i><span>google.com</span></div>
+    <div class="google-results">
+     <div class="google-word"><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span></div>
+     <div class="result-search">خرید کفش ورزشی</div>
+     <div class="result-hint">حدود ۱۲٬۴۰۰٬۰۰۰ نتیجه (۰٫۴۲ ثانیه)</div>
+     <div class="result highlight"><small>yourstore.ir › shoes</small><strong>خرید کفش ورزشی | فروشگاه شما</strong><p>انواع کفش ورزشی برای دویدن، تمرین و استفاده روزمره. مدل مناسب خودت رو پیدا کن.</p></div>
+     <div class="result"><small>sport-shop.example</small><strong>راهنمای انتخاب کفش ورزشی</strong><p>مقایسه مدل‌ها و نکاتی برای انتخاب بهتر.</p></div>
+     <div class="result"><small>shoes.example</small><strong>جدیدترین کفش‌های ورزشی</strong><p>مدل‌های متنوع برای فعالیت‌های مختلف.</p></div>
     </div>
-    <div class="mon-neck" style="width:120px;height:44px;margin:0 auto;background:linear-gradient(180deg,#1d2a44,#0b1220)"></div>
-    <div class="mon-base" style="width:330px;height:24px;margin:0 auto;border-radius:0 0 16px 16px;background:linear-gradient(180deg,#16223a,#0a1120)"></div>
+   </div>
   </div>
+ </section>
 
-  <!-- سه علت -->
-  <div class="causes" id="causes">
-    <div class="cause" data-i="0">
-      <div class="n">۱</div>
-      <div class="tx">
-        <div class="t">افزونهٔ ناسازگار</div>
-        <div class="f">پنل باز می‌شه، ولی سایت سفیده</div>
-      </div>
+ <section id="siteScene" class="scene">
+  <div class="kicker">حالا تصور کن سایت تو دیده بشه</div>
+  <h2 class="scene-title">از نتیجهٔ گوگل تا <b>ورود به سایت</b></h2>
+  <p class="scene-sub">مشتری محصول رو می‌بینه، بررسی می‌کنه و می‌تونه به خریدار واقعی تبدیل بشه.</p>
+  <div class="visual">
+   <div class="site-browser">
+    <div class="site-nav"><strong>فروشگاه شما</strong><span>محصولات　 درباره ما　 تماس با ما</span></div>
+    <div class="site-body">
+     <div class="product-art"><div class="shoe"></div></div>
+     <div class="product-copy"><small>کالکشن ورزشی</small><h3>کفش مناسب مسیر تو</h3><p>برای تمرین، دویدن و قدم‌های هر روزت انتخاب کن.</p><button>مشاهدهٔ محصولات ←</button></div>
     </div>
-    <div class="cause" data-i="1">
-      <div class="n">۲</div>
-      <div class="tx">
-        <div class="t">خطای PHP</div>
-        <div class="f">یه خطای PHP در قالب یا کد</div>
-      </div>
-    </div>
-    <div class="cause" data-i="2">
-      <div class="n">۳</div>
-      <div class="tx">
-        <div class="t">کمبود حافظه</div>
-        <div class="f">حافظهٔ PHP تموم شده</div>
-      </div>
-    </div>
+    <div class="site-foot">yourstore.ir / product / running-shoes</div>
+   </div>
   </div>
+ </section>
 
-  <!-- دو سوال -->
-  <div class="qs" id="qs">
-    <div class="q" data-i="0">
-      <div class="tick">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#41FAF1" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-      </div>
-      <div class="tx">
-        <div class="qt">پنل باز می‌شه؟</div>
-        <div class="qa">آره → سمت فرانت خراب شده، نه هاست</div>
-      </div>
-    </div>
-    <div class="q" data-i="1">
-      <div class="tick">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#41FAF1" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-      </div>
-      <div class="tx">
-        <div class="qt">آخرین چیزی که عوض کردی چی بود؟</div>
-        <div class="qa">آپدیت؟ پلاگین؟ محتوا؟</div>
-      </div>
-    </div>
-  </div>
+ <section id="questionScene" class="scene">
+  <div class="kicker">اولین قدم سئو</div>
+  <h2 class="scene-title">باید بدونی <b>مشتری چی سرچ می‌کنه؟</b></h2>
+  <div class="question-card"><div class="q">مشتری دنبال چه چیزیه؟</div><div class="hint">از کلمه‌هایی شروع کن که مردم واقعاً برای پیدا کردن محصول یا خدماتت جست‌وجو می‌کنن.</div></div>
+ </section>
 
-  <!-- کرسر -->
-  <div class="cursor" id="cursor">
-    <svg viewBox="0 0 24 24" fill="#fff" stroke="#0A192F" stroke-width="1.4" stroke-linejoin="round">
-      <path d="M5 2.5 19.5 12.2 12.3 13.4 9.6 20.2z"/>
-    </svg>
-    <div class="ring" id="clickRing"></div>
-  </div>
-
-  <!-- کاراکتر اکتو -->
-  <div class="char" id="charWrap">
-    <svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+ <div class="bubble" id="speech">از همین سؤال شروع کن!</div>
+ <div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
       <g id="charInner">
         <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
 
@@ -503,688 +197,99 @@
           <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
         </g>
       </g>
-    </svg>
-  </div>
-
-  <div class="speech" id="speech">مشتری دنبال چه چیزیه؟<small>از همون‌جا شروع کن!</small></div>
-  <div class="copy" id="copy"></div>
-
-  <div class="sweep" id="sweep"></div>
-
-  <div class="guides" id="guides">
-    <div class="zone top"><span class="tag">IG header</span></div>
-    <div class="zone bottom"><span class="tag">IG UI</span></div>
-  </div>
+    </svg></div>
+ <div id="steps">
+  <div class="step" data-i="0"><i></i><span>جست‌وجو</span></div><div class="step-line"></div>
+  <div class="step" data-i="1"><i></i><span>نتایج گوگل</span></div><div class="step-line"></div>
+  <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
+ </div>
 </div>
-
-<div id="ui">
-  <button id="playBtn">Pause</button>
-  <input id="scrub" type="range" min="0" max="40" step="0.01" value="0">
-  <span class="time" id="timeLbl">0.00s</span>
-  <label><input id="guideChk" type="checkbox"> safe-zones</label>
-  <button id="restartBtn">Restart</button>
-</div>
-
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="40" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
-/* =====================================================================
-   OCTOOPUS · REEL ENGINE v2
-   کل انیمیشن یک تابع خالص از زمان است: draw(t) — هیچ stateی نگه
-   نمی‌داریم. به همین دلیل می‌توانیم فریم‌به‌فریم (۳۰fps) رندر کنیم و
-   خروجی کاملاً یکسان بگیریم.
-
-   v2: ریگ دوربین، مانیتور سه‌بعدی، کرسر، کارت‌های علت، نوار مسیر.
-   تایم‌لاین همه‌چیز نسبت به «بیت‌ها» تعریف می‌شود (b + o) تا با
-   جابه‌جا شدن صدا، کل صحنه خودکار جابه‌جا شود.
-   ===================================================================== */
-
-const RENDER = new URLSearchParams(location.search).has("render");
-const params = new URLSearchParams(location.search);
-
-/* ---------------------------------------------------------------------
-   ۱) تنظیمات ریلز
-   --------------------------------------------------------------------- */
-const CFG = {
-  duration: 40,
-  fps: 30,
-  rise: { start: 1.65, dur: 1.05, from: 170 },
-  blinks: [2.7, 4.4, 7.8, 11.5, 14.1, 18.2, 21.4, 25.6, 29.5, 33.6, 37.4, 39.4],
-
-  beats: [
-    { t0: 0, t1: 5, title: "فکر می‌کنی مشتری چطور سایتت رو پیدا می‌کنه؟", sub: "مگه آدرس سایتت رو از قبل می‌دونه؟", mouth: "surprise", gaze: [-0.3,-0.15], sweep: false },
-    { t0: 5, t1: 15, title: "بیشتر مشتری‌ها اول [[سراغ گوگل]] می‌رن", sub: "محصول یا خدماتشون رو جست‌وجو می‌کنن؛ گوگل نتایج مرتبط رو پیشنهاد می‌ده.", mouth: "happy", gaze: [0.72,-0.38], sweep: true },
-    { t0: 15, t1: 28, title: "از جست‌وجو تا [[خرید]]", sub: "مشتری وارد سایتت می‌شه، محصول رو می‌بینه و می‌تونه به خریدار واقعی تبدیل بشه.", mouth: "surprise", gaze: [-0.72,-0.22], sweep: true },
-    { t0: 28, t1: 40, title: "[[مشتری چی سرچ می‌کنه؟]]", sub: "اولین قدم اینه که بفهمی مردم دنبال چی می‌گردن.", mouth: "happy", gaze: [0,0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
-  ],
-
-  camera: [
-    { b:0,o:0,s:1,x:0,y:0 }, { b:0,ref:"end",o:0,s:1.025,x:0,y:0 },
-    { b:1,o:0,s:1.025,x:0,y:0 }, { b:2,o:0,s:1.04,x:0,y:0 },
-    { b:3,o:0,s:1.04,x:0,y:0 }, { b:3,ref:"end",o:0,s:1,x:0,y:0 }
-  ],
-  char: [
-    { t:5.15,scale:0.55,x:-300,y:-80 }, { t:6.15,scale:0.57,x:-300,y:-80 },
-    { t:10.4,scale:0.57,x:-300,y:-80 }, { t:11.2,scale:0.57,x:-300,y:-80 },
-    { t:16.95,scale:0.57,x:-300,y:-80 }, { t:17.2,scale:0.55,x:300,y:-80 },
-    { t:18.2,scale:0.57,x:300,y:-80 }, { t:24.55,scale:0.55,x:-300,y:-80 },
-    { t:25.4,scale:0.57,x:-300,y:-80 }, { t:32.85,scale:0.55,x:0,y:-80 },
-    { t:34.0,scale:0.57,x:0,y:-80 }, { t:38.4,scale:0.57,x:0,y:-80 }
-  ],
-  monitor: [
-    { b:0,o:0,opacity:0,x:0,y:45,scale:.94,rotY:-12,state:"white" },
-    { b:0,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:0,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:1,o:-.15,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"white" },
-    { b:1,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:1,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
-    { b:2,o:-.20,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"site" },
-    { b:2,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"site" },
-    { b:2,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"site" },
-    { b:3,o:-.20,opacity:0,x:0,y:25,scale:.96,rotY:0,state:"query" },
-    { b:3,o:.30,opacity:1,x:0,y:0,scale:1,rotY:0,state:"query" }
-  ],
-  cursor: [],
-  causes: [],
-  questions: [],
-  stepper: [
-    { b:0,o:0,step:0 }, { b:1,o:0,step:1 }, { b:2,o:0,step:2 }, { b:3,o:0,step:2 }
-  ]
-};
-
-/* ---------------------------------------------------------------------
-   ۲) ابزارهای ریاضی
-   --------------------------------------------------------------------- */
-const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-const lerp = (a, b, t) => a + (b - a) * t;
-const prog = (t, start, dur) => clamp((t - start) / dur);
-const eOutCubic = t => 1 - Math.pow(1 - t, 3);
-const eInCubic = t => t * t * t;
-const eOutExpo = t => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
-const eInOutCubic = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-const eOutBack = (t, s = 1.35) => 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2);
-
-function rng(seed) {
-  return function () {
-    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-/* ---------------------------------------------------------------------
-   ۳) گرفتن المان‌ها
-   --------------------------------------------------------------------- */
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
-const el = {
-  stage: $("#stage"),
-  dots: $("#dots"), glow: $("#glow"), charWrap: $("#charWrap"), char: $("#charInner"),
-  eyeL: $("#eyeL"), eyeR: $("#eyeR"), pupilL: $("#pupilL"), pupilR: $("#pupilR"),
-  mHappy: $("#mHappy"), mSad: $("#mSad"), mSurprise: $("#mSurprise"),
-  legs: { LL: $("#legLL"), LM: $("#legLM"), RM: $("#legRM"), RL: $("#legRL") },
-  chip: null, copy: $("#copy"), sweep: $("#sweep"), bubbles: $("#bubbles"),
-  monitor: $("#monitor"), monBlank: $("#monBlank"),
-  screens: { white: $("#scrWhite"), log: $("#scrLog"), site: $("#scrSite"), query: $("#scrQuery") },
-  logHi: $("#logHi"), cursor: $("#cursor"), ring: $("#clickRing"),
-  causes: $$("#causes .cause"), questions: $$("#qs .q"), stepsNav: $$("#stepsNav .sn")
-};
-
-/* ---------------------------------------------------------------------
-   ۴) ساخت متن‌ها (واژه‌به‌واژه)
-   [[...]] = هایلایت فیروزه‌ای     {{...}} = بلوک سفید (خودِ صفحهٔ سفید)
-   --------------------------------------------------------------------- */
-function segments(text) {
-  const out = [];
-  String(text).split(/(\[\[.+?\]\]|\{\{.+?\}\})/g).filter(Boolean).forEach(part => {
-    const block = part.startsWith("{{");
-    const hl = block || part.startsWith("[[");
-    const clean = block ? part.slice(2, -2) : (hl ? part.slice(2, -2) : part);
-    clean.split(/\s+/).filter(Boolean).forEach(w => out.push({ w, hl, block }));
-  });
-  return out;
-}
-
-function buildLine(parent, text, cls) {
-  const d = document.createElement("div");
-  d.className = cls;
-  parent.appendChild(d);
-  for (const s of segments(text)) {
-    const w = document.createElement("span");
-    w.className = "w" + (s.hl ? " hl" : "") + (s.block ? " wblock" : "");
-    w.textContent = s.w;
-    d.appendChild(w);
-    d.appendChild(document.createTextNode(" "));
+(function(){
+ "use strict";
+ var DURATION=40, RENDER=new URLSearchParams(location.search).has("render");
+ var $=function(id){return document.getElementById(id)};
+ var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
+ var lerp=function(a,b,p){return a+(b-a)*p};
+ var prog=function(t,a,d){return clamp((t-a)/d,0,1)};
+ var expo=function(p){return p>=1?1:1-Math.pow(2,-10*p)};
+ var smooth=function(p){p=clamp(p,0,1);return p*p*p*(p*(p*6-15)+10)};
+ var back=function(p,s){return 1+(s+1)*Math.pow(p-1,3)+s*Math.pow(p-1,2)};
+ var scene=function(t,a,b,fade){return expo(prog(t,a,.45))*(1-prog(t,b-fade,fade))};
+ var scenes=[["titleScene",0,5.6,38],["ownerScene",5.45,10.45,48],["resultsScene",10.2,17.35,48],["siteScene",17.1,28.15,48],["questionScene",27.9,40,42]];
+ var poses=[
+  {t:5.15,x:-300,y:-80,s:.55},{t:6.15,x:-300,y:-80,s:.57},
+  {t:10.2,x:-300,y:-80,s:.57},{t:10.45,x:300,y:-80,s:.55},
+  {t:11.2,x:300,y:-80,s:.57},{t:17.0,x:300,y:-80,s:.57},
+  {t:17.2,x:-300,y:-80,s:.55},{t:18.0,x:-300,y:-80,s:.57},
+  {t:27.8,x:-300,y:-80,s:.57},{t:28.0,x:0,y:-80,s:.55},
+  {t:29.0,x:0,y:-80,s:.57},{t:40,x:0,y:-80,s:.57}
+ ];
+ var limbs=[["legLL",31.89,0,-1],["legLM",152.34,1.4,-1],["legRM",272.93,2.8,1],["legRL",393.3,4.2,1]].map(function(v){return {node:$(v[0]),x:v[1],phase:v[2],dir:v[3]};});
+ var eyes=[{node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},{node:$("eyeR"),x:302.82,y:157.74,pupil:$("pupilR")}];
+ function sample(t){
+  if(t<=poses[0].t)return poses[0];
+  for(var i=0;i<poses.length-1;i++){
+   var a=poses[i],b=poses[i+1];
+   if(t<=b.t){var p=smooth(prog(t,a.t,b.t-a.t));return {x:lerp(a.x,b.x,p),y:lerp(a.y,b.y,p),s:lerp(a.s,b.s,p)};}
   }
-  return d;
-}
-
-CFG.beats.forEach(b => {
-  const box = document.createElement("div");
-  box.className = "beat";
-  el.copy.appendChild(box);
-  b._box = box;
-  b._title = buildLine(box, b.title, "title");
-  b._sub = buildLine(box, b.sub, "sub");
-  b._words = [...b._title.querySelectorAll(".w"), ...b._sub.querySelectorAll(".w")];
-  b._hlBars = [...box.querySelectorAll(".hl")];
-  b._titleLen = b._title.querySelectorAll(".w").length;
-});
-
-// چیپ CTA
-const chipBeat = CFG.beats.findIndex(b => b.chip);if (chipBeat > -1) {
-  const c = document.createElement("div");
-  c.className = "chip";
-  c.innerHTML =
-    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
-       stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
-     <span>${CFG.beats[chipBeat].chip}</span>
-     <span class="ltr">octoopus.ir</span>`;
-  CFG.beats[chipBeat]._box.appendChild(c);
-  el.chip = c;
-}
-
-/* ---------------------------------------------------------------------
-   ۵) حباب‌ها
-   --------------------------------------------------------------------- */
-const BUBBLES = [];
-(function makeBubbles() {
-  const r = rng(20260119);
-  for (let i = 0; i < 16; i++) {
-    const node = document.createElement("i");
-    const size = lerp(8, 34, r());
-    node.style.width = size + "px";
-    node.style.height = size + "px";
-    el.bubbles.appendChild(node);
-    BUBBLES.push({
-      node,
-      x: lerp(40, 1040, r()),
-      y0: lerp(0, 2100, r()),
-      speed: lerp(45, 150, r()),
-      wob: lerp(12, 48, r()),
-      phase: r() * Math.PI * 2,
-      alpha: lerp(0.10, 0.42, r())
-    });
-  }
-})();
-
-/* ---------------------------------------------------------------------
-   ۶) تایم‌لاین کی‌فریمی
-   هر کی‌فریم یا t مطلق دارد یا b/o (بیت + آفست). با تغییر تایمینگ
-   صدا، همه‌چیز خودکار جابه‌جا می‌شود.
-   --------------------------------------------------------------------- */
-function resolveTrack(list) {
-  if (!list) return [];
-  return list.map(k => {
-    const o = { ...k };
-    if (o.t == null) {
-      const beat = CFG.beats[o.b] || { t0: 0, t1: 0 };
-      o.t = (o.ref === "end" ? beat.t1 : beat.t0) + (o.o || 0);
-    }
-    return o;
-  });
-}
-let TRACKS = {};
-let MARKS = {};   // زمان‌های استخراج‌شده از صدا (b0..b5, c0..c2, q0..q1)
-
-function resolveTrack(list) {
-  if (!list) return [];
-  return list.map(k => {
-    const o = { ...k };
-    if (o.t == null) {
-      const beat = CFG.beats[o.b] || { t0: 0, t1: 0 };
-      o.t = (o.ref === "end" ? beat.t1 : beat.t0) + (o.o || 0);
-    }
-    return o;
-  }).sort((a, b) => a.t - b.t);   // مرتب‌سازی: تایمینگ صدا ممکن است ترتیب را به‌هم بزند
-}
-function resolveAll() {
-  TRACKS = {
-    camera: resolveTrack(CFG.camera),
-    char: resolveTrack(CFG.char),
-    monitor: resolveTrack(CFG.monitor),
-    cursor: resolveTrack(CFG.cursor),
-    stepper: resolveTrack(CFG.stepper)
-  };
-  const beatOf = (c) => CFG.beats[c.b] || { t0: 0, t1: 0 };
-  CFG.causes = CFG.causes.map(c => ({
-    ...c,
-    t: (c.mark && MARKS[c.mark]) ? MARKS[c.mark].t0 : beatOf(c).t0 + (c.o || 0),
-    tEnd: beatOf(c).t1
-  }));
-  CFG.questions = CFG.questions.map(c => ({
-    ...c,
-    t: (c.mark && MARKS[c.mark]) ? MARKS[c.mark].t0 : beatOf(c).t0 + (c.o || 0),
-    tEnd: beatOf(c).t1
-  }));
-  // تیتر صحنه وقتی کارت/سوال ظاهر می‌شود کنار می‌رود
-  CFG.beats.forEach(b => {
-    if (!b.textHide) { b._hideAt = null; return; }
-    const m = b.textHide.mark && MARKS[b.textHide.mark];
-    b._hideAt = m ? m.t0 - 0.25 : b.t0 + (b.textHide.o || 0);
-  });
-
-  // تایم‌لاین طراحی‌شده (برای حالت «بخوان روی ویدیو»)
-  window.OCTO_TIMELINE = {
-    beats: CFG.beats.map(b => ({ t0: +b.t0.toFixed(3), t1: +b.t1.toFixed(3) })),
-    cards: CFG.causes.map(c => ({ i: c.i, t: +c.t.toFixed(3) })),
-    questions: CFG.questions.map(q => ({ i: q.i, t: +q.t.toFixed(3) })),
-    marks: MARKS
-  };
-}
-
-// رویدادهای صوتی: لحظه‌هایی که یک افکت باید بزند
-// (رندرر این لیست را می‌خواند و برایش صدا می‌سازد)
-let EVENTS = [];
-function computeEvents() {
-  const B = CFG.beats;
-  const t0 = i => (B[i] ? B[i].t0 : 0);
-  const ev = [];
-  ev.push({ name: "rise",   t: CFG.rise.start + 0.05 });     // اکتو از اعماق
-  ev.push({ name: "pop",    t: t0(0) + 0.30 });              // بلوک «سفید»
-  for (let i = 1; i < B.length; i++) ev.push({ name: "sweep", t: t0(i) - 0.04 });
-  ev.push({ name: "whoosh", t: t0(0) + 0.25 });
-  ev.push({ name: "pop", t: t0(2) + 0.35 });
-  ev.push({ name: "ding", t: t0(3) + 0.55 });
-  window.OCTO_EVENTS = EVENTS;
-}
-resolveAll();
-computeEvents();
-
-function ease(name, t) {
-  switch (name) {
-    case "linear": return t;
-    case "out": return eOutCubic(t);
-    case "expo": return eOutExpo(t);
-    case "back": return eOutBack(t, 1.2);
-    case "inOut": return eInOutCubic(t);
-    default: return eInOutCubic(t);
-  }
-}
-
-function track(list, t) {
-  if (!list || !list.length) return null;
-  if (t <= list[0].t) return { ...list[0] };
-  const last = list[list.length - 1];
-  if (t >= last.t) return { ...last };
-  for (let i = 0; i < list.length - 1; i++) {
-    const a = list[i], b = list[i + 1];
-    if (t >= a.t && t <= b.t) {
-      const p = b.t === a.t ? 1 : (t - a.t) / (b.t - a.t);
-      const e = ease(b.ease || "inOut", p);
-      const out = {};
-      for (const k of Object.keys(b)) {
-        if (k === "t" || k === "ease") continue;
-        out[k] = (typeof b[k] === "number" && typeof a[k] === "number")
-          ? lerp(a[k], b[k], e)
-          : (p >= 1 ? b[k] : a[k]);
-      }
-      out.t = t;
-      return out;
-    }
-  }
-  return { ...last };
-}
-
-/* ---------------------------------------------------------------------
-   ۷) رندر هر فریم
-   --------------------------------------------------------------------- */
-const CX = 212.6, CY = 471.93;
-const EYE = { L: [114.81, 157.74], R: [302.82, 157.74] };
-const OCTO_POSES = [
-  {t:5.0,x:-300,y:-80,s:.55},{t:6.0,x:-300,y:-80,s:.57},{t:14.8,x:-300,y:-80,s:.57},
-  {t:15.0,x:300,y:-80,s:.55},{t:16.0,x:300,y:-80,s:.57},{t:27.8,x:-300,y:-80,s:.55},
-  {t:28.0,x:0,y:-80,s:.55},{t:29.0,x:0,y:-80,s:.57},{t:40,x:0,y:-80,s:.57}
-];
-function sampleOctoPose(list,t){
-  if(t<=list[0].t)return {...list[0]};
-  for(let i=0;i<list.length-1;i++){
-    const a=list[i],b=list[i+1];
-    if(t<=b.t){
-      const p=prog(t,a.t,b.t-a.t),e=p*p*p*(p*(p*6-15)+10);
-      return {t,x:lerp(a.x,b.x,e),y:lerp(a.y,b.y,e),s:lerp(a.s,b.s,e)};
-    }
-  }
-  return {...list[list.length-1]};
-}
-function sceneV7(t,a,b,fade=.45){return eOutExpo(prog(t,a,.45))*(1-prog(t,b-fade,fade))}
-const OCTO_LIMBS = [
-  {node:el.legs.LL,x:31.89,phase:0,dir:-1},{node:el.legs.LM,x:152.34,phase:1.4,dir:-1},
-  {node:el.legs.RM,x:272.93,phase:2.8,dir:1},{node:el.legs.RL,x:393.3,phase:4.2,dir:1}
-];
-let FIT = 1;
-
-function mouthWeights(t) {
-  const w = { happy: 0, sad: 0, surprise: 0 };
-  if (t < CFG.beats[0].t0) return { happy: 1, sad: 0, surprise: 0 };
-  let idx = 0;
-  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) idx = i;
-  const cur = CFG.beats[idx];
-  const p = clamp((t - cur.t0) / 0.1);
-  w[cur.mouth] = p;
-  if (idx > 0) w[CFG.beats[idx - 1].mouth] += 1 - p;
-  return w;
-}
-
-function gazeAt(t) {
-  let idx = 0;
-  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) idx = i;
-  const cur = CFG.beats[idx];
-  if (idx === 0) return cur.gaze;
-  const p = eInOutCubic(clamp((t - cur.t0) / 0.45));
-  const prev = CFG.beats[idx - 1].gaze;
-  return [lerp(prev[0], cur.gaze[0], p), lerp(prev[1], cur.gaze[1], p)];
-}
-
-// پلک زدن بر اساس طول هر بیت ساخته می‌شود تا با صدا جابه‌جا شود
-function blinkTimes() {
-  const out = [...(CFG.blinks || [])];
-  for (const b of CFG.beats) {
-    const len = Math.max(0.6, b.t1 - b.t0);
-    out.push(b.t0 + Math.min(0.50, len * 0.18));
-    out.push(b.t0 + Math.min(0.85, len * 0.32));
-    out.push(b.t0 + len * 0.74);
-  }
-  return out;
-}
-
-function blinkAt(t) {
-  let sy = 1;
-  for (const bt of blinkTimes()) {
-    const p = (t - bt) / 0.16;
-    if (p > 0 && p < 1) sy = Math.min(sy, 1 - 0.94 * Math.sin(Math.PI * p));
-  }
+  return poses[poses.length-1];
+ }
+ function blink(t){
+  var times=[2.7,4.4,7.8,11.5,14.1,18.2,21.4,25.6,29.5,33.6,37.4,39.4],sy=1;
+  for(var i=0;i<times.length;i++){var p=(t-times[i])/.16;if(p>0&&p<1)sy=Math.min(sy,1-.94*Math.sin(Math.PI*p));}
   return sy;
-}
-
-// نویز قطعی برای فلیکر صفحهٔ سفید
-function flick(t, seed) {
-  const n = Math.sin(t * 37.1 + seed) * 0.5 + Math.sin(t * 61.7 + seed * 2.3) * 0.5;
-  return n;
-}
-
-function draw(t) {
-  t = Math.max(0, t);
-
-  /* --- پس‌زمینه --- */
-  el.dots.style.transform = `translate(${Math.sin(t * 0.25) * 14}px, ${-t * 10}px)`;
-  el.glow.style.transform = `scale(${1 + Math.sin(t * 1.15) * 0.02})`;
-  el.glow.style.opacity = 0.85 + Math.sin(t * 1.15) * 0.15;
-  const cover = document.getElementById('titleScene');
-  cover.style.opacity = sceneV7(t,0,5.6,0.45);
-  cover.style.transform = `translate3d(0,${lerp(38,0,eOutCubic(prog(t,0,.58)))}px,0)`;
-
-  for (const b of BUBBLES) {
-    const y = 2100 - (((b.y0 + t * b.speed) % 2300));
-    const x = b.x + Math.sin(t * 1.1 + b.phase) * b.wob;
-    b.node.style.transform = `translate(${x}px, ${y}px)`;
-    b.node.style.opacity = b.alpha * (0.55 + 0.45 * Math.sin(t * 1.6 + b.phase));
+ }
+ function draw(input){
+  var t=clamp(Number(input)||0,0,DURATION);
+  $("grid").style.transform="translate3d("+Math.sin(t*.15)*13+"px,"+(-t*5)+"px,0)";
+  $("glow").style.transform="scale("+(1+Math.sin(t*.62)*.035)+")";
+  scenes.forEach(function(s){var el=$(s[0]),p=scene(t,s[1],s[2],.45);el.style.opacity=p;el.style.transform="translate3d(0,"+lerp(s[3],0,expo(prog(t,s[1],.58)))+"px,0)";});
+  var pose=sample(t),enter=back(prog(t,1.65,1.05),1.12);
+  var settle=prog(t,5.95,.42),squash=Math.sin(Math.PI*settle)*.055;
+  var breath=Math.sin((t-6)*1.55)*.004,floatY=Math.sin((t-6)*1.05)*1.8;
+  $("octoWrap").style.opacity=scene(t,1.6,DURATION,.5);
+  $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY+lerp(170,0,enter))+"px,0) scale("+(pose.s*(1+breath+squash*.55))+","+(pose.s*(1+breath-squash))+")";
+  $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
+  var intensity=t<10.4?.75:t<17.2?.9:t<28?.85:.65;
+  limbs.forEach(function(l){var swing=Math.sin(t*1.8+l.phase)*1.55*intensity,accent=Math.sin(t*.78+l.phase)*.42;l.node.setAttribute("transform","rotate("+((swing+accent)*l.dir).toFixed(2)+" "+l.x+" 308.65)");});
+  var gaze=t<10.4?[-.3,-.15]:t<17.2?[.72,-.38]:t<28?[-.72,-.22]:[0,0];
+  var sy=blink(t);
+  eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
+  $("mSurprise").style.opacity=t<10.4?1:0;
+  $("mHappy").style.opacity=t>=10.4?1:0;
+  $("mSad").style.opacity=0;
+  var speechIn=back(prog(t,32,.42),1.35),speechOut=prog(t,38.6,.35);
+  $("speech").style.opacity=clamp(speechIn*1.3,0,1)*(1-speechOut);
+  $("speech").style.transform="translate(-50%,"+lerp(25,0,speechIn)+"px) scale("+lerp(.82,1,speechIn)+")";
+  $("steps").style.opacity=expo(prog(t,5.25,.35));
+  var step=t<10.4?0:t<17.2?1:t<28?2:2;
+  document.querySelectorAll(".step").forEach(function(n,i){n.classList.toggle("on",i===step);n.classList.toggle("done",i<step);});
+ }
+ window.renderAt=draw;
+ window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
+ window.__ready=false;
+ if(RENDER){
+  $("controls").style.display="none";
+  var time=new URLSearchParams(location.search).get("t");
+  draw(time===null?0:parseFloat(time));
+  document.fonts.ready.then(function(){window.__ready=true;});
+ }else{
+  var fit=1,playing=true,offset=0,t0=performance.now();
+  function resize(){fit=Math.min(window.innerWidth/1080,window.innerHeight/1920);$("stage").style.transform="scale("+fit+")";}
+  function tick(now){
+   if(playing)offset=((now-t0)/1000)%DURATION;
+   draw(offset);$("scrub").value=offset;$("time").textContent=offset.toFixed(2)+"s";
+   requestAnimationFrame(tick);
   }
-
-  /* --- دوربین --- */
-  const cam = track(TRACKS.camera, t) || { s: 1, x: 0, y: 0 };
-  const cs = cam.s || 1;
-  const maxX = (cs - 1) * 540, maxY = (cs - 1) * 960;
-  const cx = clamp(cam.x || 0, -maxX, maxX);
-  const cy = clamp(cam.y || 0, -maxY, maxY);
-  el.stage.style.transform =
-    `scale(${FIT}) translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px) scale(${cs.toFixed(4)})`;
-
-  /* --- اکتو: منطق ورود و حرکت عین V7 پروژه Customer Trust --- */
-  const pose = sampleOctoPose(OCTO_POSES, t);
-  const enter = eOutBack(prog(t, 1.65, 1.05), 1.12);
-  const settle = prog(t, 5.95, 0.42);
-  const squash = Math.sin(Math.PI * settle) * 0.055;
-  const breath = Math.sin((t - 6) * 1.55) * 0.004;
-  const float = Math.sin((t - 6) * 1.05) * 1.8;
-  el.charWrap.style.opacity = sceneV7(t, 1.6, CFG.duration, 0.5);
-  el.charWrap.style.zIndex = "3";
-  el.charWrap.style.filter = "drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
-  const sy = pose.s * (1 + breath - squash), sx = pose.s * (1 + breath + squash * 0.55);
-  el.charWrap.style.transform = `translate3d(${pose.x}px,${(pose.y + float + lerp(170,0,enter))}px,0) scale(${sx},${sy})`;
-  el.char.setAttribute("transform", "");
-  const limbIntensity = t < 10.4 ? .75 : t < 17.2 ? .9 : t < 24.55 ? .85 : t < 33 ? .72 : .55;
-  OCTO_LIMBS.forEach(l => {
-    const swing = Math.sin(t * 1.8 + l.phase) * 1.55 * limbIntensity;
-    const accent = Math.sin(t * .78 + l.phase) * .42;
-    l.node.setAttribute("transform", `rotate(${((swing + accent) * l.dir).toFixed(2)} ${l.x} 308.65)`);
-  });
-  $("#stepsNav").style.opacity = eOutExpo(prog(t, 5.25, .35));
-  el.bubbles.style.opacity = eOutExpo(prog(t, 5.3, .5));
-
-  /* --- چشم‌ها --- */
-  const g = gazeAt(t);
-  const gx = g[0] * 9, gy = g[1] * 7;
-  el.pupilL.setAttribute("transform", `translate(${gx.toFixed(2)} ${gy.toFixed(2)})`);
-  el.pupilR.setAttribute("transform", `translate(${gx.toFixed(2)} ${gy.toFixed(2)})`);
-  const bsy = blinkAt(t);
-  for (const [k, c] of [["eyeL", EYE.L], ["eyeR", EYE.R]]) {
-    el[k].setAttribute("transform",
-      `translate(${c[0]} ${c[1]}) scale(1 ${bsy.toFixed(3)}) translate(${-c[0]} ${-c[1]})`);
-  }
-
-  /* --- دهان --- */
-  const mw = mouthWeights(t);
-  el.mHappy.style.opacity = mw.happy;
-  el.mSad.style.opacity = mw.sad;
-  el.mSurprise.style.opacity = mw.surprise;
-
-  /* --- متن صحنه‌ها --- */
-  CFG.beats.forEach(b => {
-    const inDur = 0.5, outDur = 0.3;
-    const pIn = eOutExpo(prog(t, b.t0, inDur));
-    const pOut = prog(t, b.t1 - outDur, outDur);
-    const hide = b._hideAt != null ? prog(t, b._hideAt, 0.35) : 0;
-    const alpha = pIn * (1 - eInCubic(pOut)) * (1 - eInCubic(hide));
-    const shift = lerp(48, 0, pIn) + lerp(0, -34, eInCubic(pOut));
-
-    if (alpha <= 0.001) {
-      b._title.style.opacity = 0; b._sub.style.opacity = 0;
-      b._words.forEach(w => { w.style.opacity = 0; });
-      return;
-    }
-
-    b._title.style.opacity = alpha;
-    b._sub.style.opacity = alpha;
-    b._title.style.transform = `translateY(${shift}px)`;
-
-    b._words.forEach((w, i) => {
-      const isSub = i >= b._titleLen;
-      const p = eOutExpo(clamp((t - b.t0 - 0.04 - i * 0.055) / 0.42));
-      // کلمه‌های بلوک‌سفید با فلیکر CRT چشمک می‌زنند
-      const flk = w.classList.contains("wblock")
-        ? (1 - 0.05 * Math.abs(flick(t, 9.3)))
-        : 1;
-      w.style.opacity = p * flk;
-      w.style.transform = `translateY(${lerp(46, 0, p)}px) scale(${lerp(0.94, 1, p)})`;
-      w.style.filter = p < 0.98 ? `blur(${lerp(6, 0, p).toFixed(2)}px)` : "none";
-      if (isSub) w.style.opacity = p * 0.92;
-    });
-
-    b._hlBars.forEach((h, i) => {
-      const p = eOutCubic(clamp((t - b.t0 - 0.42 - i * 0.07) / 0.45));
-      h.style.setProperty("--u", p.toFixed(3));
-    });
-
-    if (b.chip && el.chip) {
-      const p = clamp((t - b.t0 - 0.55) / 0.42);
-      const e = eOutBack(p, 1.9);
-      el.chip.style.opacity = clamp(p * 1.6);
-      el.chip.style.transform = `translateY(${lerp(24, 0, p)}px) scale(${lerp(0.82, 1, e)})`;
-    }
-  });
-
-  /* --- حباب گفتار اکتو: در بخش توضیح کیفیت واکنش نشان می‌دهد --- */
-  const speech = $("#speech");
-  const speechP = eOutBack(prog(t, 32.0, 0.42), 1.35);
-  const speechOut = prog(t, 38.6, 0.35);
-  speech.style.opacity = clamp(speechP * 1.3) * (1 - eInCubic(speechOut));
-  speech.style.transform = `translateY(${lerp(24,0,speechP)}px) scale(${lerp(.82,1,speechP)})`;
-
-  /* --- مانیتور --- */
-  const mo = track(TRACKS.monitor, t) || { opacity: 0 };
-  el.monitor.style.opacity = mo.opacity ?? 0;
-  el.monitor.style.transform =
-    `translate(${(mo.x || 0).toFixed(1)}px, ${(mo.y || 0).toFixed(1)}px) scale(${(mo.scale || 1).toFixed(3)}) rotateY(${(mo.rotY || 0).toFixed(1)}deg)`;
-  for (const key of Object.keys(el.screens)) {
-    el.screens[key].classList.toggle("on", key === mo.state);
-  }
-  /* --- فلیکر CRT روی صفحهٔ سفید --- */
-  const f = flick(t, 3.7);
-  el.monBlank.style.opacity = (1 - 0.06 * Math.abs(f)).toFixed(3);
-
-  /* --- خط لاگ --- */
-  const clickKF = TRACKS.cursor.find(k => k.click);
-  const clickT = clickKF ? clickKF.t : 1e9;
-  el.logHi.classList.toggle("on", t >= clickT);
-
-  /* --- کرسر --- */
-  const cu = track(TRACKS.cursor, t);
-  if (cu) {
-    const vis = t >= cu.t - 0.01 && t <= (TRACKS.cursor[TRACKS.cursor.length - 1].t + 0.4);
-    el.cursor.style.opacity = vis ? 1 : 0;
-    el.cursor.style.transform = `translate(${(cu.x || 0).toFixed(1)}px, ${(cu.y || 0).toFixed(1)}px)`;
-    const cp = prog(t, clickT, 0.45);
-    el.ring.style.opacity = (cp > 0 && cp < 1) ? (1 - cp) * 0.9 : 0;
-    el.ring.style.transform = `scale(${(0.3 + cp * 2.2).toFixed(3)})`;
-  }
-
-  /* --- کارت‌های علت --- */
-  el.causes.forEach(node => {
-    const c = CFG.causes.find(x => x.i === +node.dataset.i);
-    if (!c) return;
-    const p = eOutBack(prog(t, c.t, 0.5), 1.5);
-    const out = prog(t, c.tEnd - 0.35, 0.35);
-    const alpha = clamp(p * 1.4) * (1 - eInCubic(out));
-    node.style.opacity = alpha;
-    node.style.transform = `translateY(${lerp(46, 0, p).toFixed(1)}px) scale(${lerp(0.92, 1, clamp(p)).toFixed(3)})`;
-  });
-
-  /* --- سوال‌ها --- */
-  el.questions.forEach(node => {
-    const q = CFG.questions.find(x => x.i === +node.dataset.i);
-    if (!q) return;
-    const p = eOutBack(prog(t, q.t, 0.5), 1.4);
-    const out = prog(t, q.tEnd - 0.35, 0.35);
-    const alpha = clamp(p * 1.4) * (1 - eInCubic(out));
-    node.style.opacity = alpha;
-    node.classList.toggle("on", t >= q.t && alpha > 0.05);
-    node.style.transform = `translateX(${lerp(50, 0, p).toFixed(1)}px)`;
-  });
-
-  /* --- نوار مسیر --- */
-  const st = track(TRACKS.stepper, t);
-  const step = st ? st.step : 0;
-  el.stepsNav.forEach((node, i) => {
-    node.classList.toggle("on", i === step);
-    node.classList.toggle("done", i < step);
-  });
-
-  /* --- کارت خطای قدیمی (غیرفعال در این نسخه) --- */
-  /* --- خط اسکن --- */
-  let sweepOp = 0, sweepY = -60;
-  for (const b of CFG.beats) {
-    if (!b.sweep) continue;
-    const p = prog(t, b.t0 - 0.05, 0.45);
-    if (p > 0 && p < 1) {
-      sweepY = lerp(-40, 1960, eInOutCubic(p));
-      sweepOp = Math.sin(Math.PI * p) * 0.75;
-    }
-  }
-  el.sweep.style.transform = `translateY(${sweepY}px)`;
-  el.sweep.style.opacity = sweepOp;
-}
-
-/* ---------------------------------------------------------------------
-   ۸) پخش / پیش‌نمایش + هوک زمان‌بندی صدا
-   --------------------------------------------------------------------- */
-window.renderAt = draw;
-window.OCTO_META = { duration: CFG.duration, fps: CFG.fps, width: 1080, height: 1920 };
-window.__ready = false;
-
-// رندرر می‌تواند تایمینگ صدا را از بیرون تزریق کند
-window.applyTiming = (obj) => {
-  if (!obj) return;
-  if (obj.duration) { CFG.duration = obj.duration; window.OCTO_META.duration = obj.duration; }
-
-  if (obj.marks) {
-    MARKS = obj.marks;
-    // بیت‌ها از روی برچسب‌های b0..b5 ساخته می‌شوند:
-    // هر بیت از شروع جمله‌اش تا شروع جملهٔ بعدی ادامه دارد.
-    const keys = Object.keys(MARKS)
-      .filter(k => /^b\d+$/.test(k))
-      .sort((a, b) => (+a.slice(1)) - (+b.slice(1)));
-    keys.forEach((k, i) => {
-      const beat = CFG.beats[i];
-      if (!beat) return;
-      const start = Math.max(0, MARKS[k].t0 - 0.12);
-      const next = keys[i + 1] ? MARKS[keys[i + 1]].t0 - 0.12 : (obj.duration || MARKS[k].t1 + 0.6);
-      beat.t0 = start;
-      beat.t1 = Math.max(start + 0.6, next);
-    });
-  }
-
-  if (Array.isArray(obj.beats)) {
-    obj.beats.forEach((bt, i) => {
-      if (!CFG.beats[i]) return;
-      if (bt.t0 != null) CFG.beats[i].t0 = bt.t0;
-      if (bt.t1 != null) CFG.beats[i].t1 = bt.t1;
-    });
-  }
-  resolveAll();
-  computeEvents();
-};
-
-if (RENDER) {
-  document.getElementById("ui").style.display = "none";
-  const tf = params.get("t");
-  draw(tf ? parseFloat(tf) : 0);
-  if (params.has("guides")) document.getElementById("guides").classList.add("on");
-  document.fonts.ready.then(() => { window.__ready = true; });
-} else {
-  const stage = el.stage;
-  stage.style.top = "calc(50% - 28px)";
-  const fit = () => {
-    FIT = Math.min(window.innerWidth / 1080, (window.innerHeight - 56) / 1920);
-    draw(offset);
-  };
-
-  const playBtn = document.getElementById("playBtn");
-  const scrub = document.getElementById("scrub");
-  const timeLbl = document.getElementById("timeLbl");
-  scrub.max = CFG.duration;
-
-  let playing = true, t0 = performance.now(), offset = 0;
-
-  const tick = (now) => {
-    if (playing) {
-      offset = ((now - t0) / 1000) % CFG.duration;
-      scrub.value = offset;
-    }
-    draw(offset);
-    timeLbl.textContent = offset.toFixed(2) + "s";
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-  fit();
-  window.addEventListener("resize", fit);
-
-  playBtn.onclick = () => {
-    playing = !playing;
-    playBtn.textContent = playing ? "Pause" : "Play";
-    if (playing) t0 = performance.now() - offset * 1000;
-  };
-  scrub.oninput = () => {
-    offset = parseFloat(scrub.value);
-    if (playing) t0 = performance.now() - offset * 1000;
-  };
-  document.getElementById("restartBtn").onclick = () => {
-    offset = 0; t0 = performance.now();
-  };
-  document.getElementById("guideChk").onchange = (e) => {
-    document.getElementById("guides").classList.toggle("on", e.target.checked);
-  };
-  document.fonts.ready.then(() => { window.__ready = true; });
-}
+  $("play").onclick=function(){playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};
+  $("restart").onclick=function(){offset=0;t0=performance.now();};
+  $("scrub").oninput=function(){offset=parseFloat($("scrub").value);if(playing)t0=performance.now()-offset*1000;};
+  window.addEventListener("resize",resize);resize();requestAnimationFrame(tick);
+  document.fonts.ready.then(function(){window.__ready=true;});
+ }
+})();
 </script>
 </body>
 </html>
