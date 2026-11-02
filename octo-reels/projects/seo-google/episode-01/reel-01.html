@@ -375,7 +375,7 @@
             <i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i>
             <div class="u">google.com</div>
           </div>
-          <div class="google-page">
+          <div class="google-page" id="monBlank">
             <div class="google-word" aria-label="Google"><b>G</b><i>o</i><em>o</em><strong>g</strong><u>l</u><small>e</small></div>
             <div class="google-search"><span>طراحی سایت فروشگاهی</span><b>⌕</b></div>
             <div class="google-hint">حدود ۱۲٬۴۰۰٬۰۰۰ نتیجه</div>
@@ -388,7 +388,7 @@
         <div class="scr" id="scrLog">
           <div class="mon-log-head">GOOGLE · PAGE QUALITY CHECK</div>
           <div class="ranking-check">
-            <div class="rank-row"><i>01</i><span><b>ارتباط با جست‌وجو</b><small>آیا صفحه دقیقاً به نیاز کاربر جواب می‌دهد؟</small></span><strong>✓</strong></div>
+            <div class="rank-row" id="logHi"><i>01</i><span><b>ارتباط با جست‌وجو</b><small>آیا صفحه دقیقاً به نیاز کاربر جواب می‌دهد؟</small></span><strong>✓</strong></div>
             <div class="rank-row"><i>02</i><span><b>محتوای مفید و قابل اعتماد</b><small>آیا پاسخ روشن، دقیق و ارزشمند است؟</small></span><strong>✓</strong></div>
             <div class="rank-row"><i>03</i><span><b>تجربهٔ کاربری</b><small>آیا صفحه سریع و قابل استفاده است؟</small></span><strong>✓</strong></div>
           </div>
@@ -580,26 +580,6 @@ const CFG = {
   questions: [],
   stepper: [
     { b:0,o:0,step:0 }, { b:2,o:0,step:1 }, { b:4,o:0,step:2 }
-  ]
-};
-
-  causes: [
-    { b: 2, o: 3.2, i: 0, mark: "c0" },
-    { b: 2, o: 5.8, i: 1, mark: "c1" },
-    { b: 2, o: 8.4, i: 2, mark: "c2" }
-  ],
-
-  // ---------- سوال‌ها ----------
-  questions: [
-    { b: 3, o: 3.4, i: 0, mark: "q0" },
-    { b: 3, o: 6.2, i: 1, mark: "q1" }
-  ],
-
-  // ---------- نوار مسیر ----------
-  stepper: [
-    { b: 0, o: 0.0, step: 0 },
-    { b: 2, o: 0.0, step: 1 },
-    { b: 4, o: 0.0, step: 2 }
   ]
 };
 
