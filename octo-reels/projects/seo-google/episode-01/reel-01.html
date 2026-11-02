@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Octoopus · SEO Reel 01 — گوگل چطور انتخاب می‌کند؟</title>
-<link rel="stylesheet" href="./fonts.css">
+<link rel="stylesheet" href="../../../template/fonts.css">
 <style>
   /* ============================================================
      پالت برند — از سایت octoopus.ir استخراج شده
@@ -548,11 +548,11 @@ const CFG = {
   blinks: [3.4, 8.2, 14.5, 21.2, 28.4],
 
   beats: [
-    { t0: 0, t1: 5.2, title: "هر سایتی رو گوگل نشون نمی‌ده!", sub: "پس چطور انتخاب می‌کنه کدوم سایت دیده بشه؟", mouth: "surprise", gaze: [0.0,-0.12], sweep: false },
+    { t0: 0, t1: 5.2, title: "هر سایتی رو گوگل نشون نمی‌ده!", sub: "چطور از گوگل مشتری بگیریم؟ | قسمت اول", mouth: "surprise", gaze: [0.0,-0.12], sweep: false },
     { t0: 5.2, t1: 11.0, title: "اول، منظور کاربر رو می‌فهمه", sub: "فقط کلمه‌ها مهم نیستن؛ هدف جست‌وجو مهمه.", mouth: "happy", gaze: [0.25,-0.45], sweep: true },
     { t0: 11.0, t1: 18.0, title: "بعد، ارتباط صفحه رو می‌سنجه", sub: "محتوا باید دقیقاً به سؤال کاربر جواب بده.", mouth: "surprise", gaze: [0.35,-0.35], sweep: true },
     { t0: 18.0, t1: 25.0, title: "کیفیت و اعتبار هم مهمه", sub: "محتوای مفید، قابل اعتماد و تجربهٔ خوب.", mouth: "sad", gaze: [0.42,-0.18], sweep: true },
-    { t0: 25.0, t1: 33.0, title: "در نهایت، بهترین پاسخ‌ها رو مرتب می‌کنه", sub: "سئو یعنی برای کاربر بهترین جواب باشی؛ نه فقط پر از کلمه.", mouth: "happy", gaze: [0.0,0.0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
+    { t0: 25.0, t1: 33.0, title: "در نهایت، بهترین پاسخ‌ها رو مرتب می‌کنه", sub: "این‌ها بخشی از معیارهاشن؛ بهترین پاسخ رو بساز.", mouth: "happy", gaze: [0.0,0.0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
   ],
 
   camera: [
@@ -917,8 +917,23 @@ function draw(t) {
   /* --- بازوها --- */
   const swayAmp = 1.4 + (1 - riseP) * 5;
   const legs = [["LL", 0, -1], ["LM", 0.6, -1], ["RM", 1.2, 1], ["RL", 1.8, 1]];
-  for (const [key, phase, dir] of legs) {
-    const a = Math.sin(t * 2.1 + phase) * swayAmp * dir;
+  let poseIndex = 0;
+  for (let i = 0; i < CFG.beats.length; i++) if (t >= CFG.beats[i].t0) poseIndex = i;
+  const poses = [
+    [-7, -3, 3, 7],       // ورود کنجکاو و غافلگیر
+    [-17, -10, 11, 18],   // اشاره و معرفی جست‌وجو
+    [-10, 8, -8, 10],     // توضیح و تحلیل
+    [13, 8, -8, -13],      // واکنش هنگام حرف زدن
+    [-12, -16, 16, 12]     // جمع‌بندی و دعوت به قسمت بعد
+  ];
+  const prevPose = poses[Math.max(0, poseIndex - 1)];
+  const currentPose = poses[poseIndex];
+  const poseMix = eOutCubic(clamp((t - CFG.beats[poseIndex].t0) / 0.55));
+  for (let i = 0; i < legs.length; i++) {
+    const [key, phase, dir] = legs[i];
+    const gesture = lerp(prevPose[i], currentPose[i], poseMix);
+    const talkMotion = poseIndex === 3 ? Math.sin(t * 5.2 + phase) * 3.2 : 0;
+    const a = Math.sin(t * 2.1 + phase) * swayAmp * dir + gesture + talkMotion;
     el.legs[key].setAttribute("transform",
       `rotate(${a.toFixed(2)} ${key === "LL" ? 31.89 : key === "LM" ? 152.34 : key === "RM" ? 272.93 : 393.3} 308.65)`);
   }
