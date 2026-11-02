@@ -224,8 +224,8 @@
 
   /* ---------- کاراکتر ---------- */
   .char{
-    position:absolute;top:800px;left:50%;width:780px;
-    margin-left:-390px;
+    position:absolute;top:1010px;left:50%;width:560px;
+    margin-left:-280px;opacity:0;
     transform-origin:50% 100%;
     filter:drop-shadow(0 40px 70px rgba(0,0,0,.45)) drop-shadow(0 0 60px rgba(65,250,241,.10));
     will-change:transform;
@@ -544,7 +544,7 @@ const params = new URLSearchParams(location.search);
 const CFG = {
   duration: 33,
   fps: 30,
-  rise: { start: 0.05, dur: 0.95, from: 980 },
+  rise: { start: 1.65, dur: 1.05, from: 170 },
   blinks: [3.4, 8.2, 14.5, 21.2, 28.4],
 
   beats: [
@@ -561,17 +561,12 @@ const CFG = {
     { b:3,o:0,s:1.04,x:0,y:0 }, { b:4,o:0,s:1,x:0,y:0 }
   ],
   char: [
-    // ورود اول دقیقاً مثل پروژهٔ مبنا: اکتو از پایین قاب بالا می‌آید.
-    { b:0,o:0,scale:1.00,x:0,y:0 },
-    { b:0,ref:"end",o:0,scale:1.00,x:0,y:0 },
-    // بعد از معرفی عنوان، اکتو کوچک می‌شود و کنار محتوای آموزشی قرار می‌گیرد.
-    { b:1,o:0.35,scale:0.52,x:-300,y:40 },
-    { b:1,ref:"end",o:0,scale:0.52,x:-300,y:40 },
-    { b:2,o:0.20,scale:0.50,x:-320,y:60 },
-    { b:2,ref:"end",o:0,scale:0.50,x:-320,y:60 },
-    { b:3,o:0.20,scale:0.52,x:-320,y:50 },
-    { b:3,ref:"end",o:0,scale:0.52,x:-320,y:50 },
-    { b:4,o:0.20,scale:0.48,x:320,y:80 }
+    { t:0,scale:1,x:0,y:0 }, { t:5.15,scale:1,x:0,y:0 },
+    { t:6.15,scale:0.55,x:-300,y:-80 }, { t:10.4,scale:0.57,x:-300,y:-80 },
+    { t:11.2,scale:0.57,x:-300,y:-80 }, { t:17.2,scale:0.55,x:300,y:-80 },
+    { t:18.2,scale:0.57,x:300,y:-80 }, { t:24.55,scale:0.55,x:-300,y:-80 },
+    { t:25.4,scale:0.57,x:-300,y:-80 }, { t:28.8,scale:0.55,x:0,y:-80 },
+    { t:30,scale:0.57,x:0,y:-80 }, { t:33,scale:0.57,x:0,y:-80 }
   ],
   monitor: [
     { b:0,o:0,opacity:0,x:0,y:45,scale:.94,rotY:-12,state:"white" },
