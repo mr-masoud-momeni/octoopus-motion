@@ -907,6 +907,9 @@ function draw(t) {
   el.dots.style.transform = `translate(${Math.sin(t * 0.25) * 14}px, ${-t * 10}px)`;
   el.glow.style.transform = `scale(${1 + Math.sin(t * 1.15) * 0.02})`;
   el.glow.style.opacity = 0.85 + Math.sin(t * 1.15) * 0.15;
+  const cover = document.getElementById('titleScene');
+  cover.style.opacity = sceneV7(t,0,5.6,0.45);
+  cover.style.transform = `translate3d(0,${lerp(38,0,eOutCubic(prog(t,0,.58)))}px,0)`;
 
   for (const b of BUBBLES) {
     const y = 2100 - (((b.y0 + t * b.speed) % 2300));
