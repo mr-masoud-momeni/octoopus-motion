@@ -324,7 +324,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
    n.style.transform="translate3d(0,"+(-78*prog(t,start,end-start))+"px,0) scale("+(.92+.08*rise)+")";
   });
   var speechText="",speechStart=0,speechEnd=0;
-  if(t>=13.35&&t<21.65){speechText="آهان! گوگل واسش پیدا می‌کنه!";speechStart=13.55;speechEnd=21.3;}
+  if(t>=13.35&&t<21.65){speechText="آهان! گوگل واسم پیدا می‌کنه!";speechStart=13.55;speechEnd=21.3;}
   else if(t>=28.7&&t<32){speechText="آخ جون مشتری!";speechStart=29.0;speechEnd=31.75;}
   $("speech").textContent=speechText;
   var speechIn=back(prog(t,speechStart,.5),1.15),speechOut=prog(t,speechEnd-.35,.35);
