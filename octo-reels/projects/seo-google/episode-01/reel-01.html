@@ -263,7 +263,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
  </div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="46" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="46" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
 <script>
 (function(){
  "use strict";
@@ -331,6 +331,59 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("speech").style.opacity=speechText?clamp(speechIn*1.25,0,1)*(1-speechOut):0;
   $("speech").style.transform="translate(-50%,"+lerp(25,0,speechIn)+"px) scale("+lerp(.82,1,speechIn)+")";
  }
+
+ function makeSfxWav(){
+  var sampleRate=48000,frames=DURATION*sampleRate;
+  var Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+  if(!Offline)throw new Error("مرورگر از ساخت WAV پشتیبانی نمی‌کند.");
+  var ctx=new Offline(2,frames,sampleRate),master=ctx.createGain(),comp=ctx.createDynamicsCompressor();
+  master.gain.value=.82;comp.threshold.value=-12;comp.knee.value=18;comp.ratio.value=3;comp.attack.value=.004;comp.release.value=.18;
+  master.connect(comp);comp.connect(ctx.destination);
+  function tone(t,d,f1,f2,amp,type){
+   var o=ctx.createOscillator(),g=ctx.createGain();o.type=type||"sine";
+   o.frequency.setValueAtTime(Math.max(1,f1),t);o.frequency.exponentialRampToValueAtTime(Math.max(1,f2),t+d);
+   g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,amp),t+Math.min(.025,d*.25));g.gain.exponentialRampToValueAtTime(.0001,t+d);
+   o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.015);
+  }
+  function noise(t,d,amp,low,high){
+   var n=Math.max(1,Math.floor(sampleRate*d)),b=ctx.createBuffer(1,n,sampleRate),a=b.getChannelData(0);
+   for(var i=0;i<n;i++)a[i]=(Math.random()*2-1)*(1-i/n*.18);
+   var src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),g=ctx.createGain();
+   src.buffer=b;filter.type="bandpass";filter.frequency.setValueAtTime(low,t);filter.frequency.exponentialRampToValueAtTime(high,t+d);filter.Q.value=.65;
+   g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(amp,t+Math.min(.12,d*.35));g.gain.exponentialRampToValueAtTime(.0001,t+d);
+   src.connect(filter);filter.connect(g);g.connect(master);src.start(t);src.stop(t+d+.02);
+  }
+  function pop(t,soft){
+   var v=soft||1;tone(t,.12,720,420,.075*v,"sine");tone(t+.018,.085,1180,760,.035*v,"sine");
+  }
+  function whoosh(t,d,amp){
+   noise(t,d,amp,420,1900);tone(t,d*.78,170,72,amp*.42,"sine");
+  }
+  function bubble(t){
+   tone(t,.19,880,510,.047,"sine");tone(t+.035,.11,1450,980,.018,"sine");
+  }
+  // ورود نرم اکتو و حباب‌های فکر
+  whoosh(1.58,.82,.055);pop(2.28,.72);
+  bubble(6.05);bubble(7.46);bubble(9.06);
+  // نمایش نتایج گوگل
+  whoosh(12.82,.72,.048);pop(13.48,.62);
+  // ورود به سایت و تأکید روی مسیر خرید
+  whoosh(21.82,.82,.052);tone(25.7,.12,1050,720,.028,"sine");
+  pop(28.92,.82);tone(29.12,.22,980,1480,.025,"sine");
+  // پرسش پایانی و حالت متفکر اکتو
+  whoosh(31.82,.72,.038);tone(34.05,.24,430,300,.026,"triangle");
+  // پایان‌بندی برند؛ سه نت کوتاه و لطیف، بدون موسیقی پس‌زمینه
+  tone(40.12,.62,660,660,.032,"sine");tone(40.34,.72,880,880,.026,"sine");tone(40.62,.9,1100,1100,.022,"sine");
+  return ctx.startRendering().then(function(buffer){
+   var channels=buffer.numberOfChannels,length=buffer.length,dataBytes=length*channels*2;
+   var ab=new ArrayBuffer(44+dataBytes),view=new DataView(ab),p=0;
+   function str(s){for(var i=0;i<s.length;i++)view.setUint8(p++,s.charCodeAt(i));}
+   str("RIFF");view.setUint32(p,36+dataBytes,true);p+=4;str("WAVE");str("fmt ");view.setUint32(p,16,true);p+=4;view.setUint16(p,1,true);p+=2;view.setUint16(p,channels,true);p+=2;view.setUint32(p,sampleRate,true);p+=4;view.setUint32(p,sampleRate*channels*2,true);p+=4;view.setUint16(p,channels*2,true);p+=2;view.setUint16(p,16,true);p+=2;str("data");view.setUint32(p,dataBytes,true);p+=4;
+   var ch=[];for(var c=0;c<channels;c++)ch.push(buffer.getChannelData(c));
+   for(var i=0;i<length;i++)for(var c=0;c<channels;c++){var x=clamp(ch[c][i],-1,1);view.setInt16(p,x<0?x*32768:x*32767,true);p+=2;}
+   return new Blob([ab],{type:"audio/wav"});
+  });
+ }
  window.renderAt=draw;
  window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
  window.__ready=false;
@@ -349,6 +402,13 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   }
   $("play").onclick=function(){playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};
   $("restart").onclick=function(){offset=0;t0=performance.now();};
+  $("exportSfx").onclick=function(){
+   var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";
+   makeSfxWav().then(function(blob){
+    var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-01-sfx-46s.wav";document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";
+   }).catch(function(err){status.textContent="خطا: "+err.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});
+  };
   $("scrub").oninput=function(){offset=parseFloat($("scrub").value);if(playing)t0=performance.now()-offset*1000;};
   window.addEventListener("resize",resize);resize();requestAnimationFrame(tick);
   document.fonts.ready.then(function(){window.__ready=true;});
