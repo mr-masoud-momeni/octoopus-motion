@@ -72,13 +72,16 @@
   }
 
   /* ---------- نوار برند ---------- */
-  .brand{
-    position:absolute;top:96px;left:0;right:0;
-    display:flex;align-items:center;justify-content:center;gap:16px;
-    font-size:34px;font-weight:500;color:var(--muted);
-    letter-spacing:.06em;opacity:.62;direction:ltr;
-  }
-  .brand .dot{width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 22px var(--cyan)}
+  .brand{position:absolute;top:78px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.72}
+  .brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
+  #dots{inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.42;mask-image:radial-gradient(72% 60% at 50% 52%,#000,transparent)}
+  #titleScene{top:0;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 100px}
+  #titleScene .cover-part{font-size:38px;font-weight:900;color:#41FAF1;margin-top:32px;padding:7px 30px;border-top:2px solid #41FAF188;border-bottom:2px solid #41FAF188;letter-spacing:.02em}
+  #titleScene .episode{font-size:25px;color:#aebbd0;margin-bottom:30px;font-weight:800;letter-spacing:.04em}
+  #titleScene h1{font-size:112px;line-height:1.32;font-weight:1000;letter-spacing:-.055em;text-align:center;max-width:940px;text-shadow:0 12px 34px #0005}
+  #titleScene h1 span{display:block}
+  #titleScene h1 .cover-accent{color:#41FAF1;text-shadow:0 0 38px #41FAF144}
+  #titleScene .ornament{width:230px;height:4px;margin-top:32px;border-radius:5px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
 
   /* ---------- نوار مسیر (stepper) ---------- */
   .steps-nav{
@@ -223,13 +226,7 @@
   }
 
   /* ---------- کاراکتر ---------- */
-  .char{
-    position:absolute;top:1010px;left:50%;width:560px;
-    margin-left:-280px;opacity:0;
-    transform-origin:50% 100%;
-    filter:drop-shadow(0 40px 70px rgba(0,0,0,.45)) drop-shadow(0 0 60px rgba(65,250,241,.10));
-    will-change:transform;
-  }
+  .char{position:absolute;left:50%;top:1010px;width:560px;margin-left:-280px;opacity:0;transform:translate3d(250px,160px,0) scale(.72);transform-origin:50% 100%;filter:drop-shadow(0 34px 48px rgba(0,0,0,.42)) drop-shadow(0 0 30px rgba(65,250,241,.12));z-index:3;will-change:transform,opacity,filter}
   .char svg{display:block;width:100%;height:auto;overflow:visible}
   .octo-body{fill:var(--cyan)}
   .octo-ring{fill:#000}
@@ -355,7 +352,9 @@
   <div class="glow" id="glow"></div>
   <div class="bubbles" id="bubbles"></div>
 
-  <div class="brand"><span class="dot"></span><span>octoopus.ir</span></div>
+  <div class="brand"><i></i><span>octoopus.ir</span></div>
+
+  <section id="titleScene" class="scene"><div class="episode">اُکتوپوس تقدیم می‌کند</div><h1><span>چطور از گوگل</span><span class="cover-accent">مشتری بگیریم؟</span></h1><div class="ornament"></div><div class="cover-part">قسمت اول</div></section>
 
   <!-- مسیر ثابت مجموعه -->
   <div class="steps-nav" id="stepsNav">
@@ -542,17 +541,17 @@ const params = new URLSearchParams(location.search);
    ۱) تنظیمات ریلز
    --------------------------------------------------------------------- */
 const CFG = {
-  duration: 33,
+  duration: 38.4,
   fps: 30,
   rise: { start: 1.65, dur: 1.05, from: 170 },
-  blinks: [3.4, 8.2, 14.5, 21.2, 28.4],
+  blinks: [6.7, 9.85, 13.65, 17.85, 21.8, 26.9, 30.9, 35.8, 38.1],
 
   beats: [
-    { t0: 0, t1: 4.8, title: "چطور از گوگل مشتری بگیریم؟", sub: "قسمت اول", mouth: "surprise", gaze: [0.0,-0.12], sweep: false },
-    { t0: 4.8, t1: 10.0, title: "هر سایتی رو گوگل نشون نمی‌ده!", sub: "اول باید بفهمیم کاربر دنبال چیه.", mouth: "happy", gaze: [0.25,-0.45], sweep: true },
-    { t0: 10.0, t1: 16.2, title: "صفحه باید مرتبط باشه", sub: "محتوا باید دقیقاً به جست‌وجوی کاربر جواب بده.", mouth: "surprise", gaze: [0.35,-0.35], sweep: true },
-    { t0: 16.2, t1: 23.0, title: "مفید و قابل اعتماد باش", sub: "فقط تکرار کلمه‌ها کافی نیست.", mouth: "happy", gaze: [0.42,-0.18], sweep: true },
-    { t0: 23.0, t1: 33.0, title: "تجربهٔ خوب هم مهمه", sub: "گوگل می‌خواد بهترین پاسخ رو به کاربر نشون بده.", mouth: "happy", gaze: [0.0,0.0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
+    { t0: 5.35, t1: 10.65, title: "هر سایتی رو گوگل نشون نمی‌ده!", sub: "اول باید بفهمیم کاربر دنبال چیه.", mouth: "surprise", gaze: [-0.3,-0.15], sweep: true },
+    { t0: 10.4, t1: 17.45, title: "صفحه باید مرتبط باشه", sub: "محتوا باید دقیقاً به جست‌وجوی کاربر جواب بده.", mouth: "happy", gaze: [0.72,-0.38], sweep: true },
+    { t0: 17.2, t1: 24.85, title: "مفید و قابل اعتماد باش", sub: "فقط تکرار کلمه‌ها کافی نیست.", mouth: "surprise", gaze: [-0.72,-0.22], sweep: true },
+    { t0: 24.55, t1: 29.0, title: "تجربهٔ خوب هم مهمه", sub: "سرعت و راحتی استفاده هم اهمیت دارن.", mouth: "happy", gaze: [0.52,-0.28], sweep: true },
+    { t0: 28.8, t1: 38.35, title: "گوگل بهترین پاسخ رو انتخاب می‌کنه", sub: "برای مشتری، بهترین جواب رو آماده کن.", mouth: "happy", gaze: [0,0], sweep: true, chip: "قسمت بعد: تحقیق کلمات کلیدی" }
   ],
 
   camera: [
@@ -561,16 +560,18 @@ const CFG = {
     { b:3,o:0,s:1.04,x:0,y:0 }, { b:4,o:0,s:1,x:0,y:0 }
   ],
   char: [
-    { t:0,scale:1,x:0,y:0 }, { t:5.15,scale:1,x:0,y:0 },
-    { t:6.15,scale:0.55,x:-300,y:-80 }, { t:10.4,scale:0.57,x:-300,y:-80 },
-    { t:11.2,scale:0.57,x:-300,y:-80 }, { t:17.2,scale:0.55,x:300,y:-80 },
+    { t:5.15,scale:0.55,x:-300,y:-80 }, { t:6.15,scale:0.57,x:-300,y:-80 },
+    { t:10.4,scale:0.57,x:-300,y:-80 }, { t:11.2,scale:0.57,x:-300,y:-80 },
+    { t:16.95,scale:0.57,x:-300,y:-80 }, { t:17.2,scale:0.55,x:300,y:-80 },
     { t:18.2,scale:0.57,x:300,y:-80 }, { t:24.55,scale:0.55,x:-300,y:-80 },
-    { t:25.4,scale:0.57,x:-300,y:-80 }, { t:28.8,scale:0.55,x:0,y:-80 },
-    { t:30,scale:0.57,x:0,y:-80 }, { t:33,scale:0.57,x:0,y:-80 }
+    { t:25.4,scale:0.57,x:-300,y:-80 }, { t:32.85,scale:0.55,x:0,y:-80 },
+    { t:34.0,scale:0.57,x:0,y:-80 }, { t:38.4,scale:0.57,x:0,y:-80 }
   ],
   monitor: [
     { b:0,o:0,opacity:0,x:0,y:45,scale:.94,rotY:-12,state:"white" },
-    { b:1,o:-.45,opacity:0,x:0,y:45,scale:.94,rotY:-12,state:"white" },
+    { b:0,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
+    { b:0,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
+    { b:1,o:-.20,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"log" },
     { b:1,o:.35,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
     { b:1,ref:"end",o:0,opacity:1,x:0,y:0,scale:1,rotY:0,state:"white" },
     { b:2,o:-.20,opacity:0,x:0,y:20,scale:.96,rotY:0,state:"log" },
@@ -827,6 +828,28 @@ function track(list, t) {
    --------------------------------------------------------------------- */
 const CX = 212.6, CY = 471.93;
 const EYE = { L: [114.81, 157.74], R: [302.82, 157.74] };
+const OCTO_POSES = [
+  {t:5.15,x:-300,y:-80,s:.55},{t:6.15,x:-300,y:-80,s:.57},{t:10.4,x:-300,y:-80,s:.57},
+  {t:11.2,x:-300,y:-80,s:.57},{t:16.95,x:-300,y:-80,s:.57},{t:17.2,x:300,y:-80,s:.55},
+  {t:18.2,x:300,y:-80,s:.57},{t:24.55,x:-300,y:-80,s:.55},{t:25.4,x:-300,y:-80,s:.57},
+  {t:32.85,x:0,y:-80,s:.55},{t:34.0,x:0,y:-80,s:.57},{t:40,x:0,y:-80,s:.57}
+];
+function sampleOctoPose(list,t){
+  if(t<=list[0].t)return {...list[0]};
+  for(let i=0;i<list.length-1;i++){
+    const a=list[i],b=list[i+1];
+    if(t<=b.t){
+      const p=prog(t,a.t,b.t-a.t),e=p*p*p*(p*(p*6-15)+10);
+      return {t,x:lerp(a.x,b.x,e),y:lerp(a.y,b.y,e),s:lerp(a.s,b.s,e)};
+    }
+  }
+  return {...list[list.length-1]};
+}
+function sceneV7(t,a,b,fade=.45){return eOutExpo(prog(t,a,.45))*(1-prog(t,b-fade,fade))}
+const OCTO_LIMBS = [
+  {node:el.legs.LL,x:31.89,phase:0,dir:-1},{node:el.legs.LM,x:152.34,phase:1.4,dir:-1},
+  {node:el.legs.RM,x:272.93,phase:2.8,dir:1},{node:el.legs.RL,x:393.3,phase:4.2,dir:1}
+];
 let FIT = 1;
 
 function mouthWeights(t) {
@@ -901,22 +924,27 @@ function draw(t) {
   el.stage.style.transform =
     `scale(${FIT}) translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px) scale(${cs.toFixed(4)})`;
 
-  /* --- کاراکتر: بالا آمدن + تنفس + فشردگی --- */
-  const riseP = prog(t, CFG.rise.start, CFG.rise.dur);
-  const riseY = lerp(CFG.rise.from, 0, eOutBack(riseP, 1.05));
-  const breath = Math.sin(t * 1.85) * 5;
-  const landAt = CFG.rise.start + CFG.rise.dur * 0.82;
-  const squash = 0.075 * Math.sin(Math.PI * prog(t, landAt, 0.4));
-  const sy = (1 - squash) * (1 + Math.sin(t * 1.85) * 0.006);
-  const sx = 1 + squash * 0.55;
-
-  el.char.setAttribute("transform",
-    `translate(0 ${riseY + breath}) translate(${CX} ${CY}) scale(${sx} ${sy}) translate(${-CX} ${-CY})`);
-
-  /* --- جای کاراکتر در صحنه --- */
-  const chr = track(TRACKS.char, t) || { scale: 1, x: 0, y: 0 };
-  el.charWrap.style.transform =
-    `translate(${(chr.x || 0).toFixed(1)}px, ${(chr.y || 0).toFixed(1)}px) scale(${(chr.scale || 1).toFixed(3)})`;
+  /* --- اکتو: منطق ورود و حرکت عین V7 پروژه Customer Trust --- */
+  const pose = sampleOctoPose(OCTO_POSES, t);
+  const enter = eOutBack(prog(t, 1.65, 1.05), 1.12);
+  const settle = prog(t, 5.95, 0.42);
+  const squash = Math.sin(Math.PI * settle) * 0.055;
+  const breath = Math.sin((t - 6) * 1.55) * 0.004;
+  const float = Math.sin((t - 6) * 1.05) * 1.8;
+  el.charWrap.style.opacity = sceneV7(t, 1.6, CFG.duration, 0.5);
+  el.charWrap.style.zIndex = "3";
+  el.charWrap.style.filter = "drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
+  const sy = pose.s * (1 + breath - squash), sx = pose.s * (1 + breath + squash * 0.55);
+  el.charWrap.style.transform = `translate3d(${pose.x}px,${(pose.y + float + lerp(170,0,enter))}px,0) scale(${sx},${sy})`;
+  el.char.setAttribute("transform", "");
+  const limbIntensity = t < 10.4 ? .75 : t < 17.2 ? .9 : t < 24.55 ? .85 : t < 33 ? .72 : .55;
+  OCTO_LIMBS.forEach(l => {
+    const swing = Math.sin(t * 1.8 + l.phase) * 1.55 * limbIntensity;
+    const accent = Math.sin(t * .78 + l.phase) * .42;
+    l.node.setAttribute("transform", `rotate(${((swing + accent) * l.dir).toFixed(2)} ${l.x} 308.65)`);
+  });
+  $("#stepsNav").style.opacity = eOutExpo(prog(t, 5.25, .35));
+  el.bubbles.style.opacity = eOutExpo(prog(t, 5.3, .5));
 
   /* --- بازوها --- */
   const swayAmp = 1.4 + (1 - riseP) * 5;
@@ -1006,8 +1034,8 @@ function draw(t) {
 
   /* --- حباب گفتار اکتو: در بخش توضیح کیفیت واکنش نشان می‌دهد --- */
   const speech = $("#speech");
-  const speechP = eOutBack(prog(t, 16.85, 0.42), 1.35);
-  const speechOut = prog(t, 22.55, 0.35);
+  const speechP = eOutBack(prog(t, 22.2, 0.42), 1.35);
+  const speechOut = prog(t, 27.9, 0.35);
   speech.style.opacity = clamp(speechP * 1.3) * (1 - eInCubic(speechOut));
   speech.style.transform = `translateY(${lerp(24,0,speechP)}px) scale(${lerp(.82,1,speechP)})`;
 
