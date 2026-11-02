@@ -362,6 +362,21 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   function bubble(t){
    tone(t,.19,880,510,.047,"sine");tone(t+.035,.11,1450,980,.018,"sine");
   }
+  // صدای اختصاصی ورود تیترها: سوئیپ واضح‌تر + ضربه‌ی کوتاه و تمیز
+  function titleWhoosh(t,amp){
+   noise(t,.48,amp,520,2600);
+   tone(t+.25,.16,210,92,amp*.72,"sine");
+   tone(t+.39,.075,1550,920,amp*.48,"triangle");
+  }
+  // کاور و ورود تیترهای اصلی هر سکانس
+  titleWhoosh(.12,.105);titleWhoosh(.72,.078);
+  titleWhoosh(5.62,.105);
+  titleWhoosh(13.02,.112);
+  titleWhoosh(22.02,.112);
+  titleWhoosh(32.02,.105);
+  titleWhoosh(40.02,.095);
+  // زیرتیترها با تأخیر کوتاه و صدای سبک‌تر
+  pop(6.12,.62);pop(13.48,.58);pop(22.48,.58);pop(32.42,.55);pop(40.48,.52);
   // ورود نرم اکتو و حباب‌های فکر
   whoosh(1.58,.82,.055);pop(2.28,.72);
   bubble(6.05);bubble(7.46);bubble(9.06);
