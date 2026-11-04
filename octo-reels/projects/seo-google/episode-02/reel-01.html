@@ -22,6 +22,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #titleScene h1 span{display:block;white-space:nowrap}
 #titleScene h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 38px #41FAF144}
 .cover-part{font-size:34px;font-weight:850;color:#fff;margin-top:34px;padding:8px 30px;border-top:1px solid rgba(65,250,241,.6);border-bottom:1px solid rgba(65,250,241,.6);letter-spacing:.02em}
+#titleScene h1 span{will-change:transform,opacity;text-shadow:0 12px 34px #0007} .cover-part{box-shadow:0 0 24px rgba(65,250,241,.08);will-change:transform,opacity}
+.scene-title,.scene-sub,.kicker{will-change:transform,opacity}
+#ownerScene .thought-cloud{background:linear-gradient(135deg,rgba(16,43,72,.96),rgba(5,18,34,.94));box-shadow:0 16px 38px rgba(0,0,0,.3),0 0 30px rgba(65,250,241,.16);border-color:rgba(65,250,241,.72)}
+.shoe-intent{box-shadow:0 18px 42px rgba(0,0,0,.26),0 0 22px rgba(65,250,241,.09),inset 0 1px 0 rgba(255,255,255,.09)}
+.journey-step{box-shadow:0 18px 42px rgba(0,0,0,.25),0 0 24px rgba(65,250,241,.1),inset 0 1px 0 rgba(255,255,255,.08)}
+#journeyQuestion{box-shadow:0 18px 48px rgba(0,0,0,.3),0 0 28px rgba(65,250,241,.12)}
 .kicker{font-size:28px;font-weight:800;color:var(--cyan);margin-bottom:20px}
 .scene-title{font-size:56px;line-height:1.5;font-weight:950;letter-spacing:-.025em;color:#fff}
 .scene-title b{font-weight:950;color:var(--cyan)}
@@ -505,6 +511,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("grid").style.transform="translate3d("+Math.sin(t*.15)*13+"px,"+(-t*5)+"px,0)";
   $("glow").style.transform="scale("+(1+Math.sin(t*.62)*.035)+")";
   scenes.forEach(function(s){var el=$(s[0]),p=scene(t,s[1],s[2],.45);el.style.opacity=p;el.style.transform="translate3d(0,"+lerp(s[3],0,expo(prog(t,s[1],.58)))+"px,0)";});
+   function textIn(sel,start,dur,dy,fromScale){var el=$(sel);if(!el)return;var p=back(prog(t,start,dur),1.2);el.style.opacity=clamp(p,0,1);el.style.transform="translate3d(0,"+lerp(dy,0,p)+"px,0) scale("+lerp(fromScale,1,p)+")";}
+   textIn("#titleScene h1 span:nth-child(1)",.18,.62,48,.88);textIn("#titleScene h1 span:nth-child(2)",.42,.66,52,.86);textIn("#titleScene .cover-part",.92,.52,28,.9);
+   textIn("#ownerScene .kicker",4.68,.42,24,.9);textIn("#ownerScene .topic-head",4.82,.68,48,.9);textIn("#ownerScene .scene-sub",5.34,.58,30,.94);
+   textIn("#resultsScene .kicker",10.02,.38,22,.9);textIn("#resultsScene .shoe-scene-title",10.12,.62,42,.9);textIn("#resultsScene .shoe-scene-sub",10.52,.55,28,.94);
+   textIn("#closingScene .closing-kicker",51.72,.42,26,.9);textIn("#closingScene .closing-title",51.88,.68,46,.88);textIn("#closingScene .closing-copy",52.28,.58,30,.94);textIn("#closingScene .next-episode",52.72,.62,38,.9);
   var pose=sample(t),enter=back(prog(t,1.55,1.05),1.12);
   var settle=prog(t,4.7,.42),squash=Math.sin(Math.PI*settle)*.05;
   var breath=Math.sin((t-5)*1.5)*.004,floatY=Math.sin((t-5)*1.05)*1.8;
