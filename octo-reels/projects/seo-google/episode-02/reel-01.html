@@ -457,8 +457,9 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   else if(t>=32.1&&t<39){speechText="نیاز پشت جست‌وجو مهمه!";speechStart=32.35;speechEnd=38.8;}
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
   thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
+  thought.style.left="calc(50% + "+pose.x+"px)";
   thought.style.transform="translate3d(-50%,"+lerp(260,0,thoughtIn)+"px,0) scale("+lerp(.78,1,thoughtIn)+")";
-  var trail=$("ownerScene").querySelector(".thought-trail");trail.style.opacity=t>=5&&t<10?clamp(prog(t,5.05,.35))*(1-prog(t,9.55,.35)):0;
+  var trail=$("ownerScene").querySelector(".thought-trail");trail.style.left="calc(50% + "+pose.x+"px)";trail.style.opacity=t>=5&&t<10?clamp(prog(t,5.05,.35))*(1-prog(t,9.55,.35)):0;
   $("speech").textContent=speechText;
   var speechIn=back(prog(t,speechStart,.46),1.12),speechOut=prog(t,speechEnd-.35,.35);
   $("speech").style.opacity=speechText?clamp(speechIn*1.2,0,1)*(1-speechOut):0;
