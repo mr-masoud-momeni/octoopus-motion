@@ -171,8 +171,17 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 
 /* Episode 02 / scene 2: underwater explorer + Octo's thought */
 #ownerScene .kicker,#ownerScene .topic-head,#ownerScene .scene-sub{position:relative;z-index:4}
-#ownerScene .owner-diver{position:absolute;z-index:1;right:38px;top:770px;width:570px;height:430px;opacity:.68;transform:rotate(-3deg);filter:drop-shadow(0 16px 35px rgba(0,0,0,.24));pointer-events:none}
-#ownerScene .owner-diver svg{width:100%;height:100%;overflow:visible}
+#ownerScene .owner-diver{position:absolute;z-index:1;left:38px;top:845px;width:600px;height:320px;opacity:.82;pointer-events:none;animation:diverDrift 5.8s ease-in-out infinite;filter:drop-shadow(0 14px 28px rgba(0,0,0,.2))}
+#ownerScene .owner-diver img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;opacity:.88}
+#ownerScene .air-bubbles{position:absolute;left:170px;top:15px;width:90px;height:150px}
+#ownerScene .air-bubbles i{position:absolute;bottom:0;width:12px;height:12px;border:1.5px solid rgba(183,235,242,.8);border-radius:50%;background:rgba(115,208,225,.12);opacity:0;animation:airRise 2.8s ease-out infinite}
+#ownerScene .air-bubbles i:nth-child(1){left:12px;animation-delay:0s;width:9px;height:9px}
+#ownerScene .air-bubbles i:nth-child(2){left:38px;animation-delay:.55s;width:15px;height:15px}
+#ownerScene .air-bubbles i:nth-child(3){left:24px;animation-delay:1.1s;width:7px;height:7px}
+#ownerScene .air-bubbles i:nth-child(4){left:58px;animation-delay:1.65s;width:11px;height:11px}
+#ownerScene .air-bubbles i:nth-child(5){left:44px;animation-delay:2.2s;width:6px;height:6px}
+@keyframes diverDrift{0%,100%{transform:translate3d(0,0,0) rotate(-1deg)}50%{transform:translate3d(8px,-17px,0) rotate(1.2deg)}}
+@keyframes airRise{0%{transform:translate3d(0,0,0) scale(.65);opacity:0}15%{opacity:.85}85%{opacity:.55}100%{transform:translate3d(18px,-142px,0) scale(1.25);opacity:0}}
 #ownerScene .thought-cloud{position:absolute;z-index:8;left:48px;top:760px;width:470px;min-height:112px;padding:24px 30px;border:1.5px solid rgba(180,232,238,.72);border-radius:48px;background:rgba(10,25,47,.88);box-shadow:0 12px 35px rgba(0,0,0,.22),0 0 24px rgba(65,250,241,.08);display:flex;align-items:center;justify-content:center;color:#f4f7fb;font-size:27px;font-weight:900;text-align:center;opacity:0;transform:translate3d(-18px,22px,0) scale(.88);will-change:transform,opacity;pointer-events:none}
 #ownerScene .thought-cloud:before,#ownerScene .thought-cloud:after{content:"";position:absolute;border:1.5px solid rgba(180,232,238,.72);background:#0A192F;border-radius:50%}
 #ownerScene .thought-cloud:before{width:19px;height:19px;bottom:-30px;left:115px}
@@ -198,30 +207,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <h2 class="scene-title topic-head">مشتری‌ها دقیقاً<br><b>چی جست‌وجو می‌کنن؟</b></h2>
   <p class="scene-sub">چون همیشه اسم محصولت رو جست‌وجو نمی‌کنن!</p>
   <div class="owner-diver" aria-hidden="true">
-   <svg viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-     <linearGradient id="diverTone" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9bd6df"/><stop offset="1" stop-color="#397a9c"/></linearGradient>
-     <filter id="diverGlow"><feGaussianBlur stdDeviation="8"/></filter>
-    </defs>
-    <ellipse cx="275" cy="190" rx="170" ry="92" fill="#41faf1" opacity=".07" filter="url(#diverGlow)"/>
-    <g transform="translate(45 28) rotate(-13 245 170)" fill="none" stroke="url(#diverTone)" stroke-linecap="round" stroke-linejoin="round">
-     <path d="M178 155 Q225 112 292 135 L344 169 Q355 181 341 196 L290 220 Q229 237 178 196Z" fill="#397a9c" fill-opacity=".48" stroke-width="9"/>
-     <circle cx="362" cy="171" r="39" fill="#173b58" fill-opacity=".8" stroke-width="10"/>
-     <path d="M342 157 Q365 143 389 161 L392 181 Q366 198 343 181Z" fill="#9debf0" fill-opacity=".38" stroke-width="6"/>
-     <path d="M182 153 L147 126 Q134 119 126 131 L111 153 Q106 164 120 171 L177 190" fill="#397a9c" fill-opacity=".5" stroke-width="12"/>
-     <path d="M201 207 L169 251 L118 266" stroke-width="21"/>
-     <path d="M118 266 L75 258 L54 279 Q92 302 137 285 L166 265" fill="#397a9c" fill-opacity=".5" stroke-width="9"/>
-     <path d="M287 214 L318 258 L365 274" stroke-width="21"/>
-     <path d="M365 274 L410 267 L432 286 Q390 308 347 292 L319 270" fill="#397a9c" fill-opacity=".5" stroke-width="9"/>
-     <rect x="205" y="93" width="55" height="91" rx="17" fill="#285674" stroke-width="8"/>
-     <path d="M217 102 V173 M248 102 V173" stroke-width="5" opacity=".7"/>
-     <path d="M397 136 Q431 108 451 80" stroke-width="5" opacity=".7"/>
-    </g>
-    <g fill="#9debf0" opacity=".65">
-     <circle cx="420" cy="70" r="8"/><circle cx="448" cy="43" r="5"/><circle cx="466" cy="17" r="3"/>
-     <circle cx="95" cy="105" r="5"/><circle cx="77" cy="78" r="3"/>
-    </g>
-   </svg>
+   <img src="https://images.rawpixel.com/image_png_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjY3NC0xNzItcC5wbmc.png" alt="">
+   <span class="air-bubbles"><i></i><i></i><i></i><i></i><i></i></span>
   </div>
   <div class="thought-cloud" id="thoughtCloud">
    <span>این اینجا دنبال چی می‌گرده؟</span>
