@@ -17,31 +17,31 @@ import { dirname } from "node:path";
 
 export const SFX = {
   rise: {
-    src: "aevalsrc=0.42*sin(2*PI*(170-95*t)*t)*exp(-5*t):d=0.85:s=44100", vol: 0.9
+    src: "aevalsrc=0.62*sin(2*PI*(190-72*t)*t)*exp(-3.8*t):d=0.95:s=44100", vol: 1.0
   },
   pop: {
-    src: "aevalsrc=0.40*sin(2*PI*720*t)*exp(-15*t):d=0.24:s=44100", vol: 0.85
+    src: "aevalsrc=0.62*sin(2*PI*880*t)*exp(-12*t)+0.22*sin(2*PI*145*t)*exp(-20*t):d=0.28:s=44100", vol: 1.0
   },
   sweep: {
-    src: "anoisesrc=d=0.55:c=pink:r=44100, volume=0.42, afade=t=in:st=0:d=0.2, afade=t=out:st=0.3:d=0.25",
-    vol: 0.45
+    src: "anoisesrc=d=0.62:c=pink:r=44100, highpass=f=280, lowpass=f=6500, volume=0.72, afade=t=in:st=0:d=0.1, afade=t=out:st=0.28:d=0.34",
+    vol: 0.72
   },
   whoosh: {
-    src: "anoisesrc=d=0.6:c=white:r=44100, highpass=f=320, lowpass=f=6500, volume=0.38, afade=t=in:st=0.04:d=0.2, afade=t=out:st=0.24:d=0.36",
-    vol: 0.5
+    src: "anoisesrc=d=0.68:c=white:r=44100, highpass=f=260, lowpass=f=8500, volume=0.66, afade=t=in:st=0.01:d=0.12, afade=t=out:st=0.25:d=0.42",
+    vol: 0.78
   },
   zap: {
-    src: "aevalsrc=0.30*sin(2*PI*(1500-900*t)*t)*exp(-11*t):d=0.32:s=44100", vol: 0.65
+    src: "aevalsrc=0.48*sin(2*PI*(1800-1050*t)*t)*exp(-8*t):d=0.38:s=44100", vol: 0.9
   },
   tick: {
-    src: "aevalsrc=0.26*sin(2*PI*1500*t)*exp(-26*t):d=0.16:s=44100", vol: 0.7
+    src: "aevalsrc=0.4*sin(2*PI*1750*t)*exp(-20*t):d=0.18:s=44100", vol: 0.9
   },
   click: {
-    src: "aevalsrc=0.34*sin(2*PI*2400*t)*exp(-55*t):d=0.08:s=44100", vol: 0.8
+    src: "aevalsrc=0.48*sin(2*PI*2600*t)*exp(-42*t):d=0.1:s=44100", vol: 0.95
   },
   ding: {
-    src: "aevalsrc=0.20*(sin(2*PI*1046*t)+0.55*sin(2*PI*1568*t))*exp(-7*t):d=0.6:s=44100",
-    vol: 0.8
+    src: "aevalsrc=0.3*(sin(2*PI*1046*t)+0.62*sin(2*PI*1568*t)+0.28*sin(2*PI*2093*t))*exp(-5.5*t):d=0.72:s=44100",
+    vol: 0.95
   }
 };
 
@@ -75,7 +75,7 @@ export async function buildSfxTrack(events, outPath, total = 0) {
   const n = chains.length;
   let mix = chains.join(";") + `;${chains.map((_, i) => `[s${i}]`).join("")}amix=inputs=${n}:normalize=0:duration=longest`;
   if (total > 0) mix += `,apad=whole_dur=${total.toFixed(3)}`;
-  mix += "[aout]";
+  mix += ",alimiter=limit=0.92[aout]";
   args.push("-filter_complex", mix, "-map", "[aout]", "-c:a", "pcm_s16le", "-ar", "48000");
   if (total > 0) args.push("-t", total.toFixed(3));
   args.push(outPath);
