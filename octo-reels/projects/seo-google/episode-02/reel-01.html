@@ -132,6 +132,21 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 .next-episode small{font-size:19px;color:#aabbd0;font-weight:700}
 .next-episode strong{font-size:29px;color:#fff;font-weight:950}
 .next-episode strong em{font-style:normal;color:var(--cyan)}
+/* Scene 4 — customer journey */
+#journeyScene{inset:0;left:0;right:0;height:100%;padding:0;z-index:12;text-align:center}
+#journeyQuestion{position:absolute;top:420px;left:95px;right:95px;padding:34px 38px;border:1px solid rgba(180,232,238,.55);border-radius:30px;background:rgba(10,25,47,.9);box-shadow:0 18px 48px rgba(0,0,0,.25);font-size:43px;line-height:1.55;font-weight:950;color:#fff;opacity:0;transform:translateY(25px) scale(.96)}
+#journeyQuestion em{font-style:normal;color:var(--cyan)}
+#journeyNarration{position:absolute;top:510px;left:100px;right:100px;min-height:210px;display:flex;align-items:center;justify-content:center;font-size:37px;line-height:1.85;font-weight:850;color:#f4f7fb;opacity:0}
+#journeySteps{position:absolute;top:350px;left:115px;right:115px;display:flex;flex-direction:column;align-items:stretch;gap:0;direction:rtl}
+.journey-step{min-height:185px;display:flex;align-items:center;gap:28px;padding:24px 34px;border:1px solid rgba(65,250,241,.36);border-radius:28px;background:linear-gradient(110deg,rgba(20,43,77,.94),rgba(7,19,36,.94));box-shadow:0 18px 42px rgba(0,0,0,.22);opacity:0;transform:translateY(35px) scale(.97)}
+.journey-icon{width:105px;height:105px;flex:none;display:grid;place-items:center;border-radius:28px;background:rgba(65,250,241,.1);border:1px solid rgba(65,250,241,.45);color:var(--cyan)}
+.journey-icon svg{width:62px;height:62px;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.journey-label{text-align:right;font-size:37px;line-height:1.5;font-weight:950;color:#fff}
+.journey-arrow{height:74px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:58px;line-height:1;opacity:0;transform:translateY(-12px)}
+#journeyFinal{position:absolute;top:565px;left:85px;right:85px;min-height:450px;display:flex;align-items:center;justify-content:center;padding:40px 32px;font-size:48px;line-height:1.75;font-weight:1000;color:#fff;text-align:center;text-shadow:0 10px 35px #0006;opacity:0}
+#journeyFinal em{font-style:normal;color:var(--cyan);text-shadow:0 0 34px #41FAF144}
+#journeyFinal .typed-cursor{display:inline-block;width:4px;height:.95em;margin-right:5px;vertical-align:-.12em;background:var(--cyan);animation:journeyBlink .8s steps(2,start) infinite}
+@keyframes journeyBlink{to{visibility:hidden}}
 #closingScene~#octoWrap{z-index:5}
 #octoWrap{z-index:5}#controls{z-index:1000}
 
@@ -361,6 +376,19 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="shoe-thought" id="shoeThought"><span>پس همه اینا نیاز به کفش دارن؟!</span><i></i><b></b></div>
  </section>
 
+ <section id="journeyScene" class="scene">
+  <div id="journeyQuestion">پس اینا همه تو <em>یه مرحله</em> از خرید نیستن؟</div>
+  <div id="journeyNarration"></div>
+  <div id="journeySteps">
+   <div class="journey-step"><div class="journey-icon"><svg viewBox="0 0 64 64"><path d="M32 8a18 18 0 0 0-11 32c3 2 4 5 4 8h14c0-3 1-6 4-8A18 18 0 0 0 32 8Z"/><path d="M25 54h14M27 60h10M32 17v8M18 24l6 5M46 24l-6 5"/></svg></div><div class="journey-label">شناخت نیاز و مشکل</div></div>
+   <div class="journey-arrow">↓</div>
+   <div class="journey-step"><div class="journey-icon"><svg viewBox="0 0 64 64"><circle cx="27" cy="27" r="17"/><path d="m40 40 15 15M19 27h16M27 19v16"/></svg></div><div class="journey-label">بررسی و مقایسه راه‌حل‌ها</div></div>
+   <div class="journey-arrow">↓</div>
+   <div class="journey-step"><div class="journey-icon"><svg viewBox="0 0 64 64"><path d="M8 12h7l7 31h29l7-22H19"/><circle cx="27" cy="53" r="3"/><circle cx="47" cy="53" r="3"/><path d="m28 29 7 7 13-14"/></svg></div><div class="journey-label">تصمیم و خرید</div></div>
+  </div>
+  <div id="journeyFinal"></div>
+ </section>
+
  <section id="siteScene" class="scene">
   <div class="kicker">هر مشتری از یه مسیر شروع می‌کنه</div>
   <h2 class="scene-title">سه مدل جست‌وجو،<br><b>برای یک محصول</b></h2>
@@ -430,11 +458,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
  </div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="28" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="55" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
 <script>
 (function(){
  "use strict";
- var DURATION=28, RENDER=new URLSearchParams(location.search).has("render");
+ var DURATION=55, RENDER=new URLSearchParams(location.search).has("render");
  var $=function(id){return document.getElementById(id)};
  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
  var lerp=function(a,b,p){return a+(b-a)*p};
@@ -446,12 +474,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var scenes=[
   ["titleScene",0,4.8,34],
   ["ownerScene",4.55,10.1,42],
-  ["resultsScene",9.95,28,42]
+  ["resultsScene",9.95,28,42],\n   ["journeyScene",27.8,55,42]
  ];
  var poses=[
   {t:1.55,x:-300,y:-80,s:.55},{t:4.8,x:-300,y:-80,s:.57},
   {t:9.8,x:300,y:-80,s:.55},{t:10.7,x:100,y:100,s:.49},
-  {t:27.2,x:100,y:100,s:.49},{t:28,x:100,y:100,s:.49}
+  {t:27.2,x:100,y:100,s:.49},{t:27.8,x:0,y:600,s:.82},{t:29.2,x:0,y:80,s:.82},{t:55,x:0,y:80,s:.82}
  ];
  var eyes=[
   {node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},
@@ -503,6 +531,21 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var shoeThought=$("shoeThought"),thoughtP=back(prog(t,23.65,.72),1.1),thoughtFade=1-prog(t,27.55,.35);
   shoeThought.style.opacity=t>=23.65?clamp(thoughtP*1.12,0,1)*thoughtFade:0;
   shoeThought.style.transform="translate3d(0,"+lerp(24,0,thoughtP)+"px,0) scale("+lerp(.86,1,thoughtP)+")";
+  // سکانس چهارم: سؤال اکتو، نریشن تایپی، مسیر سه‌مرحله‌ای و جمله پایانی
+  var jq=$("journeyQuestion"),jn=$("journeyNarration"),jf=$("journeyFinal");
+  var jqIn=back(prog(t,30.05,.55),1.08),jqOut=prog(t,33.05,.35);
+  jq.style.opacity=t>=30.05?clamp(jqIn,0,1)*(1-jqOut):0;
+  jq.style.transform="translateY("+lerp(28,0,jqIn)+"px) scale("+lerp(.96,1,jqIn)+")";
+  var narration="نه دقیقاً! یکی تازه داره مشکلش رو می‌شناسه، یکی دنبال مقایسه‌ست، یکی هم آماده خریده.";
+  var np=prog(t,33.55,4.45),ncount=Math.floor(narration.length*np);
+  jn.textContent=narration.slice(0,ncount);
+  jn.style.opacity=t>=33.55&&t<38.35?1:0;
+  document.querySelectorAll(".journey-step").forEach(function(n,i){var p=back(prog(t,38.55+i*1.45,.62),1.12);n.style.opacity=clamp(p,0,1);n.style.transform="translateY("+lerp(38,0,p)+"px) scale("+lerp(.97,1,p)+")";});
+  document.querySelectorAll(".journey-arrow").forEach(function(n,i){var p=back(prog(t,39.15+i*1.45,.42),1.08);n.style.opacity=clamp(p,0,1);n.style.transform="translateY("+lerp(-14,0,p)+"px)";});
+  var finalText="اگه فقط برای کسی محتوا بسازی که آماده خریده، بخش بزرگی از مشتری‌هات رو قبل از رسیدن به فروش از دست می‌دی.";
+  var fp=prog(t,44.15,8.2),fcount=Math.floor(finalText.length*fp);
+  jf.innerHTML=t>=44.15?finalText.slice(0,fcount)+"<span class=\\"typed-cursor\\"></span>":"";
+  jf.style.opacity=t>=44.15?clamp(prog(t,44.15,.35),0,1):0;
   var speechText="",speechStart=0,speechEnd=0;
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
   thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
@@ -527,7 +570,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   whoosh(4.62,.105);pop(5.08,.7);
   // ورود سکانس سوم و نمایش جست‌وجوها
   whoosh(10.02,.105);pop(10.62,.8);
-  pop(14.9,.72);pop(17.9,.62);pop(20.9,.62);pop(23.65,.68);
+  pop(14.9,.72);pop(17.9,.62);pop(20.9,.62);pop(23.65,.68);\n  whoosh(27.85,.13);pop(30.05,.82);\n  pop(33.55,.55);pop(38.55,.62);pop(40,.62);pop(41.45,.62);pop(42.05,.62);whoosh(44.15,.1);
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
@@ -546,7 +589,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("play").onclick=function(){playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};
   $("restart").onclick=function(){offset=0;t0=performance.now();};
   $("scrub").oninput=function(){offset=parseFloat($("scrub").value);if(playing)t0=performance.now()-offset*1000;draw(offset);};
-  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-28s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
+  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-55s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
   window.addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(function(){window.__ready=true;});
  }
 })();
