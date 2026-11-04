@@ -169,6 +169,18 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #octoWrap{top:1010px}
 @media(max-width:800px){.intent-list{left:70px;right:70px}.intent-row{gap:12px;padding:17px}.intent-copy strong{font-size:21px}.intent-tag{font-size:15px;padding:8px}}
 
+/* Episode 02 / scene 2: underwater explorer + Octo's thought */
+#ownerScene .kicker,#ownerScene .topic-head,#ownerScene .scene-sub{position:relative;z-index:4}
+#ownerScene .owner-diver{position:absolute;z-index:1;right:38px;top:770px;width:570px;height:430px;opacity:.68;transform:rotate(-3deg);filter:drop-shadow(0 16px 35px rgba(0,0,0,.24));pointer-events:none}
+#ownerScene .owner-diver svg{width:100%;height:100%;overflow:visible}
+#ownerScene .thought-cloud{position:absolute;z-index:8;left:48px;top:760px;width:470px;min-height:112px;padding:24px 30px;border:1.5px solid rgba(180,232,238,.72);border-radius:48px;background:rgba(10,25,47,.88);box-shadow:0 12px 35px rgba(0,0,0,.22),0 0 24px rgba(65,250,241,.08);display:flex;align-items:center;justify-content:center;color:#f4f7fb;font-size:27px;font-weight:900;text-align:center;opacity:0;transform:translate3d(-18px,22px,0) scale(.88);will-change:transform,opacity;pointer-events:none}
+#ownerScene .thought-cloud:before,#ownerScene .thought-cloud:after{content:"";position:absolute;border:1.5px solid rgba(180,232,238,.72);background:#0A192F;border-radius:50%}
+#ownerScene .thought-cloud:before{width:19px;height:19px;bottom:-30px;left:115px}
+#ownerScene .thought-cloud:after{width:11px;height:11px;bottom:-49px;left:93px}
+#ownerScene .thought-cloud .dot{position:absolute;border-radius:50%;background:#0A192F;border:1.5px solid rgba(180,232,238,.72)}
+#ownerScene .thought-cloud .dot-one{width:7px;height:7px;bottom:-63px;left:79px}
+#ownerScene .thought-cloud .dot-two,#ownerScene .thought-cloud .dot-three{display:none}
+#ownerScene .thought-cloud span{position:relative;z-index:1}
 </style>
 </head>
 <body>
@@ -185,6 +197,36 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="kicker">این بار می‌خوایم بفهمیم...</div>
   <h2 class="scene-title topic-head">مشتری‌ها دقیقاً<br><b>چی جست‌وجو می‌کنن؟</b></h2>
   <p class="scene-sub">چون همیشه اسم محصولت رو جست‌وجو نمی‌کنن!</p>
+  <div class="owner-diver" aria-hidden="true">
+   <svg viewBox="0 0 520 390" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+     <linearGradient id="diverTone" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9bd6df"/><stop offset="1" stop-color="#397a9c"/></linearGradient>
+     <filter id="diverGlow"><feGaussianBlur stdDeviation="8"/></filter>
+    </defs>
+    <ellipse cx="275" cy="190" rx="170" ry="92" fill="#41faf1" opacity=".07" filter="url(#diverGlow)"/>
+    <g transform="translate(45 28) rotate(-13 245 170)" fill="none" stroke="url(#diverTone)" stroke-linecap="round" stroke-linejoin="round">
+     <path d="M178 155 Q225 112 292 135 L344 169 Q355 181 341 196 L290 220 Q229 237 178 196Z" fill="#397a9c" fill-opacity=".48" stroke-width="9"/>
+     <circle cx="362" cy="171" r="39" fill="#173b58" fill-opacity=".8" stroke-width="10"/>
+     <path d="M342 157 Q365 143 389 161 L392 181 Q366 198 343 181Z" fill="#9debf0" fill-opacity=".38" stroke-width="6"/>
+     <path d="M182 153 L147 126 Q134 119 126 131 L111 153 Q106 164 120 171 L177 190" fill="#397a9c" fill-opacity=".5" stroke-width="12"/>
+     <path d="M201 207 L169 251 L118 266" stroke-width="21"/>
+     <path d="M118 266 L75 258 L54 279 Q92 302 137 285 L166 265" fill="#397a9c" fill-opacity=".5" stroke-width="9"/>
+     <path d="M287 214 L318 258 L365 274" stroke-width="21"/>
+     <path d="M365 274 L410 267 L432 286 Q390 308 347 292 L319 270" fill="#397a9c" fill-opacity=".5" stroke-width="9"/>
+     <rect x="205" y="93" width="55" height="91" rx="17" fill="#285674" stroke-width="8"/>
+     <path d="M217 102 V173 M248 102 V173" stroke-width="5" opacity=".7"/>
+     <path d="M397 136 Q431 108 451 80" stroke-width="5" opacity=".7"/>
+    </g>
+    <g fill="#9debf0" opacity=".65">
+     <circle cx="420" cy="70" r="8"/><circle cx="448" cy="43" r="5"/><circle cx="466" cy="17" r="3"/>
+     <circle cx="95" cy="105" r="5"/><circle cx="77" cy="78" r="3"/>
+    </g>
+   </svg>
+  </div>
+  <div class="thought-cloud" id="thoughtCloud">
+   <span>این اینجا دنبال چی می‌گرده؟</span>
+   <i class="dot dot-one"></i><i class="dot dot-two"></i><i class="dot dot-three"></i>
+  </div>
  </section>
 
  <section id="resultsScene" class="scene">
@@ -362,10 +404,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
    n.style.opacity=clamp(p*1.12)*fade;n.style.transform="translateY("+lerp(35,0,p)+"px) scale("+lerp(.98,1,p)+")";
   });
   var speechText="",speechStart=0,speechEnd=0;
-  if(t>=4.9&&t<9.9){speechText="بذار یه مثال بزنم!";speechStart=5.15;speechEnd=9.7;}
-  else if(t>=10.2&&t<18.7){speechText="فقط نوشته: کفش!";speechStart=10.45;speechEnd=18.45;}
+  if(t>=10.2&&t<18.7){speechText="فقط نوشته: کفش!";speechStart=10.45;speechEnd=18.45;}
   else if(t>=19.1&&t<31.7){speechText="این سه تا یکی نیستن!";speechStart=19.35;speechEnd=31.45;}
   else if(t>=32.1&&t<39){speechText="نیاز پشت جست‌وجو مهمه!";speechStart=32.35;speechEnd=38.8;}
+  var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,.62),1.12),thoughtOut=prog(t,9.72-.38,.38);
+  thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
+  thought.style.transform="translate3d("+lerp(-18,0,thoughtIn)+"px,"+lerp(22,0,thoughtIn)+"px,0) scale("+lerp(.88,1,thoughtIn)+")";
   $("speech").textContent=speechText;
   var speechIn=back(prog(t,speechStart,.46),1.12),speechOut=prog(t,speechEnd-.35,.35);
   $("speech").style.opacity=speechText?clamp(speechIn*1.2,0,1)*(1-speechOut):0;
@@ -382,6 +426,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   function pop(t,a){tone(t,.13,760,390,.07*a,"sine");tone(t+.025,.09,1250,800,.035*a,"triangle");}
   whoosh(.12,.105);pop(1.65,.8);
   whoosh(4.62,.105);pop(5.08,.7);
+  // حباب فکر اکتو در سکانس دوم
+  pop(5.28,.62);pop(5.52,.38);
   whoosh(9.92,.11);pop(10.48,.72);
   whoosh(18.92,.12);pop(19.62,.7);pop(22.65,.65);pop(25.7,.65);
   whoosh(31.92,.1);tone(33.1,.3,430,300,.035,"triangle");
