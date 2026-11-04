@@ -216,6 +216,42 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 @keyframes headDrift{0%,100%{transform:rotate(0)}50%{transform:rotate(-1.5deg)}}
 @keyframes maskBubble{0%{opacity:0;transform:translate(0,0) scale(.55)}18%{opacity:.9}100%{opacity:0;transform:translate(30px,-115px) scale(1.2)}}
 
+
+/* Scene 2: use the actual diver.svg asset; swim motion + mask bubbles */
+#ownerScene .owner-diver{
+ position:absolute;z-index:2;left:18px;top:850px;width:760px;height:360px;
+ opacity:0;pointer-events:none;filter:drop-shadow(0 18px 24px rgba(0,0,0,.28));
+ animation:diverEntrance .9s cubic-bezier(.2,.75,.25,1) 4.85s both,diverSwim 5.2s ease-in-out 5.75s infinite;
+}
+#ownerScene .diver-svg{display:block;width:100%;height:100%;object-fit:contain;overflow:visible}
+@keyframes diverEntrance{from{opacity:0;transform:translate3d(-55px,35px,0) rotate(-5deg) scale(.9)}to{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1)}}
+@keyframes diverSwim{0%,100%{transform:translate3d(0,0,0) rotate(-1deg)}25%{transform:translate3d(13px,-11px,0) rotate(.5deg)}50%{transform:translate3d(25px,-3px,0) rotate(1.2deg)}75%{transform:translate3d(10px,10px,0) rotate(-.2deg)}}
+#ownerScene .mask-bubbles{position:absolute;left:78%;top:24%;width:100px;height:155px;pointer-events:none}
+#ownerScene .mask-bubbles i{position:absolute;bottom:0;width:11px;height:11px;border:2px solid rgba(190,246,249,.95);border-radius:50%;background:rgba(65,250,241,.16);opacity:0;box-shadow:0 0 10px rgba(65,250,241,.18);animation:maskAir 2.35s ease-out infinite}
+#ownerScene .mask-bubbles i:nth-child(1){left:10px;width:8px;height:8px;animation-delay:0s}
+#ownerScene .mask-bubbles i:nth-child(2){left:34px;width:13px;height:13px;animation-delay:.46s}
+#ownerScene .mask-bubbles i:nth-child(3){left:22px;width:7px;height:7px;animation-delay:.92s}
+#ownerScene .mask-bubbles i:nth-child(4){left:53px;width:10px;height:10px;animation-delay:1.38s}
+#ownerScene .mask-bubbles i:nth-child(5){left:42px;width:6px;height:6px;animation-delay:1.84s}
+@keyframes maskAir{0%{opacity:0;transform:translate3d(0,5px,0) scale(.55)}18%{opacity:.95}82%{opacity:.7}100%{opacity:0;transform:translate3d(22px,-150px,0) scale(1.25)}}
+/* Octo's thought rises from above his head and settles near the top of the scene */
+#ownerScene .thought-cloud{
+ left:50%;top:445px;width:500px;min-height:105px;padding:22px 28px;
+ border:1.5px solid rgba(180,232,238,.8);border-radius:42px;
+ background:rgba(10,25,47,.78);font-size:27px;
+ transform:translate3d(-50%,260px,0) scale(.78);
+}
+#ownerScene .thought-cloud:before{width:17px;height:17px;bottom:-29px;left:calc(50% - 8px)}
+#ownerScene .thought-cloud:after{width:10px;height:10px;bottom:-49px;left:calc(50% - 5px)}
+#ownerScene .thought-trail{position:absolute;z-index:7;left:50%;top:770px;width:70px;height:210px;transform:translateX(-50%);pointer-events:none}
+#ownerScene .thought-trail i{position:absolute;bottom:0;border:1.5px solid rgba(180,232,238,.8);border-radius:50%;background:rgba(65,250,241,.08);opacity:0;animation:thoughtRise 2.1s ease-out infinite}
+#ownerScene .thought-trail i:nth-child(1){width:17px;height:17px;left:5px}
+#ownerScene .thought-trail i:nth-child(2){width:11px;height:11px;left:35px;animation-delay:.42s}
+#ownerScene .thought-trail i:nth-child(3){width:7px;height:7px;left:21px;animation-delay:.84s}
+@keyframes thoughtRise{0%{opacity:0;transform:translateY(0) scale(.7)}20%{opacity:.9}100%{opacity:0;transform:translateY(-195px) scale(1.2)}}
+#ownerScene .thought-cloud .dot{display:none!important}
+#ownerScene .thought-cloud span{position:relative;z-index:1}
+
 </style>
 </head>
 <body>
@@ -233,45 +269,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <h2 class="scene-title topic-head">مشتری‌ها دقیقاً<br><b>چی جست‌وجو می‌کنن؟</b></h2>
   <p class="scene-sub">چون همیشه اسم محصولت رو جست‌وجو نمی‌کنن!</p>
   <div class="owner-diver" aria-hidden="true">
-   <svg class="diver-svg" viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
-    <g class="diver-glide">
-     <g class="diver-fins">
-      <path class="fin fin-back" d="M92 137 Q45 111 8 126 Q25 169 72 190 L154 174Z"/>
-      <path class="fin fin-front" d="M108 196 Q56 189 20 221 Q49 257 96 278 L166 226Z"/>
-     </g>
-     <g class="diver-legs">
-      <path class="suit" d="M130 133 Q235 113 345 145 L382 193 Q274 222 151 207 L92 178Z"/>
-      <path class="suit" d="M125 188 Q234 173 351 191 L385 224 Q264 261 145 239 L92 220Z"/>
-     </g>
-     <g class="diver-tank">
-      <rect x="360" y="40" width="194" height="96" rx="46" fill="#e8c94d" transform="rotate(-13 457 88)"/>
-      <path d="M371 109 Q450 127 529 94 L545 159 Q463 193 382 163Z" fill="#9b702b"/>
-      <path d="M382 111 L396 166 M423 104 L437 174 M463 95 L478 165" stroke="#f5df35" stroke-width="9" stroke-linecap="round"/>
-     </g>
-     <path class="suit torso" d="M330 135 Q405 103 514 128 L587 176 Q559 239 470 244 L365 211 Q331 188 330 135Z"/>
-     <g class="diver-arm">
-      <path class="suit" d="M476 172 Q548 171 593 209 L665 183 Q683 176 691 193 Q697 208 679 220 L599 259 Q574 270 550 251 L469 218Z"/>
-      <path class="glove" d="M657 181 Q684 158 704 162 L733 146 Q748 139 754 151 Q759 164 743 172 L773 167 Q789 168 789 181 Q788 194 769 194 L740 206 Q721 220 699 213 L675 211Z"/>
-     </g>
-     <g class="diver-head">
-      <path class="hood" d="M536 32 Q566 -8 629 3 Q692 9 713 67 L700 143 Q663 171 606 149 L558 115Z"/>
-      <path class="mask" d="M607 51 Q652 31 704 47 Q729 57 723 96 Q718 127 682 130 L620 120 Q595 107 598 78 Q599 61 607 51Z"/>
-      <path d="M615 58 Q656 43 700 55 Q715 60 712 91 Q708 111 681 116 L625 108 Q610 99 611 78Z" fill="#b7e6dc" stroke="#426c5a" stroke-width="8"/>
-      <ellipse cx="652" cy="83" rx="8" ry="13" fill="#536e68"/>
-      <ellipse cx="685" cy="81" rx="8" ry="13" fill="#253b35"/>
-      <path class="regulator" d="M680 125 Q668 155 690 173 Q706 183 721 169" fill="none" stroke="#10151d" stroke-width="13" stroke-linecap="round"/>
-      <ellipse cx="724" cy="170" rx="17" ry="22" fill="#10151d"/>
-     </g>
-     <g class="diver-bubbles">
-      <circle cx="752" cy="128" r="8"/><circle cx="773" cy="99" r="12"/><circle cx="746" cy="64" r="6"/><circle cx="783" cy="43" r="9"/><circle cx="757" cy="13" r="5"/>
-     </g>
-    </g>
-   </svg>
+   <img class="diver-svg" src="diver.svg" alt="">
+   <span class="mask-bubbles"><i></i><i></i><i></i><i></i><i></i></span>
   </div>
-  <div class="thought-cloud" id="thoughtCloud">
-   <span>این اینجا دنبال چی می‌گرده؟</span>
-   <i class="dot dot-one"></i><i class="dot dot-two"></i><i class="dot dot-three"></i>
-  </div>
+  <div class="thought-trail" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="thought-cloud" id="thoughtCloud"><span>این اینجا دنبال چی می‌گرده؟</span></div>
  </section>
 
  <section id="resultsScene" class="scene">
@@ -371,6 +373,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
           </g>
           <path id="mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
           <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+          <path id="mThinking" d="M198 280 Q211 274 225 280" fill="none" stroke="#03080f" stroke-width="5" stroke-linecap="round" opacity="0"/>
         </g>
       </g>
     </svg></div>
@@ -436,10 +439,10 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("octoWrap").style.opacity=scene(t,1.5,DURATION,.5);
   $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY+lerp(165,0,enter))+"px,0) scale("+(pose.s*(1+breath+squash*.5))+","+(pose.s*(1+breath-squash))+")";
   $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
-  var sy=blink(t),gaze=t<4.8?[0,0]:t<10.1?[.1,-.45]:t<19.1?[.7,-.28]:t<32.1?[-.6,-.12]:[0,0];
+  var sy=blink(t),gaze=t<4.8?[0,0]:t<10.1?[.15,-1.05]:t<19.1?[.7,-.28]:t<32.1?[-.6,-.12]:[0,0];
   eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
-  var curious=t>=9.85&&t<19.1,surprised=t>=18.85&&t<32.1,sad=false;
-  $("mSurprise").style.opacity=surprised?1:0;$("mHappy").style.opacity=(curious||sad)?0:1;$("mSad").style.opacity=sad?1:0;
+  var thinking=t>=4.85&&t<10.1,curious=t>=9.85&&t<19.1,surprised=t>=18.85&&t<32.1,sad=false;
+  $("mSurprise").style.opacity=surprised?1:0;$("mHappy").style.opacity=(curious||sad||thinking)?0:1;$("mSad").style.opacity=sad?1:0;$("mThinking").style.opacity=thinking?1:0;
   document.querySelectorAll(".autocomplete-row").forEach(function(n,i){
    var p=back(prog(t,12.1+i*.62,.48),1.18),fade=1-prog(t,18.6,.35);
    n.style.opacity=clamp(p*1.2)*fade;n.style.transform="translateY("+lerp(22,0,p)+"px)";
@@ -452,9 +455,10 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   if(t>=10.2&&t<18.7){speechText="فقط نوشته: کفش!";speechStart=10.45;speechEnd=18.45;}
   else if(t>=19.1&&t<31.7){speechText="این سه تا یکی نیستن!";speechStart=19.35;speechEnd=31.45;}
   else if(t>=32.1&&t<39){speechText="نیاز پشت جست‌وجو مهمه!";speechStart=32.35;speechEnd=38.8;}
-  var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,.62),1.12),thoughtOut=prog(t,9.72-.38,.38);
+  var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
   thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
-  thought.style.transform="translate3d("+lerp(-18,0,thoughtIn)+"px,"+lerp(22,0,thoughtIn)+"px,0) scale("+lerp(.88,1,thoughtIn)+")";
+  thought.style.transform="translate3d(-50%,"+lerp(260,0,thoughtIn)+"px,0) scale("+lerp(.78,1,thoughtIn)+")";
+  var trail=$("ownerScene").querySelector(".thought-trail");trail.style.opacity=t>=5&&t<10?clamp(prog(t,5.05,.35))*(1-prog(t,9.55,.35)):0;
   $("speech").textContent=speechText;
   var speechIn=back(prog(t,speechStart,.46),1.12),speechOut=prog(t,speechEnd-.35,.35);
   $("speech").style.opacity=speechText?clamp(speechIn*1.2,0,1)*(1-speechOut):0;
