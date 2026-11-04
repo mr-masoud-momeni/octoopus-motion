@@ -497,7 +497,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var queryStarts=[12.4,15.4,18.4];
   document.querySelectorAll("#shoeQueries .shoe-intent").forEach(function(n,i){
    var p=back(prog(t,queryStarts[i],.62),1.14);
-   n.style.opacity=clamp(p);
+   n.style.opacity=clamp(p,0,1);
    n.style.transform="translate3d("+lerp(0,0,p)+","+lerp(36,0,p)+"px,0) scale("+lerp(.97,1,p)+")";
   });
   var shoeThought=$("shoeThought"),thoughtP=back(prog(t,21.15,.72),1.1),thoughtFade=1-prog(t,27.55,.35);
