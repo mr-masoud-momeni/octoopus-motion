@@ -150,6 +150,19 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 .autocomplete-row:last-child{border-bottom:0}
 #siteScene{padding-top:225px}
 #siteScene .scene-sub{max-width:880px}
+ #siteScene .scene-title{font-size:55px;line-height:1.42}
+ .query-popups{position:absolute;top:635px;left:455px;right:8px;display:flex;flex-direction:column;gap:28px;z-index:6;direction:rtl}
+ .query-popup{min-height:150px;display:flex;align-items:center;gap:17px;padding:22px 24px;border:1px solid rgba(180,232,238,.38);border-radius:24px;background:rgba(13,34,59,.9);box-shadow:0 18px 42px rgba(0,0,0,.22);text-align:right;opacity:0;transform:translate3d(45px,12px,0) scale(.96);will-change:transform,opacity}
+ .query-mark{width:54px;height:54px;flex:none;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(65,250,241,.42);color:var(--cyan);font:500 44px/1 Arial,sans-serif}
+ .query-popup div{flex:1;min-width:0}
+ .query-popup small{display:block;color:#9eafc5;font-size:17px;margin-bottom:8px}
+ .query-popup strong{display:block;color:#fff;font-size:25px;line-height:1.5;font-weight:900}
+ .query-step{width:35px;height:35px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(65,250,241,.12);border:1px solid rgba(65,250,241,.42);color:var(--cyan);font-size:19px;font-style:normal;font-weight:900}
+ .query-thought{position:absolute;z-index:8;left:58px;top:795px;width:385px;min-height:105px;padding:22px 20px;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(180,232,238,.78);border-radius:38px;background:rgba(10,25,47,.9);box-shadow:0 12px 32px rgba(0,0,0,.2);color:#f4f7fb;font-size:25px;font-weight:950;text-align:center;opacity:0;transform:translate3d(0,22px,0) scale(.82);will-change:transform,opacity}
+ .query-thought i,.query-thought b{position:absolute;display:block;border:1.5px solid rgba(180,232,238,.78);border-radius:50%;background:#0A192F}
+ .query-thought i{width:18px;height:18px;left:calc(50% + 8px);bottom:-29px}
+ .query-thought b{width:10px;height:10px;left:calc(50% + 19px);bottom:-47px}
+ .query-thought span{position:relative;z-index:1}
 .intent-list{position:absolute;top:650px;left:105px;right:105px;display:flex;flex-direction:column;gap:20px;z-index:4}
 .intent-row{min-height:142px;display:flex;align-items:center;gap:20px;padding:20px 25px;border:1px solid rgba(65,250,241,.3);border-radius:22px;background:linear-gradient(110deg,rgba(20,43,77,.96),rgba(7,19,36,.94));box-shadow:0 18px 45px rgba(0,0,0,.2);opacity:0;transform:translateY(34px) scale(.98)}
 .intent-number{width:54px;height:54px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(65,250,241,.13);border:1px solid rgba(65,250,241,.5);color:var(--cyan);font-size:27px;font-weight:950}
@@ -167,7 +180,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #closingScene .closing-copy{max-width:850px}
 #closingScene .next-episode{margin-top:48px}
 #octoWrap{top:1010px}
-@media(max-width:800px){.intent-list{left:70px;right:70px}.intent-row{gap:12px;padding:17px}.intent-copy strong{font-size:21px}.intent-tag{font-size:15px;padding:8px}}
+@media(max-width:800px){.query-popups{left:455px;right:8px}.query-popup{gap:12px;padding:17px}.query-popup strong{font-size:21px}.query-popup small{font-size:15px}}
 
 /* Episode 02 / scene 2: underwater explorer + Octo's thought */
 #ownerScene .kicker,#ownerScene .topic-head,#ownerScene .scene-sub{position:relative;z-index:4}
@@ -277,46 +290,20 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  </section>
 
  <section id="resultsScene" class="scene">
-  <div class="kicker">از یه مثال شروع کنیم</div>
+  <div class="kicker">یه مثال ساده بزنیم</div>
   <h2 class="scene-title">فرض کن فروشگاه <b>کفش</b> داری</h2>
-  <p class="scene-sub">مشتری وارد گوگل می‌شه و فقط می‌نویسه: کفش</p>
-  <div class="visual query-demo">
-   <div class="browser">
-    <div class="browser-top"><i></i><i></i><i></i><span>google.com</span></div>
-    <div class="google-results">
-     <div class="google-word"><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span></div>
-     <div class="result-search">کفش</div>
-     <div class="autocomplete-list">
-      <div class="autocomplete-row">کفش پیاده‌روی</div>
-      <div class="autocomplete-row">کفش مناسب پیاده‌روی طولانی</div>
-      <div class="autocomplete-row">کفش طبی مردانه</div>
-     </div>
-    </div>
-   </div>
-  </div>
+  <p class="scene-sub">مشتری‌ها ممکنه دنبال کفش باشن،<br>ولی از مسیرهای مختلفی بهش می‌رسن.</p>
  </section>
 
  <section id="siteScene" class="scene">
-  <div class="kicker">اما همه دنبال یه چیز نیستن</div>
-  <h2 class="scene-title">سه نفر، سه جست‌وجوی <b>متفاوت</b></h2>
-  <p class="scene-sub">ممکنه هر سه به یک محصول نیاز داشته باشن؛ اما از سه مسیر ذهنی متفاوت.</p>
-  <div class="intent-list">
-   <div class="intent-row" data-row="0">
-    <div class="intent-number">۱</div>
-    <div class="intent-copy"><small>جست‌وجوی اول</small><strong>چرا پاهام موقع پیاده‌روی درد می‌گیره؟</strong></div>
-    <div class="intent-tag problem">شناخت مشکل</div>
-   </div>
-   <div class="intent-row" data-row="1">
-    <div class="intent-number">۲</div>
-    <div class="intent-copy"><small>جست‌وجوی دوم</small><strong>بهترین کفش برای پیاده‌روی طولانی</strong></div>
-    <div class="intent-tag solution">پیدا کردن راه‌حل</div>
-   </div>
-   <div class="intent-row" data-row="2">
-    <div class="intent-number">۳</div>
-    <div class="intent-copy"><small>جست‌وجوی سوم</small><strong>خرید کفش پیاده‌روی مردانه</strong></div>
-    <div class="intent-tag buy">آماده‌تر برای خرید</div>
-   </div>
+  <div class="kicker">هر مشتری از یه مسیر شروع می‌کنه</div>
+  <h2 class="scene-title">سه مدل جست‌وجو،<br><b>برای یک محصول</b></h2>
+  <div class="query-popups">
+   <div class="query-popup" data-query="0"><span class="query-mark">⌕</span><div><small>وقتی هنوز دنبال راه‌حل می‌گرده</small><strong>کفش مناسب برای کمردرد</strong></div><i class="query-step">۱</i></div>
+   <div class="query-popup" data-query="1"><span class="query-mark">⌕</span><div><small>وقتی راه‌حل رو شناخته</small><strong>انواع کفش طبی</strong></div><i class="query-step">۲</i></div>
+   <div class="query-popup" data-query="2"><span class="query-mark">⌕</span><div><small>وقتی آماده‌ی انتخابه</small><strong>خرید کفش</strong></div><i class="query-step">۳</i></div>
   </div>
+  <div class="query-thought" id="queryThought"><span>پس همه‌ی اینا کفش می‌خوان؟!</span><i></i><b></b></div>
  </section>
 
  <section id="questionScene" class="scene">
@@ -441,8 +428,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
   var sy=blink(t),gaze=t<4.8?[0,0]:t<10.1?[.15,-1.05]:t<19.1?[.7,-.28]:t<32.1?[-.6,-.12]:[0,0];
   eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
-  var thinking=t>=4.85&&t<10.1,curious=t>=9.85&&t<19.1,surprised=t>=18.85&&t<32.1,sad=false;
-  $("mSurprise").style.opacity=surprised?1:0;$("mHappy").style.opacity=(curious||sad||thinking)?0:1;$("mSad").style.opacity=sad?1:0;$("mThinking").style.opacity=thinking?1:0;
+  var thinking=t>=4.85&&t<10.1,curious=t>=9.85&&t<19.1,queryThinking=t>=18.85&&t<32.1,surprised=false,sad=false;
+  $("mSurprise").style.opacity=surprised?1:0;$("mHappy").style.opacity=(curious||sad||thinking||queryThinking)?0:1;$("mSad").style.opacity=sad?1:0;$("mThinking").style.opacity=(thinking||queryThinking)?1:0;
   document.querySelectorAll(".autocomplete-row").forEach(function(n,i){
    var p=back(prog(t,12.1+i*.62,.48),1.18),fade=1-prog(t,18.6,.35);
    n.style.opacity=clamp(p*1.2)*fade;n.style.transform="translateY("+lerp(22,0,p)+"px)";
@@ -453,7 +440,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   });
   var speechText="",speechStart=0,speechEnd=0;
   if(t>=10.2&&t<18.7){speechText="فقط نوشته: کفش!";speechStart=10.45;speechEnd=18.45;}
-  else if(t>=19.1&&t<31.7){speechText="این سه تا یکی نیستن!";speechStart=19.35;speechEnd=31.45;}
+  else if(t>=19.1&&t<31.7){speechText="هر کدوم یه نیت دارن!";speechStart=19.35;speechEnd=31.45;}
   else if(t>=32.1&&t<39){speechText="نیاز پشت جست‌وجو مهمه!";speechStart=32.35;speechEnd=38.8;}
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
   thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
@@ -479,7 +466,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   // حباب فکر اکتو در سکانس دوم
   pop(5.28,.62);pop(5.52,.38);
   whoosh(9.92,.11);pop(10.48,.72);
-  whoosh(18.92,.12);pop(19.62,.7);pop(22.65,.65);pop(25.7,.65);
+  whoosh(18.92,.12);pop(20.12,.72);pop(23.17,.68);pop(26.22,.68);pop(20.52,.42);
   whoosh(31.92,.1);tone(33.1,.3,430,300,.035,"triangle");
   whoosh(39.22,.09);tone(39.8,.55,660,660,.035,"sine");tone(40.05,.65,880,880,.027,"sine");tone(40.35,.8,1100,1100,.022,"sine");
   return ctx.startRendering().then(function(buffer){
