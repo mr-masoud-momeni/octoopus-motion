@@ -393,11 +393,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
  </div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="46" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="4.8" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
 <script>
 (function(){
  "use strict";
- var DURATION=46, RENDER=new URLSearchParams(location.search).has("render");
+ var DURATION=4.8, RENDER=new URLSearchParams(location.search).has("render");
  var $=function(id){return document.getElementById(id)};
  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
  var lerp=function(a,b,p){return a+(b-a)*p};
@@ -407,11 +407,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var back=function(p,s){return 1+(s+1)*Math.pow(p-1,3)+s*Math.pow(p-1,2)};
  var scene=function(t,a,b,fade){return expo(prog(t,a,.42))*(1-prog(t,b-fade,fade))};
  var scenes=[
-  ["titleScene",0,4.8,34],
-  ["ownerScene",4.55,10.1,42],
-  ["resultsScene",9.85,32.1,48],
-  ["questionScene",31.85,39.4,42],
-  ["closingScene",39.15,46,48]
+  ["titleScene",0,4.8,34]
  ];
  var poses=[
   {t:1.55,x:-300,y:-80,s:.55},{t:4.8,x:-300,y:-80,s:.57},
@@ -492,13 +488,6 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   function whoosh(t,a){noise(t,.48,a,420,2400);tone(t+.18,.22,190,75,a*.7,"sine");}
   function pop(t,a){tone(t,.13,760,390,.07*a,"sine");tone(t+.025,.09,1250,800,.035*a,"triangle");}
   whoosh(.12,.105);pop(1.65,.8);
-  whoosh(4.62,.105);pop(5.08,.7);
-  // حباب فکر اکتو در سکانس دوم
-  pop(5.28,.62);pop(5.52,.38);
-  whoosh(9.92,.11);pop(10.48,.72);
-  whoosh(13.62,.1);pop(13.88,.72);pop(17.68,.68);pop(21.48,.68);pop(25.42,.55);
-  whoosh(31.92,.1);tone(33.1,.3,430,300,.035,"triangle");
-  whoosh(39.22,.09);tone(39.8,.55,660,660,.035,"sine");tone(40.05,.65,880,880,.027,"sine");tone(40.35,.8,1100,1100,.022,"sine");
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
