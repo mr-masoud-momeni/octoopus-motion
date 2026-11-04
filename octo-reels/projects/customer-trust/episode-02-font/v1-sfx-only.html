@@ -263,18 +263,18 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  let FIT=1,playing=true,offset=0,start=performance.now();
  window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:FPS,width:1080,height:1920};
  window.OCTO_EVENTS=[
-  // ورود اکتو در کاور؛ صدای کوتاه و نرم
-  {name:"rise",t:1.72},
-  {name:"pop",t:5.4},
-  {name:"pop",t:10.45},
-  // نمایش صفحه ناخوانا و تأکید روی مشکل
-  {name:"whoosh",t:10.78},{name:"pop",t:14.15},
-  // خستگی مشتری و بستن صفحه
-  {name:"sweep",t:17.18},{name:"zap",t:22.1},
-  // ورود نسخه خوانا و اصلاح‌شده
-  {name:"whoosh",t:24.58},{name:"ding",t:25.15},
-  // پایان‌بندی و دو تأکید ظریف
-  {name:"whoosh",t:32.9},{name:"ding",t:35.1},{name:"ding",t:37.25}
+  // ورود تیتر کاور: حرکت هوایی + ضربه‌ی سینمایی
+  {name:"title",t:.12},
+  // ورود اکتو و جابه‌جایی‌های مهمش
+  {name:"octo",t:1.68},
+  {name:"title",t:5.38},
+  {name:"title",t:10.43},{name:"uiPop",t:14.15},
+  {name:"title",t:17.23},{name:"octo",t:17.42},
+  {name:"uiClose",t:22.1},
+  {name:"title",t:24.58},{name:"octo",t:24.82},
+  {name:"title",t:32.88},{name:"octo",t:33.05},
+  // تأکیدهای پایانی
+  {name:"ding",t:35.1},{name:"ding",t:37.25}
 ];
  
   async function exportSfxWav(){
@@ -317,7 +317,34 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
      osc(t,.82,1568,1568,.12,"sine",.002,.68);
      osc(t,.72,2093,2093,.055,"sine",.002,.62);
     }
+    function titleHit(t){
+     // A clear, wide title whoosh with a low cinematic impact at the reveal.
+     filteredNoise(t,.62,.38,120,11500,420,9800,.11,.23);
+     osc(t,.34,112,43,.30,"sine",.002,.27);
+     osc(t,.19,740,250,.13,"triangle",.002,.15);
+     filteredNoise(t+.045,.105,.19,1800,13000,10500,4200,.001,.09);
+    }
+    function octoMove(t){
+     // Short elastic swoop for Octo's entrance/side change; softer than title hits.
+     filteredNoise(t,.34,.22,260,8500,700,6200,.035,.18);
+     osc(t,.31,235,118,.19,"sine",.004,.23);
+     osc(t+.035,.17,470,310,.075,"triangle",.003,.13);
+    }
+    function uiPop(t){
+     filteredNoise(t,.07,.22,1400,10500,8500,3200,.001,.06);
+     osc(t,.19,680,360,.22,"sine",.002,.14);
+     osc(t,.13,125,72,.13,"sine",.002,.1);
+    }
+    function uiClose(t){
+     filteredNoise(t,.12,.25,900,9000,7600,1800,.001,.1);
+     osc(t,.22,260,72,.22,"sine",.002,.17);
+     osc(t,.09,1150,430,.09,"triangle",.001,.07);
+    }
     for(const e of window.OCTO_EVENTS||[]){const t=Math.max(0,e.t);switch(e.name){
+     case "title":titleHit(t);break;
+     case "octo":octoMove(t);break;
+     case "uiPop":uiPop(t);break;
+     case "uiClose":uiClose(t);break;
      case "rise":
       osc(t,.82,95,235,.24,"sine",.025,.34);osc(t,.58,190,480,.10,"triangle",.02,.28);
       filteredNoise(t,.72,.18,450,6500,850,5200,.08,.25);break;
