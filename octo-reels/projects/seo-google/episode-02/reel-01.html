@@ -562,20 +562,20 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var sr=48000,frames=DURATION*sr,Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
   if(!Offline)throw new Error("مرورگر از ساخت WAV پشتیبانی نمی‌کند.");
   var ctx=new Offline(2,frames,sr),master=ctx.createGain(),comp=ctx.createDynamicsCompressor();
-  master.gain.value=.82;comp.threshold.value=-12;comp.knee.value=18;comp.ratio.value=3;comp.attack.value=.004;comp.release.value=.18;master.connect(comp);comp.connect(ctx.destination);
+  master.gain.value=.96;comp.threshold.value=-18;comp.knee.value=12;comp.ratio.value=4;comp.attack.value=.002;comp.release.value=.14;master.connect(comp);comp.connect(ctx.destination);
   function tone(t,d,f1,f2,a,type){var o=ctx.createOscillator(),g=ctx.createGain();o.type=type||"sine";o.frequency.setValueAtTime(f1,t);o.frequency.exponentialRampToValueAtTime(Math.max(1,f2),t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,a),t+Math.min(.025,d*.25));g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02);}
   function noise(t,d,a,lo,hi){var n=Math.max(1,Math.floor(sr*d)),b=ctx.createBuffer(1,n,sr),v=b.getChannelData(0);for(var i=0;i<n;i++)v[i]=(Math.random()*2-1)*(1-i/n*.18);var s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=b;f.type="bandpass";f.frequency.setValueAtTime(lo,t);f.frequency.exponentialRampToValueAtTime(hi,t+d);f.Q.value=.7;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(a,t+Math.min(.1,d*.35));g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f);f.connect(g);g.connect(master);s.start(t);s.stop(t+d+.02);}
-  function whoosh(t,a){noise(t,.48,a,420,2400);tone(t+.18,.22,190,75,a*.7,"sine");}
-  function pop(t,a){tone(t,.13,760,390,.07*a,"sine");tone(t+.025,.09,1250,800,.035*a,"triangle");}
-  whoosh(.12,.105);pop(1.65,.8);
-  whoosh(4.62,.105);pop(5.08,.7);
+  function whoosh(t,a){noise(t,.58,a*1.65,300,4200);noise(t+.035,.32,a*.62,1800,7200);tone(t+.12,.32,210,58,a*1.05,"sine");}
+  function pop(t,a){tone(t,.18,920,310,.16*a,"sine");tone(t+.012,.11,1650,760,.085*a,"triangle");tone(t,.095,145,68,.12*a,"sine");noise(t,.055,.045*a,1800,6500);}
+  whoosh(.12,.19);pop(1.65,1.05);
+  whoosh(4.62,.18);pop(5.08,.95);
   // ورود سکانس سوم و نمایش جست‌وجوها
-  whoosh(10.02,.105);pop(10.62,.8);
-  pop(14.9,.72);pop(17.9,.62);pop(20.9,.62);pop(23.65,.68);
-  whoosh(25.02,.13);pop(26.4,.82);
-  pop(30.1,.55);pop(36.6,.62);pop(38.5,.62);pop(40.4,.62);pop(40.9,.62);whoosh(44.2,.1);
+  whoosh(10.02,.2);pop(10.62,1.05);
+  pop(14.9,.95);pop(17.9,.88);pop(20.9,.88);pop(23.65,1.0);
+  whoosh(25.02,.24);pop(26.4,1.08);
+  pop(30.1,.82);pop(36.6,.95);pop(38.5,.95);pop(40.4,.95);pop(40.9,.8);whoosh(44.2,.2);
   // پایان‌بندی برند و معرفی قسمت بعدی، مطابق قسمت اول
-  whoosh(51.62,.095);tone(51.72,.62,660,660,.032,"sine");tone(51.94,.72,880,880,.026,"sine");tone(52.22,.9,1100,1100,.022,"sine");
+  whoosh(51.62,.2);tone(51.72,.62,660,660,.055,"sine");tone(51.94,.72,880,880,.045,"sine");tone(52.22,.9,1100,1100,.04,"sine");
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
