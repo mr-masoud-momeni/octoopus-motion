@@ -199,7 +199,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
       </g>
     </svg></div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="40" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><button id="exportSfx">دانلود افکت صدا</button><span id="sfxStatus"></span><input id="scrub" type="range" min="0" max="40" step=".01" value="0"><span id="time">0.00s</span></div>
 <script>
 (()=>{
  const RENDER=new URLSearchParams(location.search).has("render"),DURATION=40,FPS=30,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -276,6 +276,28 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   // پایان‌بندی و دو تأکید ظریف
   {name:"whoosh",t:32.9},{name:"ding",t:35.1},{name:"ding",t:37.25}
 ];
+ 
+  async function exportSfxWav(){
+   const btn=$id("exportSfx"),status=$id("sfxStatus");if(!btn||btn.disabled)return;
+   btn.disabled=true;btn.textContent="در حال ساخت صدا…";status.textContent="لطفاً صبر کن";
+   try{
+    const sr=44100,duration=DURATION+.5,ctx=new OfflineAudioContext(2,Math.ceil(sr*duration),sr),master=ctx.createGain();
+    master.gain.value=.82;master.connect(ctx.destination);
+    function tone(t,d,f1,f2,amp){const o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.setValueAtTime(f1,t);if(f2)o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,amp),t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02)}
+    function noise(t,d,amp,hp,lp){const n=Math.ceil(sr*d),b=ctx.createBuffer(1,n,sr),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=Math.random()*2-1;const src=ctx.createBufferSource(),hi=ctx.createBiquadFilter(),lo=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=b;hi.type="highpass";hi.frequency.value=hp;lo.type="lowpass";lo.frequency.value=lp;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(amp,t+.16);g.gain.setValueAtTime(amp,t+d*.48);g.gain.exponentialRampToValueAtTime(.0001,t+d);src.connect(hi);hi.connect(lo);lo.connect(g);g.connect(master);src.start(t);src.stop(t+d)}
+    for(const e of window.OCTO_EVENTS||[]){const t=Math.max(0,e.t);switch(e.name){
+     case "rise":tone(t,.85,170,89,.36);break;case "pop":tone(t,.24,720,720,.34);break;case "zap":tone(t,.32,1500,1212,.25);break;
+     case "tick":tone(t,.16,1500,1500,.22);break;case "click":tone(t,.08,2400,2400,.28);break;
+     case "ding":tone(t,.6,1046,1046,.15);tone(t,.6,1568,1568,.082);break;
+     case "whoosh":noise(t,.6,.12,320,6500);break;case "sweep":noise(t,.55,.15,180,9000);break;case "reveal":noise(t,.75,.10,500,7000);break;
+    }}
+    const rendered=await ctx.startRendering(),channels=rendered.numberOfChannels,length=rendered.length,bytes=44+length*channels*2,buf=new ArrayBuffer(bytes),view=new DataView(buf);
+    const write=(off,s)=>{for(let i=0;i<s.length;i++)view.setUint8(off+i,s.charCodeAt(i))};
+    write(0,"RIFF");view.setUint32(4,bytes-8,true);write(8,"WAVE");write(12,"fmt ");view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,channels,true);view.setUint32(24,sr,true);view.setUint32(28,sr*channels*2,true);view.setUint16(32,channels*2,true);view.setUint16(34,16,true);write(36,"data");view.setUint32(40,length*channels*2,true);
+    let p=44;for(let i=0;i<length;i++)for(let ch=0;ch<channels;ch++){const v=Math.max(-1,Math.min(1,rendered.getChannelData(ch)[i]));view.setInt16(p,v<0?v*32768:v*32767,true);p+=2}
+    const url=URL.createObjectURL(new Blob([buf],{type:"audio/wav"})),a=document.createElement("a");a.href=url;a.download="customer-trust-episode-02-font-sfx.wav";a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);status.textContent="فایل WAV آماده شد";
+   }catch(err){console.error(err);status.textContent="ساخت صدا ناموفق بود؛ کنسول را بررسی کن"}finally{btn.disabled=false;btn.textContent="دانلود افکت صدا"}
+  }
  window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
  if(RENDER){E.controls.style.display="none";draw(new URLSearchParams(location.search).get("t")||0)}
  else{
@@ -283,6 +305,7 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
   const tick=now=>{if(playing){offset=((now-start)/1000)%DURATION;E.scrub.value=offset}draw(offset);E.time.textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)};
   requestAnimationFrame(tick);
   E.play.onclick=()=>{playing=!playing;E.play.textContent=playing?"Pause":"Play";if(playing)start=performance.now()-offset*1000};
+   $id("exportSfx").onclick=exportSfxWav;
   E.scrub.oninput=()=>{offset=Number(E.scrub.value);if(playing)start=performance.now()-offset*1000;draw(offset)};
   $id("restart").onclick=()=>{offset=0;start=performance.now();draw(0)};
  }
