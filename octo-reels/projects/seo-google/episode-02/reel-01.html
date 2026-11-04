@@ -299,7 +299,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 @keyframes maskAir{0%{opacity:0;transform:translate3d(0,5px,0) scale(.55)}18%{opacity:.95}82%{opacity:.7}100%{opacity:0;transform:translate3d(22px,-150px,0) scale(1.25)}}
 /* Octo's thought rises from above his head and settles near the top of the scene */
 #ownerScene .thought-cloud{
- left:50%;top:970px;width:500px;min-height:105px;padding:22px 28px;
+ left:50%;top:820px;width:500px;min-height:105px;padding:22px 28px;
  border:1.5px solid rgba(180,232,238,.8);border-radius:42px;
  background:rgba(10,25,47,.78);font-size:27px;
  transform:translate3d(-50%,260px,0) scale(.78);
@@ -458,11 +458,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
  </div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="55" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="75" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
 <script>
 (function(){
  "use strict";
- var DURATION=55, RENDER=new URLSearchParams(location.search).has("render");
+ var DURATION=75, RENDER=new URLSearchParams(location.search).has("render");
  var $=function(id){return document.getElementById(id)};
  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
  var lerp=function(a,b,p){return a+(b-a)*p};
@@ -475,12 +475,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   ["titleScene",0,4.8,34],
   ["ownerScene",4.55,10.1,42],
   ["resultsScene",9.95,28,42],
-   ["journeyScene",27.8,55,42]
+   ["journeyScene",27.8,75,42]
  ];
  var poses=[
   {t:1.55,x:-300,y:-80,s:.55},{t:4.8,x:-300,y:-80,s:.57},
   {t:9.8,x:300,y:-80,s:.55},{t:10.7,x:100,y:100,s:.49},
-  {t:27.2,x:100,y:100,s:.49},{t:27.8,x:0,y:600,s:.82},{t:29.2,x:0,y:80,s:.82},{t:55,x:0,y:80,s:.82}
+  {t:27.2,x:100,y:100,s:.49},{t:27.8,x:0,y:600,s:.82},{t:30.8,x:0,y:80,s:.82},{t:75,x:0,y:80,s:.82}
  ];
  var eyes=[
   {node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},
@@ -534,19 +534,19 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   shoeThought.style.transform="translate3d(0,"+lerp(24,0,thoughtP)+"px,0) scale("+lerp(.86,1,thoughtP)+")";
   // سکانس چهارم: سؤال اکتو، نریشن تایپی، مسیر سه‌مرحله‌ای و جمله پایانی
   var jq=$("journeyQuestion"),jn=$("journeyNarration"),jf=$("journeyFinal");
-  var jqIn=back(prog(t,30.05,.55),1.08),jqOut=prog(t,33.05,.35);
-  jq.style.opacity=t>=30.05?clamp(jqIn,0,1)*(1-jqOut):0;
+  var jqIn=back(prog(t,31.2,.65),1.08),jqOut=prog(t,35.5,.5);
+  jq.style.opacity=t>=31.2?clamp(jqIn,0,1)*(1-jqOut):0;
   jq.style.transform="translateY("+lerp(28,0,jqIn)+"px) scale("+lerp(.96,1,jqIn)+")";
   var narration="نه دقیقاً! یکی تازه داره مشکلش رو می‌شناسه، یکی دنبال مقایسه‌ست، یکی هم آماده خریده.";
-  var np=prog(t,33.55,4.45),ncount=Math.floor(narration.length*np);
+  var np=prog(t,36.3,7.5),ncount=Math.floor(narration.length*np);
   jn.textContent=narration.slice(0,ncount);
-  jn.style.opacity=t>=33.55&&t<38.35?1:0;
-  document.querySelectorAll(".journey-step").forEach(function(n,i){var p=back(prog(t,38.55+i*1.45,.62),1.12),fade=1-prog(t,43.45,.45);n.style.opacity=clamp(p,0,1)*fade;n.style.transform="translateY("+lerp(38,0,p)+"px) scale("+lerp(.97,1,p)+")";});
-  document.querySelectorAll(".journey-arrow").forEach(function(n,i){var p=back(prog(t,39.15+i*1.45,.42),1.08),fade=1-prog(t,43.45,.45);n.style.opacity=clamp(p,0,1)*fade;n.style.transform="translateY("+lerp(-14,0,p)+"px)";});
+  jn.style.opacity=t>=36.3&&t<47.4?1:0;
+  document.querySelectorAll(".journey-step").forEach(function(n,i){var p=back(prog(t,48.2+i*2.8,.85),1.12),fade=1-prog(t,59.4,.6);n.style.opacity=clamp(p,0,1)*fade;n.style.transform="translateY("+lerp(38,0,p)+"px) scale("+lerp(.97,1,p)+")";});
+  document.querySelectorAll(".journey-arrow").forEach(function(n,i){var p=back(prog(t,49.35+i*2.8,.55),1.08),fade=1-prog(t,59.4,.6);n.style.opacity=clamp(p,0,1)*fade;n.style.transform="translateY("+lerp(-14,0,p)+"px)";});
   var finalText="اگه فقط برای کسی محتوا بسازی که آماده خریده، بخش بزرگی از مشتری‌هات رو قبل از رسیدن به فروش از دست می‌دی.";
-  var fp=prog(t,44.15,8.2),fcount=Math.floor(finalText.length*fp);
-  jf.innerHTML=t>=44.15?finalText.slice(0,fcount)+'<span class="typed-cursor"></span>':"";
-  jf.style.opacity=t>=44.15?clamp(prog(t,44.15,.35),0,1):0;
+  var fp=prog(t,61.1,11.2),fcount=Math.floor(finalText.length*fp);
+  jf.innerHTML=t>=61.1?finalText.slice(0,fcount)+'<span class="typed-cursor"></span>':"";
+  jf.style.opacity=t>=61.1?clamp(prog(t,61.1,.5),0,1):0;
   var speechText="",speechStart=0,speechEnd=0;
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
   thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
@@ -572,8 +572,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   // ورود سکانس سوم و نمایش جست‌وجوها
   whoosh(10.02,.105);pop(10.62,.8);
   pop(14.9,.72);pop(17.9,.62);pop(20.9,.62);pop(23.65,.68);
-  whoosh(27.85,.13);pop(30.05,.82);
-  pop(33.55,.55);pop(38.55,.62);pop(40,.62);pop(41.45,.62);pop(42.05,.62);whoosh(44.15,.1);
+  whoosh(27.85,.13);pop(31.2,.82);
+  pop(36.3,.55);pop(48.2,.62);pop(51,.62);pop(53.8,.62);pop(54.35,.62);whoosh(61.1,.1);
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
@@ -592,7 +592,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("play").onclick=function(){playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};
   $("restart").onclick=function(){offset=0;t0=performance.now();};
   $("scrub").oninput=function(){offset=parseFloat($("scrub").value);if(playing)t0=performance.now()-offset*1000;draw(offset);};
-  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-55s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
+  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-75s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
   window.addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(function(){window.__ready=true;});
  }
 })();
