@@ -450,8 +450,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  ];
  var poses=[
   {t:1.55,x:-300,y:-80,s:.55},{t:4.8,x:-300,y:-80,s:.57},
-  {t:9.8,x:300,y:-80,s:.55},{t:10.7,x:0,y:100,s:.49},
-  {t:27.2,x:0,y:100,s:.49},{t:28,x:0,y:100,s:.49}
+  {t:9.8,x:300,y:-80,s:.55},{t:10.7,x:100,y:100,s:.49},
+  {t:27.2,x:100,y:100,s:.49},{t:28,x:100,y:100,s:.49}
  ];
  var eyes=[
   {node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},
@@ -479,12 +479,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var settle=prog(t,4.7,.42),squash=Math.sin(Math.PI*settle)*.05;
   var breath=Math.sin((t-5)*1.5)*.004,floatY=Math.sin((t-5)*1.05)*1.8;
   $("octoWrap").style.opacity=scene(t,1.5,DURATION,.5);
-  var queryReact=0;[12.4,15.4,18.4].forEach(function(start){var rp=prog(t,start,.48);if(t>=start&&t<start+.48)queryReact=Math.max(queryReact,Math.sin(Math.PI*rp));});
+  var queryReact=0;[14.9,17.9,20.9].forEach(function(start){var rp=prog(t,start,.48);if(t>=start&&t<start+.48)queryReact=Math.max(queryReact,Math.sin(Math.PI*rp));});
   $("octoWrap").style.transform="translate3d("+(pose.x-7*queryReact)+"px,"+(pose.y+floatY+lerp(165,0,enter)-9*queryReact)+"px,0) rotate("+(-1.35*queryReact)+"deg) scale("+(pose.s*(1+breath+squash*.5+queryReact*.008))+","+(pose.s*(1+breath-squash-queryReact*.012))+")";
   $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
-  var sy=blink(t),gaze=t<4.8?[0,0]:t<9.85?[.15,-1.05]:t<12.4?[-.2,-.35]:t<21.3?[-.15,-1.1]:t<25.8?[0,-1.15]:[0,0];
+  var sy=blink(t),gaze=t<4.8?[0,0]:t<9.85?[.15,-1.05]:t<14.9?[-.2,-.35]:t<23.8?[-.15,-1.1]:t<25.8?[0,-1.15]:[0,0];
   eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
-  var thinking=t>=4.85&&t<10.1,curious=t>=9.85&&t<12.4,queryThinking=t>=21.1&&t<27.8,surprised=false,sad=false;
+  var thinking=t>=4.85&&t<10.1,curious=t>=9.85&&t<12.4,queryThinking=t>=23.6&&t<27.8,surprised=false,sad=false;
   $("mSurprise").style.opacity=surprised?1:0;$("mHappy").style.opacity=(curious||sad||thinking||queryThinking)?0:1;$("mSad").style.opacity=sad?1:0;$("mThinking").style.opacity=(thinking||queryThinking)?1:0;
    document.querySelectorAll(".autocomplete-row").forEach(function(n,i){
    var p=back(prog(t,12.1+i*.62,.48),1.18),fade=1-prog(t,18.6,.35);
@@ -494,14 +494,14 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
    var p=back(prog(t,19.6+i*3.05,.62),1.16),fade=1-prog(t,31.75,.35);
    n.style.opacity=clamp(p*1.12)*fade;n.style.transform="translateY("+lerp(35,0,p)+"px) scale("+lerp(.98,1,p)+")";
   });
-  var queryStarts=[12.4,15.4,18.4];
+  var queryStarts=[14.9,17.9,20.9];
   document.querySelectorAll("#shoeQueries .shoe-intent").forEach(function(n,i){
    var p=back(prog(t,queryStarts[i],.62),1.14);
    n.style.opacity=clamp(p,0,1);
    n.style.transform="translate3d("+lerp(0,0,p)+","+lerp(36,0,p)+"px,0) scale("+lerp(.97,1,p)+")";
   });
-  var shoeThought=$("shoeThought"),thoughtP=back(prog(t,21.15,.72),1.1),thoughtFade=1-prog(t,27.55,.35);
-  shoeThought.style.opacity=t>=21.15?clamp(thoughtP*1.12,0,1)*thoughtFade:0;
+  var shoeThought=$("shoeThought"),thoughtP=back(prog(t,23.65,.72),1.1),thoughtFade=1-prog(t,27.55,.35);
+  shoeThought.style.opacity=t>=23.65?clamp(thoughtP*1.12,0,1)*thoughtFade:0;
   shoeThought.style.transform="translate3d(0,"+lerp(24,0,thoughtP)+"px,0) scale("+lerp(.86,1,thoughtP)+")";
   var speechText="",speechStart=0,speechEnd=0;
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
@@ -527,7 +527,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   whoosh(4.62,.105);pop(5.08,.7);
   // ورود سکانس سوم و نمایش جست‌وجوها
   whoosh(10.02,.105);pop(10.62,.8);
-  pop(12.4,.72);pop(15.4,.62);pop(18.4,.62);pop(21.15,.68);
+  pop(14.9,.72);pop(17.9,.62);pop(20.9,.62);pop(23.65,.68);
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
