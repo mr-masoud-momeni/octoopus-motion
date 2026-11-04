@@ -316,11 +316,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <h2 class="scene-title">فرض کن فروشگاه <b>کفش</b> داری</h2>
   <p class="scene-sub">مشتری‌ها ممکنه دنبال کفش باشن ولی در مسیرهای مختلف.</p>
   <div class="query-popups" id="shoeQueries">
-   <div class="query-popup" data-query="0"><span class="query-mark">⌕</span><div><small>جست‌وجو از مسیرِ مشکل</small><strong>کفش مناسب برای کمردرد</strong></div><i class="query-step">۱</i></div>
+   <div class="query-popup" data-query="0"><span class="query-mark">⌕</span><div><small>جست‌وجو از مسیرِ مشکل</small><strong>برای کمردرد چه کفشی خوبه؟</strong></div><i class="query-step">۱</i></div>
    <div class="query-popup" data-query="1"><span class="query-mark">⌕</span><div><small>جست‌وجو برای شناخت راه‌حل</small><strong>انواع کفش طبی</strong></div><i class="query-step">۲</i></div>
    <div class="query-popup" data-query="2"><span class="query-mark">⌕</span><div><small>جست‌وجوی مستقیم برای خرید</small><strong>خرید کفش</strong></div><i class="query-step">۳</i></div>
   </div>
-  <div class="query-thought" id="queryThought"><span>پس همه اینا کفش می‌خوان؟!</span><i></i><b></b></div>
+  <div class="query-thought" id="queryThought"><span>پس همه‌ی اینا کفش می‌خوان؟!</span><i></i><b></b></div>
 
  </section>
 
@@ -393,11 +393,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
  </div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="10.1" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="32.6" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
 <script>
 (function(){
  "use strict";
- var DURATION=10.1, RENDER=new URLSearchParams(location.search).has("render");
+ var DURATION=32.6, RENDER=new URLSearchParams(location.search).has("render");
  var $=function(id){return document.getElementById(id)};
  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
  var lerp=function(a,b,p){return a+(b-a)*p};
@@ -408,7 +408,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var scene=function(t,a,b,fade){return expo(prog(t,a,.42))*(1-prog(t,b-fade,fade))};
  var scenes=[
   ["titleScene",0,4.8,34],
-  ["ownerScene",4.55,10.1,42]
+  ["ownerScene",4.55,10.1,42],
+  ["resultsScene",9.95,32.6,42]
  ];
  var poses=[
   {t:1.55,x:-300,y:-80,s:.55},{t:4.8,x:-300,y:-80,s:.57},
@@ -468,7 +469,6 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   queryThought.style.opacity=t>=25.25&&t<32.1?clamp(thoughtPop*1.08)*thoughtFade:0;
   queryThought.style.transform="translate3d(0,"+lerp(24,0,thoughtPop)+"px,0) scale("+lerp(.84,1,thoughtPop)+")";
   var speechText="",speechStart=0,speechEnd=0;
-  if(t>=32.1&&t<39){speechText="نیاز پشت جست‌وجو مهمه!";speechStart=32.35;speechEnd=38.8;}
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
   thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
   thought.style.left="calc(50% + "+pose.x+"px)";
@@ -490,8 +490,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   function pop(t,a){tone(t,.13,760,390,.07*a,"sine");tone(t+.025,.09,1250,800,.035*a,"triangle");}
   whoosh(.12,.105);pop(1.65,.8);
   whoosh(4.62,.105);pop(5.08,.7);
-  // حباب فکر اکتو در سکانس دوم
-  pop(5.28,.62);pop(5.52,.38);
+  // ورود سکانس سوم و نمایش جست‌وجوها
+  whoosh(10.02,.105);pop(10.62,.8);
+  pop(13.75,.72);pop(17.55,.72);pop(21.35,.72);
+  // حباب فکر اکتو، بالای سرش
+  pop(25.25,.72);pop(25.48,.42);
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
@@ -510,7 +513,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("play").onclick=function(){playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};
   $("restart").onclick=function(){offset=0;t0=performance.now();};
   $("scrub").oninput=function(){offset=parseFloat($("scrub").value);if(playing)t0=performance.now()-offset*1000;draw(offset);};
-  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-46s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
+  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-32s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
   window.addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(function(){window.__ready=true;});
  }
 })();
