@@ -190,17 +190,17 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 @media(max-width:800px){.query-popups{left:455px;right:8px}.query-popup{gap:12px;padding:17px}.query-popup strong{font-size:21px}.query-popup small{font-size:15px}}
 
 
-/* Scene 3 layout: three queries at left, Octo and thought at right */
+/* Scene 3 — rebuilt: heading above, one search card at left, Octo with thought above at right */
 #resultsScene{padding-top:235px}
-#resultsScene .scene-title{font-size:64px;line-height:1.42}
-#resultsScene .scene-sub{font-size:28px;line-height:1.65;margin-top:12px}
-#resultsScene .shoe-store-visual{left:50%;top:665px;width:470px;height:410px;transform:translateX(-50%);opacity:0}
-#resultsScene .query-popups{top:660px;left:65px;right:auto;width:505px;gap:16px}
-#resultsScene .query-popup{min-height:122px;padding:16px 18px;gap:12px;border-radius:20px}
-#resultsScene .query-popup strong{font-size:23px;line-height:1.45}
-#resultsScene .query-popup small{font-size:15px;margin-bottom:5px}
-#resultsScene .query-mark{width:43px;height:43px;font-size:36px}
-#resultsScene .query-step{width:30px;height:30px;font-size:17px}
+#resultsScene .kicker{margin-bottom:16px}
+#resultsScene .scene-title{font-size:66px;line-height:1.42}
+#resultsScene .scene-sub{max-width:900px;font-size:28px;line-height:1.7;margin-top:14px}
+#resultsScene .query-popups{position:absolute;top:660px;left:65px;right:auto;width:505px;height:132px;display:block;z-index:6;direction:rtl}
+#resultsScene .query-popup{position:absolute;inset:0;width:100%;height:132px;min-height:132px;display:flex;align-items:center;gap:14px;padding:18px 20px;border:1px solid rgba(180,232,238,.42);border-radius:22px;background:rgba(13,34,59,.96);box-shadow:0 18px 42px rgba(0,0,0,.24);text-align:right;opacity:0;transform:translate3d(35px,0,0) scale(.97);will-change:transform,opacity}
+#resultsScene .query-popup strong{font-size:24px;line-height:1.5}
+#resultsScene .query-popup small{font-size:16px;margin-bottom:5px}
+#resultsScene .query-mark{width:46px;height:46px;font-size:38px}
+#resultsScene .query-step{width:32px;height:32px;font-size:18px}
 #resultsScene .query-thought{left:600px;right:auto;top:775px;width:410px;min-height:112px;padding:20px 18px;border-radius:34px;font-size:25px;transform-origin:50% 100%}
 #resultsScene .query-thought i{left:52%;bottom:-25px}
 #resultsScene .query-thought b{left:55%;bottom:-43px}
@@ -312,27 +312,16 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  </section>
 
  <section id="resultsScene" class="scene">
-  <div class="kicker">یه مثال ساده بزنیم</div>
+  <div class="kicker">یک مثال ساده</div>
   <h2 class="scene-title">فرض کن فروشگاه <b>کفش</b> داری</h2>
-  <p class="scene-sub">مشتری‌ها ممکنه دنبال کفش باشن،<br>ولی از مسیرهای مختلفی بهش می‌رسن.</p>
+  <p class="scene-sub">مشتری‌ها ممکنه دنبال کفش باشن ولی در مسیرهای مختلف.</p>
   <div class="query-popups" id="shoeQueries">
    <div class="query-popup" data-query="0"><span class="query-mark">⌕</span><div><small>جست‌وجو از مسیرِ مشکل</small><strong>کفش مناسب برای کمردرد</strong></div><i class="query-step">۱</i></div>
    <div class="query-popup" data-query="1"><span class="query-mark">⌕</span><div><small>جست‌وجو برای شناخت راه‌حل</small><strong>انواع کفش طبی</strong></div><i class="query-step">۲</i></div>
    <div class="query-popup" data-query="2"><span class="query-mark">⌕</span><div><small>جست‌وجوی مستقیم برای خرید</small><strong>خرید کفش</strong></div><i class="query-step">۳</i></div>
   </div>
-  <div class="query-thought" id="queryThought"><span>پس همه‌ی اینا کفش می‌خوان؟!</span><i></i><b></b></div>
- <div class="shoe-store-visual" aria-hidden="true"><svg viewBox="0 0 650 570" xmlns="http://www.w3.org/2000/svg">
-<defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#244766"/><stop offset="1" stop-color="#102b48"/></linearGradient><linearGradient id="ss" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f6f7f4"/><stop offset="1" stop-color="#aebdca"/></linearGradient></defs>
-<ellipse cx="310" cy="523" rx="275" ry="23" fill="#000" opacity=".22"/>
-<path d="M68 178 112 70h407l52 108v320H68Z" fill="#102943" stroke="#8ca9ba" stroke-opacity=".65" stroke-width="4"/><path d="M105 176h424v318H105Z" fill="url(#sg)" stroke="#6c879e" stroke-width="3"/>
-<rect x="190" y="88" width="210" height="70" rx="12" fill="#0a192f" stroke="#41FAF1" stroke-opacity=".75" stroke-width="3"/><text x="295" y="133" fill="#f4f7fb" font-size="34" font-family="Vazirmatn,sans-serif" font-weight="900" text-anchor="middle">فروشگاه کفش</text>
-<path d="M78 178h500l-19 54H97Z" fill="#1b4c67" stroke="#9ab4c5" stroke-opacity=".6" stroke-width="3"/><path d="M98 179h80l-9 53h-72Zm160 0h80l-2 53h-80Zm160 0h80l7 53h-80Z" fill="#41FAF1" opacity=".18"/>
-<path d="M135 315h360M135 416h360" stroke="#8ba5b9" stroke-width="8" stroke-linecap="round"/><path d="M145 319v-83m340 83v-83M145 420v-98m340 98v-98" stroke="#7893aa" stroke-width="5" opacity=".65"/>
-<g transform="translate(165 270)"><path d="M0 22q28-8 48-31l25 6q11 19 35 25 13 4 12 17H9Q-5 39 0 22Z" fill="#dce7ed" stroke="#8ca8bb" stroke-width="3"/><path d="M8 35h109q-1 12-13 13H14Q4 47 8 35Z" fill="url(#ss)"/><path d="m48 4 20 10m-31-2 20 10m-30-3 18 9" stroke="#6e879a" stroke-width="3" stroke-linecap="round"/></g>
-<g transform="translate(335 270)"><path d="M0 22q28-8 48-31l25 6q11 19 35 25 13 4 12 17H9Q-5 39 0 22Z" fill="#41b9b5" stroke="#b5e9e8" stroke-width="3"/><path d="M8 35h109q-1 12-13 13H14Q4 47 8 35Z" fill="url(#ss)"/><path d="m48 4 20 10m-31-2 20 10m-30-3 18 9" stroke="#d6f4f1" stroke-width="3" stroke-linecap="round"/></g>
-<g transform="translate(165 372) scale(.92)"><path d="M0 22q28-8 48-31l25 6q11 19 35 25 13 4 12 17H9Q-5 39 0 22Z" fill="#d5b58b" stroke="#f0d8b9" stroke-width="3"/><path d="M8 35h109q-1 12-13 13H14Q4 47 8 35Z" fill="url(#ss)"/><path d="m48 4 20 10m-31-2 20 10m-30-3 18 9" stroke="#8d7256" stroke-width="3" stroke-linecap="round"/></g>
-<g transform="translate(335 372) scale(.92)"><path d="M0 22q28-8 48-31l25 6q11 19 35 25 13 4 12 17H9Q-5 39 0 22Z" fill="#8295ad" stroke="#c1d0dc" stroke-width="3"/><path d="M8 35h109q-1 12-13 13H14Q4 47 8 35Z" fill="url(#ss)"/><path d="m48 4 20 10m-31-2 20 10m-30-3 18 9" stroke="#e4ebf1" stroke-width="3" stroke-linecap="round"/></g>
-<path d="M245 432v62h140v-62" fill="#0b2038" stroke="#7893aa" stroke-width="3"/><path d="M315 435v58" stroke="#7893aa" stroke-width="2"/><circle cx="302" cy="465" r="4" fill="#41FAF1"/><path d="M116 244v235M521 244v235" stroke="#b4d3df" stroke-opacity=".2" stroke-width="3"/></svg><div class="store-floor-glow"></div></div>
+  <div class="query-thought" id="queryThought"><span>پس همه اینا کفش می‌خوان؟!</span><i></i><b></b></div>
+
  </section>
 
  <section id="siteScene" class="scene">
@@ -461,11 +450,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
   var sy=blink(t),gaze=t<4.8?[0,0]:t<10.1?[.15,-1.05]:t<32.1?[-.6,-.12]:[0,0];
   eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
-  var thinking=t>=4.85&&t<10.1,curious=t>=9.85&&t<14.2,queryThinking=t>=22.4&&t<32.1,surprised=false,sad=false;
+  var thinking=t>=4.85&&t<10.1,curious=t>=9.85&&t<14.2,queryThinking=t>=25.25&&t<32.1,surprised=false,sad=false;
   $("mSurprise").style.opacity=surprised?1:0;$("mHappy").style.opacity=(curious||sad||thinking||queryThinking)?0:1;$("mSad").style.opacity=sad?1:0;$("mThinking").style.opacity=(thinking||queryThinking)?1:0;
-  var storeIn=back(prog(t,10.05,.82),1.08),storeOut=prog(t,14.05,.55),store=$("resultsScene").querySelector(".shoe-store-visual");
-   store.style.opacity=t>=9.85&&t<14.7?clamp(storeIn*1.12,0,1)*(1-storeOut):0;
-   store.style.transform="translate3d("+lerp(-35,0,storeIn)+"px,"+lerp(35,0,storeIn)+"px,0) scale("+lerp(.94,1,storeIn)+")";
    document.querySelectorAll(".autocomplete-row").forEach(function(n,i){
    var p=back(prog(t,12.1+i*.62,.48),1.18),fade=1-prog(t,18.6,.35);
    n.style.opacity=clamp(p*1.2)*fade;n.style.transform="translateY("+lerp(22,0,p)+"px)";
@@ -474,13 +460,14 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
    var p=back(prog(t,19.6+i*3.05,.62),1.16),fade=1-prog(t,31.75,.35);
    n.style.opacity=clamp(p*1.12)*fade;n.style.transform="translateY("+lerp(35,0,p)+"px) scale("+lerp(.98,1,p)+")";
   });
+  var queryStarts=[13.75,17.55,21.35],queryEnds=[17.25,21.05,24.85];
   document.querySelectorAll("#shoeQueries .query-popup").forEach(function(n,i){
-   var p=back(prog(t,14.35+i*2.35,.58),1.13),fade=1-prog(t,31.7,.35);
-   n.style.opacity=clamp(p*1.08)*fade;
-   n.style.transform="translate3d("+lerp(38,0,p)+"px,0,0) scale("+lerp(.96,1,p)+")";
+   var start=queryStarts[i],end=queryEnds[i],p=back(prog(t,start,.55),1.13),fade=1-prog(t,end-.3,.3);
+   n.style.opacity=t>=start&&t<end?clamp(p*1.08)*fade:0;
+   n.style.transform="translate3d("+lerp(35,0,p)+"px,0,0) scale("+lerp(.97,1,p)+")";
   });
-  var queryThought=$("queryThought"),thoughtPop=back(prog(t,22.55,.62),1.1),thoughtFade=1-prog(t,31.7,.35);
-  queryThought.style.opacity=t>=22.55&&t<32.1?clamp(thoughtPop*1.08)*thoughtFade:0;
+  var queryThought=$("queryThought"),thoughtPop=back(prog(t,25.25,.62),1.1),thoughtFade=1-prog(t,31.7,.35);
+  queryThought.style.opacity=t>=25.25&&t<32.1?clamp(thoughtPop*1.08)*thoughtFade:0;
   queryThought.style.transform="translate3d(0,"+lerp(24,0,thoughtPop)+"px,0) scale("+lerp(.84,1,thoughtPop)+")";
   var speechText="",speechStart=0,speechEnd=0;
   if(t>=10.2&&t<18.7){speechText="فقط نوشته: کفش!";speechStart=10.45;speechEnd=18.45;}
@@ -510,7 +497,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   // حباب فکر اکتو در سکانس دوم
   pop(5.28,.62);pop(5.52,.38);
   whoosh(9.92,.11);pop(10.48,.72);
-  whoosh(18.92,.12);pop(14.48,.72);pop(16.83,.68);pop(19.18,.68);pop(22.72,.55);
+  whoosh(13.62,.1);pop(13.88,.72);pop(17.68,.68);pop(21.48,.68);pop(25.42,.55);
   whoosh(31.92,.1);tone(33.1,.3,430,300,.035,"triangle");
   whoosh(39.22,.09);tone(39.8,.55,660,660,.035,"sine");tone(40.05,.65,880,880,.027,"sine");tone(40.35,.8,1100,1100,.022,"sine");
   return ctx.startRendering().then(function(buffer){
