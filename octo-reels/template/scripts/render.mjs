@@ -11,7 +11,7 @@
  * هیچ پکیجی لازم نیست: فقط Chrome + Node 24 + FFmpeg.
  */
 import { spawn } from "node:child_process";
-import { writeFile, mkdir, rm, readFile, readdir, stat } from "node:fs/promises";
+import { writeFile, mkdir, rm, readFile, readdir, stat, copyFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join, dirname, resolve, isAbsolute } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -43,6 +43,7 @@ const AUDIO_FILE = flag("audio", null);
 const MUSIC_FILE = flag("music", null);
 const TIMING_FILE = flag("timing", null);
 const SFX_ON = argv.includes("--sfx");
+const SEPARATE_SFX = argv.includes("--sfx-separate");
 const MUX_ONLY = argv.includes("--mux-only");
 const DUMP_TIMELINE = argv.includes("--dump-timeline");
 
@@ -233,7 +234,7 @@ if (mode === "stills") {
 } else {
   const framesDir = join(outDir, "frames");
   const outFile = join(outDir, flag("out", "octo-template.mp4"));
-  const silentFile = (AUDIO_FILE || MUSIC_FILE || SFX_ON)
+  const silentFile = (AUDIO_FILE || MUSIC_FILE || (SFX_ON && !SEPARATE_SFX))
     ? join(outDir, ".silent.mp4")
     : outFile;
 
@@ -301,7 +302,13 @@ if (mode === "stills") {
     }
   }
 
-  if (AUDIO_FILE || MUSIC_FILE || sfxFile) {
+  if (SEPARATE_SFX && sfxFile) {
+    const separateSfxFile = join(outDir, flag("sfx-out", "octo-sfx.wav"));
+    await copyFile(sfxFile, separateSfxFile);
+    await rm(sfxFile, { force: true });
+    console.log("separate sfx:", separateSfxFile);
+    console.log("silent video:", outFile);
+  } else if (AUDIO_FILE || MUSIC_FILE || sfxFile) {
     const args = ["-y", "-i", silentFile];
     let idx = 0;
     if (AUDIO_FILE) { args.push("-i", rel(AUDIO_FILE)); idx++; }
