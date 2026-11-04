@@ -540,8 +540,8 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   var np=prog(t,33.55,4.45),ncount=Math.floor(narration.length*np);
   jn.textContent=narration.slice(0,ncount);
   jn.style.opacity=t>=33.55&&t<38.35?1:0;
-  document.querySelectorAll(".journey-step").forEach(function(n,i){var p=back(prog(t,38.55+i*1.45,.62),1.12);n.style.opacity=clamp(p,0,1);n.style.transform="translateY("+lerp(38,0,p)+"px) scale("+lerp(.97,1,p)+")";});
-  document.querySelectorAll(".journey-arrow").forEach(function(n,i){var p=back(prog(t,39.15+i*1.45,.42),1.08);n.style.opacity=clamp(p,0,1);n.style.transform="translateY("+lerp(-14,0,p)+"px)";});
+  document.querySelectorAll(".journey-step").forEach(function(n,i){var p=back(prog(t,38.55+i*1.45,.62),1.12),fade=1-prog(t,43.45,.45);n.style.opacity=clamp(p,0,1)*fade;n.style.transform="translateY("+lerp(38,0,p)+"px) scale("+lerp(.97,1,p)+")";});
+  document.querySelectorAll(".journey-arrow").forEach(function(n,i){var p=back(prog(t,39.15+i*1.45,.42),1.08),fade=1-prog(t,43.45,.45);n.style.opacity=clamp(p,0,1)*fade;n.style.transform="translateY("+lerp(-14,0,p)+"px)";});
   var finalText="اگه فقط برای کسی محتوا بسازی که آماده خریده، بخش بزرگی از مشتری‌هات رو قبل از رسیدن به فروش از دست می‌دی.";
   var fp=prog(t,44.15,8.2),fcount=Math.floor(finalText.length*fp);
   jf.innerHTML=t>=44.15?finalText.slice(0,fcount)+"<span class=\\"typed-cursor\\"></span>":"";
