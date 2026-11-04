@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اُکتوپوس | مشتری‌ها دقیقاً چی جست‌وجو می‌کنن؟ قسمت دوم</title>
+<link rel="stylesheet" href="../../../template/fonts.css">
+<style>
+@font-face{font-family:Vazirmatn;src:url("../../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:swap}
+:root{--navy:#0A192F;--navy2:#142B4D;--cyan:#41FAF1;--white:#F4F7FB;--muted:#B4BCD0;--ink:#152238}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;isolation:isolate;transform-origin:center;background:radial-gradient(90% 65% at 50% 72%,#173657 0%,var(--navy) 58%,#030914 100%)}
+#grid{position:absolute;inset:-80px;background-image:radial-gradient(rgba(65,250,241,.13) 2px,transparent 2px);background-size:66px 66px;opacity:.42;mask-image:radial-gradient(72% 60% at 50% 52%,#000,transparent)}
+#glow{position:absolute;left:50%;top:950px;width:1000px;height:900px;margin-left:-500px;border-radius:50%;background:radial-gradient(circle,rgba(65,250,241,.14),rgba(65,250,241,.035) 52%,transparent 72%);filter:blur(8px)}
+.brand{position:absolute;top:78px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;direction:ltr;font:600 28px/1.2 system-ui,sans-serif;letter-spacing:.06em;color:#b4bfd1;opacity:.72;z-index:8}
+.brand i{width:10px;height:10px;background:var(--cyan);border-radius:50%;box-shadow:0 0 18px var(--cyan)}
+.scene{position:absolute;left:70px;right:70px;text-align:center;opacity:0;z-index:4;will-change:opacity,transform}
+#titleScene{inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 90px;background:radial-gradient(ellipse at 50% 48%,rgba(20,43,77,.34),transparent 66%)}
+#titleScene h1{font-size:112px;line-height:1.42;font-weight:1000;letter-spacing:-.055em;text-align:center;max-width:960px;color:#fff;text-shadow:0 12px 34px #0005}
+#titleScene h1 span{display:block;white-space:nowrap}
+#titleScene h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 38px #41FAF144}
+.cover-part{font-size:34px;font-weight:850;color:#fff;margin-top:34px;padding:8px 30px;border-top:1px solid rgba(65,250,241,.6);border-bottom:1px solid rgba(65,250,241,.6);letter-spacing:.02em}
+.kicker{font-size:28px;font-weight:800;color:var(--cyan);margin-bottom:20px}
+.scene-title{font-size:56px;line-height:1.5;font-weight:950;letter-spacing:-.025em;color:#fff}
+.scene-title b{font-weight:950;color:var(--cyan)}
+.scene-sub{max-width:850px;margin:18px auto 0;font-size:29px;line-height:1.8;color:#d0d9e6;font-weight:600}
+#ownerScene{top:260px}
+#resultsScene{top:245px}
+#siteScene{top:245px}
+#questionScene{top:260px}
+.visual{position:absolute;left:50%;top:660px;transform:translateX(-50%);width:850px;height:560px;z-index:2}
+.owner-wrap{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center}
+.owner{position:absolute;right:90px;bottom:140px;width:230px;height:270px}
+.owner .hair{position:absolute;top:0;left:66px;width:100px;height:82px;border-radius:48% 48% 38% 38%;background:#182b43}
+.owner .head{position:absolute;top:30px;left:74px;width:88px;height:100px;border-radius:42% 42% 48% 48%;background:#d9a783;box-shadow:inset -9px -5px 0 #bd896f}
+.owner .neck{position:absolute;top:116px;left:106px;width:28px;height:34px;background:#c88e70}
+.owner .body{position:absolute;left:24px;bottom:0;width:200px;height:150px;border-radius:90px 90px 18px 18px;background:linear-gradient(135deg,#267b89,#16435d)}
+.owner .arm{position:absolute;right:12px;bottom:55px;width:150px;height:28px;border-radius:30px;background:#d9a783;transform:rotate(-15deg);transform-origin:right center}
+.desk{position:absolute;bottom:112px;left:65px;right:45px;height:20px;border-radius:20px;background:#52647a;box-shadow:0 14px 0 #263b53}
+.laptop{position:absolute;left:120px;bottom:132px;width:330px;height:225px;z-index:2}
+.laptop-screen{height:190px;border:12px solid #1b2c43;border-bottom-width:18px;border-radius:18px 18px 8px 8px;background:#f6f8fb;box-shadow:0 20px 45px #0006;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px}
+.laptop-base{height:14px;margin:0 -20px;background:linear-gradient(#9eacbd,#53677e);border-radius:0 0 20px 20px}
+.laptop-screen .google-word{font:700 39px/1 Arial,sans-serif;direction:ltr;letter-spacing:-2px}
+.google-word span:nth-child(1){color:#4285f4}.google-word span:nth-child(2){color:#ea4335}.google-word span:nth-child(3){color:#fbbc05}.google-word span:nth-child(4){color:#4285f4}.google-word span:nth-child(5){color:#34a853}.google-word span:nth-child(6){color:#ea4335}
+.searchbar{width:245px;height:42px;border:1px solid #d8dce4;border-radius:24px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:#596579;font-size:15px;box-shadow:0 3px 9px #0001}
+.searchbar strong{font-size:20px;color:#4285f4}
+.visual-label{position:absolute;left:50%;bottom:42px;transform:translateX(-50%);padding:12px 24px;border-radius:14px;background:#102641;border:1px solid #41FAF155;color:#dff;white-space:nowrap;font-size:24px;font-weight:800}
+.browser{position:absolute;inset:0;border-radius:28px;background:#eef2f7;overflow:hidden;box-shadow:0 35px 90px #0008;border:10px solid #21324b}
+.browser-top{height:55px;background:#dfe5ed;display:flex;align-items:center;gap:9px;padding:0 20px;direction:ltr}
+.browser-top i{width:12px;height:12px;border-radius:50%;background:#f06b65}.browser-top i:nth-child(2){background:#f5c45b}.browser-top i:nth-child(3){background:#62c987}
+.browser-top span{margin-left:16px;background:#fff;border-radius:7px;padding:6px 16px;font:14px Arial,sans-serif;color:#68778a;flex:1}
+.google-results{padding:28px 45px;color:#263449;direction:rtl;text-align:right}
+.google-results .google-word{font-size:35px;margin-bottom:18px;text-align:center}
+.result-search{height:48px;border-radius:28px;border:1px solid #d5dbe4;background:#fff;padding:9px 20px;color:#354257;font-size:20px;box-shadow:0 2px 8px #0001}
+.result-hint{font-size:14px;color:#758195;margin:13px 0 18px}
+.result{padding:13px 5px 12px;border-bottom:1px solid #dce2ea}
+.result small{display:block;color:#4285a8;font:13px Arial,sans-serif;direction:ltr;text-align:left}
+.result strong{display:block;color:#1a56b4;font-size:23px;margin:4px 0}
+.result p{font-size:15px;line-height:1.5;color:#4e596b}
+.result.highlight{background:#eaf8f7;border-right:5px solid #27a9a3;padding-right:14px;border-radius:8px}
+.site-browser{position:absolute;inset:0;border-radius:28px;overflow:hidden;background:#f6f7f9;border:10px solid #21324b;box-shadow:0 35px 90px #0008;color:#20314a}
+.site-nav{height:58px;background:#fff;border-bottom:1px solid #e2e7ed;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-size:18px;font-weight:800}
+.site-nav span{color:#68768a;font-size:14px}
+.site-body{display:flex;align-items:center;gap:24px;padding:35px 34px;direction:rtl}
+.product-art{width:280px;height:330px;border-radius:22px;background:radial-gradient(circle at 50% 30%,#c4d5e2,#7796ad 72%,#46677e);display:grid;place-items:center;flex:none}
+.shoe{width:210px;height:100px;border-radius:75% 25% 35% 35%;background:linear-gradient(160deg,#f8fbff,#b9c9d8 65%,#6d8399);transform:rotate(-13deg);box-shadow:inset 0 -13px 0 #879bad,0 20px 25px #26394a55;position:relative}
+.shoe:before{content:"";position:absolute;left:32px;top:20px;width:90px;height:3px;background:#8297a9;box-shadow:0 13px #8297a9,0 26px #8297a9}
+.product-copy{flex:1;text-align:right}
+.product-copy small{font-size:15px;color:#168d8c;font-weight:900}
+.product-copy h3{font-size:29px;line-height:1.5;margin:10px 0;color:#20314a}
+.product-copy p{font-size:16px;line-height:1.8;color:#64748b}
+.product-copy button{margin-top:22px;border:0;border-radius:10px;padding:12px 22px;background:#1aa9a3;color:#fff;font:800 17px Vazirmatn}
+.site-foot{position:absolute;bottom:16px;right:28px;font-size:14px;color:#718096}
+.question-card{position:absolute;left:50%;top:690px;transform:translateX(-50%);width:850px;padding:42px 40px;border-radius:30px;background:linear-gradient(135deg,rgba(20,43,77,.95),rgba(7,19,36,.96));border:1px solid rgba(65,250,241,.32);box-shadow:0 28px 75px #0007}
+.question-card .q{font-size:50px;font-weight:950;line-height:1.5}
+.question-card .q b{color:var(--cyan)}
+.question-card .hint{font-size:27px;line-height:1.8;color:#c5d2e2;margin-top:15px}
+#octoWrap{position:absolute;left:50%;top:1010px;width:560px;margin-left:-280px;opacity:0;transform:translate3d(250px,160px,0) scale(.72);transform-origin:50% 100%;filter:drop-shadow(0 34px 48px rgba(0,0,0,.42)) drop-shadow(0 0 30px rgba(65,250,241,.12));z-index:3;will-change:transform,opacity,filter}
+#octo{display:block;width:100%;height:auto;overflow:visible}
+.octo-body{fill:#41FAF1}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
+.bubble{position:absolute;z-index:7;left:50%;top:805px;min-width:370px;max-width:600px;padding:19px 27px;border-radius:20px;background:transparent;color:#f4f7fb;border:1px solid rgba(210,239,245,.5);font-size:27px;font-weight:900;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.14);opacity:0;transform:translate(-50%,25px) scale(.85)}
+.bubble:after{content:"";position:absolute;left:48%;bottom:-13px;border-width:13px 12px 0;border-style:solid;border-color:rgba(210,239,245,.5) transparent transparent}
+.bubble:before{content:"";position:absolute;left:calc(48% + 1px);bottom:-11px;border-width:12px 11px 0;border-style:solid;border-color:#0A192F transparent transparent}
+#steps{position:absolute;top:145px;left:100px;right:100px;display:flex;align-items:center;gap:16px;z-index:9;opacity:0}
+.step{display:flex;align-items:center;gap:10px;color:#71829a;font-size:23px;font-weight:800;white-space:nowrap}
+.step i{width:16px;height:16px;border:3px solid currentColor;border-radius:50%}
+.step.on{color:var(--cyan)}.step.on i{background:var(--cyan);box-shadow:0 0 18px #41FAF1aa}
+.step.done{color:#41FAF177}.step.done i{background:#41FAF177}
+.step-line{height:2px;background:#ffffff25;flex:1}
+#controls{position:fixed;z-index:100;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(5,12,24,.94);border-top:1px solid rgba(65,250,241,.2);font:13px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
+#controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+#scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
+
+
+/* بازچینی صحنه‌ها: فضای مستقل برای تصویر و اکتو */
+#ownerScene,#resultsScene,#siteScene,#questionScene{left:70px;right:70px;top:0;height:100%;padding-top:235px}
+#ownerScene .scene-title,#resultsScene .scene-title,#siteScene .scene-title,#questionScene .scene-title{font-size:56px;line-height:1.45}
+#ownerScene .scene-sub,#resultsScene .scene-sub,#siteScene .scene-sub{max-width:850px;font-size:27px;line-height:1.7;margin-top:14px}
+.owner-illustration{position:absolute;top:650px;left:50%;width:850px;height:475px;transform:translateX(-50%);display:flex;align-items:center;justify-content:center}
+.owner-illustration svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 28px 45px rgba(0,0,0,.28))}
+.owner-caption{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);font-size:22px;font-weight:750;color:#c9d8e7;white-space:nowrap}
+#resultsScene .visual,#siteScene .visual{top:640px;width:850px;height:480px}
+#resultsScene .browser{height:455px}
+#resultsScene .google-results{padding:17px 42px}
+#resultsScene .google-results .google-word{font-size:28px;margin:2px 0 10px}
+#resultsScene .result-search{height:42px;font-size:18px}
+#resultsScene .result-hint{margin:8px 0 10px}
+#resultsScene .result{padding:9px 5px}
+#resultsScene .result strong{font-size:20px;margin:2px 0}
+#resultsScene .result p{font-size:13px}
+#siteScene .site-browser{height:455px}
+#siteScene .site-body{padding:24px 30px}
+#siteScene .product-art{height:290px}
+#questionScene .question-card{top:700px;width:850px}
+#octoWrap{top:1010px;width:560px;margin-left:-280px;z-index:5}
+#octo{width:100%;height:auto}
+#steps{display:none!important}
+.bubble{top:1310px;min-width:340px;max-width:520px;font-size:27px;padding:18px 25px;z-index:8}
+.deep-sea{position:absolute;left:-70px;top:700px;width:1080px;height:620px;opacity:.78;pointer-events:none;z-index:1}.deep-sea svg{width:100%;height:100%}
+.sea-thought{position:absolute;z-index:6;display:flex;align-items:center;justify-content:center;opacity:0;padding:13px 19px;border-radius:22px;background:transparent;color:#f4f7fb;border:1px solid rgba(210,239,245,.48);box-shadow:0 5px 18px rgba(0,0,0,.12);font-size:22px;font-weight:850;text-align:center;white-space:nowrap;will-change:transform,opacity}
+.thought-a{left:390px;top:875px;width:175px;height:64px}
+.thought-b{left:485px;top:805px;width:190px;height:66px}
+.thought-c{left:565px;top:880px;width:205px;height:68px}
+#closingScene{top:390px;z-index:6}
+.closing-kicker{font-size:25px;font-weight:850;color:var(--cyan);letter-spacing:.02em}
+.closing-title{max-width:900px;margin:22px auto 16px;font-size:68px;line-height:1.45;font-weight:1000;color:#fff;text-shadow:0 12px 34px #0005}
+.closing-title em{font-style:normal;color:var(--cyan);text-shadow:0 0 34px #41FAF144}
+.closing-copy{max-width:790px;margin:0 auto;color:#cbd6e5;font-size:27px;line-height:1.9;font-weight:600}
+.next-episode{display:inline-flex;flex-direction:column;gap:8px;margin-top:62px;padding:22px 38px;border:1px solid rgba(65,250,241,.48);border-radius:22px;background:linear-gradient(135deg,rgba(20,43,77,.82),rgba(7,19,36,.82));box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.next-episode small{font-size:19px;color:#aabbd0;font-weight:700}
+.next-episode strong{font-size:29px;color:#fff;font-weight:950}
+.next-episode strong em{font-style:normal;color:var(--cyan)}
+#closingScene~#octoWrap{z-index:5}
+#octoWrap{z-index:5}#controls{z-index:1000}
+
+
+/* Episode 02: same Octoopus visual language, with a new teaching sequence */
+#titleScene{padding:0 90px}
+#titleScene .episode-only{font-size:128px;line-height:1.3;font-weight:1000;letter-spacing:-.04em;color:#fff;text-shadow:0 12px 34px #0006}
+#ownerScene{padding-top:280px}
+#ownerScene .topic-head{font-size:76px;line-height:1.5}
+#ownerScene .scene-sub{font-size:31px;margin-top:28px}
+#resultsScene .visual.query-demo{top:650px;width:850px;height:500px}
+#resultsScene .browser{height:480px}
+#resultsScene .google-results{padding:24px 42px}
+#resultsScene .google-results .google-word{font-size:38px;margin:4px 0 18px}
+#resultsScene .result-search{height:58px;font-size:25px}
+.autocomplete-list{margin:0 14px;background:#fff;border:1px solid #e0e5ec;border-top:0;border-radius:0 0 18px 18px;overflow:hidden;color:#29384d;text-align:right}
+.autocomplete-row{height:66px;padding:17px 26px;border-bottom:1px solid #edf0f4;font-size:21px;opacity:0;transform:translateY(16px)}
+.autocomplete-row:last-child{border-bottom:0}
+#siteScene{padding-top:225px}
+#siteScene .scene-sub{max-width:880px}
+.intent-list{position:absolute;top:650px;left:105px;right:105px;display:flex;flex-direction:column;gap:20px;z-index:4}
+.intent-row{min-height:142px;display:flex;align-items:center;gap:20px;padding:20px 25px;border:1px solid rgba(65,250,241,.3);border-radius:22px;background:linear-gradient(110deg,rgba(20,43,77,.96),rgba(7,19,36,.94));box-shadow:0 18px 45px rgba(0,0,0,.2);opacity:0;transform:translateY(34px) scale(.98)}
+.intent-number{width:54px;height:54px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(65,250,241,.13);border:1px solid rgba(65,250,241,.5);color:var(--cyan);font-size:27px;font-weight:950}
+.intent-copy{flex:1;text-align:right;min-width:0}
+.intent-copy small{display:block;color:#9eafc5;font-size:17px;margin-bottom:6px}
+.intent-copy strong{display:block;color:#fff;font-size:25px;line-height:1.5;font-weight:850}
+.intent-tag{flex:none;padding:10px 14px;border-radius:12px;font-size:17px;font-weight:850;white-space:nowrap}
+.intent-tag.problem{color:#ffd28b;background:rgba(255,190,95,.12);border:1px solid rgba(255,190,95,.3)}
+.intent-tag.solution{color:#9edaff;background:rgba(90,180,255,.12);border:1px solid rgba(90,180,255,.3)}
+.intent-tag.buy{color:#8ef3df;background:rgba(65,250,200,.12);border:1px solid rgba(65,250,200,.3)}
+#questionScene{padding-top:245px}
+#questionScene .question-card{top:720px}
+#closingScene{top:330px}
+#closingScene .closing-title{font-size:66px}
+#closingScene .closing-copy{max-width:850px}
+#closingScene .next-episode{margin-top:48px}
+#octoWrap{top:1010px}
+@media(max-width:800px){.intent-list{left:70px;right:70px}.intent-row{gap:12px;padding:17px}.intent-copy strong{font-size:21px}.intent-tag{font-size:15px;padding:8px}}
+
+</style>
+</head>
+<body>
+<div id="stage">
+ <div id="grid"></div><div id="glow"></div>
+ <div class="brand"><i></i><span>octoopus.ir</span></div>
+
+ <section id="titleScene" class="scene">
+  <h1 class="episode-only"><span>قسمت دوم</span></h1>
+ </section>
+
+ <section id="ownerScene" class="scene">
+  <div class="kicker">این بار می‌خوایم بفهمیم...</div>
+  <h2 class="scene-title topic-head">مشتری‌ها دقیقاً<br><b>چی جست‌وجو می‌کنن؟</b></h2>
+  <p class="scene-sub">چون همیشه اسم محصولت رو جست‌وجو نمی‌کنن!</p>
+ </section>
+
+ <section id="resultsScene" class="scene">
+  <div class="kicker">از یه مثال شروع کنیم</div>
+  <h2 class="scene-title">فرض کن فروشگاه <b>کفش</b> داری</h2>
+  <p class="scene-sub">مشتری وارد گوگل می‌شه و فقط می‌نویسه: کفش</p>
+  <div class="visual query-demo">
+   <div class="browser">
+    <div class="browser-top"><i></i><i></i><i></i><span>google.com</span></div>
+    <div class="google-results">
+     <div class="google-word"><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span></div>
+     <div class="result-search">کفش</div>
+     <div class="autocomplete-list">
+      <div class="autocomplete-row">کفش پیاده‌روی</div>
+      <div class="autocomplete-row">کفش مناسب پیاده‌روی طولانی</div>
+      <div class="autocomplete-row">کفش طبی مردانه</div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <section id="siteScene" class="scene">
+  <div class="kicker">اما همه دنبال یه چیز نیستن</div>
+  <h2 class="scene-title">سه نفر، سه جست‌وجوی <b>متفاوت</b></h2>
+  <p class="scene-sub">ممکنه هر سه به یک محصول نیاز داشته باشن؛ اما از سه مسیر ذهنی متفاوت.</p>
+  <div class="intent-list">
+   <div class="intent-row" data-row="0">
+    <div class="intent-number">۱</div>
+    <div class="intent-copy"><small>جست‌وجوی اول</small><strong>چرا پاهام موقع پیاده‌روی درد می‌گیره؟</strong></div>
+    <div class="intent-tag problem">شناخت مشکل</div>
+   </div>
+   <div class="intent-row" data-row="1">
+    <div class="intent-number">۲</div>
+    <div class="intent-copy"><small>جست‌وجوی دوم</small><strong>بهترین کفش برای پیاده‌روی طولانی</strong></div>
+    <div class="intent-tag solution">پیدا کردن راه‌حل</div>
+   </div>
+   <div class="intent-row" data-row="2">
+    <div class="intent-number">۳</div>
+    <div class="intent-copy"><small>جست‌وجوی سوم</small><strong>خرید کفش پیاده‌روی مردانه</strong></div>
+    <div class="intent-tag buy">آماده‌تر برای خرید</div>
+   </div>
+  </div>
+ </section>
+
+ <section id="questionScene" class="scene">
+  <div class="kicker">نکته‌ای که باید یادت بمونه</div>
+  <h2 class="scene-title">فقط کلمه رو نبین؛<br><b>نیاز پشتش رو بفهم.</b></h2>
+  <div class="question-card">
+   <div class="q">این یعنی نیت جست‌وجو</div>
+   <div class="hint">برای تولید محتوا و ساخت صفحه‌های سایت، باید بدونی کاربر دنبال چه جواب یا راه‌حلیه.</div>
+  </div>
+ </section>
+
+ <section id="closingScene" class="scene">
+  <div class="closing-kicker">سئو از شناخت مشتری شروع می‌شه</div>
+  <h2 class="closing-title">اول نیازش رو بفهم؛<br><em>بعد کلمه رو انتخاب کن.</em></h2>
+  <p class="closing-copy">قرار نیست فقط کلمه‌های پرجست‌وجو رو هدف بگیریم؛ باید جواب درست رو به آدم درست برسونیم.</p>
+  <div class="next-episode"><small>قسمت بعدی</small><strong>کدوم کلمه <em>ارزش هدف‌گرفتن داره؟</em></strong></div>
+ </section>
+
+ <div class="bubble" id="speech">بذار یه مثال بزنم!</div>
+ <div id="octoWrap"><svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+      <g id="charInner">
+        <path id="Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+
+        <!-- چشم راست -->
+        <g id="eyeR">
+          <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilR">
+            <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- چشم چپ -->
+        <g id="eyeL">
+          <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilL">
+            <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- بازوها -->
+        <path id="legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+        <path id="legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+        <path id="legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+        <path id="legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+
+        <!-- دهان: سه حالت -->
+        <g id="mouth">
+          <g id="mSurprise" opacity="0">
+            <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+          </g>
+          <path id="mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+          <path id="mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+        </g>
+      </g>
+    </svg></div>
+ <div id="steps">
+  <div class="step" data-i="0"><i></i><span>جست‌وجو</span></div><div class="step-line"></div>
+  <div class="step" data-i="1"><i></i><span>نتایج گوگل</span></div><div class="step-line"></div>
+  <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
+ </div>
+</div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="46" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
+<script>
+(function(){
+ "use strict";
+ var DURATION=46, RENDER=new URLSearchParams(location.search).has("render");
+ var $=function(id){return document.getElementById(id)};
+ var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
+ var lerp=function(a,b,p){return a+(b-a)*p};
+ var prog=function(t,a,d){return clamp((t-a)/d,0,1)};
+ var expo=function(p){return p>=1?1:1-Math.pow(2,-10*p)};
+ var smooth=function(p){p=clamp(p,0,1);return p*p*p*(p*(p*6-15)+10)};
+ var back=function(p,s){return 1+(s+1)*Math.pow(p-1,3)+s*Math.pow(p-1,2)};
+ var scene=function(t,a,b,fade){return expo(prog(t,a,.42))*(1-prog(t,b-fade,fade))};
+ var scenes=[
+  ["titleScene",0,4.8,34],
+  ["ownerScene",4.55,10.1,42],
+  ["resultsScene",9.85,19.1,48],
+  ["siteScene",18.85,32.1,48],
+  ["questionScene",31.85,39.4,42],
+  ["closingScene",39.15,46,48]
+ ];
+ var poses=[
+  {t:1.55,x:-300,y:-80,s:.55},{t:4.8,x:-300,y:-80,s:.57},
+  {t:9.8,x:300,y:-80,s:.55},{t:10.7,x:300,y:-80,s:.57},
+  {t:18.8,x:-300,y:-80,s:.55},{t:19.6,x:-300,y:-80,s:.57},
+  {t:31.8,x:300,y:-80,s:.55},{t:32.7,x:300,y:-80,s:.57},
+  {t:39.1,x:300,y:70,s:.46},{t:46,x:300,y:70,s:.46}
+ ];
+ var eyes=[
+  {node:$("eyeL"),x:114.81,y:157.74,pupil:$("pupilL")},
+  {node:$("eyeR"),x:302.82,y:157.74,pupil:$("pupilR")}
+ ];
+ function sample(t){
+  if(t<=poses[0].t)return poses[0];
+  for(var i=0;i<poses.length-1;i++){
+   var a=poses[i],b=poses[i+1];
+   if(t<=b.t){var p=smooth(prog(t,a.t,b.t-a.t));return{x:lerp(a.x,b.x,p),y:lerp(a.y,b.y,p),s:lerp(a.s,b.s,p)};}
+  }
+  return poses[poses.length-1];
+ }
+ function blink(t){
+  var times=[2.65,4.25,6.8,9.2,12.8,16.4,20.2,23.8,27.6,30.7,34.5,37.8,41.8,44.3],sy=1;
+  for(var i=0;i<times.length;i++){var p=(t-times[i])/.16;if(p>0&&p<1)sy=Math.min(sy,1-.94*Math.sin(Math.PI*p));}
+  return sy;
+ }
+ function draw(input){
+  var t=clamp(Number(input)||0,0,DURATION);
+  $("grid").style.transform="translate3d("+Math.sin(t*.15)*13+"px,"+(-t*5)+"px,0)";
+  $("glow").style.transform="scale("+(1+Math.sin(t*.62)*.035)+")";
+  scenes.forEach(function(s){var el=$(s[0]),p=scene(t,s[1],s[2],.45);el.style.opacity=p;el.style.transform="translate3d(0,"+lerp(s[3],0,expo(prog(t,s[1],.58)))+"px,0)";});
+  var pose=sample(t),enter=back(prog(t,1.55,1.05),1.12);
+  var settle=prog(t,4.7,.42),squash=Math.sin(Math.PI*settle)*.05;
+  var breath=Math.sin((t-5)*1.5)*.004,floatY=Math.sin((t-5)*1.05)*1.8;
+  $("octoWrap").style.opacity=scene(t,1.5,DURATION,.5);
+  $("octoWrap").style.transform="translate3d("+pose.x+"px,"+(pose.y+floatY+lerp(165,0,enter))+"px,0) scale("+(pose.s*(1+breath+squash*.5))+","+(pose.s*(1+breath-squash))+")";
+  $("octoWrap").style.filter="drop-shadow(0 24px 32px rgba(0,0,0,.38)) drop-shadow(0 0 20px rgba(65,250,241,.10))";
+  var sy=blink(t),gaze=t<4.8?[0,0]:t<10.1?[.1,-.45]:t<19.1?[.7,-.28]:t<32.1?[-.6,-.12]:[0,0];
+  eyes.forEach(function(e){e.pupil.setAttribute("transform","translate("+(gaze[0]*8).toFixed(2)+" "+(gaze[1]*7).toFixed(2)+")");e.node.setAttribute("transform","translate("+e.x+" "+e.y+") scale(1 "+sy.toFixed(3)+") translate("+(-e.x)+" "+(-e.y)+")");});
+  var curious=t>=9.85&&t<19.1,surprised=t>=18.85&&t<32.1,sad=false;
+  $("mSurprise").style.opacity=surprised?1:0;$("mHappy").style.opacity=(curious||sad)?0:1;$("mSad").style.opacity=sad?1:0;
+  document.querySelectorAll(".autocomplete-row").forEach(function(n,i){
+   var p=back(prog(t,12.1+i*.62,.48),1.18),fade=1-prog(t,18.6,.35);
+   n.style.opacity=clamp(p*1.2)*fade;n.style.transform="translateY("+lerp(22,0,p)+"px)";
+  });
+  document.querySelectorAll(".intent-row").forEach(function(n,i){
+   var p=back(prog(t,19.6+i*3.05,.62),1.16),fade=1-prog(t,31.75,.35);
+   n.style.opacity=clamp(p*1.12)*fade;n.style.transform="translateY("+lerp(35,0,p)+"px) scale("+lerp(.98,1,p)+")";
+  });
+  var speechText="",speechStart=0,speechEnd=0;
+  if(t>=4.9&&t<9.9){speechText="بذار یه مثال بزنم!";speechStart=5.15;speechEnd=9.7;}
+  else if(t>=10.2&&t<18.7){speechText="فقط نوشته: کفش!";speechStart=10.45;speechEnd=18.45;}
+  else if(t>=19.1&&t<31.7){speechText="این سه تا یکی نیستن!";speechStart=19.35;speechEnd=31.45;}
+  else if(t>=32.1&&t<39){speechText="نیاز پشت جست‌وجو مهمه!";speechStart=32.35;speechEnd=38.8;}
+  $("speech").textContent=speechText;
+  var speechIn=back(prog(t,speechStart,.46),1.12),speechOut=prog(t,speechEnd-.35,.35);
+  $("speech").style.opacity=speechText?clamp(speechIn*1.2,0,1)*(1-speechOut):0;
+  $("speech").style.transform="translate(-50%,"+lerp(24,0,speechIn)+"px) scale("+lerp(.84,1,speechIn)+")";
+ }
+ function makeSfxWav(){
+  var sr=48000,frames=DURATION*sr,Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+  if(!Offline)throw new Error("مرورگر از ساخت WAV پشتیبانی نمی‌کند.");
+  var ctx=new Offline(2,frames,sr),master=ctx.createGain(),comp=ctx.createDynamicsCompressor();
+  master.gain.value=.82;comp.threshold.value=-12;comp.knee.value=18;comp.ratio.value=3;comp.attack.value=.004;comp.release.value=.18;master.connect(comp);comp.connect(ctx.destination);
+  function tone(t,d,f1,f2,a,type){var o=ctx.createOscillator(),g=ctx.createGain();o.type=type||"sine";o.frequency.setValueAtTime(f1,t);o.frequency.exponentialRampToValueAtTime(Math.max(1,f2),t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,a),t+Math.min(.025,d*.25));g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02);}
+  function noise(t,d,a,lo,hi){var n=Math.max(1,Math.floor(sr*d)),b=ctx.createBuffer(1,n,sr),v=b.getChannelData(0);for(var i=0;i<n;i++)v[i]=(Math.random()*2-1)*(1-i/n*.18);var s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=b;f.type="bandpass";f.frequency.setValueAtTime(lo,t);f.frequency.exponentialRampToValueAtTime(hi,t+d);f.Q.value=.7;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(a,t+Math.min(.1,d*.35));g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f);f.connect(g);g.connect(master);s.start(t);s.stop(t+d+.02);}
+  function whoosh(t,a){noise(t,.48,a,420,2400);tone(t+.18,.22,190,75,a*.7,"sine");}
+  function pop(t,a){tone(t,.13,760,390,.07*a,"sine");tone(t+.025,.09,1250,800,.035*a,"triangle");}
+  whoosh(.12,.105);pop(1.65,.8);
+  whoosh(4.62,.105);pop(5.08,.7);
+  whoosh(9.92,.11);pop(10.48,.72);
+  whoosh(18.92,.12);pop(19.62,.7);pop(22.65,.65);pop(25.7,.65);
+  whoosh(31.92,.1);tone(33.1,.3,430,300,.035,"triangle");
+  whoosh(39.22,.09);tone(39.8,.55,660,660,.035,"sine");tone(40.05,.65,880,880,.027,"sine");tone(40.35,.8,1100,1100,.022,"sine");
+  return ctx.startRendering().then(function(buffer){
+   var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
+   function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
+   str("RIFF");v.setUint32(p,36+bytes,true);p+=4;str("WAVE");str("fmt ");v.setUint32(p,16,true);p+=4;v.setUint16(p,1,true);p+=2;v.setUint16(p,channels,true);p+=2;v.setUint32(p,sr,true);p+=4;v.setUint32(p,sr*channels*2,true);p+=4;v.setUint16(p,channels*2,true);p+=2;v.setUint16(p,16,true);p+=2;str("data");v.setUint32(p,bytes,true);p+=4;
+   var ch=[];for(var c=0;c<channels;c++)ch.push(buffer.getChannelData(c));
+   for(var i=0;i<length;i++)for(var c=0;c<channels;c++){var x=clamp(ch[c][i],-1,1);v.setInt16(p,x<0?x*32768:x*32767,true);p+=2;}
+   return new Blob([ab],{type:"audio/wav"});
+  });
+ }
+ window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};window.__ready=false;
+ if(RENDER){$("controls").style.display="none";var q=new URLSearchParams(location.search).get("t");draw(q===null?0:parseFloat(q));document.fonts.ready.then(function(){window.__ready=true;});}
+ else{
+  var fit=1,playing=true,offset=0,t0=performance.now();
+  function resize(){fit=Math.min(innerWidth/1080,innerHeight/1920);$("stage").style.transform="scale("+fit+")";}
+  function tick(now){if(playing)offset=((now-t0)/1000)%DURATION;draw(offset);$("scrub").value=offset;$("time").textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick);}
+  $("play").onclick=function(){playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};
+  $("restart").onclick=function(){offset=0;t0=performance.now();};
+  $("scrub").oninput=function(){offset=parseFloat($("scrub").value);if(playing)t0=performance.now()-offset*1000;draw(offset);};
+  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-46s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
+  window.addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(function(){window.__ready=true;});
+ }
+})();
+</script>
+</body>
+</html>
