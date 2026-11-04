@@ -204,6 +204,19 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 #resultsScene .query-thought{left:600px;right:auto;top:775px;width:410px;min-height:112px;padding:20px 18px;border-radius:34px;background:transparent;box-shadow:none;font-size:25px;transform-origin:50% 100%}
 #resultsScene .query-thought i{left:52%;bottom:-25px;background:transparent}
 #resultsScene .query-thought b{left:55%;bottom:-43px;background:transparent}
+
+/* Scene 3: one heading with Octo, then three search phrases inside one shared box */
+#resultsScene{padding-top:235px}
+#resultsScene .kicker{margin-bottom:16px}
+#resultsScene .scene-title{font-size:66px;line-height:1.42}
+#resultsScene .scene-sub{display:none}
+#resultsScene .search-terms-box{position:absolute;top:650px;left:65px;width:505px;padding:18px 22px;border:1px solid rgba(180,232,238,.42);border-radius:24px;background:rgba(13,34,59,.94);box-shadow:0 18px 42px rgba(0,0,0,.24);direction:rtl;z-index:6}
+#resultsScene .search-term{min-height:100px;display:flex;align-items:center;gap:18px;padding:15px 8px;border-bottom:1px solid rgba(180,232,238,.18);opacity:0;transform:translate3d(28px,0,0);will-change:transform,opacity}
+#resultsScene .search-term:last-child{border-bottom:0}
+#resultsScene .search-term span{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1px solid rgba(65,250,241,.42);border-radius:50%;background:rgba(65,250,241,.1);color:var(--cyan);font-size:20px;font-weight:900}
+#resultsScene .search-term strong{color:#fff;font-size:23px;line-height:1.6;font-weight:850}
+@media(max-width:800px){#resultsScene .search-terms-box{left:35px;width:500px}#resultsScene .search-term strong{font-size:21px}}
+
 /* Episode 02 / scene 2: underwater explorer + Octo's thought */
 #ownerScene .kicker,#ownerScene .topic-head,#ownerScene .scene-sub{position:relative;z-index:4}
 #ownerScene .owner-diver{position:absolute;z-index:1;left:38px;top:845px;width:600px;height:320px;opacity:.82;pointer-events:none;animation:diverDrift 5.8s ease-in-out infinite;filter:drop-shadow(0 14px 28px rgba(0,0,0,.2))}
@@ -314,13 +327,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  <section id="resultsScene" class="scene">
   <div class="kicker">یک مثال ساده</div>
   <h2 class="scene-title">فرض کن فروشگاه <b>کفش</b> داری</h2>
-  <p class="scene-sub">مشتری‌ها ممکنه دنبال کفش باشن ولی در مسیرهای مختلف.</p>
-  <div class="query-popups" id="shoeQueries">
-   <div class="query-popup" data-query="0"><span class="query-mark">⌕</span><div><small>جست‌وجو از مسیرِ مشکل</small><strong>برای کمردرد چه کفشی خوبه؟</strong></div><i class="query-step">۱</i></div>
-   <div class="query-popup" data-query="1"><span class="query-mark">⌕</span><div><small>جست‌وجو برای شناخت راه‌حل</small><strong>انواع کفش طبی</strong></div><i class="query-step">۲</i></div>
-   <div class="query-popup" data-query="2"><span class="query-mark">⌕</span><div><small>جست‌وجوی مستقیم برای خرید</small><strong>خرید کفش</strong></div><i class="query-step">۳</i></div>
+  <div class="search-terms-box" id="shoeQueries">
+   <div class="search-term"><span>۱</span><strong>برای کمردرد چه کفشی خوبه؟</strong></div>
+   <div class="search-term"><span>۲</span><strong>انواع کفش طبی</strong></div>
+   <div class="search-term"><span>۳</span><strong>خرید کفش</strong></div>
   </div>
-  <div class="query-thought" id="queryThought"><span>پس همه‌ی اینا کفش می‌خوان؟!</span><i></i><b></b></div>
 
  </section>
 
@@ -393,11 +404,11 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   <div class="step" data-i="2"><i></i><span>ورود به سایت</span></div>
  </div>
 </div>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="32.6" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="20.4" step=".01" value="0"><span id="time">0.00s</span><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px"></span></div>
 <script>
 (function(){
  "use strict";
- var DURATION=32.6, RENDER=new URLSearchParams(location.search).has("render");
+ var DURATION=20.4, RENDER=new URLSearchParams(location.search).has("render");
  var $=function(id){return document.getElementById(id)};
  var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
  var lerp=function(a,b,p){return a+(b-a)*p};
@@ -409,7 +420,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  var scenes=[
   ["titleScene",0,4.8,34],
   ["ownerScene",4.55,10.1,42],
-  ["resultsScene",9.95,32.6,42]
+  ["resultsScene",9.95,20.4,42]
  ];
  var poses=[
   {t:1.55,x:-300,y:-80,s:.55},{t:4.8,x:-300,y:-80,s:.57},
@@ -459,15 +470,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
    var p=back(prog(t,19.6+i*3.05,.62),1.16),fade=1-prog(t,31.75,.35);
    n.style.opacity=clamp(p*1.12)*fade;n.style.transform="translateY("+lerp(35,0,p)+"px) scale("+lerp(.98,1,p)+")";
   });
-  var queryStarts=[13.75,17.55,21.35],queryEnds=[17.25,21.05,24.85];
-  document.querySelectorAll("#shoeQueries .query-popup").forEach(function(n,i){
-   var start=queryStarts[i],end=queryEnds[i],p=back(prog(t,start,.55),1.13),fade=1-prog(t,end-.3,.3);
-   n.style.opacity=t>=start&&t<end?clamp(p*1.08)*fade:0;
-   n.style.transform="translate3d("+lerp(35,0,p)+"px,0,0) scale("+lerp(.97,1,p)+")";
+  var queryStarts=[13.75,15.1,16.45];
+  document.querySelectorAll("#shoeQueries .search-term").forEach(function(n,i){
+   var p=back(prog(t,queryStarts[i],.48),1.12);
+   n.style.opacity=clamp(p);
+   n.style.transform="translate3d("+lerp(28,0,p)+"px,0,0)";
   });
-  var queryThought=$("queryThought"),thoughtPop=back(prog(t,25.25,.62),1.1),thoughtFade=1-prog(t,31.7,.35);
-  queryThought.style.opacity=t>=25.25&&t<32.1?clamp(thoughtPop*1.08)*thoughtFade:0;
-  queryThought.style.transform="translate3d(0,"+lerp(24,0,thoughtPop)+"px,0) scale("+lerp(.84,1,thoughtPop)+")";
   var speechText="",speechStart=0,speechEnd=0;
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
   thought.style.opacity=t>=4.8&&t<10.1?clamp(thoughtIn*1.12,0,1)*(1-thoughtOut):0;
@@ -492,9 +500,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   whoosh(4.62,.105);pop(5.08,.7);
   // ورود سکانس سوم و نمایش جست‌وجوها
   whoosh(10.02,.105);pop(10.62,.8);
-  pop(13.75,.72);pop(17.55,.72);pop(21.35,.72);
-  // حباب فکر اکتو، بالای سرش
-  pop(25.25,.72);pop(25.48,.42);
+  pop(13.75,.72);pop(15.1,.62);pop(16.45,.62);
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
@@ -513,7 +519,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   $("play").onclick=function(){playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};
   $("restart").onclick=function(){offset=0;t0=performance.now();};
   $("scrub").oninput=function(){offset=parseFloat($("scrub").value);if(playing)t0=performance.now()-offset*1000;draw(offset);};
-  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-32s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
+  $("exportSfx").onclick=function(){var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";makeSfxWav().then(function(blob){var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="octoopus-seo-episode-02-sfx-20s.wav";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);status.textContent="فایل آماده شد";}).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});};
   window.addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(function(){window.__ready=true;});
  }
 })();
