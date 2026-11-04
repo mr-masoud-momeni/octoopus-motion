@@ -545,7 +545,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   document.querySelectorAll(".journey-arrow").forEach(function(n,i){var p=back(prog(t,39.15+i*1.45,.42),1.08),fade=1-prog(t,43.45,.45);n.style.opacity=clamp(p,0,1)*fade;n.style.transform="translateY("+lerp(-14,0,p)+"px)";});
   var finalText="اگه فقط برای کسی محتوا بسازی که آماده خریده، بخش بزرگی از مشتری‌هات رو قبل از رسیدن به فروش از دست می‌دی.";
   var fp=prog(t,44.15,8.2),fcount=Math.floor(finalText.length*fp);
-  jf.innerHTML=t>=44.15?finalText.slice(0,fcount)+"<span class=\\"typed-cursor\\"></span>":"";
+  jf.innerHTML=t>=44.15?finalText.slice(0,fcount)+\'<span class="typed-cursor"></span>\':"";
   jf.style.opacity=t>=44.15?clamp(prog(t,44.15,.35),0,1):0;
   var speechText="",speechStart=0,speechEnd=0;
   var thought=$("thoughtCloud"),thoughtIn=back(prog(t,5.18,1.05),1.08),thoughtOut=prog(t,9.72-.38,.38);
@@ -571,7 +571,9 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
   whoosh(4.62,.105);pop(5.08,.7);
   // ورود سکانس سوم و نمایش جست‌وجوها
   whoosh(10.02,.105);pop(10.62,.8);
-  pop(14.9,.72);pop(17.9,.62);pop(20.9,.62);pop(23.65,.68);\n  whoosh(27.85,.13);pop(30.05,.82);\n  pop(33.55,.55);pop(38.55,.62);pop(40,.62);pop(41.45,.62);pop(42.05,.62);whoosh(44.15,.1);
+  pop(14.9,.72);pop(17.9,.62);pop(20.9,.62);pop(23.65,.68);
+  whoosh(27.85,.13);pop(30.05,.82);
+  pop(33.55,.55);pop(38.55,.62);pop(40,.62);pop(41.45,.62);pop(42.05,.62);whoosh(44.15,.1);
   return ctx.startRendering().then(function(buffer){
    var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
    function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
