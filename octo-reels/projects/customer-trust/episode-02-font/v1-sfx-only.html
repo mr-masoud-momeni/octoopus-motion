@@ -279,23 +279,64 @@ body{background:#030914;color:var(--cream);font-family:Vazirmatn,sans-serif;-web
  
   async function exportSfxWav(){
    const btn=$id("exportSfx"),status=$id("sfxStatus");if(!btn||btn.disabled)return;
-   btn.disabled=true;btn.textContent="در حال ساخت صدا…";status.textContent="لطفاً صبر کن";
+   btn.disabled=true;btn.textContent="در حال ساخت صدا…";status.textContent="در حال طراحی افکت‌های قوی‌تر";
    try{
-    const sr=44100,duration=DURATION+.5,ctx=new OfflineAudioContext(2,Math.ceil(sr*duration),sr),master=ctx.createGain();
-    master.gain.value=.82;master.connect(ctx.destination);
-    function tone(t,d,f1,f2,amp){const o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.setValueAtTime(f1,t);if(f2)o.frequency.linearRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,amp),t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02)}
-    function noise(t,d,amp,hp,lp){const n=Math.ceil(sr*d),b=ctx.createBuffer(1,n,sr),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=Math.random()*2-1;const src=ctx.createBufferSource(),hi=ctx.createBiquadFilter(),lo=ctx.createBiquadFilter(),g=ctx.createGain();src.buffer=b;hi.type="highpass";hi.frequency.value=hp;lo.type="lowpass";lo.frequency.value=lp;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(amp,t+.16);g.gain.setValueAtTime(amp,t+d*.48);g.gain.exponentialRampToValueAtTime(.0001,t+d);src.connect(hi);hi.connect(lo);lo.connect(g);g.connect(master);src.start(t);src.stop(t+d)}
+    const sr=44100,duration=DURATION+.8,ctx=new OfflineAudioContext(2,Math.ceil(sr*duration),sr);
+    const comp=ctx.createDynamicsCompressor();comp.threshold.value=-19;comp.knee.value=18;comp.ratio.value=4.5;comp.attack.value=.003;comp.release.value=.18;
+    const master=ctx.createGain();master.gain.value=.9;master.connect(comp);comp.connect(ctx.destination);
+    const env=(g,t,d,peak,attack=.008,release=.12)=>{g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.0002,peak),t+attack);g.gain.setValueAtTime(Math.max(.0002,peak),Math.max(t+attack,t+d-release));g.gain.exponentialRampToValueAtTime(.0001,t+d)};
+    function osc(t,d,f1,f2,amp,type="sine",attack=.008,release=.12){
+     const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(Math.max(20,f1),t);if(f2)o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),t+d);
+     env(g,t,d,amp,attack,release);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.025);
+    }
+    function filteredNoise(t,d,amp,hp,lp,from,to,attack=.025,release=.16){
+     const n=Math.max(1,Math.ceil(sr*d)),b=ctx.createBuffer(1,n,sr),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=Math.random()*2-1;
+     const src=ctx.createBufferSource(),hi=ctx.createBiquadFilter(),lo=ctx.createBiquadFilter(),g=ctx.createGain();
+     src.buffer=b;hi.type="highpass";hi.frequency.value=hp;lo.type="lowpass";lo.frequency.setValueAtTime(Math.max(80,from),t);lo.frequency.exponentialRampToValueAtTime(Math.max(80,to),t+d);
+     env(g,t,d,amp,attack,release);src.connect(hi);hi.connect(lo);lo.connect(g);g.connect(master);src.start(t);src.stop(t+d+.02);
+    }
+    function pop(t){
+     // Sharp transient + rounded low-end body + descending tonal knock.
+     filteredNoise(t,.075,.24,1700,9500,7200,2600,.002,.055);
+     osc(t,.22,980,310,.32,"sine",.002,.13);
+     osc(t,.16,145,58,.28,"sine",.002,.11);
+    }
+    function whoosh(t,d=.72){
+     filteredNoise(t,d,.31,180,9500,420,7600,.16,.19);
+     osc(t,.48,105,48,.16,"sine",.025,.28);
+     filteredNoise(t,.19,.11,2400,12000,9000,5200,.002,.16);
+    }
+    function sweep(t){
+     filteredNoise(t,.62,.34,120,11000,260,9800,.035,.2);
+     osc(t,.48,82,42,.2,"sine",.01,.25);
+     osc(t,.26,520,150,.11,"triangle",.004,.18);
+    }
+    function ding(t){
+     // Bell-like partials with a little attack and long, clean tail.
+     osc(t,.9,1046,1046,.2,"sine",.002,.72);
+     osc(t,.82,1568,1568,.12,"sine",.002,.68);
+     osc(t,.72,2093,2093,.055,"sine",.002,.62);
+    }
     for(const e of window.OCTO_EVENTS||[]){const t=Math.max(0,e.t);switch(e.name){
-     case "rise":tone(t,.85,170,89,.36);break;case "pop":tone(t,.24,720,720,.34);break;case "zap":tone(t,.32,1500,1212,.25);break;
-     case "tick":tone(t,.16,1500,1500,.22);break;case "click":tone(t,.08,2400,2400,.28);break;
-     case "ding":tone(t,.6,1046,1046,.15);tone(t,.6,1568,1568,.082);break;
-     case "whoosh":noise(t,.6,.12,320,6500);break;case "sweep":noise(t,.55,.15,180,9000);break;case "reveal":noise(t,.75,.10,500,7000);break;
+     case "rise":
+      osc(t,.82,95,235,.24,"sine",.025,.34);osc(t,.58,190,480,.10,"triangle",.02,.28);
+      filteredNoise(t,.72,.18,450,6500,850,5200,.08,.25);break;
+     case "pop":pop(t);break;
+     case "zap":
+      osc(t,.29,1280,125,.23,"sawtooth",.002,.19);filteredNoise(t,.2,.19,1300,10000,8200,2100,.002,.16);
+      osc(t,.32,72,48,.16,"sine",.002,.2);break;
+     case "tick":filteredNoise(t,.065,.2,2200,11000,9000,4800,.001,.05);osc(t,.07,1900,950,.12,"sine",.001,.05);break;
+     case "click":filteredNoise(t,.045,.24,2600,12000,11000,6500,.001,.035);osc(t,.055,1700,1100,.1,"triangle",.001,.04);break;
+     case "ding":ding(t);break;
+     case "whoosh":whoosh(t);break;
+     case "sweep":sweep(t);break;
+     case "reveal":whoosh(t,.9);ding(t+.16);break;
     }}
     const rendered=await ctx.startRendering(),channels=rendered.numberOfChannels,length=rendered.length,bytes=44+length*channels*2,buf=new ArrayBuffer(bytes),view=new DataView(buf);
     const write=(off,s)=>{for(let i=0;i<s.length;i++)view.setUint8(off+i,s.charCodeAt(i))};
     write(0,"RIFF");view.setUint32(4,bytes-8,true);write(8,"WAVE");write(12,"fmt ");view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,channels,true);view.setUint32(24,sr,true);view.setUint32(28,sr*channels*2,true);view.setUint16(32,channels*2,true);view.setUint16(34,16,true);write(36,"data");view.setUint32(40,length*channels*2,true);
     let p=44;for(let i=0;i<length;i++)for(let ch=0;ch<channels;ch++){const v=Math.max(-1,Math.min(1,rendered.getChannelData(ch)[i]));view.setInt16(p,v<0?v*32768:v*32767,true);p+=2}
-    const url=URL.createObjectURL(new Blob([buf],{type:"audio/wav"})),a=document.createElement("a");a.href=url;a.download="customer-trust-episode-02-font-sfx.wav";a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);status.textContent="فایل WAV آماده شد";
+    const url=URL.createObjectURL(new Blob([buf],{type:"audio/wav"})),a=document.createElement("a");a.href=url;a.download="customer-trust-episode-02-font-sfx.wav";a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);status.textContent="نسخه جدید WAV آماده شد";
    }catch(err){console.error(err);status.textContent="ساخت صدا ناموفق بود؛ کنسول را بررسی کن"}finally{btn.disabled=false;btn.textContent="دانلود افکت صدا"}
   }
  window.__ready=false;document.fonts.ready.then(()=>window.__ready=true);
