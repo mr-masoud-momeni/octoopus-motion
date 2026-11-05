@@ -332,18 +332,18 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
 .shoe-intent-number{width:56px;height:56px;flex:none;display:grid;place-items:center;border:1px solid rgba(65,250,241,.52);border-radius:16px;background:rgba(65,250,241,.1);color:var(--cyan);font-size:27px;font-weight:950}
 .shoe-intent strong{flex:1;color:#f4f7fb;font-size:29px;line-height:1.45;font-weight:850}
 .shoe-intent-line{position:absolute;right:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,transparent,rgba(65,250,241,.75));opacity:.65}
-.shoe-thought{position:absolute;z-index:8;left:50%;top:1080px;width:510px;min-height:102px;padding:22px 24px;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(180,232,238,.82);border-radius:38px;background:rgba(10,25,47,.88);box-shadow:0 12px 32px rgba(0,0,0,.22),0 0 25px rgba(65,250,241,.06);color:#f4f7fb;font-size:27px;font-weight:950;text-align:center;opacity:0;transform:translateY(24px) scale(.86);will-change:transform,opacity}
-.shoe-thought i,.shoe-thought b{position:absolute;display:block;border:1.5px solid rgba(180,232,238,.82);border-radius:50%;background:#0A192F}
-.shoe-thought i{width:17px;height:17px;left:calc(50% - 5px);bottom:-28px}
-.shoe-thought b{width:10px;height:10px;left:calc(50% + 8px);bottom:-47px}
-.shoe-thought span{position:relative;z-index:1}
+.shoe-volume{flex:none;min-width:142px;padding:10px 14px;border:1px solid rgba(65,250,241,.3);border-radius:16px;background:rgba(65,250,241,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;direction:rtl}
+.shoe-volume strong{color:var(--cyan);font-size:27px;line-height:1.3;font-weight:950;white-space:nowrap}
+.shoe-volume small{color:#b9d5d8;font-size:15px;line-height:1.4;white-space:nowrap}
 @media(max-width:800px){
  #resultsScene .shoe-scene-title{font-size:58px}
  #resultsScene .shoe-scene-sub{font-size:25px}
  .shoe-intent-list{left:65px;right:65px;top:610px;gap:16px}
  .shoe-intent{min-height:100px;padding:14px 18px;gap:14px}
  .shoe-intent strong{font-size:22px}
- .shoe-thought{width:490px;top:1095px;font-size:25px}
+ .shoe-volume{min-width:120px;padding:8px 10px}
+ .shoe-volume strong{font-size:23px}
+ .shoe-volume small{font-size:13px}
 }
 
 
@@ -395,13 +395,12 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
  <section id="resultsScene" class="scene">
   <div class="kicker">یک مثال ساده</div>
   <h2 class="scene-title shoe-scene-title">فرض کن یه فروشگاه <b>کفش</b> داری</h2>
-  <p class="scene-sub shoe-scene-sub">سه عبارت؛ اما ارزش یکسانی برای کسب‌وکار ندارن</p>
+  <p class="scene-sub shoe-scene-sub">اعداد جست‌وجو فرضی‌ان؛ اما تفاوت نیت کاربران واقعیه</p>
   <div class="shoe-intent-list" id="shoeQueries">
-   <div class="shoe-intent"><span class="shoe-intent-number">۱</span><div class="intent-copy"><strong>کفش</strong><small>جست‌وجوی زیاد؛ اما منظور کاربر دقیق نیست</small></div><span class="shoe-intent-line"></span></div>
-   <div class="shoe-intent"><span class="shoe-intent-number">۲</span><div class="intent-copy"><strong>بهترین کفش پیاده‌روی</strong><small>کاربر در حال بررسی و مقایسه است</small></div><span class="shoe-intent-line"></span></div>
-   <div class="shoe-intent"><span class="shoe-intent-number">۳</span><div class="intent-copy"><strong>خرید کفش پیاده‌روی مردانه</strong><small>قصد خرید، مشخص‌تر و نزدیک‌تر به اقدام</small></div><span class="shoe-intent-line"></span></div>
+   <div class="shoe-intent"><span class="shoe-intent-number">۱</span><div class="intent-copy"><strong>کفش</strong><small>جست‌وجوی زیاد؛ اما منظور کاربر دقیق نیست</small></div><div class="shoe-volume"><strong>۱۲٬۰۰۰</strong><small>جست‌وجو در ماه</small></div><span class="shoe-intent-line"></span></div>
+   <div class="shoe-intent"><span class="shoe-intent-number">۲</span><div class="intent-copy"><strong>بهترین کفش پیاده‌روی</strong><small>کاربر در حال بررسی و مقایسه است</small></div><div class="shoe-volume"><strong>۱٬۶۰۰</strong><small>جست‌وجو در ماه</small></div><span class="shoe-intent-line"></span></div>
+   <div class="shoe-intent"><span class="shoe-intent-number">۳</span><div class="intent-copy"><strong>خرید کفش پیاده‌روی مردانه</strong><small>قصد خرید، مشخص‌تر و نزدیک‌تر به اقدام</small></div><div class="shoe-volume"><strong>۴۵۰</strong><small>جست‌وجو در ماه</small></div><span class="shoe-intent-line"></span></div>
   </div>
-  <div class="shoe-thought" id="shoeThought"><span>پس پربازدیدترین کلمه همیشه بهترین نیست؟!</span><i></i><b></b></div>
  </section>
 
  <section id="journeyScene" class="scene">
@@ -563,9 +562,6 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
    n.style.opacity=clamp(p,0,1);
    n.style.transform="translate3d("+lerp(0,0,p)+","+lerp(36,0,p)+"px,0) scale("+lerp(.97,1,p)+")";
   });
-  var shoeThought=$("shoeThought"),thoughtP=back(prog(t,23.65,.72),1.1),thoughtFade=1-prog(t,24.65,.3);
-  shoeThought.style.opacity=t>=23.65?clamp(thoughtP*1.12,0,1)*thoughtFade:0;
-  shoeThought.style.transform="translate3d(0,"+lerp(24,0,thoughtP)+"px,0) scale("+lerp(.86,1,thoughtP)+")";
   // سکانس چهارم: سؤال اکتو، نریشن تایپی، مسیر سه‌مرحله‌ای و جمله پایانی
   var jq=$("journeyQuestion"),jn=$("journeyNarration"),jf=$("journeyFinal");
   var jqIn=back(prog(t,26.4,.5),1.08),jqOut=prog(t,29.7,.38);
