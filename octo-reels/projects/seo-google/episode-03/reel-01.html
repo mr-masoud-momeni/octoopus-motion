@@ -549,7 +549,7 @@ body{background:#030914;color:var(--white);font-family:Vazirmatn,sans-serif;-web
    n.style.opacity=clamp(p,0,1);
    n.style.transform="translate3d("+lerp(0,0,p)+","+lerp(36,0,p)+"px,0) scale("+lerp(.97,1,p)+")";
   });
-  var shoeThought=$("shoeThought"),thoughtP=back(prog(t,23.65,.72),1.1),thoughtFade=0;
+  var shoeThought=$("shoeThought"),thoughtP=back(prog(t,23.65,.72),1.1),thoughtFade=1-prog(t,24.65,.3);
   shoeThought.style.opacity=t>=23.65?clamp(thoughtP*1.12,0,1)*thoughtFade:0;
   shoeThought.style.transform="translate3d(0,"+lerp(24,0,thoughtP)+"px,0) scale("+lerp(.86,1,thoughtP)+")";
   // سکانس چهارم: سؤال اکتو، نریشن تایپی، مسیر سه‌مرحله‌ای و جمله پایانی
