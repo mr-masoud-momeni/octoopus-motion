@@ -200,7 +200,14 @@ var smooth=p=>{p=clamp(p,0,1);return p*p*(3-2*p)};
 var lerp=(a,b,p)=>a+(b-a)*p;
 var enter=(el,t,a,d,y)=>{var p=smooth((t-a)/d);el.style.opacity=p;el.style.transform="translateY("+(y*(1-p))+"px)"};
 var fade=(el,t,a,b)=>{el.style.opacity=smooth((t-a)/.3)*(1-smooth((t-b)/.3))};
-var typeText=(el,text,t,start,duration,caret)=>{var p=clamp((t-start)/duration,0,1),n=Math.floor(p*Array.from(text).length);el.textContent=Array.from(text).slice(0,n).join("");if(caret&&p<1)el.innerHTML=el.textContent+'<i class="question-caret"></i>'};
+var typedProgress=new WeakMap();
+function typeTap(el,n){
+ if(RENDER)return;
+ var prev=typedProgress.get(el)||0;
+ if(n<prev){typedProgress.set(el,n);return;}
+ if(n-prev>=2){typedProgress.set(el,n);playSfx("type");}
+}
+var typeText=(el,text,t,start,duration,caret)=>{var p=clamp((t-start)/duration,0,1),n=Math.floor(p*Array.from(text).length);typeTap(el,n);el.textContent=Array.from(text).slice(0,n).join("");if(caret&&p<1)el.innerHTML=el.textContent+'<i class="question-caret"></i>'};
 function typeInto(el,text,t,start,duration,accent=[]){
  var chars=Array.from(text),p=clamp((t-start)/duration,0,1),n=Math.floor(p*chars.length);
  var value=chars.slice(0,n).join("");
@@ -262,8 +269,8 @@ function playSfx(name){
   if(audioCtx.state==="suspended")audioCtx.resume();
   var now=audioCtx.currentTime,osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
   osc.connect(gain);gain.connect(audioCtx.destination);
-  var freq={rise:190,pop:880,zap:1800,tick:1750,click:2600,ding:1046}[name]||520;
-  var dur={rise:.95,pop:.28,zap:.38,tick:.18,click:.1,ding:.72,sweep:.62,whoosh:.68}[name]||.25;
+  var freq={rise:190,pop:880,zap:1800,tick:1750,click:2600,ding:1046,type:1250}[name]||520;
+  var dur={rise:.95,pop:.28,zap:.38,tick:.18,click:.1,ding:.72,sweep:.62,whoosh:.68,type:.045}[name]||.25;
   if(name==="sweep"||name==="whoosh"){
    var n=Math.floor(audioCtx.sampleRate*dur),buf=audioCtx.createBuffer(1,n,audioCtx.sampleRate),data=buf.getChannelData(0);
    for(var i=0;i<n;i++)data[i]=(Math.random()*2-1)*(i/n<.2?i/n/.2:Math.max(0,1-(i/n-.2)/.8));
@@ -275,7 +282,7 @@ function playSfx(name){
   else if(name==="zap"){osc.frequency.setValueAtTime(1800,now);osc.frequency.linearRampToValueAtTime(750,now+dur)}
   else if(name==="ding"){osc.frequency.setValueAtTime(1046,now);osc.frequency.setValueAtTime(1568,now+.12)}
   else osc.frequency.setValueAtTime(freq,now);
-  gain.gain.setValueAtTime(.0001,now);gain.gain.linearRampToValueAtTime(name==="ding"?.16:.2,now+.008);gain.gain.exponentialRampToValueAtTime(.0001,now+dur);
+  gain.gain.setValueAtTime(.0001,now);gain.gain.linearRampToValueAtTime(name==="type"?.045:(name==="ding"?.16:.2),now+.004);gain.gain.exponentialRampToValueAtTime(.0001,now+dur);
   osc.start(now);osc.stop(now+dur);
  }catch(e){}
 }
