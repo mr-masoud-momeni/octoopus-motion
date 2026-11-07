@@ -42,7 +42,8 @@ const HTML_FILE = rel(flag("html", "index.html"));
 const AUDIO_FILE = flag("audio", null);
 const MUSIC_FILE = flag("music", null);
 const TIMING_FILE = flag("timing", null);
-const SFX_ON = argv.includes("--sfx");
+const MUX_AUDIO = argv.includes("--mux-audio");
+const SFX_ON = MUX_AUDIO && argv.includes("--sfx");
 const MUX_ONLY = argv.includes("--mux-only");
 const DUMP_TIMELINE = argv.includes("--dump-timeline");
 
@@ -303,7 +304,7 @@ if (mode === "stills") {
     }
   }
 
-  if (AUDIO_FILE || MUSIC_FILE || sfxFile) {
+  if (MUX_AUDIO && (AUDIO_FILE || MUSIC_FILE || sfxFile)) {
     const args = ["-y", "-i", silentFile];
     let idx = 0;
     if (AUDIO_FILE) { args.push("-i", rel(AUDIO_FILE)); idx++; }
