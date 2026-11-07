@@ -6,64 +6,64 @@
 <title>اُکتوپوس | چرا رتبه داری ولی کلیک نمی‌گیری؟</title>
 <link rel="stylesheet" href="../../../template/fonts.css">
 <style>
-:root{--bg:#071426;--panel:#10243d;--cyan:#41faf1;--white:#f4f7fb;--muted:#aebdd0;--ink:#172b46;--blue:#1759ad}
+:root{--bg:#071426;--panel:#10243d;--cyan:#41faf1;--white:#f4f7fb;--muted:#b7c5d7;--ink:#172b46;--blue:#1759ad}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;height:100%;overflow:hidden;background:#030914}
 body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:antialiased}
-#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;transform-origin:center;background:linear-gradient(160deg,#0b1d34 0%,#071426 58%,#030914 100%);isolation:isolate}
-#stage:before{content:"";position:absolute;width:900px;height:900px;border-radius:50%;background:#12304b;filter:blur(100px);opacity:.45;left:90px;top:520px}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;transform-origin:center;background:linear-gradient(155deg,#0b1d34 0%,#071426 58%,#030914 100%);isolation:isolate}
+#stage:before{content:"";position:absolute;width:850px;height:850px;border-radius:50%;background:#12304b;filter:blur(110px);opacity:.35;left:110px;top:500px;pointer-events:none}
 .brand{position:absolute;top:58px;left:0;right:0;text-align:center;direction:ltr;font:800 23px/1 system-ui,sans-serif;letter-spacing:.12em;color:#9eafc3;opacity:.65;z-index:20}
 .brand:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cyan);margin-right:12px;box-shadow:0 0 16px var(--cyan)}
 .scene{position:absolute;inset:0;opacity:0;pointer-events:none}
-.copy{position:absolute;left:78px;right:78px;text-align:center;font-size:55px;line-height:1.7;font-weight:950;letter-spacing:-.025em}
-.copy em{font-style:normal;color:var(--cyan)}
-.small{font-size:29px;line-height:1.8;font-weight:650;color:#c4d1e0}
-#introCopy{top:255px}
-#introCopy .small{margin-top:22px}
-#octo{position:absolute;left:50%;top:920px;width:430px;margin-left:-215px;opacity:0;transform:translateY(160px) scale(.9);filter:drop-shadow(0 28px 35px #0007)}
-.octo-body{fill:#41FAF1}.octo-ring{fill:#000}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
-#searchScene{padding:0 70px}
-#searchCaption{position:absolute;top:235px;left:65px;right:65px;text-align:center;font-size:48px;line-height:1.7;font-weight:950}
-#searchCaption em{font-style:normal;color:var(--cyan)}
-.browser{position:absolute;top:500px;left:65px;right:65px;height:960px;border-radius:30px;background:#f7f9fc;overflow:hidden;box-shadow:0 35px 90px #0007;border:5px solid #263b56}
-.browserbar{height:54px;background:#e8edf3;display:flex;align-items:center;gap:10px;padding:0 20px;direction:ltr}
-.browserbar i{width:12px;height:12px;border-radius:50%;background:#ef6b64}.browserbar i:nth-child(2){background:#f4c35c}.browserbar i:nth-child(3){background:#62c987}
-.address{margin-left:12px;flex:1;border-radius:8px;background:white;color:#8390a0;padding:7px 14px;font:14px Arial}
-.searchcontent{padding:30px 42px;color:var(--ink)}
-.google{font:700 43px/1 Arial,sans-serif;text-align:center;direction:ltr;margin-bottom:22px;letter-spacing:-2px}
-.google b:nth-child(1){color:#4285f4}.google b:nth-child(2){color:#ea4335}.google b:nth-child(3){color:#fbbc05}.google b:nth-child(4){color:#4285f4}.google b:nth-child(5){color:#34a853}.google b:nth-child(6){color:#ea4335}
-.query{height:62px;border:1px solid #d9e0e9;border-radius:32px;padding:16px 24px;font-size:22px;color:#45546a;box-shadow:0 2px 9px #0001}
-.result{position:relative;margin-top:28px;padding:23px 18px 25px;border-radius:12px;opacity:0;transform:translateY(20px);border:2px solid transparent}
-.result .url{direction:ltr;text-align:left;color:#68798d;font:16px Arial,sans-serif}
-.result h3{font-size:29px;line-height:1.65;color:var(--blue);font-weight:750;margin:9px 0}
-.result p{font-size:20px;line-height:1.75;color:#4e5c6e}
-.rank{position:absolute;left:18px;top:20px;background:#e9eef5;color:#44566d;border-radius:20px;padding:6px 13px;font-size:16px;font-weight:900}
-#result2{margin-top:12px}
-#result2 h3{color:#1759ad}
-#result1.focus{border-color:#f0c77b;background:#fffaf0}
-#result2.focus{border-color:#27b8ad;background:#effcf9}
-.pointer{position:absolute;left:180px;top:1130px;width:54px;height:70px;z-index:5;opacity:0;filter:drop-shadow(0 5px 4px #0006)}
-.pointer svg{width:100%;height:100%}
-#choiceText{position:absolute;top:1510px;left:80px;right:80px;text-align:center;font-size:38px;line-height:1.7;font-weight:900;opacity:0}
-#editScene{padding:0 75px}
-#editCaption{position:absolute;top:235px;left:70px;right:70px;text-align:center;font-size:48px;line-height:1.7;font-weight:950}
-#editCaption em{font-style:normal;color:var(--cyan)}
-.editor{position:absolute;top:580px;left:70px;right:70px;border-radius:26px;background:#f5f7fa;color:#172b46;overflow:hidden;box-shadow:0 32px 75px #0006;opacity:0;transform:translateY(30px)}
-.editorHead{height:68px;background:#e7edf4;padding:19px 28px;font-size:20px;color:#64758b;font-weight:800}
-.editorBody{padding:42px 38px 48px}
-.fieldLabel{font-size:19px;color:#718096;font-weight:800;margin-bottom:18px}
-.oldTitle{font-size:31px;line-height:1.65;color:#68788d;text-decoration:line-through;min-height:100px}
-.newTitle{font-size:38px;line-height:1.8;color:#1759ad;font-weight:850;min-height:150px;margin-top:28px}
-.caret{display:inline-block;width:4px;height:1em;background:#1759ad;vertical-align:-.12em;margin-right:5px;animation:blink .7s steps(2,start) infinite}
+.kicker{position:absolute;top:220px;left:80px;right:80px;text-align:center;color:var(--muted);font-size:29px;font-weight:750;letter-spacing:.02em}
+.headline{position:absolute;top:330px;left:75px;right:75px;text-align:center;font-size:63px;line-height:1.75;font-weight:950;letter-spacing:-.03em}
+.headline em,.cyan{font-style:normal;color:var(--cyan)}
+.subline{position:absolute;top:670px;left:110px;right:110px;text-align:center;color:#c5d2e1;font-size:34px;line-height:1.8;font-weight:650}
+.problem-card{position:absolute;top:900px;left:105px;right:105px;background:#f5f8fc;color:var(--ink);border-radius:28px;padding:32px 38px 40px;box-shadow:0 32px 90px #0008;opacity:0;transform:translateY(38px)}
+.problem-top{display:flex;align-items:center;justify-content:space-between;color:#68798d;font-size:20px;font-weight:800}
+.google-mark{font:800 27px Arial,sans-serif;direction:ltr}
+.google-mark b:nth-child(1){color:#4285f4}.google-mark b:nth-child(2){color:#ea4335}.google-mark b:nth-child(3){color:#fbbc05}.google-mark b:nth-child(4){color:#4285f4}.google-mark b:nth-child(5){color:#34a853}.google-mark b:nth-child(6){color:#ea4335}
+.problem-url{direction:ltr;text-align:left;color:#68798d;font:18px Arial,sans-serif;margin-top:28px}
+.problem-title{font-size:37px;line-height:1.65;color:#1759ad;font-weight:850;margin:12px 0}
+.problem-desc{font-size:23px;line-height:1.8;color:#526176}
+.problem-stats{display:flex;justify-content:space-between;align-items:center;margin-top:30px;padding-top:24px;border-top:1px solid #dce4ed;font-size:23px;font-weight:850}
+.zero{color:#c44747;font-size:27px}
+#problemAlert{position:absolute;top:1470px;left:90px;right:90px;text-align:center;font-size:36px;line-height:1.8;font-weight:900;opacity:0}
+#questionScene{display:flex;align-items:center;justify-content:center}
+.question-wrap{width:100%;padding:0 95px;text-align:center}
+.question-label{font-size:29px;color:var(--muted);font-weight:750;margin-bottom:38px;opacity:0}
+.question{font-size:66px;line-height:1.8;font-weight:950;min-height:240px}
+.question .typed{color:var(--cyan)}
+.question-caret{display:inline-block;width:5px;height:1em;background:var(--cyan);vertical-align:-.12em;margin-right:7px;animation:blink .7s steps(2,start) infinite}
 @keyframes blink{to{visibility:hidden}}
-.rule{height:1px;background:#dce3eb;margin:25px 0}
-.meta{font-size:23px;line-height:1.8;color:#506178}
-#editNote{position:absolute;top:1450px;left:85px;right:85px;text-align:center;font-size:34px;line-height:1.8;font-weight:900;opacity:0}
-#endScene .endCopy{position:absolute;top:290px;left:75px;right:75px;text-align:center;font-size:58px;line-height:1.75;font-weight:1000;opacity:0}
-#endScene .endCopy em{font-style:normal;color:var(--cyan)}
-#endScene .endSmall{position:absolute;top:600px;left:110px;right:110px;text-align:center;font-size:28px;line-height:1.8;color:#c2d0df;opacity:0}
-#endScene #octoEnd{position:absolute;left:50%;top:850px;width:400px;margin-left:-200px;opacity:0;transform:translateY(90px)}
-#endScene .endBrand{position:absolute;top:1410px;left:0;right:0;text-align:center;font:900 42px/1.4 system-ui,sans-serif;letter-spacing:.1em;color:var(--cyan);opacity:0}
+#choiceScene{padding:0 75px}
+.choice-intro{position:absolute;top:225px;left:80px;right:80px;text-align:center;font-size:43px;line-height:1.7;font-weight:900}
+.choice-intro em{font-style:normal;color:var(--cyan)}
+.choice-card{position:absolute;left:92px;right:92px;min-height:300px;border-radius:26px;padding:38px 42px;background:#f5f8fc;color:var(--ink);box-shadow:0 24px 65px #0005;opacity:0;transform:translateY(30px);border:4px solid transparent}
+#choiceA{top:570px}#choiceB{top:990px}
+.choice-tag{font-size:20px;color:#68798d;font-weight:850;margin-bottom:24px}
+.choice-title{font-size:39px;line-height:1.8;font-weight:900;color:#1759ad}
+.choice-desc{font-size:22px;color:#637187;margin-top:15px}
+.choice-card.selected{border-color:#20b9ae;background:#effdfa;box-shadow:0 0 0 8px #41faf122,0 25px 70px #0006}
+.choice-card.rejected{border-color:#e7bd75;background:#fffaf0}
+.cursor{position:absolute;z-index:5;width:62px;height:76px;opacity:0;filter:drop-shadow(0 7px 5px #0007);left:760px;top:850px}
+.cursor svg{width:100%;height:100%}
+#choiceVerdict{position:absolute;top:1450px;left:80px;right:80px;text-align:center;font-size:36px;line-height:1.8;font-weight:900;opacity:0}
+#reasonsScene{padding:0 90px}
+.reasons-head{position:absolute;top:225px;left:80px;right:80px;text-align:center;font-size:53px;line-height:1.7;font-weight:950}
+.reasons-head em{font-style:normal;color:var(--cyan)}
+.reasons-lead{position:absolute;top:390px;left:100px;right:100px;text-align:center;color:#bdcada;font-size:29px}
+.reason{position:absolute;left:105px;right:105px;min-height:165px;border:2px solid #25435c;background:linear-gradient(110deg,#10243d,#0c1d32);border-radius:22px;display:flex;align-items:center;gap:28px;padding:25px 34px;opacity:0;transform:translateX(-35px)}
+#reason1{top:590px}#reason2{top:820px}#reason3{top:1050px}
+.reason-num{width:72px;height:72px;flex:0 0 72px;border-radius:50%;display:grid;place-items:center;background:#173d51;color:var(--cyan);font:900 30px system-ui}
+.reason-text{font-size:39px;line-height:1.6;font-weight:900}
+.reason-text small{display:block;font-size:23px;line-height:1.7;color:#aebdd0;font-weight:600;margin-top:3px}
+.reason-note{position:absolute;top:1320px;left:105px;right:105px;text-align:center;font-size:28px;line-height:1.8;color:#b8c7d8;opacity:0}
+#endScene .end-main{position:absolute;top:460px;left:75px;right:75px;text-align:center;font-size:65px;line-height:1.8;font-weight:1000;opacity:0}
+#endScene .end-main em{font-style:normal;color:var(--cyan)}
+#endScene .end-sub{position:absolute;top:900px;left:100px;right:100px;text-align:center;font-size:31px;line-height:1.8;color:#c1cfdf;opacity:0}
+.end-line{position:absolute;top:1160px;left:190px;right:190px;height:3px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0)}
+#endScene .end-brand{position:absolute;top:1270px;left:0;right:0;text-align:center;font:900 43px/1.4 system-ui,sans-serif;letter-spacing:.1em;color:var(--cyan);opacity:0}
 #controls{position:fixed;z-index:1000;left:0;right:0;bottom:0;display:flex;align-items:center;gap:16px;padding:18px 24px;background:rgba(5,12,24,.97);border-top:1px solid rgba(65,250,241,.25);font:18px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
 #controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.4);border-radius:12px;padding:13px 20px;font:inherit;cursor:pointer}
 #scrub{flex:1;accent-color:var(--cyan);height:14px}#time{min-width:90px;text-align:center}
@@ -71,132 +71,48 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 </head>
 <body>
 <div id="stage">
- <div class="brand">OCTOOPUS</div>
- <section id="introScene" class="scene">
-  <div id="introCopy" class="copy">من دنبال یه کفش<br><em>راحت می‌گردم.</em><div class="small">پس می‌رم سراغ گوگل.</div></div>
-  <svg id="octo" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
-      <g id="hook-charInner">
-        <path id="hook-Head" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
-
-        <!-- چشم راست -->
-        <g id="hook-eyeR">
-          <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
-          <g id="hook-pupilR">
-            <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
-            <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
-            <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
-          </g>
-        </g>
-
-        <!-- چشم چپ -->
-        <g id="hook-eyeL">
-          <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
-          <g id="hook-pupilL">
-            <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
-            <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
-            <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
-          </g>
-        </g>
-
-        <!-- بازوها -->
-        <path id="hook-legRL" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
-        <path id="hook-legRM" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
-        <path id="hook-legLM" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
-        <path id="hook-legLL" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
-
-        <!-- دهان: سه حالت -->
-        <g id="hook-mouth">
-          <g id="hook-mSurprise" opacity="0">
-            <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
-          </g>
-          <path id="hook-mHappy" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
-          <path id="hook-mSad" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
-          <path id="hook-mThinking" d="M198 280 Q211 274 225 280" fill="none" stroke="#03080f" stroke-width="5" stroke-linecap="round" opacity="0"/>
-        </g>
-      </g>
-    </svg>
- </section>
- <section id="searchScene" class="scene">
-  <div id="searchCaption">دو نتیجه می‌بینم؛<br><em>کدوم رو باز می‌کنم؟</em></div>
-  <div class="browser">
-   <div class="browserbar"><i></i><i></i><i></i><div class="address">google.com/search</div></div>
-   <div class="searchcontent">
-    <div class="google"><b>G</b><b>o</b><b>o</b><b>g</b><b>l</b><b>e</b></div>
-    <div class="query">خرید کفش پیاده‌روی مردانه</div>
-    <div class="result" id="result1">
-     <span class="rank">رتبه ۱</span><div class="url">example.com › blog</div>
-     <h3>راهنمای خرید کفش پیاده‌روی</h3><p>در این مقاله با نکات مهم انتخاب کفش پیاده‌روی آشنا شوید.</p>
-    </div>
-    <div class="result" id="result2">
-     <div class="url">shoe-guide.ir › راهنمای خرید</div>
-     <h3>قبل از خرید کفش پیاده‌روی، این ۵ نکته رو بدون!</h3>
-     <p>از زیره تا قالب؛ چیزهایی که قبل از خرید باید بررسی کنی.</p>
-    </div>
-   </div>
-  </div>
-  <div class="pointer" id="pointer"><svg viewBox="0 0 60 70"><path d="M7 4 L7 55 L21 42 L31 64 L42 59 L31 37 L51 35 Z" fill="#fff" stroke="#0a192f" stroke-width="4" stroke-linejoin="round"/></svg></div>
-  <div id="choiceText">با اینکه اولی رتبهٔ یکه،<br><em>من دومی رو انتخاب می‌کنم.</em></div>
- </section>
- <section id="editScene" class="scene">
-  <div id="editCaption">حالا برمی‌گردم و<br><em>عنوان صفحه‌م رو بهتر می‌کنم.</em></div>
-  <div class="editor" id="editor">
-   <div class="editorHead">ویرایش عنوان صفحه</div>
-   <div class="editorBody">
-    <div class="fieldLabel">عنوان فعلی</div><div class="oldTitle">راهنمای خرید کفش پیاده‌روی</div>
-    <div class="rule"></div>
-    <div class="fieldLabel">عنوان پیشنهادی</div><div class="newTitle" id="typedTitle"></div>
-    <div class="rule"></div><div class="meta">توضیح کوتاه: راهنمای انتخاب کفش مناسب برای پیاده‌روی طولانی؛ از زیره و قالب تا راحتی پا.</div>
-   </div>
-  </div>
-  <div id="editNote">عنوان خوب، فقط موضوع رو نمی‌گه؛<br><em>دلیل انتخاب رو هم روشن می‌کنه.</em></div>
- </section>
- <section id="endScene" class="scene">
-  <div class="endCopy" id="endCopy">رتبه باعث دیده‌شدنه؛<br><em>عنوان خوب، دلیل کلیکه.</em></div>
-  <div class="endSmall" id="endSmall">عنوان و توضیحات نتیجه، اولین برخورد مشتری با صفحهٔ تو هستن.</div>
-  <div id="octoEnd"><svg id="octo-end" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
-      <g id="hook-charInner-end">
-        <path id="hook-Head-end" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
-
-        <!-- چشم راست -->
-        <g id="hook-eyeR-end">
-          <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
-          <g id="hook-pupilR-end">
-            <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
-            <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
-            <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
-          </g>
-        </g>
-
-        <!-- چشم چپ -->
-        <g id="hook-eyeL-end">
-          <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
-          <g id="hook-pupilL-end">
-            <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
-            <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
-            <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
-          </g>
-        </g>
-
-        <!-- بازوها -->
-        <path id="hook-legRL-end" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
-        <path id="hook-legRM-end" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
-        <path id="hook-legLM-end" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
-        <path id="hook-legLL-end" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
-
-        <!-- دهان: سه حالت -->
-        <g id="hook-mouth-end">
-          <g id="hook-mSurprise-end" opacity="0">
-            <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
-          </g>
-          <path id="hook-mHappy-end" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
-          <path id="hook-mSad-end" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
-          <path id="hook-mThinking-end" d="M198 280 Q211 274 225 280" fill="none" stroke="#03080f" stroke-width="5" stroke-linecap="round" opacity="0"/>
-        </g>
-      </g>
-    </svg></div>
-  <div class="endBrand" id="endBrand">OCTOOPUS</div>
- </section>
- <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="30" step=".01" value="0"><span id="time">0.00s</span></div>
+<div class="brand">OCTOOPUS</div>
+<section id="problemScene" class="scene">
+ <div class="kicker">مشکل خیلی از سایت‌ها اینجاست...</div>
+ <div class="headline" id="problemHeadline">رتبه‌ی خوبی داری؛<br><em>اما کلیک نمی‌گیری؟</em></div>
+ <div class="subline" id="problemSub">کاربر نتیجه‌ات رو می‌بینه،<br>ولی از کنارش رد می‌شه.</div>
+ <div class="problem-card" id="problemCard">
+  <div class="problem-top"><span>نتیجه‌ی جست‌وجوی گوگل</span><span class="google-mark"><b>G</b><b>o</b><b>o</b><b>g</b><b>l</b><b>e</b></span></div>
+  <div class="problem-url">yourstore.ir › blog</div>
+  <div class="problem-title">راهنمای خرید کفش پیاده‌روی</div>
+  <div class="problem-desc">در این مطلب با نکات مهم انتخاب کفش پیاده‌روی آشنا شوید.</div>
+  <div class="problem-stats"><span>جایگاه در نتایج: <strong>۱</strong></span><span class="zero">کلیک: ۰</span></div>
+ </div>
+ <div id="problemAlert">رتبه‌ی یک؛<em class="cyan"> بدون کلیک!</em></div>
+</section>
+<section id="questionScene" class="scene">
+ <div class="question-wrap">
+  <div class="question-label" id="questionLabel">حالا خودت رو جای کاربر بذار...</div>
+  <div class="question" id="questionText"></div>
+ </div>
+</section>
+<section id="choiceScene" class="scene">
+ <div class="choice-intro" id="choiceIntro">فرض کن دنبال کفش پیاده‌روی هستی؛<br><em>کدوم عنوان نظرت رو جلب می‌کنه؟</em></div>
+ <div class="choice-card" id="choiceA"><div class="choice-tag">عنوان اول</div><div class="choice-title">راهنمای خرید کفش پیاده‌روی</div><div class="choice-desc">یک عنوان کلی و معمولی</div></div>
+ <div class="choice-card" id="choiceB"><div class="choice-tag">عنوان دوم</div><div class="choice-title">قبل از خرید کفش پیاده‌روی، این ۵ نکته رو بدون!</div><div class="choice-desc">وعده‌ای مشخص برای تصمیم بهتر</div></div>
+ <div class="cursor" id="cursor"><svg viewBox="0 0 60 76"><path d="M7 4 L7 59 L22 44 L34 69 L46 63 L34 39 L55 37 Z" fill="#fff" stroke="#071426" stroke-width="4" stroke-linejoin="round"/></svg></div>
+ <div id="choiceVerdict">من دومی رو انتخاب می‌کنم.</div>
+</section>
+<section id="reasonsScene" class="scene">
+ <div class="reasons-head" id="reasonsHead">یک عنوان خوب باید<br><em>سه کار انجام بده:</em></div>
+ <div class="reasons-lead" id="reasonsLead">نه با کلمات پیچیده؛ با یک دلیل روشن برای کلیک.</div>
+ <div class="reason" id="reason1"><div class="reason-num">۱</div><div class="reason-text">جذاب و کنجکاوی‌برانگیز<small>توجه کاربر رو جلب کنه و او رو به خواندن ترغیب کنه.</small></div></div>
+ <div class="reason" id="reason2"><div class="reason-num">۲</div><div class="reason-text">روشن و مشخص<small>کاربر بفهمه دقیقاً قراره چه چیزی به دست بیاره.</small></div></div>
+ <div class="reason" id="reason3"><div class="reason-num">۳</div><div class="reason-text">مرتبط و قابل‌اعتماد<small>وعده‌ای بده که محتوای صفحه واقعاً بهش عمل کنه.</small></div></div>
+ <div class="reason-note" id="reasonNote">کنجکاوی خوبه؛ ابهامِ گیج‌کننده نه.</div>
+</section>
+<section id="endScene" class="scene">
+ <div class="end-main" id="endMain">رتبه تو رو<br><em>دیده می‌کنه؛</em><br>عنوانت انتخابت می‌کنه.</div>
+ <div class="end-sub" id="endSub">برای کلیک گرفتن، فقط بالا بودن کافی نیست.</div>
+ <div class="end-line" id="endLine"></div>
+ <div class="end-brand" id="endBrand">OCTOOPUS</div>
+</section>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="30" step=".01" value="0"><span id="time">0.00s</span></div>
 </div>
 <script>
 (function(){
@@ -206,36 +122,41 @@ var $=id=>document.getElementById(id),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 var smooth=p=>{p=clamp(p,0,1);return p*p*(3-2*p)};
 var lerp=(a,b,p)=>a+(b-a)*p;
 var enter=(el,t,a,d,y)=>{var p=smooth((t-a)/d);el.style.opacity=p;el.style.transform="translateY("+(y*(1-p))+"px)"};
-var fade=(el,t,a,b)=>{el.style.opacity=smooth((t-a)/.35)*(1-smooth((t-b)/.35))};
-var title="قبل از خرید کفش پیاده‌روی، این ۵ نکته رو بدون!";
+var fade=(el,t,a,b)=>{el.style.opacity=smooth((t-a)/.3)*(1-smooth((t-b)/.3))};
+var typeText=(el,text,t,start,duration,caret)=>{var p=clamp((t-start)/duration,0,1),n=Math.floor(p*Array.from(text).length);el.textContent=Array.from(text).slice(0,n).join("");if(caret&&p<1)el.innerHTML=el.textContent+'<i class="question-caret"></i>'};
 function draw(input){
  var t=clamp(Number(input)||0,0,DURATION);
- [["introScene",0,5.2],["searchScene",4.9,17.5],["editScene",17.2,25.4],["endScene",25.1,30]].forEach(s=>fade($(s[0]),t,s[1],s[2]));
- enter($("introCopy"),t,.35,.55,24);
- enter($("octo"),t,.65,.8,100);
- enter($("searchCaption"),t,5.0,.45,22);
- enter($("searchScene").querySelector(".browser"),t,5.55,.6,35);
- enter($("result1"),t,6.45,.5,18);
- enter($("result2"),t,8.0,.5,18);
- // Hold on the first result, then let the viewer's pointer choose the second.
- var p=$("pointer"),pp=smooth((t-9.0)/1.15);p.style.opacity=smooth((t-8.7)/.3)*(1-smooth((t-11.4)/.3));p.style.transform="translate("+ (lerp(730,300,pp))+"px,"+(lerp(300,0,pp))+"px)";
- $("result1").classList.toggle("focus",t>8.65&&t<9.65);
- $("result2").classList.toggle("focus",t>=10.15&&t<12.5);
- enter($("choiceText"),t,12.0,.45,18);
- enter($("editCaption"),t,17.35,.45,22);
- enter($("editor"),t,18.0,.55,30);
- var n=Math.floor(clamp((t-19.35)/2.5,0,1)*Array.from(title).length);
- $("typedTitle").textContent=Array.from(title).slice(0,n).join("");
- if(t>=19.35&&n<Array.from(title).length)$("typedTitle").innerHTML=$("typedTitle").textContent+'<i class="caret"></i>';
- enter($("editNote"),t,22.6,.5,16);
- enter($("endCopy"),t,25.35,.5,20);
- enter($("endSmall"),t,26.0,.5,18);
- enter($("octoEnd"),t,26.55,.65,70);
- enter($("endBrand"),t,28.25,.45,12);
+ [["problemScene",0,6.1],["questionScene",5.8,10.3],["choiceScene",10.0,19.0],["reasonsScene",18.7,26.1],["endScene",25.8,30]].forEach(s=>fade($(s[0]),t,s[1],s[2]));
+ enter($("problemHeadline"),t,.45,.5,22);
+ enter($("problemSub"),t,1.25,.45,18);
+ enter($("problemCard"),t,2.0,.6,34);
+ enter($("problemAlert"),t,4.55,.45,16);
+ enter($("questionLabel"),t,6.1,.4,14);
+ typeText($("questionText"),"شما بین این دو عنوان کدوم رو کلیک می‌کنید؟",t,6.65,2.5,true);
+ enter($("choiceIntro"),t,10.25,.45,18);
+ enter($("choiceA"),t,11.0,.55,28);
+ enter($("choiceB"),t,12.0,.55,28);
+ var cursor=$("cursor"),p1=smooth((t-13.0)/.8),p2=smooth((t-15.2)/.8);
+ cursor.style.opacity=smooth((t-12.8)/.25)*(1-smooth((t-17.0)/.25));
+ cursor.style.transform="translate("+lerp(180,180,p1)+"px,"+lerp(-30,0,p1)+"px)";
+ if(t>=13.75&&t<15.45)$("choiceA").classList.add("rejected");else $("choiceA").classList.remove("rejected");
+ if(t>=15.6)$("choiceB").classList.add("selected");else $("choiceB").classList.remove("selected");
+ cursor.style.left=(t<15.2?"760px":"250px");cursor.style.top=(t<15.2?"810px":"1240px");
+ enter($("choiceVerdict"),t,16.25,.45,15);
+ enter($("reasonsHead"),t,19.0,.45,20);
+ enter($("reasonsLead"),t,19.7,.4,14);
+ enter($("reason1"),t,20.25,.45,22);
+ enter($("reason2"),t,21.55,.45,22);
+ enter($("reason3"),t,22.85,.45,22);
+ enter($("reasonNote"),t,24.45,.4,14);
+ enter($("endMain"),t,26.0,.55,24);
+ enter($("endSub"),t,27.2,.45,15);
+ $("endLine").style.transform="scaleX("+smooth((t-27.8)/.7)+")";
+ enter($("endBrand"),t,28.45,.45,12);
 }
-window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[
-{name:"rise",t:.6},{name:"pop",t:2.3},{name:"whoosh",t:5.4},{name:"tick",t:6.5},{name:"tick",t:8.1},{name:"click",t:10.4},{name:"whoosh",t:17.4},{name:"type",t:19.4},{name:"ding",t:28.5}
-];window.__ready=false;
+window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
+window.OCTO_EVENTS=[{name:"rise",t:1.9},{name:"tick",t:2.1},{name:"pop",t:4.6},{name:"whoosh",t:6.0},{name:"type",t:6.7},{name:"whoosh",t:10.2},{name:"tick",t:11.1},{name:"tick",t:12.1},{name:"click",t:15.6},{name:"type",t:19.0},{name:"pop",t:20.3},{name:"pop",t:21.6},{name:"pop",t:22.9},{name:"ding",t:28.5}];
+window.__ready=false;
 if(RENDER){$("controls").style.display="none";var q=new URLSearchParams(location.search).get("t");draw(q===null?0:parseFloat(q));document.fonts.ready.then(()=>window.__ready=true)}
 else{var playing=true,offset=0,t0=performance.now(),fit=1;function resize(){fit=Math.min(innerWidth/1080,innerHeight/1920);$("stage").style.transform="scale("+fit+")"}function tick(now){if(playing)offset=((now-t0)/1000)%DURATION;draw(offset);$("scrub").value=offset;$("time").textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)}$("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000};$("restart").onclick=()=>{offset=0;t0=performance.now()};$("scrub").oninput=function(){offset=+this.value;if(playing)t0=performance.now()-offset*1000;draw(offset)};addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(()=>window.__ready=true)}
 })();
