@@ -136,12 +136,12 @@ function draw(input){
  enter($("choiceIntro"),t,10.25,.45,18);
  enter($("choiceA"),t,11.0,.55,28);
  enter($("choiceB"),t,12.0,.55,28);
- var cursor=$("cursor"),p1=smooth((t-13.0)/.8),p2=smooth((t-15.2)/.8);
+ var cursor=$("cursor"),p1=smooth((t-13.0)/.8),p2=smooth((t-14.7)/.9);
  cursor.style.opacity=smooth((t-12.8)/.25)*(1-smooth((t-17.0)/.25));
- cursor.style.transform="translate("+lerp(180,180,p1)+"px,"+lerp(-30,0,p1)+"px)";
+ var cx=lerp(760,650,p1),cy=lerp(810,650,p1);cx=lerp(cx,440,p2);cy=lerp(cy,1080,p2);
+ cursor.style.left=cx+"px";cursor.style.top=cy+"px";
  if(t>=13.75&&t<15.45)$("choiceA").classList.add("rejected");else $("choiceA").classList.remove("rejected");
  if(t>=15.6)$("choiceB").classList.add("selected");else $("choiceB").classList.remove("selected");
- cursor.style.left=(t<15.2?"760px":"250px");cursor.style.top=(t<15.2?"810px":"1240px");
  enter($("choiceVerdict"),t,16.25,.45,15);
  enter($("reasonsHead"),t,19.0,.45,20);
  enter($("reasonsLead"),t,19.7,.4,14);
