@@ -33,7 +33,7 @@ const W = 1080, H = 1920;
 const FPS = parseInt(flag("fps", "30"), 10);
 const PORT = 9333 + Math.floor(Math.random() * 400);
 const mode = argv.includes("--stills") ? "stills" : "video";
-const FAST = argv.includes("--fast");            // فریم‌های JPEG → رندر سریع‌تر
+const FAST = !argv.includes("--png");             // JPEG پیش‌فرض برای رندر سریع‌تر
 const EXT = FAST ? "jpg" : "png";
 
 // مسیرهای کمکی (نسبت به پوشهٔ template)
@@ -233,9 +233,9 @@ if (mode === "stills") {
 } else {
   const framesDir = join(outDir, "frames");
   const outFile = join(outDir, flag("out", "octo-template.mp4"));
-  const silentFile = (AUDIO_FILE || MUSIC_FILE || SFX_ON)
-    ? join(outDir, ".silent.mp4")
-    : outFile;
+  const silentFile = join(outDir, ".silent.mp4");
+  const silentOutFile = outFile.replace(/\.mp4$/i, "-no-sfx.mp4");
+  const sfxOutFile = outFile.replace(/\.mp4$/i, "-with-sfx.mp4");
 
   if (MUX_ONLY) {
     if (!existsSync(silentFile)) {
@@ -266,7 +266,7 @@ if (mode === "stills") {
       if (!files.includes(name)) { bad.push(f); continue; }
       try {
         const st = await stat(join(framesDir, name));
-        if (st.size < 5000) bad.push(f);
+        if (st.size < 1000) bad.push(f);
       } catch { bad.push(f); }
     }
     if (bad.length) {
@@ -279,11 +279,13 @@ if (mode === "stills") {
     await runFfmpeg([
       "-y", "-framerate", String(FPS),
       "-i", join(framesDir, `f%04d.${EXT}`),
-      "-c:v", "libx264", "-preset", "slow", "-crf", "17",
+      "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
       "-pix_fmt", "yuv420p", "-movflags", "+faststart",
       silentFile,
     ]);
-    console.log("video:", silentFile);
+    // خروجی اول: ویدئوی بدون صدا
+    await import("node:fs/promises").then(({ copyFile }) => copyFile(silentFile, silentOutFile));
+    console.log("video (no sfx):", silentOutFile);
   }
 
   // ---------- صدا ----------
@@ -348,11 +350,11 @@ if (mode === "stills") {
     if (chains.length) args.push("-filter_complex", chains.join(";"));
     args.push("-map", "0:v", "-map", audioLabel,
       "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
-      "-shortest", outFile);
+      "-shortest", sfxOutFile);
     await runFfmpeg(args);
     if (silentFile !== outFile) await rm(silentFile, { force: true });
     if (sfxFile) await rm(sfxFile, { force: true });
-    console.log("audio mixed:", outFile);
+    console.log("video (with sfx):", sfxOutFile);
   }
 }
 
