@@ -210,6 +210,7 @@ function typeTap(el,n){
 var typeText=(el,text,t,start,duration,caret)=>{var p=clamp((t-start)/duration,0,1),n=Math.floor(p*Array.from(text).length);typeTap(el,n);el.textContent=Array.from(text).slice(0,n).join("");if(caret&&p<1)el.innerHTML=el.textContent+'<i class="question-caret"></i>'};
 function typeInto(el,text,t,start,duration,accent=[]){
  var chars=Array.from(text),p=clamp((t-start)/duration,0,1),n=Math.floor(p*chars.length);
+ typeTap(el,n);
  var value=chars.slice(0,n).join("");
  var safe=value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
  accent.forEach(function(word){safe=safe.split(word).join('<span class="cyan">'+word+'</span>');});
@@ -261,16 +262,29 @@ function draw(input){
  $("endOcto").style.transform="translateY("+ (430*(1-smooth((t-28.35)/.8))) +"px) scale(.9)";
 }
 
-var audioCtx=null,sfxEnabled=true,lastSfxTime=0;
+var audioCtx=null,sfxEnabled=true,lastSfxTime=0,lastTypeTapAt=0;
 function playSfx(name){
  if(!sfxEnabled)return;
  try{
   audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
   if(audioCtx.state==="suspended")audioCtx.resume();
-  var now=audioCtx.currentTime,osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+  var now=audioCtx.currentTime;
+  if(name==="type"){
+   var wallNow=performance.now();
+   if(wallNow-lastTypeTapAt<78)return;
+   lastTypeTapAt=wallNow;
+   var length=Math.floor(audioCtx.sampleRate*.022),buffer=audioCtx.createBuffer(1,length,audioCtx.sampleRate),data=buffer.getChannelData(0);
+   for(var i=0;i<length;i++){var env=1-i/length;data[i]=(Math.random()*2-1)*env*env;}
+   var src=audioCtx.createBufferSource(),filter=audioCtx.createBiquadFilter(),tapGain=audioCtx.createGain();
+   src.buffer=buffer;filter.type="bandpass";filter.frequency.value=1450;filter.Q.value=.75;
+   src.connect(filter);filter.connect(tapGain);tapGain.connect(audioCtx.destination);
+   tapGain.gain.setValueAtTime(.0001,now);tapGain.gain.linearRampToValueAtTime(.032,now+.002);tapGain.gain.exponentialRampToValueAtTime(.0001,now+.024);
+   src.start(now);src.stop(now+.025);return;
+  }
+  var osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
   osc.connect(gain);gain.connect(audioCtx.destination);
-  var freq={rise:190,pop:880,zap:1800,tick:1750,click:2600,ding:1046,type:1250}[name]||520;
-  var dur={rise:.95,pop:.28,zap:.38,tick:.18,click:.1,ding:.72,sweep:.62,whoosh:.68,type:.045}[name]||.25;
+  var freq={rise:190,pop:880,zap:1800,tick:1750,click:2600,ding:1046}[name]||520;
+  var dur={rise:.95,pop:.28,zap:.38,tick:.18,click:.1,ding:.72,sweep:.62,whoosh:.68}[name]||.25;
   if(name==="sweep"||name==="whoosh"){
    var n=Math.floor(audioCtx.sampleRate*dur),buf=audioCtx.createBuffer(1,n,audioCtx.sampleRate),data=buf.getChannelData(0);
    for(var i=0;i<n;i++)data[i]=(Math.random()*2-1)*(i/n<.2?i/n/.2:Math.max(0,1-(i/n-.2)/.8));
@@ -282,7 +296,7 @@ function playSfx(name){
   else if(name==="zap"){osc.frequency.setValueAtTime(1800,now);osc.frequency.linearRampToValueAtTime(750,now+dur)}
   else if(name==="ding"){osc.frequency.setValueAtTime(1046,now);osc.frequency.setValueAtTime(1568,now+.12)}
   else osc.frequency.setValueAtTime(freq,now);
-  gain.gain.setValueAtTime(.0001,now);gain.gain.linearRampToValueAtTime(name==="type"?.045:(name==="ding"?.16:.2),now+.004);gain.gain.exponentialRampToValueAtTime(.0001,now+dur);
+  gain.gain.setValueAtTime(.0001,now);gain.gain.linearRampToValueAtTime(name==="ding"?.16:.2,now+.004);gain.gain.exponentialRampToValueAtTime(.0001,now+dur);
   osc.start(now);osc.stop(now+dur);
  }catch(e){}
 }
@@ -339,7 +353,7 @@ if(!RENDER){
 }
 
 window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
-window.OCTO_EVENTS=[{name:"rise",t:2.3},{name:"tick",t:2.5},{name:"pop",t:5.5},{name:"sweep",t:6.8},{name:"whoosh",t:7.2},{name:"zap",t:8.0},{name:"whoosh",t:12.2},{name:"tick",t:13.3},{name:"tick",t:14.5},{name:"click",t:18.7},{name:"zap",t:22.8},{name:"pop",t:24.4},{name:"pop",t:25.9},{name:"pop",t:27.5},{name:"ding",t:34.2}];
+window.OCTO_EVENTS=[{name:"rise",t:2.3},{name:"pop",t:5.5},{name:"sweep",t:6.8},{name:"whoosh",t:7.2},{name:"zap",t:8.0},{name:"whoosh",t:12.2},{name:"click",t:18.7},{name:"zap",t:22.8},{name:"pop",t:24.4},{name:"pop",t:25.9},{name:"pop",t:27.5},{name:"ding",t:34.2}];
 window.__ready=false;
 if(RENDER){$("controls").style.display="none";var q=new URLSearchParams(location.search).get("t");draw(q===null?0:parseFloat(q));document.fonts.ready.then(()=>window.__ready=true)}
 else{var playing=true,offset=0,t0=performance.now(),fit=1;function resize(){fit=Math.min(innerWidth/1080,innerHeight/1920);$("stage").style.transform="scale("+fit+")"}function tick(now){var prev=offset;if(playing){offset=((now-t0)/1000)%DURATION;if(offset<prev)lastSfxTime=0;window.OCTO_EVENTS.forEach(function(ev){if(ev.t>lastSfxTime&&ev.t<=offset)playSfx(ev.name)});lastSfxTime=offset}draw(offset);$("scrub").value=offset;$("time").textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick)}$("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing){t0=performance.now()-offset*1000;lastSfxTime=offset}};$("restart").onclick=()=>{offset=0;lastSfxTime=0;t0=performance.now()};$("scrub").oninput=function(){offset=+this.value;lastSfxTime=offset;if(playing)t0=performance.now()-offset*1000;draw(offset)};$("sfxToggle").onclick=function(){audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume();sfxEnabled=!sfxEnabled;this.textContent="SFX: "+(sfxEnabled?"ON":"OFF")};addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(()=>window.__ready=true)}
