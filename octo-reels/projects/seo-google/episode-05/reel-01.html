@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اُکتوپوس | وقتی گوگل حالش از یه صفحه به هم می‌خوره!</title>
+<link rel="stylesheet" href="../../../template/fonts.css">
+<style>
+:root{--bg:#071426;--panel:#10243d;--cyan:#41faf1;--white:#f4f7fb;--muted:#b7c5d7;--red:#ff6477;--green:#7df2c4}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#030914}
+body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;margin:-960px 0 0 -540px;overflow:hidden;transform-origin:center;background:radial-gradient(90% 70% at 50% 62%,#153653 0%,#071426 58%,#030914 100%);isolation:isolate}
+#stage:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(65,250,241,.12) 2px,transparent 2px);background-size:68px 68px;opacity:.3;mask-image:radial-gradient(70% 60% at 50% 52%,#000,transparent)}
+#stage:after{content:"";position:absolute;width:900px;height:900px;left:90px;top:480px;border-radius:50%;background:#123b52;filter:blur(130px);opacity:.22;pointer-events:none}
+.brand{position:absolute;top:62px;left:0;right:0;text-align:center;direction:ltr;font:800 24px/1 system-ui,sans-serif;letter-spacing:.12em;color:#9eafc3;opacity:.72;z-index:20}
+.brand:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cyan);margin-right:12px;box-shadow:0 0 16px var(--cyan)}
+.scene{position:absolute;inset:0;opacity:0;pointer-events:none;z-index:2}
+.scene-title{position:absolute;top:210px;left:75px;right:75px;text-align:center;font-size:68px;line-height:1.55;font-weight:1000;letter-spacing:-.04em;text-shadow:0 10px 32px #0008}
+.scene-title em{font-style:normal;color:var(--cyan)}
+.type-caret{display:inline-block;width:5px;height:.95em;background:var(--cyan);vertical-align:-.08em;margin-right:7px;animation:blink .7s steps(2,start) infinite}
+@keyframes blink{to{visibility:hidden}}
+.octo{position:absolute;width:420px;height:466px;left:330px;top:1050px;opacity:0;filter:drop-shadow(0 18px 25px #0007) drop-shadow(0 0 18px #41faf122);z-index:5}
+.octo svg{width:100%;height:100%;overflow:visible}
+.octo-body{fill:#41faf1}.octo-ring{fill:#071426}.octo-pupil{fill:#03080f}.octo-shine{fill:#fff}
+#hookOcto{top:1120px;transform:translateY(80px) rotate(-5deg)}
+#endOcto{top:1120px;transform:translateY(450px)}
+.sick-bubble{position:absolute;top:1040px;left:690px;width:120px;height:120px;border-radius:50%;display:grid;place-items:center;background:#caff9c;color:#153c39;font-size:70px;box-shadow:0 0 45px #9cf7a566;opacity:0;transform:scale(.2) rotate(-25deg);z-index:6}
+#hookCaption{position:absolute;top:750px;left:65px;right:65px;text-align:center;font-size:84px;line-height:1.55;font-weight:1000;opacity:0}
+#hookCaption em{font-style:normal;color:var(--cyan)}
+#hookCaption small{display:block;font-size:29px;color:#c2d1df;margin-top:22px;font-weight:700}
+.scene2-title{top:185px;font-size:61px}
+.aquarium{position:absolute;top:470px;left:74px;right:74px;height:1050px;border:3px solid #41faf155;border-radius:42px;background:linear-gradient(155deg,#0c2b43dd,#07182bdd);box-shadow:0 28px 90px #0007,inset 0 0 70px #41faf10b;overflow:hidden}
+.aquarium:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,#41faf11b,transparent 58%);pointer-events:none}
+.tank-label{position:absolute;top:36px;left:45px;right:45px;text-align:center;color:#b6c8d9;font-size:25px;font-weight:850;letter-spacing:.01em}
+.tank-label strong{color:var(--cyan)}
+.seaweed{position:absolute;bottom:-15px;left:28px;font-size:100px;opacity:.65;transform:rotate(-12deg)}
+.seaweed.right{left:auto;right:25px;transform:rotate(12deg)}
+.page-list{position:absolute;top:150px;left:55px;right:55px;display:flex;flex-direction:column;gap:22px}
+.page-row{height:142px;border-radius:24px;background:linear-gradient(110deg,#f4f8fb,#dce8ef);color:#16324c;display:flex;align-items:center;padding:18px 25px;gap:20px;box-shadow:0 12px 25px #0003;opacity:0;transform:translateY(25px)}
+.page-row .page-icon{font-size:53px;width:76px;flex:none;text-align:center;filter:drop-shadow(0 5px 4px #0002)}
+.page-row .page-copy{flex:1;text-align:right}
+.page-row .page-copy strong{display:block;font-size:32px;line-height:1.5;font-weight:1000}
+.page-row .page-copy small{display:block;font-size:20px;color:#62758a;margin-top:4px}
+.stamp{width:74px;height:74px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:43px;font-weight:1000;opacity:0;transform:scale(.2) rotate(-25deg)}
+.approved .stamp{background:#d7fff0;color:#098d67;border:4px solid #20ba8c}
+.rejected{border:4px solid #ff697b;background:linear-gradient(110deg,#fff4f4,#f9e3e6)}
+.rejected .stamp{background:#ffe1e5;color:#d52d4b;border:4px solid #ef5b72}
+.crab-guard{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-size:72px;opacity:0}
+.guard-sign{position:absolute;bottom:55px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:10px 24px;border:2px solid #ff7383;border-radius:15px;background:#421f35;color:#ffe5e8;font-size:23px;font-weight:900;opacity:0}
+.bubbles{position:absolute;inset:0;pointer-events:none}
+.bubbles i{position:absolute;width:15px;height:15px;border:2px solid #9efaf2aa;border-radius:50%;animation:float 4s ease-in-out infinite}
+.bubbles i:nth-child(1){left:8%;top:20%}.bubbles i:nth-child(2){left:90%;top:34%;animation-delay:-1.2s}.bubbles i:nth-child(3){left:15%;top:72%;animation-delay:-2.2s}.bubbles i:nth-child(4){left:82%;top:80%;animation-delay:-.6s}
+@keyframes float{50%{transform:translateY(-30px);opacity:.4}}
+.scene3-title{top:155px;font-size:61px}
+.reason-stack{position:absolute;top:420px;left:78px;right:78px;display:flex;flex-direction:column;gap:22px}
+.reason-card{min-height:250px;display:flex;align-items:center;gap:24px;padding:26px 30px;border:2px solid #2b5268;border-radius:28px;background:linear-gradient(115deg,#102b43ed,#0a1d32f2);box-shadow:0 20px 45px #0005;opacity:0;transform:translateX(45px)}
+.creature{width:116px;height:116px;flex:none;border-radius:34px;background:#173e53;display:grid;place-items:center;font-size:72px;box-shadow:inset 0 0 0 2px #41faf144}
+.reason-copy{flex:1;text-align:right}
+.reason-copy strong{display:block;font-size:39px;line-height:1.5;font-weight:1000;color:#fff}
+.reason-copy p{font-size:24px;line-height:1.7;color:#b8c8d8;margin-top:8px}
+.reason-copy strong em{font-style:normal;color:var(--cyan)}
+.reason-foot{position:absolute;top:1515px;left:95px;right:95px;text-align:center;font-size:27px;color:#b7c9d9;opacity:0}
+.scene4-title{top:390px;font-size:74px;min-height:330px}
+.scene4-title small{display:block;font-size:29px;line-height:1.8;color:#c4d2df;margin-top:28px;font-weight:700}
+#controls{position:fixed;z-index:1000;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;padding:16px 22px;background:rgba(5,12,24,.97);border-top:1px solid rgba(65,250,241,.25);font:16px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
+#controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.4);border-radius:11px;padding:11px 17px;font:inherit;cursor:pointer}
+#scrub{flex:1;accent-color:var(--cyan);height:12px}#time{min-width:82px;text-align:center}
+</style></head>
+<body><div id="stage"><div class="brand">OCTOOPUS</div>
+<section id="scene1" class="scene">
+ <div id="hookCaption"><span id="hookLine"></span><small>گوگل با همه صفحه‌ها مهربون نیست! 🤢</small></div>
+ <div class="octo" id="hookOcto"><svg class="octo-rig" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+      <g id="charInner-start">
+        <path id="Head-start" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+
+        <!-- چشم راست -->
+        <g id="eyeR-start">
+          <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilR-start">
+            <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- چشم چپ -->
+        <g id="eyeL-start">
+          <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilL-start">
+            <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- بازوها -->
+        <path id="legRL-start" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+        <path id="legRM-start" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+        <path id="legLM-start" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+        <path id="legLL-start" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+
+        <!-- دهان: سه حالت -->
+        <g id="mouth-start">
+          <g id="mSurprise-start" opacity="0">
+            <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+          </g>
+          <path id="mHappy-start" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+          <path id="mSad-start" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+          <path id="mThinking-start" d="M198 280 Q211 274 225 280" fill="none" stroke="#03080f" stroke-width="5" stroke-linecap="round" opacity="0"/>
+        </g>
+      </g>
+    </svg></div><div class="sick-bubble" id="sickBubble">🤢</div>
+</section>
+<section id="scene2" class="scene">
+ <div class="scene-title scene2-title"><span id="listHeading"></span></div>
+ <div class="aquarium">
+  <div class="tank-label">آکواریوم <strong>VIP گوگل</strong> · فقط صفحه‌های منتخب 🫧</div>
+  <div class="bubbles"><i></i><i></i><i></i><i></i></div>
+  <div class="page-list">
+   <div class="page-row approved" id="page1"><div class="page-icon">🐠</div><div class="page-copy"><strong><span id="pageText1"></span></strong><small>محتوای مفید و کامل</small></div><div class="stamp">✓</div></div>
+   <div class="page-row approved" id="page2"><div class="page-icon">🪼</div><div class="page-copy"><strong><span id="pageText2"></span></strong><small>پاسخ متفاوت و کاربردی</small></div><div class="stamp">✓</div></div>
+   <div class="page-row approved" id="page3"><div class="page-icon">🐢</div><div class="page-copy"><strong><span id="pageText3"></span></strong><small>صفحه‌ای که واقعاً به درد می‌خوره</small></div><div class="stamp">✓</div></div>
+   <div class="page-row rejected" id="page4"><div class="page-icon">🐡</div><div class="page-copy"><strong><span id="pageText4"></span></strong><small>این یکی فعلاً بیرون آکواریوم می‌مونه!</small></div><div class="stamp">×</div></div>
+  </div>
+  <div class="seaweed">🌿</div><div class="seaweed right">🌿</div>
+  <div class="crab-guard" id="crabGuard">🦀</div><div class="guard-sign" id="guardSign">ورود فعلاً ممنوع! ✋</div>
+ </div>
+</section>
+<section id="scene3" class="scene">
+ <div class="scene-title scene3-title"><span id="reasonsHeading"></span></div>
+ <div class="reason-stack">
+  <div class="reason-card" id="reason1"><div class="creature">🪼</div><div class="reason-copy"><strong><span id="reasonTitle1"></span></strong><p><span id="reasonDesc1"></span></p></div></div>
+  <div class="reason-card" id="reason2"><div class="creature">🐟</div><div class="reason-copy"><strong><span id="reasonTitle2"></span></strong><p><span id="reasonDesc2"></span></p></div></div>
+  <div class="reason-card" id="reason3"><div class="creature">🦀</div><div class="reason-copy"><strong><span id="reasonTitle3"></span></strong><p><span id="reasonDesc3"></span></p></div></div>
+  <div class="reason-card" id="reason4"><div class="creature">🐌</div><div class="reason-copy"><strong><span id="reasonTitle4"></span></strong><p><span id="reasonDesc4"></span></p></div></div>
+ </div>
+ <div class="reason-foot" id="reasonFoot"><span id="reasonFootText"></span></div>
+</section>
+<section id="scene4" class="scene">
+ <div class="scene-title scene4-title"><span id="endLine"></span><small><span id="endSub"></span></small></div>
+ <div class="octo" id="endOcto"><svg class="octo-rig" viewBox="0 0 425.19 471.93" xmlns="http://www.w3.org/2000/svg">
+      <g id="charInner-end">
+        <path id="Head-end" class="octo-body" d="M425.19,136.98v187.54h-63.81c-6.49-8.5-16.74-13.98-28.27-13.98s-21.79,5.48-28.29,13.98h-63.8c-6.5-8.53-16.78-14.04-28.34-14.04s-21.83,5.51-28.33,14.04h-63.9c-6.52-8.5-16.79-13.98-28.33-13.98s-21.81,5.48-28.33,13.98H0v-187.54c0-26.23,7.37-50.73,20.16-71.56.35-.58.71-1.15,1.08-1.72.22-.37.45-.73.69-1.09.36-.56.73-1.12,1.09-1.67,9.91-14.81,22.62-27.57,37.37-37.55.91-.61,1.83-1.21,2.75-1.8h0c.92-.6,1.85-1.18,2.79-1.75,3.3-2,6.69-3.87,10.16-5.6,1.49-.74,2.99-1.45,4.5-2.13,1.01-.46,2.04-.9,3.06-1.35,1.28-.54,2.57-1.06,3.87-1.56,1.3-.5,2.6-.98,3.92-1.45.53-.18,1.06-.36,1.59-.54,2.58-.87,5.2-1.67,7.86-2.4,1.77-.48,3.55-.93,5.35-1.34,1.85-.42,3.72-.81,5.6-1.16,2.04-.38,4.09-.71,6.16-1,1.55-.22,3.11-.41,4.67-.57,1.17-.12,2.35-.22,3.54-.32,1.18-.1,2.37-.17,3.56-.23.6-.03,1.2-.06,1.79-.08,1.8-.08,3.6-.11,5.41-.11h151.23c2.99,0,5.95.1,8.89.29.98.07,1.96.14,2.94.22,1.3.11,2.6.24,3.89.39.58.07,1.16.14,1.73.21,1.71.22,3.41.47,5.1.75,1.69.28,3.38.59,5.05.93.56.12,1.13.24,1.68.35,1.66.36,3.31.75,4.95,1.18,1.65.43,3.28.88,4.9,1.35,1.08.33,2.14.66,3.2,1,20.8,6.76,39.42,18.35,54.53,33.46,24.79,24.79,40.12,59.03,40.12,96.85Z"/>
+
+        <!-- چشم راست -->
+        <g id="eyeR-end">
+          <path class="octo-ring" d="M302.82,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M302.82,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilR-end">
+            <rect class="octo-pupil" x="248.19" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="304.79" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="323" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- چشم چپ -->
+        <g id="eyeL-end">
+          <path class="octo-ring" d="M114.81,89.96c18,0,34.99,7.08,47.84,19.93,12.85,12.85,19.93,29.84,19.93,47.84s-7.08,34.99-19.93,47.84c-12.85,12.85-29.84,19.93-47.84,19.93s-34.99-7.08-47.84-19.93c-12.85-12.85-19.93-29.84-19.93-47.84s7.08-34.99,19.93-47.84c12.85-12.85,29.84-19.93,47.84-19.93M114.81,63.73h0c-51.7,0-94.01,42.3-94.01,94.01h0c0,51.7,42.3,94.01,94.01,94.01h0c51.7,0,94.01-42.3,94.01-94.01h0c0-51.7-42.3-94.01-94.01-94.01h0Z"/>
+          <g id="pupilL-end">
+            <rect class="octo-pupil" x="60.18" y="103.11" width="109.25" height="109.25" rx="54.63" ry="54.63"/>
+            <rect class="octo-shine" x="116.78" y="124.27" width="40.85" height="40.85" rx="20.42" ry="20.42"/>
+            <rect class="octo-shine" x="134.98" y="171.02" width="20.42" height="20.42" rx="10.21" ry="10.21"/>
+          </g>
+        </g>
+
+        <!-- بازوها -->
+        <path id="legRL-end" class="octo-body" d="M391.79,471.93h0c-16.78,0-30.38-15.06-30.38-33.65v-129.63s63.78,0,63.78,0v126.27c0,20.43-14.96,37-33.4,37Z"/>
+        <path id="legRM-end" class="octo-body" d="M274.2,471.93h-.9c-17.81,0-32.26-16-32.26-35.73v-127.54s63.78,0,63.78,0v129.36c0,18.73-13.71,33.92-30.62,33.92Z"/>
+        <path id="legLM-end" class="octo-body" d="M184.23,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+        <path id="legLL-end" class="octo-body" d="M63.78,308.65v128.86c0,19.01-13.91,34.41-31.07,34.41-18.06,0-32.71-16.23-32.71-36.23v-127.04h63.78Z"/>
+
+        <!-- دهان: سه حالت -->
+        <g id="mouth-end">
+          <g id="mSurprise-end" opacity="0">
+            <path class="octo-pupil" d="M211.83,262.53c4.91,0,8.91,4,8.91,8.91s-4,8.91-8.91,8.91-8.91-4-8.91-8.91,4-8.91,8.91-8.91M211.83,257.53c-7.68,0-13.91,6.23-13.91,13.91s6.23,13.91,13.91,13.91,13.91-6.23,13.91-13.91-6.23-13.91-13.91-13.91h0Z"/>
+          </g>
+          <path id="mHappy-end" class="octo-pupil" d="M220.74,271.44c0,4.91-4,8.9-8.91,8.9s-8.9-3.99-8.9-8.9h-5c0,7.68,6.22,13.9,13.9,13.9s13.91-6.22,13.91-13.9h-5Z"/>
+          <path id="mSad-end" class="octo-pupil" opacity="0" d="M225.74,285.34c0-7.68-6.23-13.9-13.91-13.9s-13.9,6.22-13.9,13.9h5c0-4.91,3.99-8.9,8.9-8.9s8.91,3.99,8.91,8.9h5Z"/>
+          <path id="mThinking-end" d="M198 280 Q211 274 225 280" fill="none" stroke="#03080f" stroke-width="5" stroke-linecap="round" opacity="0"/>
+        </g>
+      </g>
+    </svg></div>
+</section>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><button id="sfxToggle">SFX: ON</button><button id="exportSfx">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:110px;font:14px sans-serif"></span><input id="scrub" type="range" min="0" max="36" step=".01" value="0"><span id="time">0.00s</span></div>
+</div>
+<script>
+(function(){
+"use strict";
+var DURATION=36,RENDER=new URLSearchParams(location.search).has("render"),$=id=>document.getElementById(id);
+var clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),smooth=p=>{p=clamp(p,0,1);return p*p*(3-2*p)};
+function fade(el,t,a,b){el.style.opacity=smooth((t-a)/.28)*(1-smooth((t-b)/.28))}
+function show(el,t,a,d,y){var p=smooth((t-a)/d);el.style.opacity=p;el.style.transform="translateY("+(y*(1-p))+"px)"}
+var typedProgress=new WeakMap();
+function typeInto(el,text,t,start,duration){
+ var chars=Array.from(text),p=clamp((t-start)/duration,0,1),n=Math.floor(p*chars.length);
+ tap(el,n);el.textContent=chars.slice(0,n).join("")+(p<1?"":"");
+}
+function tap(el,n){if(RENDER)return;var prev=typedProgress.get(el)||0;if(n<prev){typedProgress.set(el,n);return;}if(n-prev>=2){typedProgress.set(el,n);playSfx("type")}}
+var typing=[
+ ["hookLine","وقتی گوگل حالش از یه صفحه به هم می‌خوره!",.25,2.75],
+ ["listHeading","کی اجازه ورود به فهرست گوگل رو داره؟",5.35,1.5],
+ ["pageText1","راهنمای نگهداری از کاکتوس",6.45,1.05],
+ ["pageText2","ترفندهای واقعی افزایش سرعت سایت",7.45,1.15],
+ ["pageText3","آموزش انتخاب کفش مناسب پیاده‌روی",8.55,1.2],
+ ["pageText4","کپیِ همون مقاله، با یه اسم جدید!",9.8,1.3],
+ ["reasonsHeading","چرا بعضی صفحه‌ها ایندکس نمی‌شن؟",12.35,1.6],
+ ["reasonTitle1","محتوای بی‌مزه و کم‌ارزش!",14.0,.85],
+ ["reasonDesc1","حرف تازه‌ای نداره؛ مثل آبِ آکواریوم بدون ماهی!",14.8,1.0],
+ ["reasonTitle2","مهمونیِ کپی‌پیست‌ها!",16.25,.8],
+ ["reasonDesc2","تقریباً همون محتوا جای دیگه هم هست.",17.05,.85],
+ ["reasonTitle3","خودت گفتی نیاد تو! (noindex)",18.45,1.1],
+ ["reasonDesc3","با این دستور، به موتور جست‌وجو می‌گی ایندکس نکن.",19.55,1.0],
+ ["reasonTitle4","راهش بسته‌ست یا خیلی دوره!",21.0,.9],
+ ["reasonDesc4","گوگل نمی‌تونه صفحه رو بخزه یا بهش دسترسی پیدا کنه.",21.9,1.15],
+ ["reasonFootText","گاهی هم canonical می‌گه نسخه اصلی یه آدرس دیگه‌ست.",23.35,1.35],
+ ["endLine","ایندکس شدن رو نمی‌تونی به گوگل تحمیل کنی.",26.0,1.55],
+ ["endSub","اما می‌تونی کاری کنی صفحه‌ات ارزشِ موندن توی فهرستش رو داشته باشه.",27.65,1.55]
+];
+function draw(input){
+ var t=clamp(Number(input)||0,0,DURATION)/1.2;
+ fade($("scene1"),t,0,5.3);fade($("scene2"),t,5.0,12.5);fade($("scene3"),t,12.2,25.8);fade($("scene4"),t,25.5,30);
+ typing.forEach(x=>typeInto($(x[0]),x[1],t,x[2],x[3]));
+ show($("hookCaption"),t,.1,.35,15);
+ show($("hookOcto"),t,1.25,.65,80);
+ $("hookOcto").style.transform="translateY("+(t>1.9?Math.sin(t*2.2)*8:80*(1-smooth((t-1.25)/.65)))+"px) rotate("+(-5+Math.sin(t*1.4)*2)+"deg)";
+ show($("sickBubble"),t,2.65,.25,20);
+ ["page1","page2","page3","page4"].forEach((id,i)=>{show($(id),t,6.2+i*.88,.32,25);var stamp=$(id).querySelector(".stamp");show(stamp,t,7.05+i*.88,.22,0)});
+ show($("crabGuard"),t,10.5,.3,12);show($("guardSign"),t,10.7,.25,8);
+ ["reason1","reason2","reason3","reason4"].forEach((id,i)=>show($(id),t,13.65+i*1.8,.34,35));
+ show($("reasonFoot"),t,23.0,.3,10);
+ show($("endOcto"),t,27.9,.8,450);
+ $("endOcto").style.transform="translateY("+(450*(1-smooth((t-27.9)/.8)))+"px)";
+}
+var audioCtx=null,sfxEnabled=true,lastSfxTime=0,lastTypeTapAt=0;
+function playSfx(name){
+ if(!sfxEnabled)return;
+ try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume();var now=audioCtx.currentTime;
+ if(name==="type"){var wall=performance.now();if(wall-lastTypeTapAt<64)return;lastTypeTapAt=wall;var len=Math.floor(audioCtx.sampleRate*.026),b=audioCtx.createBuffer(1,len,audioCtx.sampleRate),v=b.getChannelData(0);for(var i=0;i<len;i++){var e=1-i/len;v[i]=(Math.random()*2-1)*e*e;}var s=audioCtx.createBufferSource(),f=audioCtx.createBiquadFilter(),g=audioCtx.createGain();s.buffer=b;f.type="bandpass";f.frequency.value=1850;f.Q.value=.9;s.connect(f);f.connect(g);g.connect(audioCtx.destination);g.gain.setValueAtTime(.0001,now);g.gain.linearRampToValueAtTime(.075,now+.002);g.gain.exponentialRampToValueAtTime(.0001,now+.028);s.start(now);s.stop(now+.03);return;}
+ var o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type="sine";o.frequency.setValueAtTime(name==="pop"?780:240,now);o.frequency.exponentialRampToValueAtTime(name==="pop"?420:90,now+.3);g.gain.setValueAtTime(.0001,now);g.gain.linearRampToValueAtTime(.12,now+.008);g.gain.exponentialRampToValueAtTime(.0001,now+.32);o.start(now);o.stop(now+.34);
+ }catch(e){}
+}
+function exportSfxWav(){
+ var sr=48000,Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext,ctx=new Offline(2,Math.ceil(DURATION*sr),sr),master=ctx.createGain();master.gain.value=.8;master.connect(ctx.destination);
+ // Same character-by-character schedule as the live preview, including a louder, crisp filtered typewriter tap.
+ typing.forEach(function(x){var text=x[1],start=x[2]*1.2,duration=x[3]*1.2,count=Array.from(text).length,last=0;for(var frame=1;frame<=Math.ceil(duration*60);frame++){var elapsed=frame/60,n=Math.floor(Math.min(1,elapsed/duration)*count);if(n-last>=2){var at=start+elapsed;if(at-(typing._last||-10)>=.064){var len=Math.floor(sr*.026),b=ctx.createBuffer(1,len,sr),v=b.getChannelData(0);for(var j=0;j<len;j++){var e=1-j/len;v[j]=(Math.random()*2-1)*e*e;}var s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=b;f.type="bandpass";f.frequency.value=1850;f.Q.value=.9;g.gain.setValueAtTime(.0001,at);g.gain.linearRampToValueAtTime(.075,at+.002);g.gain.exponentialRampToValueAtTime(.0001,at+.028);s.connect(f);f.connect(g);g.connect(master);s.start(at);s.stop(at+.03);typing._last=at;}last=n;}}});
+ return ctx.startRendering().then(function(buffer){var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}str("RIFF");v.setUint32(p,36+bytes,true);p+=4;str("WAVE");str("fmt ");v.setUint32(p,16,true);p+=4;v.setUint16(p,1,true);p+=2;v.setUint16(p,channels,true);p+=2;v.setUint32(p,sr,true);p+=4;v.setUint32(p,sr*channels*2,true);p+=4;v.setUint16(p,channels*2,true);p+=2;v.setUint16(p,16,true);p+=2;str("data");v.setUint32(p,bytes,true);p+=4;var ch=[];for(var c=0;c<channels;c++)ch.push(buffer.getChannelData(c));for(var i=0;i<length;i++)for(var c=0;c<channels;c++){var z=Math.max(-1,Math.min(1,ch[c][i]));v.setInt16(p,z<0?z*32768:z*32767,true);p+=2;}return new Blob([ab],{type:"audio/wav"});});
+}
+if(!RENDER){$("exportSfx").onclick=function(){var b=$("exportSfx"),s=$("sfxStatus");b.disabled=true;b.textContent="در حال ساخت WAV...";exportSfxWav().then(function(blob){var u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="reel-01-sfx.wav";a.click();setTimeout(()=>URL.revokeObjectURL(u),3000);s.textContent="فایل آماده شد";}).catch(e=>s.textContent="خطا: "+e.message).finally(()=>{b.disabled=false;b.textContent="دریافت افکت‌ها (WAV)";});};}
+window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"pop",t:2.8},{name:"pop",t:11.2},{name:"pop",t:15.1},{name:"pop",t:18.9},{name:"pop",t:22.2},{name:"pop",t:29.2}];window.__ready=false;
+if(RENDER){$("controls").style.display="none";var q=new URLSearchParams(location.search).get("t");draw(q===null?0:parseFloat(q));document.fonts.ready.then(()=>window.__ready=true);}
+else{var playing=true,offset=0,t0=performance.now();function resize(){var fit=Math.min(innerWidth/1080,innerHeight/1920);$("stage").style.transform="scale("+fit+")";}function tick(now){if(playing){offset=((now-t0)/1000)%DURATION;window.OCTO_EVENTS.forEach(ev=>{if(ev.t>lastSfxTime&&ev.t<=offset)playSfx(ev.name)});lastSfxTime=offset;}draw(offset);$("scrub").value=offset;$("time").textContent=offset.toFixed(2)+"s";requestAnimationFrame(tick);} $("play").onclick=()=>{playing=!playing;$("play").textContent=playing?"Pause":"Play";if(playing)t0=performance.now()-offset*1000;};$("restart").onclick=()=>{offset=0;lastSfxTime=0;t0=performance.now();};$("scrub").oninput=function(){offset=+this.value;lastSfxTime=offset;if(playing)t0=performance.now()-offset*1000;draw(offset);};$("sfxToggle").onclick=function(){audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume();sfxEnabled=!sfxEnabled;this.textContent="SFX: "+(sfxEnabled?"ON":"OFF");};addEventListener("resize",resize);resize();requestAnimationFrame(tick);document.fonts.ready.then(()=>window.__ready=true);}
+})();
+</script></body></html>
