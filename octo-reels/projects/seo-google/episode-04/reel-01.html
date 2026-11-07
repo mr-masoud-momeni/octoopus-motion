@@ -282,12 +282,12 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
     </svg></div>
  </section>
 
- <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="32" step=".01" value="0"><span id="time">0.00s</span></div>
+ <div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><input id="scrub" type="range" min="0" max="30" step=".01" value="0"><span id="time">0.00s</span></div>
 </div>
 <script>
 (function(){
 "use strict";
-var DURATION=32, RENDER=new URLSearchParams(location.search).has("render");
+var DURATION=30, RENDER=new URLSearchParams(location.search).has("render");
 var $=function(id){return document.getElementById(id)};
 var clamp=function(v,a,b){return Math.max(a,Math.min(b,v))};
 var lerp=function(a,b,p){return a+(b-a)*p};
@@ -308,7 +308,7 @@ function draw(input){
  var t=clamp(Number(input)||0,0,DURATION);
  $("grid").style.transform="translate3d("+Math.sin(t*.13)*12+"px,"+(-t*4)+"px,0)";
  $("glow").style.transform="scale("+(1+Math.sin(t*.7)*.035)+")";
- var scenes=[["hookScene",0,5.05],["serpScene",5,11.35],["compareScene",11.1,20.15],["snippetScene",20,25.9],["outroScene",25.65,32]];
+ var scenes=[["hookScene",0,5.05],["serpScene",5,11.35],["compareScene",11.1,20.15],["snippetScene",20,25.9],["outroScene",25.65,30]];
  scenes.forEach(function(s){vis($(s[0]),t,s[1],s[2],.42)});
  // Opening: Octo rises, title is typed in two short beats.
  var hk=moveIn($("hookKicker"),t,.25,.45,25,.94);
@@ -324,10 +324,10 @@ function draw(input){
  $("hookHalo").style.transform="scale("+(1+Math.sin(t*2)*.035)+")";
  $("hookSpark").style.opacity=clamp(octoP,0,1)*octoOut;
  // End Octo uses its own wrapper, never present during the explainer scenes.
- var outP=back(gate(t,26.15,1.0)),outEnd=1-smooth(gate(t,31.55,.4));
+ var outP=back(gate(t,26.15,1.0)),outEnd=1-smooth(gate(t,29.55,.35));
  $("outroOctoWrap").style.opacity=clamp(outP,0,1)*outEnd;
  $("outroOctoWrap").style.transform="translate3d(0,"+lerp(360,0,outP)+"px,0) scale("+lerp(.75,1,outP)+")";
- var blink=(t>30.1&&t<30.28)?Math.max(.06,Math.abs(Math.cos((t-30.1)/.18*Math.PI))):1;
+ var blink=(t>29.35&&t<29.53)?Math.max(.06,Math.abs(Math.cos((t-29.35)/.18*Math.PI))):1;
  ["eyeL","eyeR"].forEach(function(id){var e=$(id);if(e)e.style.transformOrigin="50% 50%",e.style.transform="scaleY("+blink+")"});
  moveIn($("outroKicker"),t,27.0,.45,24,.94);
  moveIn($("outroTitle"),t,27.38,.55,30,.95);
