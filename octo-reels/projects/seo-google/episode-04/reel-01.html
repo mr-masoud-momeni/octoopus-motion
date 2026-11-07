@@ -101,9 +101,9 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 <section id="reasonsScene" class="scene">
  <div class="reasons-head" id="reasonsHead">یک عنوان خوب باید<br><em>سه کار انجام بده:</em></div>
  <div class="reasons-lead" id="reasonsLead">نه با کلمات پیچیده؛ با یک دلیل روشن برای کلیک.</div>
- <div class="reason" id="reason1"><div class="reason-num">۱</div><div class="reason-text">جذاب و کنجکاوی‌برانگیز<small>توجه کاربر رو جلب کنه و او رو به خواندن ترغیب کنه.</small></div></div>
- <div class="reason" id="reason2"><div class="reason-num">۲</div><div class="reason-text">روشن و مشخص<small>کاربر بفهمه دقیقاً قراره چه چیزی به دست بیاره.</small></div></div>
- <div class="reason" id="reason3"><div class="reason-num">۳</div><div class="reason-text">مرتبط و قابل‌اعتماد<small>وعده‌ای بده که محتوای صفحه واقعاً بهش عمل کنه.</small></div></div>
+ <div class="reason" id="reason1"><div class="reason-num">۱</div><div class="reason-text"><span id="reasonTitle1">جذاب و کنجکاوی‌برانگیز</span><small>توجه کاربر رو جلب کنه و او رو به خواندن ترغیب کنه.</small></div></div>
+ <div class="reason" id="reason2"><div class="reason-num">۲</div><div class="reason-text"><span id="reasonTitle2">روشن و مشخص</span><small>کاربر بفهمه دقیقاً قراره چه چیزی به دست بیاره.</small></div></div>
+ <div class="reason" id="reason3"><div class="reason-num">۳</div><div class="reason-text"><span id="reasonTitle3">مرتبط و قابل‌اعتماد</span><small>وعده‌ای بده که محتوای صفحه واقعاً بهش عمل کنه.</small></div></div>
  <div class="reason-note" id="reasonNote">کنجکاوی خوبه؛ ابهامِ گیج‌کننده نه.</div>
 </section>
 <section id="endScene" class="scene">
@@ -156,9 +156,9 @@ function draw(input){
  typeInto($("reasonsHead"),"یک عنوان خوب باید سه کار انجام بده:",t,19.25,1.0);
  enter($("reasonsLead"),t,19.7,.4,14);
  enter($("reason1"),t,20.25,.35,10);enter($("reason2"),t,21.55,.35,10);enter($("reason3"),t,22.85,.35,10);
- typeInto($("reason1").querySelector(".reason-text"),"جذاب و کنجکاوی‌برانگیز",t,20.65,.75);
- typeInto($("reason2").querySelector(".reason-text"),"روشن و مشخص",t,21.95,.65);
- typeInto($("reason3").querySelector(".reason-text"),"مرتبط و قابل‌اعتماد",t,23.25,.7);
+ typeInto($("reasonTitle1"),"جذاب و کنجکاوی‌برانگیز",t,20.65,.75);
+ typeInto($("reasonTitle2"),"روشن و مشخص",t,21.95,.65);
+ typeInto($("reasonTitle3"),"مرتبط و قابل‌اعتماد",t,23.25,.7);
  enter($("reasonNote"),t,24.45,.4,14);
  enter($("endMain"),t,26.0,.35,10);
  typeInto($("endTyped"),"رتبه تو رو دیده می‌کنه؛ عنوانت انتخابت می‌کنه.",t,26.25,2.0);
