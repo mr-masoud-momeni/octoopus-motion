@@ -105,6 +105,47 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 #controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.35);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
 #scrub{flex:1;accent-color:var(--cyan)}#time{min-width:65px;text-align:center}
 @media(max-width:800px){.hook-title{font-size:78px}.section-head h2{font-size:58px}.compare-title{font-size:32px}}
+
+/* Calm, viewer-first revision */
+#grid,#glow{display:none!important}
+.brand{top:54px;opacity:.48;font-size:22px}
+#hookHalo,#hookSpark,.hook-kicker{display:none!important}
+.hook-title{top:245px;min-height:330px;font-size:78px;line-height:1.65;gap:18px}
+.hook-title span{min-height:1.55em}
+#octoWrap{top:1010px;width:475px;margin-left:-237.5px}
+.section-head{top:255px}
+.section-head .kicker{font-size:25px}
+.section-head h2{font-size:65px;line-height:1.55;margin-top:18px}
+.section-head p{font-size:27px;line-height:1.8;margin-top:20px}
+.browser{top:690px;height:570px;transform:none;border-width:5px;border-radius:22px}
+.browser-top{height:42px}
+.serp{padding:20px 32px}
+.google{font-size:30px;margin-bottom:14px}
+.searchbar{height:54px;font-size:21px;padding:13px 20px}
+.result{padding:20px 12px 18px}
+.result strong{font-size:25px;line-height:1.55}
+.result p{font-size:18px;line-height:1.7}
+.result .url{font-size:15px}
+.resultThree,.cursor,.metric-row,.dash-path,.insight,#compareArrow,.card-points,.card-tag,.card-label i,.connector,.snippet-meta{display:none!important}
+.rank{font-size:16px}
+#compareScene .section-head{top:245px}
+.compare-wrap{top:720px;gap:28px}
+.compare-card{padding:34px 36px;border-radius:22px;box-shadow:none;background:#10243d}
+.card-top{margin-bottom:22px}
+.card-label{font-size:23px}
+.compare-title{font-size:42px;line-height:1.8}
+#compareNote{top:1350px;font-size:31px;line-height:1.8}
+#snippetScene .section-head{top:260px}
+.snippet-card{top:760px;padding:40px 38px;border-radius:22px;box-shadow:none}
+.snippet-label{font-size:19px;margin-bottom:22px}
+.snippet-url{font-size:16px}
+.snippet-title{font-size:34px;line-height:1.75;margin:15px 0}
+.snippet-desc{font-size:24px;line-height:1.9}
+#snippetScene .takeaway{top:1420px;font-size:34px;line-height:1.8}
+#controls{position:absolute;bottom:0;left:0;right:0;min-height:112px;gap:18px;padding:22px 28px;background:rgba(3,10,22,.98);border-top:2px solid rgba(65,250,241,.34);font-size:22px}
+#controls button{min-width:112px;min-height:62px;padding:14px 20px;border-radius:14px;font-size:21px;font-weight:800}
+#scrub{height:18px;min-width:120px}
+#time{min-width:95px;font-size:21px}
 </style>
 </head>
 <body>
@@ -154,16 +195,16 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
       </g>
     </svg></div>
  <section id="hookScene" class="scene">
-  <div id="hookHalo"></div><div id="hookSpark"></div>
+  
   <div id="hookKicker" class="hook-kicker kicker">یک سؤال مهم درباره سئوی سایتت...</div>
   <h1 class="hook-title"><span id="hookLine1"></span><span id="hookLine2"></span></h1>
  </section>
 
  <section id="serpScene" class="scene">
   <div class="section-head">
-   <div class="kicker">پرونده شماره ۰۱ · نتیجه جست‌وجو</div>
-   <h2>رتبه‌ات <em>عالیه</em>؛<br>اما کلیک کجاست؟</h2>
-   <p>کاربر نتیجه تو رو می‌بینه... ولی انتخابش نمی‌کنه.</p>
+   <div class="kicker">من دنبال کفش پیاده‌روی‌ام</div>
+   <h2>کدوم نتیجه رو<br><em>باز می‌کنم؟</em></h2>
+   <p>دو نتیجه برای یک جست‌وجو؛ فقط یکی توجهم رو جلب می‌کنه.</p>
   </div>
   <div class="browser">
    <div class="browser-top"><i></i><i></i><i></i><span>google.com/search</span></div>
@@ -196,9 +237,9 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 
  <section id="compareScene" class="scene">
   <div class="section-head">
-   <div class="kicker">حالا عنوان رو بررسی کنیم</div>
-   <h2>فرق این دو عنوان<br><em>فقط چند کلمه نیست!</em></h2>
-   <p>فرض کن مقاله‌ات درباره انتخاب کفش پیاده‌رویه.</p>
+   <div class="kicker">حالا برمی‌گردم سراغ نتیجه خودم</div>
+   <h2>عنوانم رو<br><em>واضح‌تر می‌کنم.</em></h2>
+   <p>به‌جای یک اسم کلی، دلیل کلیک رو روشن می‌کنم.</p>
   </div>
   <div class="compare-wrap">
    <div class="compare-card old" id="oldCard">
@@ -218,8 +259,8 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 
  <section id="snippetScene" class="scene">
   <div class="section-head">
-   <div class="kicker">یک تکه مهم دیگه</div>
-   <h2>عنوان تنها<br><em>روی تصمیم کاربر اثر نمی‌ذاره.</em></h2>
+   <div class="kicker">قبل از کلیک، این رو هم می‌خونم</div>
+   <h2>توضیحات نتیجه<br><em>باید به دردم بخوره.</em></h2>
   </div>
   <div class="snippet-card" id="snippetCard">
    <div class="snippet-label">پیش‌نمایش نتیجه در جست‌وجو</div>
@@ -227,10 +268,10 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
    <div class="snippet-title">قبل از خرید کفش پیاده‌روی، این ۵ نکته رو بدون!</div>
    <div class="snippet-desc">از انتخاب زیره و قالب تا راحتی در مسیرهای طولانی؛ نکته‌هایی که قبل از خرید کفش مناسب باید بررسی کنی.</div>
    <div class="snippet-divider"></div>
-   <div class="snippet-meta"><i>⌕</i><span>عنوان توجه می‌گیره؛ توضیحات متا کمک می‌کنه کاربر تصمیم بگیره.</span></div>
+   
   </div>
   <div class="connector" id="connector"><svg viewBox="0 0 790 60"><path d="M20 4 V30 H770 V4" fill="none" stroke="#41faf1" stroke-width="3" stroke-dasharray="8 10" opacity=".7"/><circle cx="20" cy="4" r="7" fill="#41faf1"/><circle cx="770" cy="4" r="7" fill="#41faf1"/></svg></div>
-  <div class="takeaway" id="takeaway">عنوان باید <em>توجه جلب کنه</em>؛<br>توضیحات باید <em>انتظار درست بسازه.</em></div>
+  <div class="takeaway" id="takeaway">قبل از کلیک، باید بفهمم<br><em>این صفحه چه کمکی بهم می‌کنه.</em></div>
  </section>
 
  <section id="outroScene" class="scene">
@@ -310,19 +351,15 @@ function draw(input){
  $("glow").style.transform="scale("+(1+Math.sin(t*.7)*.035)+")";
  var scenes=[["hookScene",0,5.05],["serpScene",5,11.35],["compareScene",11.1,20.15],["snippetScene",20,25.9],["outroScene",25.65,30]];
  scenes.forEach(function(s){vis($(s[0]),t,s[1],s[2],.42)});
- // Opening: Octo rises, title is typed in two short beats.
- var hk=moveIn($("hookKicker"),t,.25,.45,25,.94);
- type($("hookLine1"),"رتبه اول گوگل هستی...",t,.72,1.45);
- type($("hookLine2"),"پس چرا کسی کلیک نمی‌کنه؟",t,2.18,1.65);
- $("hookLine1").style.color=t>1.3?"#fff":"#fff";
+ // Opening: one calm entrance, then two readable typed lines.
+ type($("hookLine1"),"رتبه اول گوگل هستی...",t,.95,2.0);
+ type($("hookLine2"),"پس چرا کسی کلیک نمی‌کنه؟",t,3.05,1.65);
+ $("hookLine1").style.color="#fff";
  $("hookLine2").style.color="#41faf1";
- var octoP=back(gate(t,.22,1.15));
- var octoOut=1-smooth(gate(t,4.48,.48));
+ var octoP=smooth(gate(t,.35,1.0));
+ var octoOut=1-smooth(gate(t,4.55,.4));
  $("octoWrap").style.opacity=clamp(octoP,0,1)*octoOut;
- $("octoWrap").style.transform="translate3d(0,"+lerp(520,0,octoP)+"px,0) scale("+lerp(.72,1,octoP)+")";
- $("hookHalo").style.opacity=clamp(octoP,0,1)*octoOut*.9;
- $("hookHalo").style.transform="scale("+(1+Math.sin(t*2)*.035)+")";
- $("hookSpark").style.opacity=clamp(octoP,0,1)*octoOut;
+ $("octoWrap").style.transform="translate3d(0,"+lerp(460,0,octoP)+"px,0) scale("+lerp(.78,1,octoP)+")";
  // End Octo uses its own wrapper, never present during the explainer scenes.
  var outP=back(gate(t,26.15,1.0)),outEnd=1-smooth(gate(t,29.55,.35));
  $("outroOctoWrap").style.opacity=clamp(outP,0,1)*outEnd;
@@ -337,24 +374,18 @@ function draw(input){
  // Search results: browser drops in, result cards appear, cursor hesitates.
  moveIn($("serpScene").querySelector(".section-head"),t,5.12,.48,24,.97);
  moveIn($("serpScene").querySelector(".browser"),t,5.55,.62,48,.94);
- ["resultOne","resultTwo","resultThree"].forEach(function(id,i){moveIn($(id),t,6.35+i*.68,.42,25,.97)});
- var cp=gate(t,8.2,.55);
- $("cursor").style.opacity=clamp(cp,0,1)*(1-gate(t,9.2,.2));
- $("cursor").style.transform="translate3d("+lerp(150,0,smooth(cp))+"px,"+lerp(90,0,smooth(cp))+"px,0) rotate(-12deg)";
- moveIn($("metricRow"),t,9.0,.4,20,.97);
- moveIn($("serpInsight"),t,9.55,.48,25,.96);
- moveIn($("dashPath"),t,9.35,.45,10,.98);
+ ["resultOne","resultTwo"].forEach(function(id,i){moveIn($(id),t,6.55+i*1.05,.65,18,.98)});
+
  // Before/after title: clear comparison, one main improvement at a time.
  moveIn($("compareScene").querySelector(".section-head"),t,11.28,.48,24,.97);
- moveIn($("oldCard"),t,12.15,.5,30,.97);
- moveIn($("newCard"),t,14.35,.58,34,.97);
- moveIn($("compareArrow"),t,16.45,.4,16,.95);
- moveIn($("compareNote"),t,17.2,.5,24,.97);
+ moveIn($("oldCard"),t,12.2,.65,24,.99);
+ var oldFade=1-smooth(gate(t,14.05,.45)); $("oldCard").style.opacity*=oldFade;
+ moveIn($("newCard"),t,14.35,.7,24,.99);
+ moveIn($("compareNote"),t,17.35,.55,18,.99);
  // Snippet: title and description read as one search result.
  moveIn($("snippetScene").querySelector(".section-head"),t,20.18,.45,24,.97);
  moveIn($("snippetCard"),t,20.8,.65,38,.96);
- moveIn($("connector"),t,22.45,.42,12,.98);
- moveIn($("takeaway"),t,23.0,.5,22,.97);
+ moveIn($("takeaway"),t,23.45,.55,18,.99);
 }
 window.renderAt=draw;
 window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
