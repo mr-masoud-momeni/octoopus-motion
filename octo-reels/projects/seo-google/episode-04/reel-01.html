@@ -189,7 +189,7 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
     </svg></div>
  <div class="end-main" id="endMain"><span id="endTyped"></span></div>
 </section>
-<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><button id="sfxToggle">SFX: ON</button><input id="scrub" type="range" min="0" max="30" step=".01" value="0"><span id="time">0.00s</span></div>
+<div id="controls"><button id="play">Pause</button><button id="restart">Restart</button><button id="sfxToggle">SFX: ON</button><button id="exportSfx" type="button">دریافت افکت‌ها (WAV)</button><span id="sfxStatus" style="direction:rtl;min-width:100px;font:14px sans-serif"></span><input id="scrub" type="range" min="0" max="30" step=".01" value="0"><span id="time">0.00s</span></div>
 </div>
 <script>
 (function(){
@@ -278,6 +278,57 @@ function playSfx(name){
   gain.gain.setValueAtTime(.0001,now);gain.gain.linearRampToValueAtTime(name==="ding"?.16:.2,now+.008);gain.gain.exponentialRampToValueAtTime(.0001,now+dur);
   osc.start(now);osc.stop(now+dur);
  }catch(e){}
+}
+
+
+function exportSfxWav(){
+ var status=$("sfxStatus"),btn=$("exportSfx"),sr=48000,Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+ if(!Offline)throw new Error("مرورگر از ساخت WAV پشتیبانی نمی‌کند.");
+ var ctx=new Offline(2,Math.ceil(DURATION*sr),sr),master=ctx.createGain();
+ master.gain.value=.72;master.connect(ctx.destination);
+ function tone(t,d,f1,f2,amp,type){
+  var o=ctx.createOscillator(),g=ctx.createGain();o.type=type||"sine";
+  o.frequency.setValueAtTime(f1,t);o.frequency.exponentialRampToValueAtTime(Math.max(1,f2),t+d);
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(amp,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.02);
+ }
+ function noise(t,d,amp,low,high){
+  var n=Math.max(1,Math.floor(sr*d)),b=ctx.createBuffer(1,n,sr),v=b.getChannelData(0);
+  for(var i=0;i<n;i++)v[i]=(Math.random()*2-1)*(1-i/n);
+  var s=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),g=ctx.createGain();
+  s.buffer=b;filter.type="lowpass";filter.frequency.setValueAtTime(high,t);filter.frequency.exponentialRampToValueAtTime(Math.max(80,low),t+d);
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(amp,t+.06);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  s.connect(filter);filter.connect(g);g.connect(master);s.start(t);s.stop(t+d+.02);
+ }
+ window.OCTO_EVENTS.forEach(function(ev){
+  var t=ev.t,n=ev.name;
+  if(n==="whoosh"||n==="sweep"){noise(t,.62,.13,450,8500);tone(t,.58,240,65,.09);}
+  else if(n==="rise"){tone(t,.95,190,118,.15);}
+  else if(n==="zap"){tone(t,.38,1800,750,.16,"sawtooth");}
+  else if(n==="ding"){tone(t,.72,1046,1568,.13);tone(t+.12,.5,1568,1568,.06);}
+  else if(n==="tick"||n==="click"){tone(t,n==="tick"?.18:.1,n==="tick"?1750:2600,n==="tick"?1250:1900,.10,"triangle");}
+  else {tone(t,.28,880,310,.15);tone(t,.09,145,68,.07);}
+ });
+ return ctx.startRendering().then(function(buffer){
+  var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
+  function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
+  str("RIFF");v.setUint32(p,36+bytes,true);p+=4;str("WAVE");str("fmt ");v.setUint32(p,16,true);p+=4;v.setUint16(p,1,true);p+=2;v.setUint16(p,channels,true);p+=2;v.setUint32(p,sr,true);p+=4;v.setUint32(p,sr*channels*2,true);p+=4;v.setUint16(p,channels*2,true);p+=2;v.setUint16(p,16,true);p+=2;str("data");v.setUint32(p,bytes,true);p+=4;
+  var ch=[];for(var c=0;c<channels;c++)ch.push(buffer.getChannelData(c));
+  for(var i=0;i<length;i++)for(var c=0;c<channels;c++){var x=Math.max(-1,Math.min(1,ch[c][i]));v.setInt16(p,x<0?x*32768:x*32767,true);p+=2;}
+  return new Blob([ab],{type:"audio/wav"});
+ });
+}
+
+
+if(!RENDER){
+ $("exportSfx").onclick=function(){
+  var btn=$("exportSfx"),status=$("sfxStatus");btn.disabled=true;btn.textContent="در حال ساخت WAV...";status.textContent="لطفاً صبر کن";
+  exportSfxWav().then(function(blob){
+   var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="reel-01-sfx.wav";
+   document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},3000);
+   status.textContent="فایل آماده شد";
+  }).catch(function(e){status.textContent="خطا: "+e.message;}).finally(function(){btn.disabled=false;btn.textContent="دریافت افکت‌ها (WAV)";});
+ };
 }
 
 window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
