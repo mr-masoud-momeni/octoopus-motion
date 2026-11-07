@@ -203,7 +203,7 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 "use strict";
 var DURATION=30,RENDER=new URLSearchParams(location.search).has("render");
 var $=id=>document.getElementById(id),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-var smooth=p=>{p=clamp(p,0,1);return p*p*(3-2*p)};
+var smooth=p=>{p=clamp(p,0,1);return p*p*(3-2*p)};\nvar lerp=(a,b,p)=>a+(b-a)*p;
 var enter=(el,t,a,d,y)=>{var p=smooth((t-a)/d);el.style.opacity=p;el.style.transform="translateY("+(y*(1-p))+"px)"};
 var fade=(el,t,a,b)=>{el.style.opacity=smooth((t-a)/.35)*(1-smooth((t-b)/.35))};
 var title="قبل از خرید کفش پیاده‌روی، این ۵ نکته رو بدون!";
