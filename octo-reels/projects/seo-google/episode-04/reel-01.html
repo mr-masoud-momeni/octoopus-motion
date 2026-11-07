@@ -330,6 +330,41 @@ function exportSfxWav(){
   else if(n==="tick"||n==="click"){tone(t,n==="tick"?.18:.1,n==="tick"?1750:2600,n==="tick"?1250:1900,.10,"triangle");}
   else {tone(t,.28,880,310,.15);tone(t,.09,145,68,.07);}
  });
+ // Export typing taps too: mirror every typeText/typeInto call in draw().
+ // Scene clock is converted back to video seconds (draw() divides by 1.2).
+ var typing=[
+  [.65,3.15,"رتبه‌ی خوبی داری؛ اما کلیک نمی‌گیری؟"],
+  [6.65,2.5,"شما بین این دو عنوان کدوم رو کلیک می‌کنید؟"],
+  [10.45,1.7,"فرض کن دنبال کفش پیاده‌روی هستی؛ کدوم عنوان نظرت رو جلب می‌کنه؟"],
+  [11.55,1.0,"راهنمای خرید کفش پیاده‌روی"],
+  [12.55,1.35,"قبل از خرید کفش پیاده‌روی، این ۵ نکته رو بدون!"],
+  [19.25,1.0,"یک عنوان خوب باید سه کار انجام بده:"],
+  [20.65,.75,"جذاب و کنجکاوی‌برانگیز"],
+  [21.95,.65,"روشن و مشخص"],
+  [23.25,.7,"مرتبط و قابل‌اعتماد"],
+  [26.25,2.0,"رتبه تو رو دیده می‌کنه؛ عنوانت انتخابت می‌کنه."]
+ ];
+ typing.forEach(function(item){
+  var start=item[0]*1.2,duration=item[1]*1.2,count=Array.from(item[2]).length;
+  var last=-1;
+  for(var frame=0;frame<=Math.ceil(duration*60);frame++){
+   var elapsed=frame/60,n=Math.floor(Math.min(1,elapsed/duration)*count);
+   if(n-last>=2){
+    var at=start+elapsed;
+    // Match the live preview's 78ms anti-chirp throttle.
+    if(at-(typing._last||-10)>=.078){
+     var len=Math.max(1,Math.floor(sr*.022)),b=ctx.createBuffer(1,len,sr),v=b.getChannelData(0);
+     for(var j=0;j<len;j++){var env=1-j/len;v[j]=(Math.random()*2-1)*env*env;}
+     var src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),g=ctx.createGain();
+     src.buffer=b;filter.type="bandpass";filter.frequency.value=1450;filter.Q.value=.75;
+     g.gain.setValueAtTime(.0001,at);g.gain.linearRampToValueAtTime(.032,at+.002);g.gain.exponentialRampToValueAtTime(.0001,at+.024);
+     src.connect(filter);filter.connect(g);g.connect(master);src.start(at);src.stop(at+.025);
+     typing._last=at;
+    }
+    last=n;
+   }
+  }
+ });
  return ctx.startRendering().then(function(buffer){
   var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
   function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
