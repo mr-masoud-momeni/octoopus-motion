@@ -241,7 +241,7 @@ function playSfx(name){
 function exportSfxWav(){
  var sr=48000,Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
  var ctx=new Offline(2,Math.ceil(DURATION*sr),sr),master=ctx.createGain();
- master.gain.value=.8;master.connect(ctx.destination);
+ master.gain.value=1;master.connect(ctx.destination);
  var lastTypeTapAt=-10;
  function addTypeTap(at){
   var len=Math.floor(sr*.026),b=ctx.createBuffer(1,len,sr),v=b.getChannelData(0);
