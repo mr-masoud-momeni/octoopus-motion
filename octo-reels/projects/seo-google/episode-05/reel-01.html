@@ -239,10 +239,56 @@ function playSfx(name){
  }catch(e){}
 }
 function exportSfxWav(){
- var sr=48000,Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext,ctx=new Offline(2,Math.ceil(DURATION*sr),sr),master=ctx.createGain();master.gain.value=.8;master.connect(ctx.destination);
- // Same character-by-character schedule as the live preview, including a louder, crisp filtered typewriter tap.
- typing.forEach(function(x){var text=x[1],start=x[2]*1.2,duration=x[3]*1.2,count=Array.from(text).length,last=0;for(var frame=1;frame<=Math.ceil(duration*60);frame++){var elapsed=frame/60,n=Math.floor(Math.min(1,elapsed/duration)*count);if(n-last>=2){var at=start+elapsed;if(at-(typing._last||-10)>=.064){var len=Math.floor(sr*.026),b=ctx.createBuffer(1,len,sr),v=b.getChannelData(0);for(var j=0;j<len;j++){var e=1-j/len;v[j]=(Math.random()*2-1)*e*e;}var s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=b;f.type="bandpass";f.frequency.value=1850;f.Q.value=.9;g.gain.setValueAtTime(.0001,at);g.gain.linearRampToValueAtTime(.075,at+.002);g.gain.exponentialRampToValueAtTime(.0001,at+.028);s.connect(f);f.connect(g);g.connect(master);s.start(at);s.stop(at+.03);typing._last=at;}last=n;}}});
- return ctx.startRendering().then(function(buffer){var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2,ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}str("RIFF");v.setUint32(p,36+bytes,true);p+=4;str("WAVE");str("fmt ");v.setUint32(p,16,true);p+=4;v.setUint16(p,1,true);p+=2;v.setUint16(p,channels,true);p+=2;v.setUint32(p,sr,true);p+=4;v.setUint32(p,sr*channels*2,true);p+=4;v.setUint16(p,channels*2,true);p+=2;v.setUint16(p,16,true);p+=2;str("data");v.setUint32(p,bytes,true);p+=4;var ch=[];for(var c=0;c<channels;c++)ch.push(buffer.getChannelData(c));for(var i=0;i<length;i++)for(var c=0;c<channels;c++){var z=Math.max(-1,Math.min(1,ch[c][i]));v.setInt16(p,z<0?z*32768:z*32767,true);p+=2;}return new Blob([ab],{type:"audio/wav"});});
+ var sr=48000,Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+ var ctx=new Offline(2,Math.ceil(DURATION*sr),sr),master=ctx.createGain();
+ master.gain.value=.8;master.connect(ctx.destination);
+ var lastTypeTapAt=-10;
+ function addTypeTap(at){
+  var len=Math.floor(sr*.026),b=ctx.createBuffer(1,len,sr),v=b.getChannelData(0);
+  for(var i=0;i<len;i++){var e=1-i/len;v[i]=(Math.random()*2-1)*e*e;}
+  var s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();
+  s.buffer=b;f.type="bandpass";f.frequency.value=1850;f.Q.value=.9;
+  g.gain.setValueAtTime(.0001,at);g.gain.linearRampToValueAtTime(.075,at+.002);
+  g.gain.exponentialRampToValueAtTime(.0001,at+.028);
+  s.connect(f);f.connect(g);g.connect(master);s.start(at);s.stop(at+.03);
+ }
+ function addPop(at){
+  var o=ctx.createOscillator(),g=ctx.createGain();
+  o.connect(g);g.connect(master);o.type="sine";
+  o.frequency.setValueAtTime(780,at);o.frequency.exponentialRampToValueAtTime(420,at+.3);
+  g.gain.setValueAtTime(.0001,at);g.gain.linearRampToValueAtTime(.12,at+.008);
+  g.gain.exponentialRampToValueAtTime(.0001,at+.32);
+  o.start(at);o.stop(at+.34);
+ }
+ // بازسازی ضربه‌های تایپ با همان بازهٔ زمانی و محدودیت 64ms پیش‌نمایش زنده
+ typing.forEach(function(x){
+  var txt=x[1],start=x[2]*1.2,duration=x[3]*1.2,count=Array.from(txt).length,last=0;
+  for(var frame=1;frame<=Math.ceil(duration*60);frame++){
+   var elapsed=frame/60,n=Math.floor(Math.min(1,elapsed/duration)*count);
+   if(n-last>=2){
+    var at=start+elapsed;
+    if(at-lastTypeTapAt>=.064){addTypeTap(at);lastTypeTapAt=at;}
+    last=n;
+   }
+  }
+ });
+ // همان شش pop پیش‌نمایش، در همان زمان و با همان نوسان‌ساز و envelope
+ [2.8,11.2,15.1,18.9,22.2,29.2].forEach(addPop);
+ return ctx.startRendering().then(function(buffer){
+  var channels=buffer.numberOfChannels,length=buffer.length,bytes=length*channels*2;
+  var ab=new ArrayBuffer(44+bytes),v=new DataView(ab),p=0;
+  function str(s){for(var i=0;i<s.length;i++)v.setUint8(p++,s.charCodeAt(i));}
+  str("RIFF");v.setUint32(p,36+bytes,true);p+=4;str("WAVE");str("fmt ");
+  v.setUint32(p,16,true);p+=4;v.setUint16(p,1,true);p+=2;v.setUint16(p,channels,true);p+=2;
+  v.setUint32(p,sr,true);p+=4;v.setUint32(p,sr*channels*2,true);p+=4;
+  v.setUint16(p,channels*2,true);p+=2;v.setUint16(p,16,true);p+=2;str("data");
+  v.setUint32(p,bytes,true);p+=4;
+  var ch=[];for(var c=0;c<channels;c++)ch.push(buffer.getChannelData(c));
+  for(var i=0;i<length;i++)for(var c=0;c<channels;c++){
+   var z=Math.max(-1,Math.min(1,ch[c][i]));v.setInt16(p,z<0?z*32768:z*32767,true);p+=2;
+  }
+  return new Blob([ab],{type:"audio/wav"});
+ });
 }
 if(!RENDER){$("exportSfx").onclick=function(){var b=$("exportSfx"),s=$("sfxStatus");b.disabled=true;b.textContent="در حال ساخت WAV...";exportSfxWav().then(function(blob){var u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="reel-01-sfx.wav";a.click();setTimeout(()=>URL.revokeObjectURL(u),3000);s.textContent="فایل آماده شد";}).catch(e=>s.textContent="خطا: "+e.message).finally(()=>{b.disabled=false;b.textContent="دریافت افکت‌ها (WAV)";});};}
 window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};window.OCTO_EVENTS=[{name:"pop",t:2.8},{name:"pop",t:11.2},{name:"pop",t:15.1},{name:"pop",t:18.9},{name:"pop",t:22.2},{name:"pop",t:29.2}];window.__ready=false;
