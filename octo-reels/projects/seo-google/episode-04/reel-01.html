@@ -15,11 +15,11 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 .brand{position:absolute;top:58px;left:0;right:0;text-align:center;direction:ltr;font:800 23px/1 system-ui,sans-serif;letter-spacing:.12em;color:#9eafc3;opacity:.65;z-index:20}
 .brand:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cyan);margin-right:12px;box-shadow:0 0 16px var(--cyan)}
 .scene{position:absolute;inset:0;opacity:0;pointer-events:none}
-.kicker{position:absolute;top:220px;left:80px;right:80px;text-align:center;color:var(--muted);font-size:29px;font-weight:750;letter-spacing:.02em}
-.headline{position:absolute;top:330px;left:75px;right:75px;text-align:center;font-size:63px;line-height:1.75;font-weight:950;letter-spacing:-.03em}
+.kicker{display:none}
+.headline{position:absolute;top:470px;left:85px;right:85px;text-align:center;font-size:78px;line-height:1.8;font-weight:950;letter-spacing:-.03em;min-height:430px}
 .headline em,.cyan{font-style:normal;color:var(--cyan)}
-.subline{position:absolute;top:670px;left:110px;right:110px;text-align:center;color:#c5d2e1;font-size:34px;line-height:1.8;font-weight:650}
-.problem-card{position:absolute;top:900px;left:105px;right:105px;background:#f5f8fc;color:var(--ink);border-radius:28px;padding:32px 38px 40px;box-shadow:0 32px 90px #0008;opacity:0;transform:translateY(38px)}
+.subline{display:none}
+.problem-card{display:none}
 .problem-top{display:flex;align-items:center;justify-content:space-between;color:#68798d;font-size:20px;font-weight:800}
 .google-mark{font:800 27px Arial,sans-serif;direction:ltr}
 .google-mark b:nth-child(1){color:#4285f4}.google-mark b:nth-child(2){color:#ea4335}.google-mark b:nth-child(3){color:#fbbc05}.google-mark b:nth-child(4){color:#4285f4}.google-mark b:nth-child(5){color:#34a853}.google-mark b:nth-child(6){color:#ea4335}
@@ -28,7 +28,7 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 .problem-desc{font-size:23px;line-height:1.8;color:#526176}
 .problem-stats{display:flex;justify-content:space-between;align-items:center;margin-top:30px;padding-top:24px;border-top:1px solid #dce4ed;font-size:23px;font-weight:850}
 .zero{color:#c44747;font-size:27px}
-#problemAlert{position:absolute;top:1470px;left:90px;right:90px;text-align:center;font-size:36px;line-height:1.8;font-weight:900;opacity:0}
+#problemAlert{display:none}
 #questionScene{display:flex;align-items:center;justify-content:center}
 .question-wrap{width:100%;padding:0 95px;text-align:center}
 .question-label{font-size:29px;color:var(--muted);font-weight:750;margin-bottom:38px;opacity:0}
@@ -59,11 +59,12 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 .reason-text{font-size:39px;line-height:1.6;font-weight:900}
 .reason-text small{display:block;font-size:23px;line-height:1.7;color:#aebdd0;font-weight:600;margin-top:3px}
 .reason-note{position:absolute;top:1320px;left:105px;right:105px;text-align:center;font-size:28px;line-height:1.8;color:#b8c7d8;opacity:0}
-#endScene .end-main{position:absolute;top:460px;left:75px;right:75px;text-align:center;font-size:65px;line-height:1.8;font-weight:1000;opacity:0}
+#endScene .end-main{position:absolute;top:480px;left:70px;right:70px;text-align:center;font-size:76px;line-height:1.85;font-weight:1000;opacity:0;min-height:460px}
 #endScene .end-main em{font-style:normal;color:var(--cyan)}
-#endScene .end-sub{position:absolute;top:900px;left:100px;right:100px;text-align:center;font-size:31px;line-height:1.8;color:#c1cfdf;opacity:0}
-.end-line{position:absolute;top:1160px;left:190px;right:190px;height:3px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0)}
-#endScene .end-brand{position:absolute;top:1270px;left:0;right:0;text-align:center;font:900 43px/1.4 system-ui,sans-serif;letter-spacing:.1em;color:var(--cyan);opacity:0}
+#endScene .end-sub{display:none}
+.end-line{display:none}
+#endScene .end-brand{display:none}
+.octo-mascot{position:absolute;width:270px;height:300px;opacity:0;z-index:3}.octo-mascot svg{width:100%;height:100%;overflow:visible}.scene-one-octo{left:405px;top:1080px;transform:translateY(55px) scale(.88)}.end-octo{left:405px;top:1110px;transform:translateY(430px) scale(.9)}.typed-caret{display:inline-block;width:5px;height:.95em;background:var(--cyan);vertical-align:-.08em;margin-right:8px;animation:blink .7s steps(2,start) infinite}
 #controls{position:fixed;z-index:1000;left:0;right:0;bottom:0;display:flex;align-items:center;gap:16px;padding:18px 24px;background:rgba(5,12,24,.97);border-top:1px solid rgba(65,250,241,.25);font:18px ui-monospace,Consolas,monospace;color:#cbd5e1;direction:ltr}
 #controls button{background:#102a43;color:var(--cyan);border:1px solid rgba(65,250,241,.4);border-radius:12px;padding:13px 20px;font:inherit;cursor:pointer}
 #scrub{flex:1;accent-color:var(--cyan);height:14px}#time{min-width:90px;text-align:center}
@@ -73,9 +74,8 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
 <div id="stage">
 <div class="brand">OCTOOPUS</div>
 <section id="problemScene" class="scene">
- <div class="kicker">مشکل خیلی از سایت‌ها اینجاست...</div>
- <div class="headline" id="problemHeadline">رتبه‌ی خوبی داری؛<br><em>اما کلیک نمی‌گیری؟</em></div>
- <div class="subline" id="problemSub">کاربر نتیجه‌ات رو می‌بینه،<br>ولی از کنارش رد می‌شه.</div>
+ <div class="octo-mascot scene-one-octo" id="sceneOneOcto"><svg viewBox="0 0 300 330" aria-hidden="true"><g fill="none" stroke="#41faf1" stroke-width="17" stroke-linecap="round"><path d="M95 205 C45 230 35 280 70 292 C92 300 105 279 94 264"/><path d="M125 218 C95 260 115 310 150 300 C171 294 168 275 156 265"/><path d="M175 218 C205 260 190 310 158 300"/><path d="M205 202 C255 225 270 270 240 289 C219 302 200 283 211 265"/></g><path d="M60 160 C55 80 95 35 150 35 C205 35 245 80 240 160 C236 222 204 245 150 245 C96 245 64 222 60 160Z" fill="#41faf1"/><ellipse cx="117" cy="145" rx="13" ry="19" fill="#071426"/><ellipse cx="183" cy="145" rx="13" ry="19" fill="#071426"/><path d="M130 184 Q150 200 170 184" fill="none" stroke="#071426" stroke-width="8" stroke-linecap="round"/></svg></div>
+ <div class="headline" id="problemHeadline"><span id="problemTyped"></span></div>
  <div class="problem-card" id="problemCard">
   <div class="problem-top"><span>نتیجه‌ی جست‌وجوی گوگل</span><span class="google-mark"><b>G</b><b>o</b><b>o</b><b>g</b><b>l</b><b>e</b></span></div>
   <div class="problem-url">yourstore.ir › blog</div>
@@ -107,7 +107,8 @@ body{font-family:Vazirmatn,sans-serif;color:var(--white);-webkit-font-smoothing:
  <div class="reason-note" id="reasonNote">کنجکاوی خوبه؛ ابهامِ گیج‌کننده نه.</div>
 </section>
 <section id="endScene" class="scene">
- <div class="end-main" id="endMain">رتبه تو رو<br><em>دیده می‌کنه؛</em><br>عنوانت انتخابت می‌کنه.</div>
+ <div class="octo-mascot end-octo" id="endOcto"><svg viewBox="0 0 300 330" aria-hidden="true"><g fill="none" stroke="#41faf1" stroke-width="17" stroke-linecap="round"><path d="M95 205 C45 230 35 280 70 292 C92 300 105 279 94 264"/><path d="M125 218 C95 260 115 310 150 300 C171 294 168 275 156 265"/><path d="M175 218 C205 260 190 310 158 300"/><path d="M205 202 C255 225 270 270 240 289 C219 302 200 283 211 265"/></g><path d="M60 160 C55 80 95 35 150 35 C205 35 245 80 240 160 C236 222 204 245 150 245 C96 245 64 222 60 160Z" fill="#41faf1"/><ellipse cx="117" cy="145" rx="13" ry="19" fill="#071426"/><ellipse cx="183" cy="145" rx="13" ry="19" fill="#071426"/><path d="M130 184 Q150 200 170 184" fill="none" stroke="#071426" stroke-width="8" stroke-linecap="round"/></svg></div>
+ <div class="end-main" id="endMain"><span id="endTyped"></span></div>
  <div class="end-sub" id="endSub">برای کلیک گرفتن، فقط بالا بودن کافی نیست.</div>
  <div class="end-line" id="endLine"></div>
  <div class="end-brand" id="endBrand">OCTOOPUS</div>
@@ -124,35 +125,45 @@ var lerp=(a,b,p)=>a+(b-a)*p;
 var enter=(el,t,a,d,y)=>{var p=smooth((t-a)/d);el.style.opacity=p;el.style.transform="translateY("+(y*(1-p))+"px)"};
 var fade=(el,t,a,b)=>{el.style.opacity=smooth((t-a)/.3)*(1-smooth((t-b)/.3))};
 var typeText=(el,text,t,start,duration,caret)=>{var p=clamp((t-start)/duration,0,1),n=Math.floor(p*Array.from(text).length);el.textContent=Array.from(text).slice(0,n).join("");if(caret&&p<1)el.innerHTML=el.textContent+'<i class="question-caret"></i>'};
+function typeInto(el,text,t,start,duration){
+ var chars=Array.from(text),p=clamp((t-start)/duration,0,1),n=Math.floor(p*chars.length);
+ el.textContent=chars.slice(0,n).join("");
+ if(p<1)el.innerHTML=el.textContent+'<i class="typed-caret"></i>';
+}
 function draw(input){
  var t=clamp(Number(input)||0,0,DURATION);
  [["problemScene",0,6.1],["questionScene",5.8,10.3],["choiceScene",10.0,19.0],["reasonsScene",18.7,26.1],["endScene",25.8,30]].forEach(s=>fade($(s[0]),t,s[1],s[2]));
- enter($("problemHeadline"),t,.45,.5,22);
- enter($("problemSub"),t,1.25,.45,18);
- enter($("problemCard"),t,2.0,.6,34);
- enter($("problemAlert"),t,4.55,.45,16);
+ enter($("problemHeadline"),t,.25,.35,12);
+ typeInto($("problemTyped"),"رتبه‌ی خوبی داری؛ اما کلیک نمی‌گیری؟",t,.65,3.15);
+ enter($("sceneOneOcto"),t,3.45,.75,0);
+ $("sceneOneOcto").style.transform="translateY("+ (t>4.2?Math.sin(t*2)*7:55*(1-smooth((t-3.45)/.75))) +"px) scale(.88)";
  enter($("questionLabel"),t,6.1,.4,14);
  typeText($("questionText"),"شما بین این دو عنوان کدوم رو کلیک می‌کنید؟",t,6.65,2.5,true);
- enter($("choiceIntro"),t,10.25,.45,18);
- enter($("choiceA"),t,11.0,.55,28);
- enter($("choiceB"),t,12.0,.55,28);
+ enter($("choiceIntro"),t,10.25,.3,10);
+ typeInto($("choiceIntro"),"فرض کن دنبال کفش پیاده‌روی هستی؛ کدوم عنوان نظرت رو جلب می‌کنه؟",t,10.45,1.7);
+ enter($("choiceA"),t,11.0,.35,18);
+ enter($("choiceB"),t,12.0,.35,18);
+ typeInto($("choiceA").querySelector(".choice-title"),"راهنمای خرید کفش پیاده‌روی",t,11.55,1.0);
+ typeInto($("choiceB").querySelector(".choice-title"),"قبل از خرید کفش پیاده‌روی، این ۵ نکته رو بدون!",t,12.55,1.35);
  var cursor=$("cursor"),p1=smooth((t-13.0)/.8),p2=smooth((t-14.7)/.9);
  cursor.style.opacity=smooth((t-12.8)/.25)*(1-smooth((t-17.0)/.25));
  var cx=lerp(760,650,p1),cy=lerp(810,650,p1);cx=lerp(cx,440,p2);cy=lerp(cy,1080,p2);
  cursor.style.left=cx+"px";cursor.style.top=cy+"px";
  if(t>=13.75&&t<15.45)$("choiceA").classList.add("rejected");else $("choiceA").classList.remove("rejected");
  if(t>=15.6)$("choiceB").classList.add("selected");else $("choiceB").classList.remove("selected");
- enter($("choiceVerdict"),t,16.25,.45,15);
- enter($("reasonsHead"),t,19.0,.45,20);
+ enter($("choiceVerdict"),t,16.25,.35,12);
+ enter($("reasonsHead"),t,19.0,.35,12);
+ typeInto($("reasonsHead"),"یک عنوان خوب باید سه کار انجام بده:",t,19.25,1.0);
  enter($("reasonsLead"),t,19.7,.4,14);
- enter($("reason1"),t,20.25,.45,22);
- enter($("reason2"),t,21.55,.45,22);
- enter($("reason3"),t,22.85,.45,22);
+ enter($("reason1"),t,20.25,.35,10);enter($("reason2"),t,21.55,.35,10);enter($("reason3"),t,22.85,.35,10);
+ typeInto($("reason1").querySelector(".reason-text"),"جذاب و کنجکاوی‌برانگیز",t,20.65,.75);
+ typeInto($("reason2").querySelector(".reason-text"),"روشن و مشخص",t,21.95,.65);
+ typeInto($("reason3").querySelector(".reason-text"),"مرتبط و قابل‌اعتماد",t,23.25,.7);
  enter($("reasonNote"),t,24.45,.4,14);
- enter($("endMain"),t,26.0,.55,24);
- enter($("endSub"),t,27.2,.45,15);
- $("endLine").style.transform="scaleX("+smooth((t-27.8)/.7)+")";
- enter($("endBrand"),t,28.45,.45,12);
+ enter($("endMain"),t,26.0,.35,10);
+ typeInto($("endTyped"),"رتبه تو رو دیده می‌کنه؛ عنوانت انتخابت می‌کنه.",t,26.25,2.0);
+ enter($("endOcto"),t,28.35,.8,0);
+ $("endOcto").style.transform="translateY("+ (430*(1-smooth((t-28.35)/.8))) +"px) scale(.9)";
 }
 window.renderAt=draw;window.OCTO_META={duration:DURATION,fps:30,width:1080,height:1920};
 window.OCTO_EVENTS=[{name:"rise",t:1.9},{name:"tick",t:2.1},{name:"pop",t:4.6},{name:"whoosh",t:6.0},{name:"type",t:6.7},{name:"whoosh",t:10.2},{name:"tick",t:11.1},{name:"tick",t:12.1},{name:"click",t:15.6},{name:"type",t:19.0},{name:"pop",t:20.3},{name:"pop",t:21.6},{name:"pop",t:22.9},{name:"ding",t:28.5}];
