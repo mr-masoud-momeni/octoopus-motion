@@ -11,7 +11,7 @@ body{position:relative;background:#050d1b;color:var(--white);font-family:Vazirma
 .glow{position:absolute;width:850px;height:850px;left:115px;top:520px;border-radius:50%;background:rgba(65,250,241,.10);filter:blur(115px);z-index:-1}
 .brand{position:absolute;top:155px;left:100px;right:100px;text-align:center;font:800 31px/1.4 Arial,sans-serif;letter-spacing:2px;color:var(--cyan);direction:ltr}
 .rule{position:absolute;top:225px;left:145px;right:145px;height:2px;background:linear-gradient(90deg,transparent,rgba(65,250,241,.55),transparent)}
-.copy{position:absolute;left:115px;right:115px;top:310px;bottom:285px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:58px;text-align:center}
+.copy{position:absolute;left:115px;right:115px;top:310px;bottom:285px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0;text-align:center}
 h1{width:100%;margin:0;font-size:82px;line-height:1.45;font-weight:900;letter-spacing:-1.5px;color:#fff}
 h1 span{color:var(--cyan)}
 .sub{width:100%;max-width:850px;margin:0;color:#EAF2FC;font-size:43px;line-height:1.9;font-weight:500;text-wrap:pretty}
@@ -20,7 +20,7 @@ h1 span{color:var(--cyan)}
 </style></head>
 <body><main id="poster"><div class="glow"></div><div class="brand">OCTOOPUS.IR</div><div class="rule"></div><section class="copy">
 <h1><span>سایت ارزون می‌خوای؟!</span></h1>
-<p class="sub">سایت ارزون ساختن همیشه به معنی <strong>کم‌هزینه بودن</strong> نیست!<br>یادت نره، <strong>وقت شما هم بخشی از هزینه‌هاست.</strong></p>
+
 </section><div class="bottom-url">octoopus.ir</div></main>
 <script>
 function fitPoster(){const p=document.getElementById('poster');const scale=Math.min(window.innerWidth/1080,window.innerHeight/1920);p.style.transform=`scale(${scale})`;p.style.left=`${(window.innerWidth-1080*scale)/2}px`;p.style.top=`${(window.innerHeight-1920*scale)/2}px`}
