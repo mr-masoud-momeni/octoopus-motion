@@ -13,13 +13,18 @@ body{position:relative;background:#050d1b;color:var(--white);font-family:Vazirma
 #poster{position:absolute;left:0;top:0;transform-origin:top left;width:1080px;height:1920px;overflow:hidden;background:radial-gradient(ellipse 85% 55% at 50% 48%,rgba(25,76,105,.55),transparent 72%),linear-gradient(145deg,#071629,#0A192F 52%,#061326)}
 #poster:before{content:"";position:absolute;inset:0;opacity:.18;background-image:radial-gradient(rgba(65,250,241,.3) 1.3px,transparent 1.3px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 5%,transparent 78%)}
 .glow{position:absolute;width:760px;height:760px;left:160px;top:570px;border-radius:50%;background:rgba(65,250,241,.09);filter:blur(110px)}
-.url{position:absolute;top:265px;left:90px;right:90px;text-align:center;font:800 25px/1.4 Arial,sans-serif;letter-spacing:1.4px;color:var(--cyan);direction:ltr}
-.rule{position:absolute;top:335px;left:90px;right:90px;height:2px;background:linear-gradient(90deg,transparent,rgba(65,250,241,.48),transparent)}
-.copy{position:absolute;left:90px;right:90px;top:520px;bottom:420px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:66px;text-align:center}
-h1{width:100%;margin:0;text-align:center;font-size:62px;line-height:1.55;font-weight:850;color:var(--white);letter-spacing:-1px}
+.url{position:absolute;top:205px;left:150px;right:150px;text-align:center;font:800 25px/1.4 Arial,sans-serif;letter-spacing:1.4px;color:var(--cyan);direction:ltr}
+.rule{position:absolute;top:275px;left:170px;right:170px;height:2px;background:linear-gradient(90deg,transparent,rgba(65,250,241,.48),transparent)}
+.copy{position:absolute;left:175px;right:175px;top:440px;bottom:440px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:54px;text-align:center}
+h1{width:100%;margin:0;text-align:center;font-size:58px;line-height:1.5;font-weight:850;color:var(--white);letter-spacing:-1px}
 h1 span{color:var(--cyan)}
-.message{width:100%;max-width:900px;margin:0;text-align:center;font-size:44px;line-height:1.95;font-weight:400;color:#EAF2FC;text-wrap:pretty}
-.message .highlight{color:var(--cyan);font-weight:500}
+.feature{display:flex;align-items:center;gap:15px;padding:12px 25px;border:1px solid rgba(65,250,241,.35);border-radius:50px;background:rgba(65,250,241,.07);color:var(--cyan);font-size:25px;font-weight:700}
+.number{display:grid;place-items:center;width:37px;height:37px;border-radius:50%;background:var(--cyan);color:#071629;font:800 19px/1 Arial,sans-serif}
+.blocks{display:grid;grid-template-columns:repeat(2,11px);gap:4px}
+.blocks i{display:block;width:11px;height:11px;border:1.5px solid var(--cyan);border-radius:2px}
+.blocks i:nth-child(2){opacity:.55}.blocks i:nth-child(3){opacity:.75}
+.message{width:100%;max-width:730px;margin:0;text-align:center;font-size:38px;line-height:2;font-weight:400;color:#EAF2FC;text-wrap:pretty}
+.message .highlight{color:var(--cyan);font-weight:650}
 </style>
 </head>
 <body>
@@ -29,7 +34,8 @@ h1 span{color:var(--cyan)}
  <div class="rule"></div>
  <section class="copy">
   <h1><span>وردپرس درد نمی‌خوره؟!</span></h1>
-  <div class="message">برتری یک: یه صفحه‌ساز مثل المنتور داره که تقریباً هر چیزی رو می‌تونی باهاش بسازی؛ از صفحه فرود و سایت شرکتی تا صفحات فروشگاهی، فرم‌ها، فیلتر محصولات و بخش‌های تعاملی. حتی می‌تونی ظاهر سایتت رو خودت تغییر بدی، بدون اینکه برای هر اصلاح کوچیکی برنامه‌نویس بخوای.</div>
+  <div class="feature"><span class="number">۱</span><span>صفحه‌ساز قدرتمند</span><span class="blocks"><i></i><i></i><i></i><i></i></span></div>
+  <div class="message">یعنی با ابزاری مثل <span class="highlight">المنتور</span>، دستت برای طراحی بازه؛ از صفحه فرود و معرفی خدمات تا صفحه محصول، فرم، فیلتر و بخش‌های تعاملی. خیلی از این‌ها رو <span class="highlight">بدون کدنویسی</span> می‌سازی و هر وقت بخوای تغییر می‌دی؛ بدون اینکه برای هر اصلاح کوچیکی برنامه‌نویس بخوای!</div>
  </section>
 </main>
 <script>
