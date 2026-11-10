@@ -1,50 +1,46 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>درب ورود سایتت پنهانه؟! | امنیت وب | Octoopus</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>درب ورود سایتت پنهانه؟! | Octoopus</title>
 <style>
 @font-face{font-family:Vazirmatn;src:url("../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:block}
 :root{--cyan:#41FAF1;--white:#F3F8FF;--muted:#B4BCD0}
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{position:relative;background:#050d1b;color:var(--white);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased}
-#poster{position:absolute;left:0;top:0;transform-origin:top left;width:1080px;height:1920px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 85% 55% at 50% 20%,rgba(25,76,105,.55),transparent 72%),linear-gradient(145deg,#071629,#0A192F 52%,#061326)}
-#poster:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.18;background-image:radial-gradient(rgba(65,250,241,.3) 1.3px,transparent 1.3px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 5%,transparent 78%)}
-.glow{position:absolute;width:760px;height:760px;left:160px;top:470px;border-radius:50%;background:rgba(65,250,241,.08);filter:blur(110px)}
-.url{position:absolute;top:92px;left:150px;right:150px;text-align:center;font:800 25px/1.4 Arial,sans-serif;letter-spacing:1.4px;color:var(--cyan);direction:ltr}
-.rule{position:absolute;top:158px;left:145px;right:145px;height:2px;background:linear-gradient(90deg,transparent,rgba(65,250,241,.48),transparent)}
-.copy{position:absolute;left:100px;right:100px;top:220px;bottom:100px;display:flex;flex-direction:column;align-items:center;text-align:center}
-h1{width:100%;margin:0 0 10px;font-size:62px;line-height:1.45;font-weight:900;letter-spacing:-1px;color:var(--white)}
+#poster{position:absolute;left:0;top:0;transform-origin:top left;width:1080px;height:1920px;overflow:hidden;background:radial-gradient(ellipse 85% 55% at 50% 48%,rgba(25,76,105,.55),transparent 72%),linear-gradient(145deg,#071629,#0A192F 52%,#061326)}
+#poster:before{content:"";position:absolute;inset:0;opacity:.18;background-image:radial-gradient(rgba(65,250,241,.3) 1.3px,transparent 1.3px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 5%,transparent 78%)}
+.glow{position:absolute;width:760px;height:760px;left:160px;top:570px;border-radius:50%;background:rgba(65,250,241,.09);filter:blur(110px)}
+.url{position:absolute;top:205px;left:150px;right:150px;text-align:center;font:800 25px/1.4 Arial,sans-serif;letter-spacing:1.4px;color:var(--cyan);direction:ltr}
+.rule{position:absolute;top:275px;left:170px;right:170px;height:2px;background:linear-gradient(90deg,transparent,rgba(65,250,241,.48),transparent)}
+.copy{position:absolute;left:175px;right:175px;top:440px;bottom:440px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:54px;text-align:center}
+h1{width:100%;margin:0;text-align:center;font-size:58px;line-height:1.5;font-weight:850;color:var(--white);letter-spacing:-1px}
 h1 span{color:var(--cyan)}
-.feature{display:flex;align-items:center;gap:15px;padding:10px 25px;margin:0 0 35px;border:1px solid rgba(65,250,241,.35);border-radius:50px;background:rgba(65,250,241,.07);color:var(--cyan);font-size:25px;font-weight:700}
+.feature{display:flex;align-items:center;gap:15px;padding:12px 25px;border:1px solid rgba(65,250,241,.35);border-radius:50px;background:rgba(65,250,241,.07);color:var(--cyan);font-size:25px;font-weight:700}
 .number{display:grid;place-items:center;width:37px;height:37px;border-radius:50%;background:var(--cyan);color:#071629;font:800 19px/1 Arial,sans-serif}
-.cards{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:right}
-.card{min-height:285px;padding:25px 25px 26px;border:1px solid rgba(111,190,220,.25);border-radius:23px;background:linear-gradient(135deg,rgba(34,72,105,.48),rgba(15,37,65,.58));box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 16px 38px rgba(0,0,0,.16)}
-.card.wide{grid-column:1/-1;min-height:215px}
-.card-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.num{width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:var(--cyan);color:#092039;display:grid;place-items:center;font:900 21px/1 Arial,sans-serif;box-shadow:0 0 22px rgba(65,250,241,.15)}
-h2{margin:0;color:var(--cyan);font-size:29px;line-height:1.4;font-weight:850}
-p{margin:0;color:#D8E3F2;font-size:22px;line-height:1.9;font-weight:430}
-code{direction:ltr;unicode-bidi:embed;display:inline-block;padding:2px 9px;border-radius:7px;background:#061326;color:var(--cyan);font:700 19px/1.7 Consolas,monospace}
-.note{width:100%;margin-top:22px;padding:20px 25px;border:1px solid rgba(255,189,117,.42);border-radius:18px;background:rgba(255,189,117,.07);color:#FFE0BD;font-size:23px;line-height:1.8;font-weight:750;text-align:center}
-.footer{margin-top:auto;width:100%;padding-top:22px;border-top:1px solid rgba(180,188,208,.2);display:flex;align-items:center;justify-content:space-between}
-.footer-copy{font-size:18px;color:var(--muted);line-height:1.8}
-.bottom-url{font:800 22px/1 Arial,sans-serif;letter-spacing:1.2px;color:var(--cyan);direction:ltr}
-</style></head>
-<body><main id="poster"><div class="glow"></div><div class="url">octoopus.ir</div><div class="rule"></div>
-<section class="copy">
-<h1>درب ورود سایتت<br><span>پنهانه؟!</span></h1>
-<div class="feature"><span class="number">۱</span><span>امنیت وب</span></div>
-<section class="cards">
-<article class="card"><div class="card-head"><span class="num">01</span><h2>مسیر ورود وردپرس</h2></div><p>آدرس پیش‌فرض ورود وردپرس معمولاً <code>/wp-login.php</code> است؛ مسیری که ربات‌ها هم به‌خوبی می‌شناسند.</p></article>
-<article class="card"><div class="card-head"><span class="num">02</span><h2>درِ ورودی رو عوض کن</h2></div><p>با یک افزونه معتبر می‌تونی آدرس ورود پیش‌فرض رو تغییر بدی تا دسترسی ربات‌های مهاجم سخت‌تر بشه.</p></article>
-<article class="card wide"><div class="card-head"><span class="num">03</span><h2>امنیت فقط مخفی‌کردن آدرس نیست</h2></div><p>رمز عبور قوی و منحصربه‌فرد، ورود دومرحله‌ای، محدودکردن تلاش‌های ورود و به‌روزرسانی منظم وردپرس رو جدی بگیر.</p></article>
-</section>
-<div class="note">تغییر آدرس ورود یک لایه دفاعیه؛ به‌تنهایی امنیت سایت رو تضمین نمی‌کنه.</div>
-<footer class="footer"><div class="footer-copy">برای امنیت بیشتر سایتت، روی اکتوپوس حساب کن!</div><div class="bottom-url">octoopus.ir</div></footer>
-</section></main>
+.blocks{display:grid;grid-template-columns:repeat(2,11px);gap:4px}
+.blocks i{display:block;width:11px;height:11px;border:1.5px solid var(--cyan);border-radius:2px}
+.blocks i:nth-child(2){opacity:.55}.blocks i:nth-child(3){opacity:.75}
+.message{width:100%;max-width:730px;margin:0;text-align:center;font-size:38px;line-height:2;font-weight:400;color:#EAF2FC;text-wrap:pretty}
+.message .highlight{color:var(--cyan);font-weight:650}
+</style>
+</head>
+<body>
+<main id="poster">
+ <div class="glow"></div>
+ <div class="url">octoopus.ir</div>
+ <div class="rule"></div>
+ <section class="copy">
+  <h1><span>درب ورود سایتت پنهانه؟!</span></h1>
+  <div class="feature"><span class="number">۱</span><span>امنیت وب</span><span class="blocks"><i></i><i></i><i></i><i></i></span></div>
+  <div class="message">آدرس پیش‌فرض ورود وردپرس (<span class="highlight">/wp-login.php</span>) برای ربات‌ها هم شناخته‌شده‌ست. با یک افزونه معتبر می‌تونی این آدرس رو تغییر بدی و حملات خودکار رو سخت‌تر کنی. البته امنیت فقط مخفی‌کردن آدرس نیست؛ <span class="highlight">رمز قوی، ورود دومرحله‌ای و به‌روزرسانی منظم</span> رو هم جدی بگیر.</div>
+ </section>
+</main>
 <script>
 function fitPoster(){const p=document.getElementById('poster');const scale=Math.min(window.innerWidth/1080,window.innerHeight/1920);p.style.transform=`scale(${scale})`;p.style.left=`${(window.innerWidth-1080*scale)/2}px`;p.style.top=`${(window.innerHeight-1920*scale)/2}px`}
 fitPoster();window.addEventListener('resize',fitPoster);document.fonts.ready.then(()=>{window.__ready=true});window.OCTO_META={duration:1};window.renderAt=()=>{};
-</script></body></html>
+</script>
+</body>
+</html>
