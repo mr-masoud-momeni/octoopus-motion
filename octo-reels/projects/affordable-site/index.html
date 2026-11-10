@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>چطور یه سایت ارزون بسازیم؟ | Octoopus</title>
+<style>
+@font-face{font-family:Vazirmatn;src:url("../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:block}
+:root{--navy:#0A192F;--navy2:#142B4D;--cyan:#41FAF1;--muted:#B4BCD0;--white:#F3F8FF}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{position:relative;font-family:Vazirmatn,sans-serif;background:#050d1b;color:var(--white);-webkit-font-smoothing:antialiased}
+#poster{position:absolute;left:0;top:0;transform-origin:top left;width:1080px;height:1920px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 85% 58% at 50% 16%,rgba(25,76,105,.62),transparent 72%),radial-gradient(ellipse 75% 58% at 92% 82%,rgba(18,65,91,.42),transparent 70%),linear-gradient(145deg,#071629 0%,#0A192F 48%,#061326 100%)}
+#poster:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.22;background-image:radial-gradient(rgba(65,250,241,.26) 1.4px,transparent 1.4px);background-size:46px 46px;mask-image:radial-gradient(ellipse at 50% 45%,#000 8%,transparent 78%)}
+#poster:after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(1,7,17,.32) 100%)}
+.glow{position:absolute;width:900px;height:900px;left:90px;top:500px;border-radius:50%;background:rgba(65,250,241,.07);filter:blur(100px);z-index:-1}
+.inner{position:absolute;inset:68px 76px 58px;display:flex;flex-direction:column}
+.header{display:flex;align-items:center;justify-content:space-between;direction:ltr;height:48px;margin-bottom:48px}
+.brand{font:800 25px/1 Arial,sans-serif;letter-spacing:2.8px;color:var(--white)}
+.brand b{color:var(--cyan);font-weight:900}
+.tag{font:600 16px/1.4 Arial,sans-serif;letter-spacing:1.8px;color:#91a9c7}
+.rule{height:2px;width:100%;background:linear-gradient(90deg,rgba(65,250,241,0),rgba(65,250,241,.45),rgba(65,250,241,0));margin-bottom:38px}
+.heading{margin-bottom:34px}
+.eyebrow{font-size:19px;font-weight:700;color:var(--cyan);letter-spacing:.5px;margin-bottom:12px}
+h1{font-size:68px;line-height:1.42;font-weight:900;letter-spacing:-1.4px;margin:0;color:#fff}
+h1 span{color:var(--cyan)}
+.lead{font-size:25px;line-height:1.8;color:var(--muted);font-weight:450;margin-top:12px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;direction:rtl}
+.card{position:relative;direction:rtl;min-height:190px;padding:23px 25px 24px;border-radius:23px;border:1px solid rgba(111,190,220,.25);background:linear-gradient(135deg,rgba(34,72,105,.48),rgba(15,37,65,.52));box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 18px 48px rgba(0,0,0,.18);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.card:before{content:"";position:absolute;inset:1px;border-radius:22px;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.07),transparent 42%);opacity:.7}
+.card-head{position:relative;display:flex;align-items:center;gap:14px;margin-bottom:13px}
+.num{width:48px;height:48px;flex:0 0 48px;border-radius:14px;background:var(--cyan);color:#092039;display:grid;place-items:center;font:900 21px/1 Arial,sans-serif;box-shadow:0 0 25px rgba(65,250,241,.18)}
+h2{font-size:27px;line-height:1.4;font-weight:850;color:var(--cyan);margin:0}
+.duration{margin-right:auto;font-size:19px;font-weight:800;color:#fff;background:rgba(65,250,241,.12);border:1px solid rgba(65,250,241,.25);border-radius:999px;padding:5px 13px;white-space:nowrap}
+p{position:relative;margin:0;color:#D8E3F2;font-size:21px;line-height:1.85;font-weight:430}
+.note{margin-top:22px;padding:22px 27px;border:1px solid rgba(65,250,241,.42);border-radius:20px;background:linear-gradient(110deg,rgba(65,250,241,.09),rgba(20,43,77,.42));display:flex;align-items:center;gap:17px}
+.note-mark{width:9px;height:40px;border-radius:8px;background:var(--cyan);box-shadow:0 0 20px rgba(65,250,241,.35);flex:0 0 9px}
+.note strong{font-size:24px;color:var(--cyan);font-weight:800}
+.footer{margin-top:auto;padding-top:25px;display:flex;flex-direction:column;gap:14px;border-top:1px solid rgba(180,188,208,.2)}
+.footer-copy{font-size:25px;color:#F3F8FF;line-height:1.8;font-weight:750}
+.footer-copy span{color:var(--cyan)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between}
+.small{font-size:18px;color:var(--muted);line-height:1.7}
+.url{font:800 23px/1 Arial,sans-serif;letter-spacing:1.3px;color:var(--cyan);direction:ltr}
+</style>
+</head>
+<body>
+<main id="poster">
+ <div class="glow"></div>
+ <div class="inner">
+  <header class="header"><div class="brand"><b>OCTO</b>OPUS</div><div class="tag">WEB DESIGN&nbsp;&nbsp;·&nbsp;&nbsp;THE REAL COST</div></header>
+  <div class="rule"></div>
+  <section class="heading">
+   <div class="eyebrow">راهکار اقتصادی برای راه‌اندازی سایت! 😬</div>
+   <h1>چطور یه سایت<br><span>ارزون</span> بسازیم؟!</h1>
+   <div class="lead">فقط کافیه قبلش یه چیزهایی یاد بگیری...</div>
+  </section>
+  <section class="cards">
+   <article class="card"><div class="card-head"><span class="num">01</span><h2>وردپرس</h2><span class="duration">۲ ماه</span></div><p>اول باید بفهمی اصلاً این سایت از کجا اومده و چطور کار می‌کنه!</p></article>
+   <article class="card"><div class="card-head"><span class="num">02</span><h2>المنتور</h2><span class="duration">۲ ماه</span></div><p>حالا وقتشه بدون کدنویسی، باکس‌ها رو جابه‌جا کنی تا سایت شکل بگیره.</p></article>
+   <article class="card"><div class="card-head"><span class="num">03</span><h2>امنیت</h2><span class="duration">۱ ماه</span></div><p>که بعد از بالا آوردن سایت، اولین مهمونت هکر نباشه!</p></article>
+   <article class="card"><div class="card-head"><span class="num">04</span><h2>مدیریت هاست</h2><span class="duration">۲ ماه</span></div><p>باید بلد باشی وقتی سایت بالا نیومد، کجا رو دستکاری کنی!</p></article>
+   <article class="card"><div class="card-head"><span class="num">05</span><h2>دیزاین</h2><span class="duration">۳ ماه</span></div><p>چون «یه سایت خوشگل می‌خوام» خودش یک تخصص جداست.</p></article>
+   <article class="card"><div class="card-head"><span class="num">06</span><h2>سئو</h2><span class="duration">۴ ماه</span></div><p>سایت رو ساختی؛ حالا باید یاد بگیری چطور کسی پیداش کنه!</p></article>
+   <article class="card"><div class="card-head"><span class="num">07</span><h2>ووکامرس</h2><span class="duration">۱ ماه</span></div><p>برای وقتی که سایت قراره بفروشه، نه اینکه فقط قشنگ باشه.</p></article>
+   <article class="card"><div class="card-head"><span class="num">08</span><h2>رفع خطا و عیب‌یابی</h2><span class="duration">۲ ماه</span></div><p>چون بالاخره یه چیزی خراب می‌شه؛ معمولاً هم درست وقتی عجله داری!</p></article>
+  </section>
+  <aside class="note"><span class="note-mark"></span><strong>جمعاً ۱۷ ماه آموزش؛ با کمی چاشنی دردسر، حدود دو سال!</strong></aside>
+  <footer class="footer">
+   <div class="footer-copy">تبریک! حالا می‌تونی یه سایت ارزون بسازی؛<br><span>البته اگه هنوز وقت و حوصله کسب‌وکارت مونده باشه! 🤕😂</span></div>
+   <div class="footer-bottom"><div class="small">گاهی سپردن کار به متخصص، اقتصادی‌تره.</div><div class="url">octoopus.ir</div></div>
+  </footer>
+ </div>
+</main>
+<script>
+function fitPoster(){const p=document.getElementById('poster');const scale=Math.min(window.innerWidth/1080,window.innerHeight/1920);p.style.transform=`scale(${scale})`;p.style.left=`${(window.innerWidth-1080*scale)/2}px`;p.style.top=`${(window.innerHeight-1920*scale)/2}px`}
+fitPoster();window.addEventListener('resize',fitPoster);document.fonts.ready.then(()=>{window.__ready=true});window.OCTO_META={duration:1};window.renderAt=()=>{};
+</script>
+</body>
+</html>
