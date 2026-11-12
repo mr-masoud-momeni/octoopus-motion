@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>رتبه اول گوگل با ضمانت؟ | Octoopus</title>
+<style>
+@font-face{font-family:Vazirmatn;src:url("../../../template/fonts/vazirmatn.woff2") format("woff2");font-weight:100 900;font-display:block}
+:root{--cyan:#41FAF1;--white:#F3F8FF}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{position:relative;background:#050d1b;color:var(--white);font-family:Vazirmatn,sans-serif;-webkit-font-smoothing:antialiased}
+#poster{position:absolute;left:0;top:0;transform-origin:top left;width:1080px;height:1920px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 90% 60% at 50% 48%,rgba(25,76,105,.62),transparent 72%),linear-gradient(145deg,#071629,#0A192F 52%,#061326)}
+#poster:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.2;background-image:radial-gradient(rgba(65,250,241,.3) 1.3px,transparent 1.3px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 5%,transparent 78%)}
+.glow{position:absolute;width:850px;height:850px;left:115px;top:520px;border-radius:50%;background:rgba(65,250,241,.10);filter:blur(115px);z-index:-1}
+.copy{position:absolute;left:90px;right:90px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+h1{width:100%;margin:0;font-size:76px;line-height:1.65;font-weight:900;letter-spacing:-1.5px;color:#fff}
+h1 span{color:var(--cyan)}
+</style>
+</head>
+<body>
+<main id="poster">
+ <div class="glow"></div>
+ <section class="copy"><h1>رتبه اول گوگل رو<br><span>بهت تضمین می‌دم!</span></h1></section>
+</main>
+<script>
+function fitPoster(){const p=document.getElementById('poster');const scale=Math.min(window.innerWidth/1080,window.innerHeight/1920);p.style.transform=`scale(${scale})`;p.style.left=`${(window.innerWidth-1080*scale)/2}px`;p.style.top=`${(window.innerHeight-1920*scale)/2}px`}
+fitPoster();window.addEventListener('resize',fitPoster);document.fonts.ready.then(()=>{window.__ready=true});window.OCTO_META={duration:1};window.renderAt=()=>{};
+</script>
+</body>
+</html>
