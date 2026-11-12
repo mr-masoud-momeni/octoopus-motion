@@ -141,13 +141,44 @@ await cdp.send("Emulation.setEmulatedMedia",
   { features: [{ name: "prefers-reduced-motion", value: "no-preference" }] }, sessionId);
 await cdp.send("Page.navigate", { url }, sessionId);
 
-// صبر تا آماده شدن فونت‌ها و اسکریپت
+// صبر تا آماده شدن اسکریپت صفحه؛ در صورت timeout رندر را با وضعیت ناقص ادامه نده
+let pageReady = false;
 for (let i = 0; i < 200; i++) {
   const r = await cdp.send("Runtime.evaluate",
     { expression: "window.__ready === true", returnByValue: true }, sessionId);
-  if (r.result?.value) break;
+  if (r.result?.value) { pageReady = true; break; }
   await new Promise((r) => setTimeout(r, 100));
 }
+if (!pageReady) {
+  throw new Error("صفحه یا فونت‌ها در زمان مقرر آماده نشدند؛ رندر متوقف شد.");
+}
+
+// فونت فارسی را صریحاً برای وزن متن و تیتر بارگذاری و وضعیت واقعی آن را بررسی کن
+const fontResult = await cdp.send("Runtime.evaluate", {
+  expression: `(async () => {
+    await document.fonts.load("500 43px Vazirmatn");
+    await document.fonts.load("900 76px Vazirmatn");
+    await document.fonts.ready;
+    const faces = [...document.fonts]
+      .filter(face => face.family.replace(/^["']|["']$/g, "") === "Vazirmatn")
+      .map(face => ({ status: face.status, weight: face.weight }));
+    return JSON.stringify({
+      faces,
+      regular: document.fonts.check("500 43px Vazirmatn"),
+      bold: document.fonts.check("900 76px Vazirmatn")
+    });
+  })()`,
+  awaitPromise: true,
+  returnByValue: true
+}, sessionId);
+const fontState = JSON.parse(fontResult.result?.value || "{}");
+if (!fontState.faces?.length ||
+    fontState.faces.some(face => face.status !== "loaded") ||
+    !fontState.regular || !fontState.bold) {
+  throw new Error("فونت Vazirmatn درست بارگذاری نشده است: " + JSON.stringify(fontState));
+}
+console.log("font ready: Vazirmatn", fontState);
+
 const meta = (await cdp.send("Runtime.evaluate",
   { expression: "JSON.stringify(window.OCTO_META)", returnByValue: true }, sessionId)).result.value;
 const META = JSON.parse(meta || '{"duration":6}');
