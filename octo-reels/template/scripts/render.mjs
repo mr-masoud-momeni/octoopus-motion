@@ -153,32 +153,6 @@ if (!pageReady) {
   throw new Error("صفحه یا فونت‌ها در زمان مقرر آماده نشدند؛ رندر متوقف شد.");
 }
 
-// فونت فارسی را صریحاً برای وزن متن و تیتر بارگذاری و وضعیت واقعی آن را بررسی کن
-const fontResult = await cdp.send("Runtime.evaluate", {
-  expression: `(async () => {
-    await document.fonts.load("500 43px Vazirmatn");
-    await document.fonts.load("900 76px Vazirmatn");
-    await document.fonts.ready;
-    const faces = [...document.fonts]
-      .filter(face => face.family.replace(/^["']|["']$/g, "") === "Vazirmatn")
-      .map(face => ({ status: face.status, weight: face.weight }));
-    return JSON.stringify({
-      faces,
-      regular: document.fonts.check("500 43px Vazirmatn"),
-      bold: document.fonts.check("900 76px Vazirmatn")
-    });
-  })()`,
-  awaitPromise: true,
-  returnByValue: true
-}, sessionId);
-const fontState = JSON.parse(fontResult.result?.value || "{}");
-if (!fontState.faces?.length ||
-    fontState.faces.some(face => face.status !== "loaded") ||
-    !fontState.regular || !fontState.bold) {
-  throw new Error("فونت Vazirmatn درست بارگذاری نشده است: " + JSON.stringify(fontState));
-}
-console.log("font ready: Vazirmatn", fontState);
-
 const meta = (await cdp.send("Runtime.evaluate",
   { expression: "JSON.stringify(window.OCTO_META)", returnByValue: true }, sessionId)).result.value;
 const META = JSON.parse(meta || '{"duration":6}');
